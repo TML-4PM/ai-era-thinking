@@ -1,0 +1,11 @@
+category,rule,description
+Governance,Two-person rule,"Any step that is not reversible requires dual control"
+Governance,Context integrity,"Check context for every data use"
+Governance,Agent disclosure,"Role charter and visible disclosure for any agent work"
+Governance,Surprise index,"Track and review surprise over time"
+Governance,BCI adverse events,"Fast response process for BCI"
+Metrics,Task cycle time,"Time from intent to verified outcome"
+Metrics,Surprise index,"Aggregated score of unexpected behavior"
+Metrics,Fairness lift,"Outcome lift for least advantaged groups"
+Metrics,Unsafe actions caught,"Rate of blocked unsafe actions"
+Metrics,BCI adverse events,"Events per active user"
