@@ -6,7 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import OrganMap from "@/components/OrganMap";
 import GlowField from "@/components/GlowField";
+import { EraTimeline } from "@/components/EraTimeline";
 import { THINKERS, type Lobe, type Thinker } from "@/data/thinkers";
+import { Link } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 const Index = () => {
@@ -57,6 +59,9 @@ const Index = () => {
                 <a href="/expansion_backlog.csv" download>
                   <Button variant="outline">Expansion Backlog (CSV)</Button>
                 </a>
+                <Link to="/governance">
+                  <Button variant="outline">Governance Framework</Button>
+                </Link>
               </div>
             </div>
             <div className="relative">
@@ -67,28 +72,37 @@ const Index = () => {
       </section>
 
       <section className="container py-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Explore the Organ</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <OrganMap selected={lobe} onSelect={setLobe} className="mb-6" />
-            <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Badge variant="secondary">Filter</Badge>
-                <Button size="sm" variant={lobe === "All" ? "default" : "secondary"} onClick={() => setLobe("All")}>All</Button>
-                <Button size="sm" variant={lobe === "Perception/Patterning" ? "default" : "secondary"} onClick={() => setLobe("Perception/Patterning")}>Perception</Button>
-                <Button size="sm" variant={lobe === "Decision/Action" ? "default" : "secondary"} onClick={() => setLobe("Decision/Action")}>Decision</Button>
-                <Button size="sm" variant={lobe === "Innovation/Strategy" ? "default" : "secondary"} onClick={() => setLobe("Innovation/Strategy")}>Innovation</Button>
-                <Button size="sm" variant={lobe === "Ethics/Governance" ? "default" : "secondary"} onClick={() => setLobe("Ethics/Governance")}>Ethics</Button>
-                <Button size="sm" variant={lobe === "Culture/Behaviour" ? "default" : "secondary"} onClick={() => setLobe("Culture/Behaviour")}>Culture</Button>
-              </div>
-              <div className="md:w-80">
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>The Organ Map</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <OrganMap selected={lobe} onSelect={setLobe} className="mb-6" />
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <Badge variant="secondary">Filter</Badge>
+                  <Button size="sm" variant={lobe === "All" ? "default" : "secondary"} onClick={() => setLobe("All")}>All</Button>
+                  <Button size="sm" variant={lobe === "Perception/Patterning" ? "default" : "secondary"} onClick={() => setLobe("Perception/Patterning")}>Perception</Button>
+                  <Button size="sm" variant={lobe === "Decision/Action" ? "default" : "secondary"} onClick={() => setLobe("Decision/Action")}>Decision</Button>
+                  <Button size="sm" variant={lobe === "Innovation/Strategy" ? "default" : "secondary"} onClick={() => setLobe("Innovation/Strategy")}>Innovation</Button>
+                  <Button size="sm" variant={lobe === "Ethics/Governance" ? "default" : "secondary"} onClick={() => setLobe("Ethics/Governance")}>Ethics</Button>
+                  <Button size="sm" variant={lobe === "Culture/Behaviour" ? "default" : "secondary"} onClick={() => setLobe("Culture/Behaviour")}>Culture</Button>
+                </div>
                 <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search thinkers, ideas, shifts" />
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Era Evolution</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <EraTimeline />
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       <section className="container pb-20">
