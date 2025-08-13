@@ -172,10 +172,6 @@ All colors MUST be HSL.
     @apply translate-x-full;
   }
 
-  .era-flow-line {
-    @apply stroke-brand-2 stroke-2 fill-none animate-pulse;
-  }
-
   .lobe-active {
     @apply opacity-100 scale-105 shadow-lg;
   }
