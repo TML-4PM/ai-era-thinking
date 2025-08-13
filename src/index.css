@@ -104,41 +104,109 @@ All colors MUST be HSL.
   }
 }
 
-/* Additional design tokens and component utilities */
+/* Enhanced design tokens and component utilities */
 @layer base {
   :root {
-    /* Brand accents for Tech Futurist vibe */
-    --brand: 265 85% 58%;
-    --brand-2: 196 100% 50%;
+    /* Enhanced brand system with rich gradients */
+    --brand: 217 91% 60%;
+    --brand-2: 263 70% 50%;
+    --brand-glow: 217 91% 70%;
+    --brand-deep: 217 91% 45%;
+    --accent-warm: 28 80% 65%;
+    --accent-cool: 195 100% 65%;
 
-    /* Motion and shadows */
-    --shadow-glow: 0 10px 30px -10px hsl(var(--brand)/0.35), 0 0 40px hsl(var(--brand-2)/0.25);
-    --shadow-glow-strong: 0 16px 40px -10px hsl(var(--brand)/0.45), 0 0 60px hsl(var(--brand-2)/0.35);
-    --transition-smooth: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Advanced motion and interaction */
+    --shadow-glow: 0 0 40px hsl(var(--brand) / 0.4);
+    --shadow-deep: 0 20px 60px -10px hsl(var(--brand) / 0.3);
+    --shadow-warm: 0 10px 30px -5px hsl(var(--accent-warm) / 0.2);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    /* Gradients */
+    /* Rich gradient system */
     --gradient-primary: linear-gradient(135deg, hsl(var(--brand)), hsl(var(--brand-2)));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--accent-warm)), hsl(var(--brand)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--brand-deep)), hsl(var(--brand-glow)), hsl(var(--accent-cool)));
+    --gradient-subtle: linear-gradient(135deg, hsl(var(--brand) / 0.1), hsl(var(--brand-2) / 0.05));
   }
   .dark {
-    --brand: 265 85% 72%;
-    --brand-2: 196 100% 60%;
+    --brand: 217 91% 70%;
+    --brand-2: 263 70% 60%;
+    --brand-glow: 217 91% 75%;
+    --accent-warm: 28 80% 70%;
+    --accent-cool: 195 100% 70%;
   }
 }
 
 @layer components {
+  /* Enhanced Utility Classes */
   .bg-gradient-primary {
     background: var(--gradient-primary);
   }
-  .btn-hero {
-    background: var(--gradient-primary);
-    color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-glow);
-    border: 1px solid hsl(var(--border));
-    transition: var(--transition-smooth);
+
+  .bg-gradient-warm {
+    background: var(--gradient-warm);
   }
-  .btn-hero:hover {
-    box-shadow: var(--shadow-glow-strong);
-    filter: brightness(1.03);
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+
+  .btn-hero {
+    @apply bg-white/10 text-white border border-white/20 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-105;
+  }
+
+  .btn-enhanced {
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-enhanced::before {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-700;
+    content: '';
+  }
+
+  .btn-enhanced:hover::before {
+    @apply translate-x-full;
+  }
+
+  .era-flow-line {
+    @apply stroke-brand-2 stroke-2 fill-none animate-pulse;
+  }
+
+  .lobe-active {
+    @apply opacity-100 scale-105 shadow-lg;
+  }
+
+  .lobe-transition {
+    @apply transition-all duration-300 ease-out hover:scale-105;
+  }
+
+  .thinker-card {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-gradient-subtle;
+  }
+
+  .glow-effect {
+    filter: drop-shadow(0 0 20px hsl(var(--brand) / 0.3));
+  }
+
+  .interactive-hover {
+    @apply transform transition-all duration-200 hover:scale-105 hover:z-10;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px hsl(var(--brand) / 0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 20px hsl(var(--brand) / 0.6));
+    }
   }
   
   /* Era transition flow indicators */
@@ -152,16 +220,6 @@ All colors MUST be HSL.
   @keyframes flow {
     0% { stroke-dashoffset: 0; }
     100% { stroke-dashoffset: 10; }
-  }
-  
-  /* Enhanced lobe styling */
-  .lobe-active {
-    filter: drop-shadow(0 0 20px hsl(var(--brand)/0.4));
-    transform: scale(1.02);
-  }
-  
-  .lobe-transition {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Workshop and governance styling */
