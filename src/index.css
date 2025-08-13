@@ -140,4 +140,49 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-glow-strong);
     filter: brightness(1.03);
   }
+  
+  /* Era transition flow indicators */
+  .era-flow-line {
+    stroke: hsl(var(--brand-2)/0.6);
+    stroke-width: 2;
+    stroke-dasharray: 5,5;
+    animation: flow 3s linear infinite;
+  }
+  
+  @keyframes flow {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 10; }
+  }
+  
+  /* Enhanced lobe styling */
+  .lobe-active {
+    filter: drop-shadow(0 0 20px hsl(var(--brand)/0.4));
+    transform: scale(1.02);
+  }
+  
+  .lobe-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Workshop and governance styling */
+  .framework-card {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)/0.3) 100%);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 20px hsl(var(--foreground)/0.05);
+  }
+  
+  .governance-critical {
+    border-left: 4px solid hsl(var(--destructive));
+    background: linear-gradient(90deg, hsl(var(--destructive)/0.05) 0%, transparent 100%);
+  }
+  
+  .metrics-positive {
+    background: linear-gradient(135deg, hsl(142 71% 45%/0.1) 0%, transparent 100%);
+    border-left: 3px solid hsl(142 71% 45%);
+  }
+  
+  .metrics-warning {
+    background: linear-gradient(135deg, hsl(48 96% 53%/0.1) 0%, transparent 100%);
+    border-left: 3px solid hsl(48 96% 53%);
+  }
 }

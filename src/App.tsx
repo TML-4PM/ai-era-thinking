@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import EraDetail from "./pages/EraDetail";
 import Governance from "./pages/Governance";
+import Tools from "./pages/Tools";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/era/:eraId" element={<EraDetail />} />
             <Route path="/governance" element={<Governance />} />
+            <Route path="/tools" element={<Tools />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
