@@ -94,11 +94,11 @@ const Index = () => {
         <meta property="og:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://ai-thinker-flux.lovable.app/'} />
-        <meta property="og:image" content={typeof window !== 'undefined' ? window.location.origin + '/placeholder.svg' : '/placeholder.svg'} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Agentic AI Organ Map – Top 50 Thinkers" />
         <meta name="twitter:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
-        <meta name="twitter:image" content={typeof window !== 'undefined' ? window.location.origin + '/placeholder.svg' : '/placeholder.svg'} />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",

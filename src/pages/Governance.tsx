@@ -20,11 +20,11 @@ export const Governance: React.FC = () => {
         <meta property="og:description" content="Comprehensive governance and safety framework for AI transformation." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://ai-thinker-flux.lovable.app/governance" />
-        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Governance & Safety | The Organ" />
         <meta name="twitter:description" content="Comprehensive governance and safety framework for AI transformation." />
-        <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
+        <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
