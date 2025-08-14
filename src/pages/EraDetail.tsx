@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { EraNavigation } from "@/components/EraNavigation";
 import { ArrowLeft, Calendar, Users, Zap, AlertTriangle, CheckCircle, Target } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
+
 
 export const EraDetail: React.FC = () => {
   const { eraId } = useParams();
@@ -57,7 +59,10 @@ export const EraDetail: React.FC = () => {
                 </Link>
                 <h1 className="text-2xl font-bold text-foreground">{era.name}</h1>
               </div>
-              <EraNavigation />
+              <div className="flex items-center gap-3">
+                <EraNavigation />
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </header>

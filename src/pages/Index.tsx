@@ -11,9 +11,10 @@ import SearchBar from "@/components/SearchBar";
 import ThinkerDetailModal from "@/components/ThinkerDetailModal";
 import { THINKERS, type Lobe, type Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
-import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useMemo, useState, useEffect } from "react";
 import { Download, ExternalLink, ArrowRight } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
   const [query, setQuery] = useState("");
@@ -29,14 +30,42 @@ const Index = () => {
     );
   }, [query, lobe]);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    const t = searchParams.get("thinker");
+    if (t) setSelectedThinker(t);
+  }, [searchParams]);
+
   const handleThinkerExplore = (name: string) => {
     setSelectedThinker(name);
+    setSearchParams({ thinker: name }, { replace: true });
   };
 
   const expandedThinker = selectedThinker ? getExpandedThinker(selectedThinker) : null;
 
+  const handleCloseModal = () => {
+    setSelectedThinker(null);
+    if (searchParams.get('thinker')) {
+      const sp = new URLSearchParams(searchParams);
+      sp.delete('thinker');
+      setSearchParams(sp, { replace: true });
+    }
+  };
+
   return (
-    <main className="min-h-screen">
+    <>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container h-14 flex items-center justify-between">
+          <Link to="/" className="font-semibold">The Organ Framework</Link>
+          <nav className="flex items-center gap-3">
+            <Link to="/governance" className="text-sm hover:underline">Governance</Link>
+            <Link to="/tools" className="text-sm hover:underline">Tools</Link>
+            <ThemeToggle />
+          </nav>
+        </div>
+      </header>
+
+      <main className="min-h-screen">
       <Helmet>
         <title>Agentic AI Organ Map – Top 50 Thinkers</title>
         <meta name="description" content="Explore the Agentic AI organ map with Top 50 thinkers, their lenses, and practical shifts. Download CSVs and use this as a working framework." />
@@ -240,10 +269,11 @@ const Index = () => {
       {/* Thinker Detail Modal */}
       <ThinkerDetailModal
         isOpen={!!selectedThinker}
-        onClose={() => setSelectedThinker(null)}
+        onClose={handleCloseModal}
         thinker={expandedThinker}
       />
     </main>
+    </>
   );
 };
 

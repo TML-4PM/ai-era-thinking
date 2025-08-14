@@ -9,6 +9,7 @@ import { GOVERNANCE_TOOLS, getToolsByCategory } from "@/data/governance-tools";
 import { WORKSHOP_SCENARIOS, ASSESSMENT_QUESTIONS } from "@/data/workshop-materials";
 import MetricsDashboard from "@/components/MetricsDashboard";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Tools() {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
@@ -18,17 +19,19 @@ export default function Tools() {
       <Helmet>
         <title>Implementation Tools - The Organ Framework</title>
         <meta name="description" content="Practical tools for implementing The Organ framework: governance code, workshop materials, and metrics dashboards." />
+        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/tools" />
       </Helmet>
 
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
+        <div className="container flex h-14 items-center justify-between">
           <Button variant="ghost" size="sm" asChild>
             <Link to="/" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               Back to Organ Map
             </Link>
           </Button>
+          <ThemeToggle />
         </div>
       </header>
 

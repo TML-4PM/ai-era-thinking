@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://ai-thinker-flux.lovable.app/sitemap.xml

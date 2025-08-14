@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { GOVERNANCE_PRINCIPLES, RISK_PROFILES, FAILURE_CASES, REGULATORY_PRESSURES } from "@/data/governance";
 import { ArrowLeft, Shield, AlertTriangle, FileText, Scale, Zap, Target } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const Governance: React.FC = () => {
   return (
@@ -21,14 +22,17 @@ export const Governance: React.FC = () => {
         {/* Header */}
         <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center gap-4">
-              <Link to="/">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Organ Map
-                </Button>
-              </Link>
-              <h1 className="text-2xl font-bold text-foreground">Governance & Safety</h1>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Link to="/">
+                  <Button variant="ghost" size="sm">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Organ Map
+                  </Button>
+                </Link>
+                <h1 className="text-2xl font-bold text-foreground">Governance & Safety</h1>
+              </div>
+              <ThemeToggle />
             </div>
           </div>
         </header>
