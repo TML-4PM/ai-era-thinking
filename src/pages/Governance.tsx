@@ -16,6 +16,15 @@ export const Governance: React.FC = () => {
         <title>Governance & Safety | The Organ - AI Transformation Framework</title>
         <meta name="description" content="Comprehensive governance and safety framework for AI transformation. Context integrity, provenance tracking, guardrails as code, and reflex stops across all technology eras." />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/governance" />
+        <meta property="og:title" content="Governance & Safety | The Organ" />
+        <meta property="og:description" content="Comprehensive governance and safety framework for AI transformation." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/governance" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Governance & Safety | The Organ" />
+        <meta name="twitter:description" content="Comprehensive governance and safety framework for AI transformation." />
+        <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

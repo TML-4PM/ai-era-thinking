@@ -20,6 +20,15 @@ export default function Tools() {
         <title>Implementation Tools - The Organ Framework</title>
         <meta name="description" content="Practical tools for implementing The Organ framework: governance code, workshop materials, and metrics dashboards." />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/tools" />
+        <meta property="og:title" content="Implementation Tools - The Organ" />
+        <meta property="og:description" content="Practical tools for implementing The Organ framework." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/tools" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Implementation Tools - The Organ" />
+        <meta name="twitter:description" content="Practical tools for implementing The Organ framework." />
+        <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/placeholder.svg" />
       </Helmet>
 
       {/* Header */}

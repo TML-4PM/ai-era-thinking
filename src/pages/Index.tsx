@@ -33,12 +33,32 @@ const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     const t = searchParams.get("thinker");
+    const l = searchParams.get("lobe");
+    const e = searchParams.get("era");
     if (t) setSelectedThinker(t);
+    if (l) setLobe(l as Lobe | "All"); else setLobe("All");
+    if (e) setSelectedEra(e); else setSelectedEra("all");
   }, [searchParams]);
 
   const handleThinkerExplore = (name: string) => {
     setSelectedThinker(name);
-    setSearchParams({ thinker: name }, { replace: true });
+    const sp = new URLSearchParams(searchParams);
+    sp.set('thinker', name);
+    setSearchParams(sp, { replace: true });
+  };
+
+  const handleLobeChange = (nextLobe: Lobe | "All") => {
+    setLobe(nextLobe);
+    const sp = new URLSearchParams(searchParams);
+    if (nextLobe !== "All") sp.set('lobe', String(nextLobe)); else sp.delete('lobe');
+    setSearchParams(sp, { replace: true });
+  };
+
+  const handleEraChange = (era: string) => {
+    setSelectedEra(era);
+    const sp = new URLSearchParams(searchParams);
+    if (era && era !== "all") sp.set('era', era); else sp.delete('era');
+    setSearchParams(sp, { replace: true });
   };
 
   const expandedThinker = selectedThinker ? getExpandedThinker(selectedThinker) : null;
@@ -70,6 +90,15 @@ const Index = () => {
         <title>Agentic AI Organ Map – Top 50 Thinkers</title>
         <meta name="description" content="Explore the Agentic AI organ map with Top 50 thinkers, their lenses, and practical shifts. Download CSVs and use this as a working framework." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/' : '/'} />
+        <meta property="og:title" content="Agentic AI Organ Map – Top 50 Thinkers" />
+        <meta property="og:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://ai-thinker-flux.lovable.app/'} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? window.location.origin + '/placeholder.svg' : '/placeholder.svg'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Agentic AI Organ Map – Top 50 Thinkers" />
+        <meta name="twitter:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? window.location.origin + '/placeholder.svg' : '/placeholder.svg'} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
@@ -165,9 +194,9 @@ const Index = () => {
             query={query}
             onQueryChange={setQuery}
             selectedLobe={lobe}
-            onLobeChange={setLobe}
+            onLobeChange={handleLobeChange}
             selectedEra={selectedEra}
-            onEraChange={setSelectedEra}
+            onEraChange={handleEraChange}
           />
           
           {/* Enhanced Organ Map */}
@@ -185,9 +214,9 @@ const Index = () => {
                 <CardContent className="p-6">
                   <EnhancedOrganMap 
                     selected={lobe} 
-                    onSelect={setLobe}
+                    onSelect={handleLobeChange}
                     selectedEra={selectedEra}
-                    onEraSelect={setSelectedEra}
+                    onEraSelect={handleEraChange}
                     showEraOverlay={true}
                   />
                 </CardContent>
@@ -256,8 +285,8 @@ const Index = () => {
               </p>
               <Button onClick={() => {
                 setQuery("");
-                setLobe("All");
-                setSelectedEra("all");
+                handleLobeChange("All");
+                handleEraChange("all");
               }}>
                 Clear All Filters
               </Button>

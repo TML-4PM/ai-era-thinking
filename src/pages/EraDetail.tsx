@@ -43,6 +43,15 @@ export const EraDetail: React.FC = () => {
         <title>{era.name} | The Organ - AI Transformation Framework</title>
         <meta name="description" content={`Deep dive into the ${era.name}: ${era.description}. ${era.context.substring(0, 150)}...`} />
         <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/era/${era.id}`} />
+        <meta property="og:title" content={`${era.name} | The Organ`} />
+        <meta property="og:description" content={`${era.description}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/era/${era.id}`} />
+        <meta property="og:image" content={`https://ai-thinker-flux.lovable.app/placeholder.svg`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${era.name} | The Organ`} />
+        <meta name="twitter:description" content={`${era.description}`} />
+        <meta name="twitter:image" content={`https://ai-thinker-flux.lovable.app/placeholder.svg`} />
       </Helmet>
 
       <div className="min-h-screen bg-background">
