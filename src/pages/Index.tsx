@@ -85,7 +85,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="min-h-screen">
+      <main id="main" className="min-h-screen">
       <Helmet>
         <title>Agentic AI Organ Map – Top 50 Thinkers</title>
         <meta name="description" content="Explore the Agentic AI organ map with Top 50 thinkers, their lenses, and practical shifts. Download CSVs and use this as a working framework." />
@@ -171,7 +171,7 @@ const Index = () => {
               <img 
                 src={heroImage} 
                 alt="The Organ Framework - Interactive AI transformation map" 
-                loading="lazy" 
+                loading="eager" fetchPriority="high" decoding="async"
                 className="relative rounded-2xl shadow-2xl border glow-effect" 
               />
             </div>

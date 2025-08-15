@@ -13,7 +13,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <main id="main" className="min-h-screen flex items-center justify-center bg-background">
       <Helmet>
         <title>404 - Page Not Found | The Organ Framework</title>
         <meta name="robots" content="noindex, nofollow" />
@@ -26,7 +26,7 @@ const NotFound = () => {
           Return to Home
         </a>
       </div>
-    </div>
+    </main>
   );
 };
 

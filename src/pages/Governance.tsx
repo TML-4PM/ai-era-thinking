@@ -46,7 +46,7 @@ export const Governance: React.FC = () => {
           </div>
         </header>
 
-        <main className="container mx-auto px-4 py-8 space-y-12">
+        <main id="main" className="container mx-auto px-4 py-8 space-y-12">
           {/* Hero */}
           <section className="text-center space-y-4">
             <div className="flex items-center justify-center mb-6">

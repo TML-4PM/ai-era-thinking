@@ -44,7 +44,7 @@ export default function Tools() {
         </div>
       </header>
 
-      <div className="container mx-auto py-8 space-y-8">
+      <main id="main" className="container mx-auto py-8 space-y-8">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold">Implementation Tools</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -163,7 +163,7 @@ export default function Tools() {
             </div>
           </TabsContent>
         </Tabs>
-      </div>
+      </main>
     </div>
   );
 }
