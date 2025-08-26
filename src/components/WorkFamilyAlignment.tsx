@@ -32,6 +32,14 @@ interface MemberAlignment {
   exemplar_roles?: string[];
 }
 
+// Helper function to safely coerce Supabase Json to transitions type
+const asTransitions = (value: any): MemberAlignment['transitions'] => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return {};
+  }
+  return value as MemberAlignment['transitions'];
+};
+
 interface ThinkerAlignment {
   thinker_name: string;
   domain: string;
@@ -189,7 +197,7 @@ export const WorkFamilyAlignment: React.FC = () => {
           display_name: item.neural_ennead_members?.display_name || 'Unknown',
           confidence: item.confidence,
           rationale: item.rationale || '',
-          transitions: item.transitions || {},
+          transitions: asTransitions(item.transitions),
           description: item.neural_ennead_members?.description || '',
           exemplar_roles: item.neural_ennead_members?.exemplar_roles || []
         });

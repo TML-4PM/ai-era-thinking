@@ -156,7 +156,7 @@ All colors MUST be HSL.
   }
 
   .btn-hero {
-    @apply bg-white/10 text-white border border-white/20 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-105;
+    @apply bg-primary text-primary-foreground border border-primary/20 backdrop-blur-sm hover:bg-primary/90 transition-all duration-300 hover:scale-105;
   }
 
   .btn-enhanced {
