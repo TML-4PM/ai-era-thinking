@@ -8,7 +8,15 @@ const corsHeaders = {
 
 // API Configuration
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
-const REQUEST_TIMEOUT = 30000; // 30 seconds
+const REQUEST_TIMEOUT = 45000; // 45 seconds for batched requests
+const MAX_DOMAINS_PER_BATCH = 3;
+
+// Model fallback sequence
+const MODELS = [
+  'gpt-5-2025-08-07',
+  'gpt-5-mini-2025-08-07', 
+  'gpt-4.1-2025-04-14'
+];
 
 // Validation function
 function validateRequest(body: any): string[] {
@@ -33,6 +41,229 @@ function validateRequest(body: any): string[] {
   return errors;
 }
 
+// Sleep utility for retries
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Make OpenAI request with retry and fallback
+async function makeOpenAIRequest(
+  prompt: string, 
+  userMessage: string, 
+  modelIndex = 0, 
+  retryCount = 0
+): Promise<{ content: string; model: string; attempts: number }> {
+  const model = MODELS[modelIndex];
+  const maxRetries = 2;
+  
+  console.log(`🤖 Attempting OpenAI request with ${model} (attempt ${retryCount + 1})`);
+  
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+      console.error('Request timed out');
+    }, REQUEST_TIMEOUT);
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: 'system', content: prompt },
+          { role: 'user', content: userMessage }
+        ],
+        max_completion_tokens: model.includes('gpt-4.1') ? 2000 : 2000
+      }),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error(`❌ ${model} failed with status ${response.status}:`, errorData);
+      
+      // Handle specific errors
+      if (response.status === 429) {
+        // Rate limit - wait and retry with same model
+        if (retryCount < maxRetries) {
+          const waitTime = 1000 * (retryCount + 1); // 1s, 2s, 3s
+          console.log(`⏱️ Rate limited, waiting ${waitTime}ms before retry`);
+          await sleep(waitTime);
+          return makeOpenAIRequest(prompt, userMessage, modelIndex, retryCount + 1);
+        }
+        // If max retries reached, try next model
+        if (modelIndex < MODELS.length - 1) {
+          console.log(`🔄 Max retries reached, trying next model`);
+          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+        }
+        throw new Error(`RATE_LIMIT:${errorData}`);
+      }
+      
+      if (response.status === 401) {
+        throw new Error(`INVALID_API_KEY:${errorData}`);
+      }
+      
+      if (response.status >= 500) {
+        // Server error - try next model if available
+        if (modelIndex < MODELS.length - 1) {
+          console.log(`🔄 Server error, trying next model`);
+          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+        }
+        throw new Error(`OPENAI_SERVER_ERROR:${errorData}`);
+      }
+      
+      throw new Error(`OPENAI_API_ERROR:${response.status} - ${errorData}`);
+    }
+
+    const data = await response.json();
+    
+    if (!data.choices?.[0]?.message?.content) {
+      throw new Error('EMPTY_API_RESPONSE:No content in OpenAI response');
+    }
+
+    console.log(`✅ ${model} succeeded`);
+    return { 
+      content: data.choices[0].message.content, 
+      model,
+      attempts: retryCount + 1
+    };
+
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.error(`⏱️ ${model} request timed out`);
+      if (modelIndex < MODELS.length - 1) {
+        return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+      }
+      throw new Error('TIMEOUT:Request timed out after trying all models');
+    }
+    
+    // If it's one of our custom errors, re-throw
+    if (error.message.includes(':')) {
+      throw error;
+    }
+    
+    // Network or other error - try next model if available
+    if (modelIndex < MODELS.length - 1) {
+      console.log(`🔄 Network error, trying next model: ${error.message}`);
+      return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+    }
+    
+    throw new Error(`NETWORK_ERROR:${error.message}`);
+  }
+}
+
+// Parse JSON with multiple fallback strategies
+function parseFrameworkJSON(content: string, attempt = 1): any {
+  console.log(`🔍 JSON parsing attempt ${attempt}`);
+  
+  try {
+    // Strategy 1: Direct parse
+    if (attempt === 1) {
+      return JSON.parse(content.trim());
+    }
+    
+    // Strategy 2: Remove markdown blocks
+    if (attempt === 2) {
+      const cleaned = content.replace(/```json\n?|\n?```/g, '').trim();
+      return JSON.parse(cleaned);
+    }
+    
+    // Strategy 3: Extract JSON array
+    if (attempt === 3) {
+      const match = content.match(/\[[\s\S]*\]/);
+      if (match) {
+        return JSON.parse(match[0]);
+      }
+    }
+    
+    // Strategy 4: More aggressive cleaning
+    if (attempt === 4) {
+      const lines = content.split('\n');
+      const startIdx = lines.findIndex(line => line.trim().startsWith('['));
+      const endIdx = lines.findLastIndex(line => line.trim().includes(']'));
+      
+      if (startIdx !== -1 && endIdx !== -1) {
+        const jsonLines = lines.slice(startIdx, endIdx + 1);
+        return JSON.parse(jsonLines.join('\n'));
+      }
+    }
+    
+    throw new Error('No valid JSON found');
+    
+  } catch (parseError) {
+    console.error(`❌ JSON parsing attempt ${attempt} failed:`, parseError.message);
+    
+    if (attempt < 4) {
+      return parseFrameworkJSON(content, attempt + 1);
+    }
+    
+    throw new Error(`JSON_PARSE_ERROR:Failed to parse after ${attempt} attempts - ${parseError.message}`);
+  }
+}
+
+// Process domains in batches
+async function processDomainBatch(
+  domains: string[], 
+  thinkerName: string, 
+  thinkerArea: string, 
+  coreIdea: string, 
+  aiShift: string
+): Promise<{ expansions: any[]; model: string; batchSize: number; processingTime: number }> {
+  const startTime = Date.now();
+  
+  console.log(`📦 Processing batch of ${domains.length} domains: ${domains.join(', ')}`);
+  
+  const systemPrompt = `You are an expert consultant specializing in applying intellectual frameworks across business domains. You're expanding ${thinkerName}'s framework from ${thinkerArea} into new contexts.
+
+THINKER FRAMEWORK:
+- Name: ${thinkerName}
+- Original Area: ${thinkerArea}
+- Core Idea: "${coreIdea}"
+- AI Transformation: "${aiShift}"
+
+CRITICAL: Return ONLY a valid JSON array. No explanatory text, no markdown blocks, just the JSON.
+
+OUTPUT FORMAT:
+[
+  {
+    "domain": "Domain Name",
+    "relevance": "2-sentence explanation of relevance",
+    "keyInsights": ["insight 1", "insight 2", "insight 3"],
+    "practicalApplications": ["application 1", "application 2", "application 3"],
+    "implementationSteps": ["step 1", "step 2", "step 3"],
+    "challenges": ["challenge 1", "challenge 2", "challenge 3"],
+    "metrics": ["metric 1", "metric 2", "metric 3"]
+  }
+]
+
+REQUIREMENTS:
+- Exactly 3 items per array (keyInsights, practicalApplications, implementationSteps, challenges, metrics)
+- Business-focused language
+- Actionable insights
+- Valid JSON only
+
+Domains: ${domains.join(', ')}`;
+
+  const userMessage = `Generate framework expansion analysis for: ${domains.join(', ')}`;
+  
+  const { content, model, attempts } = await makeOpenAIRequest(systemPrompt, userMessage);
+  const expansions = parseFrameworkJSON(content);
+  
+  // Validate structure
+  if (!Array.isArray(expansions)) {
+    throw new Error('INVALID_DATA_FORMAT:Expected JSON array');
+  }
+  
+  const processingTime = Date.now() - startTime;
+  console.log(`✅ Batch processed successfully in ${processingTime}ms with ${model}`);
+  
+  return { expansions, model, batchSize: domains.length, processingTime };
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -42,7 +273,6 @@ serve(async (req) => {
   const startTime = Date.now();
   console.log('=== Framework Expansion Request Started ===');
   console.log('Request method:', req.method);
-  console.log('Request URL:', req.url);
   console.log('Environment check - OPENAI_API_KEY exists:', !!OPENAI_API_KEY);
   console.log('Environment check - OPENAI_API_KEY length:', OPENAI_API_KEY ? OPENAI_API_KEY.length : 0);
 
@@ -52,8 +282,9 @@ serve(async (req) => {
       console.error('CRITICAL: OPENAI_API_KEY environment variable is not configured');
       return new Response(JSON.stringify({ 
         error: 'Configuration Error',
-        details: 'OpenAI API key is not configured. Please check your secrets configuration.',
-        errorCode: 'MISSING_API_KEY'
+        details: 'OpenAI API key is not configured. Please add OPENAI_API_KEY to your Supabase secrets.',
+        errorCode: 'MISSING_API_KEY',
+        suggestedAction: 'Configure API key in Supabase Functions settings'
       }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -96,247 +327,88 @@ serve(async (req) => {
 
     const { thinkerName, thinkerArea, coreIdea, aiShift, selectedDomains } = requestBody;
 
-    console.log(`✓ Validation passed - Processing request for ${thinkerName} across ${selectedDomains.length} domains: ${selectedDomains.join(', ')}`);
+    console.log(`✓ Processing ${selectedDomains.length} domains for ${thinkerName}`);
 
-    const systemPrompt = `You are an expert consultant who specializes in applying intellectual frameworks across different business domains. You're expanding ${thinkerName}'s framework from ${thinkerArea} into new business contexts.
+    // Split domains into batches if needed
+    const batches = [];
+    for (let i = 0; i < selectedDomains.length; i += MAX_DOMAINS_PER_BATCH) {
+      batches.push(selectedDomains.slice(i, i + MAX_DOMAINS_PER_BATCH));
+    }
 
-THINKER FRAMEWORK:
-- Name: ${thinkerName}
-- Original Area: ${thinkerArea}
-- Core Idea: "${coreIdea}"
-- AI Transformation: "${aiShift}"
+    console.log(`📦 Processing ${batches.length} batch(es)`);
 
-TASK: For each specified business domain, provide a structured analysis of how this thinker's framework applies.
-
-OUTPUT FORMAT: Return a JSON array with this exact structure:
-[
-  {
-    "domain": "Domain Name",
-    "relevance": "2-sentence explanation of why this framework is relevant to this domain",
-    "keyInsights": ["insight 1", "insight 2", "insight 3"],
-    "practicalApplications": ["application 1", "application 2", "application 3"],
-    "implementationSteps": ["step 1", "step 2", "step 3", "step 4"],
-    "challenges": ["challenge 1", "challenge 2", "challenge 3"],
-    "metrics": ["metric 1", "metric 2", "metric 3", "metric 4"]
-  }
-]
-
-REQUIREMENTS:
-- Be specific and actionable, not generic
-- Focus on how the core framework translates practically
-- Keep insights sharp and implementation-focused
-- Each array should have 3-4 items maximum
-- Use business language appropriate to each domain
-- Ensure JSON is valid and properly formatted
-
-Domains to analyze: ${selectedDomains.join(', ')}`;
-
-    console.log('✓ System prompt prepared, making OpenAI API call...');
-
-    // Create timeout controller
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
-      controller.abort();
-      console.error('Request timed out after 30 seconds');
-    }, REQUEST_TIMEOUT);
-
-    let response;
-    try {
-      response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-5-2025-08-07',
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: `Generate framework expansion analysis for these business domains: ${selectedDomains.join(', ')}` }
-          ],
-          max_completion_tokens: 2000
-        }),
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-    } catch (fetchError) {
-      clearTimeout(timeoutId);
-      console.error('Fetch error:', fetchError);
-      
-      if (fetchError.name === 'AbortError') {
-        return new Response(JSON.stringify({ 
-          error: 'Request Timeout',
-          details: 'The request to OpenAI timed out after 30 seconds. Please try again.',
-          errorCode: 'TIMEOUT'
-        }), {
-          status: 408,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    // Process all batches
+    const allExpansions = [];
+    const batchResults = [];
+    
+    for (let i = 0; i < batches.length; i++) {
+      try {
+        console.log(`🚀 Processing batch ${i + 1}/${batches.length}`);
+        const result = await processDomainBatch(
+          batches[i], 
+          thinkerName, 
+          thinkerArea, 
+          coreIdea, 
+          aiShift
+        );
+        
+        allExpansions.push(...result.expansions);
+        batchResults.push({
+          batchNumber: i + 1,
+          domains: batches[i],
+          success: true,
+          model: result.model,
+          processingTime: result.processingTime,
+          expansionCount: result.expansions.length
         });
+        
+      } catch (batchError) {
+        console.error(`❌ Batch ${i + 1} failed:`, batchError.message);
+        batchResults.push({
+          batchNumber: i + 1,
+          domains: batches[i],
+          success: false,
+          error: batchError.message
+        });
+        
+        // Continue processing other batches even if one fails
       }
+    }
+
+    const totalProcessingTime = Date.now() - startTime;
+    
+    // Check if we got any successful results
+    if (allExpansions.length === 0) {
+      const errorCode = batchResults[0]?.error?.split(':')[0] || 'PROCESSING_FAILED';
+      const errorDetails = batchResults[0]?.error?.split(':')[1] || 'All batches failed to process';
       
       return new Response(JSON.stringify({ 
-        error: 'Network Error',
-        details: `Failed to connect to OpenAI API: ${fetchError.message}`,
-        errorCode: 'NETWORK_ERROR'
+        error: 'Processing Failed',
+        details: errorDetails,
+        errorCode,
+        batchResults,
+        suggestedAction: errorCode === 'RATE_LIMIT' ? 'Wait a moment and try with fewer domains' :
+                        errorCode === 'INVALID_API_KEY' ? 'Check your OpenAI API key configuration' :
+                        errorCode === 'JSON_PARSE_ERROR' ? 'This is a temporary issue, please retry' :
+                        'Please try again or contact support'
       }), {
-        status: 503,
+        status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    console.log(`✓ OpenAI API responded with status: ${response.status}`);
-
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error(`✗ OpenAI API error (${response.status}):`, errorData);
-      
-      let errorMessage = `OpenAI API returned status ${response.status}`;
-      let errorCode = 'OPENAI_API_ERROR';
-      
-      if (response.status === 401) {
-        errorMessage = 'Invalid OpenAI API key. Please check your configuration.';
-        errorCode = 'INVALID_API_KEY';
-      } else if (response.status === 429) {
-        errorMessage = 'OpenAI API rate limit exceeded. Please try again later.';
-        errorCode = 'RATE_LIMIT';
-      } else if (response.status >= 500) {
-        errorMessage = 'OpenAI API is experiencing issues. Please try again later.';
-        errorCode = 'OPENAI_SERVER_ERROR';
-      }
-      
-      return new Response(JSON.stringify({ 
-        error: errorMessage,
-        details: errorData,
-        errorCode: errorCode
-      }), {
-        status: response.status,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Parse OpenAI response
-    let data;
-    try {
-      data = await response.json();
-      console.log('✓ OpenAI response parsed successfully');
-    } catch (jsonError) {
-      console.error('✗ Failed to parse OpenAI response as JSON:', jsonError);
-      return new Response(JSON.stringify({ 
-        error: 'Invalid API Response',
-        details: 'OpenAI API returned invalid JSON',
-        errorCode: 'INVALID_API_RESPONSE'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Validate OpenAI response structure
-    if (!data.choices || !Array.isArray(data.choices) || data.choices.length === 0) {
-      console.error('✗ Invalid OpenAI response structure:', data);
-      return new Response(JSON.stringify({ 
-        error: 'Invalid API Response',
-        details: 'OpenAI API response is missing expected data structure',
-        errorCode: 'MALFORMED_API_RESPONSE'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    const expansionContent = data.choices[0].message?.content;
-    if (!expansionContent) {
-      console.error('✗ No content in OpenAI response');
-      return new Response(JSON.stringify({ 
-        error: 'Empty Response',
-        details: 'OpenAI API returned empty content',
-        errorCode: 'EMPTY_API_RESPONSE'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    console.log(`✓ Generated expansion content (${expansionContent.length} characters): ${expansionContent.substring(0, 200)}...`);
-
-    // Parse the framework expansion JSON
-    let expansions;
-    try {
-      // Clean the content by removing markdown code blocks and extra whitespace
-      let cleanContent = expansionContent.replace(/```json\n?|\n?```/g, '').trim();
-      
-      // Also try to extract JSON if it's embedded in other text
-      const jsonMatch = cleanContent.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        cleanContent = jsonMatch[0];
-      }
-      
-      console.log(`✓ Attempting to parse cleaned JSON content: ${cleanContent.substring(0, 100)}...`);
-      expansions = JSON.parse(cleanContent);
-      console.log('✓ JSON parsing successful');
-      
-    } catch (parseError) {
-      console.error('✗ Failed to parse expansion JSON:', parseError);
-      console.error('✗ Raw content for debugging:', expansionContent);
-      
-      return new Response(JSON.stringify({ 
-        error: 'JSON Parse Error',
-        details: `Failed to parse framework expansion data: ${parseError.message}`,
-        rawContent: expansionContent.substring(0, 500) + '...',
-        errorCode: 'JSON_PARSE_ERROR'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Validate expansion format
-    if (!Array.isArray(expansions)) {
-      console.error('✗ Invalid expansion format - not an array:', typeof expansions);
-      return new Response(JSON.stringify({ 
-        error: 'Invalid Data Format',
-        details: 'Framework expansion data is not in the expected array format',
-        actualType: typeof expansions,
-        errorCode: 'INVALID_DATA_FORMAT'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Validate each expansion object
-    const validationIssues = [];
-    expansions.forEach((expansion, index) => {
-      const requiredFields = ['domain', 'relevance', 'keyInsights', 'practicalApplications', 'implementationSteps', 'challenges', 'metrics'];
-      requiredFields.forEach(field => {
-        if (!expansion.hasOwnProperty(field)) {
-          validationIssues.push(`Expansion ${index + 1}: missing field '${field}'`);
-        }
-      });
-    });
-
-    if (validationIssues.length > 0) {
-      console.error('✗ Expansion validation issues:', validationIssues);
-      return new Response(JSON.stringify({ 
-        error: 'Data Validation Error',
-        details: 'Generated expansions are missing required fields',
-        validationIssues,
-        errorCode: 'EXPANSION_VALIDATION_ERROR'
-      }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    const processingTime = Date.now() - startTime;
-    console.log(`✓ Successfully generated ${expansions.length} domain expansions for ${thinkerName} in ${processingTime}ms`);
+    console.log(`✅ Successfully generated ${allExpansions.length} expansions in ${totalProcessingTime}ms`);
 
     return new Response(JSON.stringify({ 
-      expansions,
+      expansions: allExpansions,
       metadata: {
-        processingTimeMs: processingTime,
-        domainsProcessed: selectedDomains.length,
-        timestamp: new Date().toISOString()
+        processingTimeMs: totalProcessingTime,
+        domainsRequested: selectedDomains.length,
+        domainsProcessed: allExpansions.length,
+        batchCount: batches.length,
+        batchResults,
+        timestamp: new Date().toISOString(),
+        successRate: (batchResults.filter(b => b.success).length / batchResults.length * 100).toFixed(1) + '%'
       }
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -347,11 +419,19 @@ Domains to analyze: ${selectedDomains.join(', ')}`;
     console.error('✗ Unexpected error in expand-thinker function:', error);
     console.error('✗ Error stack:', error.stack);
     
+    // Extract error code if it's one of our custom errors
+    const errorCode = error.message.includes(':') ? error.message.split(':')[0] : 'INTERNAL_ERROR';
+    const errorDetails = error.message.includes(':') ? error.message.split(':')[1] : error.message;
+    
     return new Response(JSON.stringify({ 
       error: 'Internal Server Error',
-      details: error.message,
-      errorCode: 'INTERNAL_ERROR',
-      processingTimeMs: processingTime
+      details: errorDetails,
+      errorCode,
+      processingTimeMs: processingTime,
+      suggestedAction: errorCode === 'RATE_LIMIT' ? 'Wait a moment and retry' :
+                      errorCode === 'INVALID_API_KEY' ? 'Check OpenAI API key configuration' :
+                      errorCode === 'NETWORK_ERROR' ? 'Check internet connection and retry' :
+                      'Please try again or contact support'
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
