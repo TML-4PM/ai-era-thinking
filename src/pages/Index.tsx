@@ -1,19 +1,17 @@
 import { Helmet } from "react-helmet-async";
 import heroImage from "@/assets/hero-organ.jpg";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import EnhancedOrganMap from "@/components/EnhancedOrganMap";
 import GlowField from "@/components/GlowField";
 import { EraTimeline } from "@/components/EraTimeline";
 import ThinkerCard from "@/components/ThinkerCard";
 import SearchBar from "@/components/SearchBar";
 import ThinkerDetailModal from "@/components/ThinkerDetailModal";
+import Footer from "@/components/Footer";
 import { THINKERS, type Lobe, type Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
-import { Download, ExternalLink, ArrowRight } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
@@ -127,43 +125,6 @@ const Index = () => {
                 </p>
               </div>
               
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-3">
-                  <a href="/organ_across_eras.csv" download>
-                    <Button variant="hero" className="btn-enhanced">
-                      <Download className="h-4 w-4 mr-2" />
-                      Core Framework (CSV)
-                    </Button>
-                  </a>
-                  <Link to="/tools">
-                    <Button className="bg-gradient-warm btn-enhanced">
-                      <ArrowRight className="h-4 w-4 mr-2" />
-                      Implementation Tools
-                    </Button>
-                  </Link>
-                </div>
-                
-                <div className="flex flex-wrap gap-2">
-                  <a href="/architecture_guts_by_era.csv" download>
-                    <Button variant="outline" size="sm" className="btn-enhanced">
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      Architecture Data
-                    </Button>
-                  </a>
-                  <a href="/governance_risks_metrics.csv" download>
-                    <Button variant="outline" size="sm" className="btn-enhanced">
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      Governance Metrics
-                    </Button>
-                  </a>
-                  <Link to="/governance">
-                    <Button variant="outline" size="sm" className="btn-enhanced">
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      Risk Framework
-                    </Button>
-                  </Link>
-                </div>
-              </div>
             </div>
             
             <div className="relative">
@@ -181,10 +142,10 @@ const Index = () => {
 
       <section className="container py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Interactive Exploration</h2>
+          <h2 className="text-3xl font-bold mb-4">Explore 50 Famous Thinkers</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Navigate through 5 key capability areas and discover how leading thinkers' insights 
-            transform in the age of agentic AI.
+            Discover how leading minds approach agentic AI and brain-computer interfaces. 
+            Each thinker offers unique perspectives brought to life through interactive dialogues.
           </p>
         </div>
         
@@ -198,59 +159,6 @@ const Index = () => {
             selectedEra={selectedEra}
             onEraChange={handleEraChange}
           />
-          
-          {/* Enhanced Organ Map */}
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <Card className="overflow-hidden">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    The Organ Map
-                    <Badge variant="secondary" className="bg-gradient-warm text-white">
-                      Interactive
-                    </Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <EnhancedOrganMap 
-                    selected={lobe} 
-                    onSelect={handleLobeChange}
-                    selectedEra={selectedEra}
-                    onEraSelect={handleEraChange}
-                    showEraOverlay={true}
-                  />
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Era Evolution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <EraTimeline />
-                <div className="mt-6 p-4 bg-gradient-subtle rounded-lg">
-                  <h4 className="font-medium mb-2">Framework Status</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Thinkers:</span>
-                      <Badge variant="outline">{THINKERS.length}</Badge>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Current View:</span>
-                      <Badge variant="outline">{filtered.length}</Badge>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Active Filters:</span>
-                      <Badge variant="outline">
-                        {lobe !== "All" ? 1 : 0} + {selectedEra !== "all" ? 1 : 0}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
@@ -302,6 +210,7 @@ const Index = () => {
         thinker={expandedThinker}
       />
     </main>
+    <Footer />
     </>
   );
 };
