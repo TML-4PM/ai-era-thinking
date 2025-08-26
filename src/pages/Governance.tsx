@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -5,9 +6,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GOVERNANCE_PRINCIPLES, RISK_PROFILES, FAILURE_CASES, REGULATORY_PRESSURES } from "@/data/governance";
-import { ArrowLeft, Shield, AlertTriangle, FileText, Scale, Zap, Target } from "lucide-react";
+import { ArrowLeft, Shield, AlertTriangle, FileText, Scale, Zap, Target, Brain } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import WorkFamilyAlignment from "@/components/WorkFamilyAlignment";
 
 export const Governance: React.FC = () => {
   return (
@@ -60,138 +63,176 @@ export const Governance: React.FC = () => {
             </p>
           </section>
 
-          {/* Core Principles */}
-          <section>
-            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <Target className="w-6 h-6 text-brand" />
-              Core Governance Principles
-            </h3>
-            <div className="grid gap-6">
-              {GOVERNANCE_PRINCIPLES.map((principle) => (
-                <Card key={principle.id} className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-brand/10">
-                      <Shield className="w-5 h-5 text-brand" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-foreground mb-2">{principle.name}</h4>
-                      <p className="text-foreground mb-4">{principle.description}</p>
-                      
-                      <div className="mb-4 p-4 bg-muted/50 rounded-lg">
-                        <h5 className="text-sm font-medium text-foreground mb-2">Implementation:</h5>
-                        <p className="text-sm text-muted-foreground">{principle.implementation}</p>
-                      </div>
-                      
-                      <div>
-                        <h5 className="text-sm font-medium text-foreground mb-2">Examples:</h5>
-                        <ul className="space-y-1">
-                          {principle.examples.map((example, index) => (
-                            <li key={index} className="flex items-start gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-brand mt-2 flex-shrink-0"></div>
-                              <span className="text-sm text-muted-foreground">{example}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
+          {/* Main Content Tabs */}
+          <Tabs defaultValue="principles" className="w-full">
+            <TabsList className="grid w-full grid-cols-5">
+              <TabsTrigger value="principles" className="flex items-center gap-2">
+                <Target className="h-4 w-4" />
+                Principles
+              </TabsTrigger>
+              <TabsTrigger value="risks" className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4" />
+                Risk Profiles
+              </TabsTrigger>
+              <TabsTrigger value="failures" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Failure Cases
+              </TabsTrigger>
+              <TabsTrigger value="regulatory" className="flex items-center gap-2">
+                <Scale className="h-4 w-4" />
+                Regulatory
+              </TabsTrigger>
+              <TabsTrigger value="workfamily" className="flex items-center gap-2">
+                <Brain className="h-4 w-4" />
+                WorkFamilyAI
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Era-Specific Risk Profiles */}
-          <section>
-            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <AlertTriangle className="w-6 h-6 text-destructive" />
-              Era-Specific Risk Profiles
-            </h3>
-            <div className="grid gap-4">
-              {RISK_PROFILES.map((risk, index) => (
-                <Card key={index} className="p-4">
-                  <div className="grid md:grid-cols-4 gap-4 items-center">
-                    <div>
-                      <Badge variant="outline" className="mb-2">{risk.era}</Badge>
-                    </div>
-                    <div>
-                      <h5 className="text-sm font-medium text-foreground mb-1">Risk</h5>
-                      <p className="text-sm text-muted-foreground">{risk.risk}</p>
-                    </div>
-                    <div>
-                      <h5 className="text-sm font-medium text-foreground mb-1">Control</h5>
-                      <p className="text-sm text-muted-foreground">{risk.control}</p>
-                    </div>
-                    <div>
-                      <h5 className="text-sm font-medium text-foreground mb-1">Metric</h5>
-                      <p className="text-sm text-muted-foreground">{risk.metric}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* Failure Cases */}
-          <section>
-            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <FileText className="w-6 h-6 text-brand" />
-              Failure Cases and Lessons
-            </h3>
-            <div className="grid gap-6">
-              {FAILURE_CASES.map((failure) => (
-                <Card key={failure.id} className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-destructive/10">
-                      <AlertTriangle className="w-5 h-5 text-destructive" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-3">
-                        <h4 className="text-lg font-semibold text-foreground">{failure.title}</h4>
-                        <Badge variant="outline">{failure.era}</Badge>
-                      </div>
-                      
-                      <p className="text-foreground mb-4">{failure.scenario}</p>
-                      
-                      <div className="grid md:grid-cols-3 gap-4">
-                        <div className="p-3 bg-destructive/5 rounded-lg">
-                          <h5 className="text-sm font-medium text-destructive mb-1">What Went Wrong</h5>
-                          <p className="text-sm text-muted-foreground">{failure.whatWentWrong}</p>
+            <TabsContent value="principles" className="space-y-6">
+              {/* Core Principles */}
+              <section>
+                <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                  <Target className="w-6 h-6 text-brand" />
+                  Core Governance Principles
+                </h3>
+                <div className="grid gap-6">
+                  {GOVERNANCE_PRINCIPLES.map((principle) => (
+                    <Card key={principle.id} className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 rounded-lg bg-brand/10">
+                          <Shield className="w-5 h-5 text-brand" />
                         </div>
-                        
-                        <div className="p-3 bg-green-500/5 rounded-lg">
-                          <h5 className="text-sm font-medium text-green-600 mb-1">Prevention</h5>
-                          <p className="text-sm text-muted-foreground">{failure.prevention}</p>
-                        </div>
-                        
-                        <div className="p-3 bg-muted/50 rounded-lg">
-                          <h5 className="text-sm font-medium text-foreground mb-1">Impact</h5>
-                          <p className="text-sm text-muted-foreground">{failure.impact}</p>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-semibold text-foreground mb-2">{principle.name}</h4>
+                          <p className="text-foreground mb-4">{principle.description}</p>
+                          
+                          <div className="mb-4 p-4 bg-muted/50 rounded-lg">
+                            <h5 className="text-sm font-medium text-foreground mb-2">Implementation:</h5>
+                            <p className="text-sm text-muted-foreground">{principle.implementation}</p>
+                          </div>
+                          
+                          <div>
+                            <h5 className="text-sm font-medium text-foreground mb-2">Examples:</h5>
+                            <ul className="space-y-1">
+                              {principle.examples.map((example, index) => (
+                                <li key={index} className="flex items-start gap-2">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-brand mt-2 flex-shrink-0"></div>
+                                  <span className="text-sm text-muted-foreground">{example}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            </TabsContent>
 
-          {/* Regulatory Pressures */}
-          <section>
-            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <Scale className="w-6 h-6 text-brand" />
-              Regulatory Pressure Points
-            </h3>
-            <div className="grid gap-4">
-              {REGULATORY_PRESSURES.map((pressure, index) => (
-                <Card key={index} className="p-4">
-                  <div className="flex items-center gap-4">
-                    <Badge variant="outline">{pressure.era}</Badge>
-                    <p className="text-foreground">{pressure.pressure}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
+            <TabsContent value="risks" className="space-y-6">
+              {/* Era-Specific Risk Profiles */}
+              <section>
+                <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                  <AlertTriangle className="w-6 h-6 text-destructive" />
+                  Era-Specific Risk Profiles
+                </h3>
+                <div className="grid gap-4">
+                  {RISK_PROFILES.map((risk, index) => (
+                    <Card key={index} className="p-4">
+                      <div className="grid md:grid-cols-4 gap-4 items-center">
+                        <div>
+                          <Badge variant="outline" className="mb-2">{risk.era}</Badge>
+                        </div>
+                        <div>
+                          <h5 className="text-sm font-medium text-foreground mb-1">Risk</h5>
+                          <p className="text-sm text-muted-foreground">{risk.risk}</p>
+                        </div>
+                        <div>
+                          <h5 className="text-sm font-medium text-foreground mb-1">Control</h5>
+                          <p className="text-sm text-muted-foreground">{risk.control}</p>
+                        </div>
+                        <div>
+                          <h5 className="text-sm font-medium text-foreground mb-1">Metric</h5>
+                          <p className="text-sm text-muted-foreground">{risk.metric}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            </TabsContent>
+
+            <TabsContent value="failures" className="space-y-6">
+              {/* Failure Cases */}
+              <section>
+                <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                  <FileText className="w-6 h-6 text-brand" />
+                  Failure Cases and Lessons
+                </h3>
+                <div className="grid gap-6">
+                  {FAILURE_CASES.map((failure) => (
+                    <Card key={failure.id} className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 rounded-lg bg-destructive/10">
+                          <AlertTriangle className="w-5 h-5 text-destructive" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-3">
+                            <h4 className="text-lg font-semibold text-foreground">{failure.title}</h4>
+                            <Badge variant="outline">{failure.era}</Badge>
+                          </div>
+                          
+                          <p className="text-foreground mb-4">{failure.scenario}</p>
+                          
+                          <div className="grid md:grid-cols-3 gap-4">
+                            <div className="p-3 bg-destructive/5 rounded-lg">
+                              <h5 className="text-sm font-medium text-destructive mb-1">What Went Wrong</h5>
+                              <p className="text-sm text-muted-foreground">{failure.whatWentWrong}</p>
+                            </div>
+                            
+                            <div className="p-3 bg-green-500/5 rounded-lg">
+                              <h5 className="text-sm font-medium text-green-600 mb-1">Prevention</h5>
+                              <p className="text-sm text-muted-foreground">{failure.prevention}</p>
+                            </div>
+                            
+                            <div className="p-3 bg-muted/50 rounded-lg">
+                              <h5 className="text-sm font-medium text-foreground mb-1">Impact</h5>
+                              <p className="text-sm text-muted-foreground">{failure.impact}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            </TabsContent>
+
+            <TabsContent value="regulatory" className="space-y-6">
+              {/* Regulatory Pressures */}
+              <section>
+                <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+                  <Scale className="w-6 h-6 text-brand" />
+                  Regulatory Pressure Points
+                </h3>
+                <div className="grid gap-4">
+                  {REGULATORY_PRESSURES.map((pressure, index) => (
+                    <Card key={index} className="p-4">
+                      <div className="flex items-center gap-4">
+                        <Badge variant="outline">{pressure.era}</Badge>
+                        <p className="text-foreground">{pressure.pressure}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            </TabsContent>
+
+            <TabsContent value="workfamily" className="space-y-6">
+              <WorkFamilyAlignment />
+            </TabsContent>
+          </Tabs>
 
           {/* In-Band Governance */}
           <Card className="p-8 bg-gradient-to-r from-brand/5 to-brand-2/5 border-brand/20">

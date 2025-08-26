@@ -1,600 +1,413 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { 
-  Sparkles, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Download, 
-  Loader, 
-  CheckCircle, 
-  AlertCircle,
-  Clock,
+import React, { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
+import { Progress } from "@/components/ui/progress";
+import { Label } from "@/components/ui/label";
+import {
+  ArrowLeft,
+  Download,
+  Code,
   Users,
+  BarChart,
   Brain,
-  Zap
-} from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { THINKERS, type Thinker } from '@/data/thinkers';
-
-// Domain mapping based on lobe
-const LOBE_TO_DOMAINS = {
-  'Decision/Action': ['Healthcare & Medical Services', 'Financial Services & Banking', 'Government & Public Sector'],
-  'Innovation/Strategy': ['Manufacturing & Supply Chain', 'Energy & Utilities', 'Transportation & Logistics'],
-  'Ethics/Governance': ['Government & Public Sector', 'Legal & Professional Services', 'Healthcare & Medical Services'],
-  'Perception/Patterning': ['Manufacturing & Supply Chain', 'Energy & Utilities', 'Transportation & Logistics'],
-  'Culture/Behaviour': ['Education & Training', 'Media & Entertainment', 'Retail & E-commerce']
-};
+  Loader2,
+  Play,
+  Pause,
+  CheckCircle,
+  XCircle
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { THINKERS, Thinker } from "@/data/thinkers";
+import { useToast } from "@/hooks/use-toast";
 
 interface ThinkerResult {
-  thinker: Thinker;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  expansions?: any[];
+  thinker: string;
+  lobe: string;
+  status: 'processing' | 'completed' | 'failed';
+  expansions: any[];
+  alignments: any[];
+  processingTime: number;
   error?: string;
-  processingTime?: number;
-  model?: string;
-}
-
-interface BulkProgress {
-  current: number;
-  total: number;
-  completed: number;
-  failed: number;
-  startTime: number;
-  estimatedTimeRemaining?: number;
 }
 
 export const AllThinkersExpansion: React.FC = () => {
-  const [results, setResults] = useState<ThinkerResult[]>([]);
-  const [isRunning, setIsRunning] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [concurrency, setConcurrency] = useState(2);
+  const [concurrency, setConcurrency] = useState(1);
   const [debugMode, setDebugMode] = useState(false);
-  const [progress, setProgress] = useState<BulkProgress | null>(null);
+  const [debugLogs, setDebugLogs] = useState<string[]>([]);
+  const [isRunning, setIsRunning] = useState(false);
+  const [results, setResults] = useState<ThinkerResult[]>([]);
+  const [progress, setProgress] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  const [startTime, setStartTime] = useState(0);
+  const [estimatedTimeRemaining, setEstimatedTimeRemaining] = useState('calculating...');
   const { toast } = useToast();
+  
+  const [includeAlignment, setIncludeAlignment] = useState(false);
 
-  // Initialize results array
-  const initializeRun = () => {
-    const initialResults: ThinkerResult[] = THINKERS.map(thinker => ({
-      thinker,
-      status: 'pending'
-    }));
-    setResults(initialResults);
-    setProgress({
-      current: 0,
-      total: THINKERS.length,
-      completed: 0,
-      failed: 0,
-      startTime: Date.now()
-    });
+  const logDebug = (message: string) => {
+    if (debugMode) {
+      setDebugLogs(prevLogs => [...prevLogs, message]);
+    }
   };
 
-  // Process a single thinker
-  const processThinker = async (thinkerResult: ThinkerResult): Promise<ThinkerResult> => {
-    const { thinker } = thinkerResult;
-    const startTime = Date.now();
-    
-    // Get domains based on lobe
-    const selectedDomains = LOBE_TO_DOMAINS[thinker.lobe] || LOBE_TO_DOMAINS['Innovation/Strategy'];
-    
-    if (debugMode) {
-      console.log(`🚀 Processing ${thinker.name} with domains:`, selectedDomains);
+  const getDomainsForLobe = (lobe: string): string[] => {
+    switch (lobe) {
+      case 'Decision/Action':
+        return ['risk-assessment', 'strategic-planning'];
+      case 'Innovation/Strategy':
+        return ['digital-transformation', 'competitive-analysis'];
+      case 'Ethics/Governance':
+        return ['regulatory-compliance', 'ethical-ai'];
+      case 'Perception/Patterning':
+        return ['digital-transformation', 'market-strategy'];
+      case 'Culture/Behaviour':
+        return ['change-management', 'organizational-culture'];
+      default:
+        return ['strategic-planning', 'change-management'];
     }
-    
+  };
+
+  const processThinker = async (thinker: Thinker): Promise<ThinkerResult> => {
+    const domains = getDomainsForLobe(thinker.lobe);
+    const result: ThinkerResult = {
+      thinker: thinker.name,
+      lobe: thinker.lobe,
+      status: 'processing',
+      expansions: [],
+      alignments: [],
+      processingTime: 0
+    };
+
+    const startTime = Date.now();
+
     try {
-      const { data, error } = await supabase.functions.invoke('expand-thinker', {
+      // Expansion
+      const { data: expansionData, error: expansionError } = await supabase.functions.invoke('expand-thinker', {
         body: {
           thinkerName: thinker.name,
           thinkerArea: thinker.area,
           coreIdea: thinker.coreIdea,
           aiShift: thinker.aiShift,
-          selectedDomains,
+          selectedDomains: domains,
           preferredModel: 'gpt-4.1-2025-04-14'
         }
       });
 
-      if (error) {
-        if (debugMode) {
-          console.error(`❌ ${thinker.name} failed:`, error);
-        }
-        return {
-          ...thinkerResult,
-          status: 'failed',
-          error: error.message,
-          processingTime: Date.now() - startTime
-        };
+      if (expansionError) {
+        throw new Error(`Expansion failed: ${expansionError.message}`);
       }
 
-      if (data?.error) {
-        return {
-          ...thinkerResult,
-          status: 'failed',
-          error: data.details || data.error,
-          processingTime: Date.now() - startTime
-        };
+      result.expansions = expansionData?.results || [];
+
+      // WorkFamilyAI Alignment (if enabled)
+      if (includeAlignment) {
+        const alignmentPromises = domains.map(async (domain) => {
+          try {
+            const { data: alignmentData, error: alignmentError } = await supabase.functions.invoke('align-workfamily', {
+              body: {
+                thinkerName: thinker.name,
+                thinkerArea: thinker.area,
+                coreIdea: thinker.coreIdea,
+                aiShift: thinker.aiShift,
+                domain: domain
+              }
+            });
+
+            if (alignmentError) {
+              console.error(`Alignment failed for ${thinker.name} (${domain}):`, alignmentError);
+              return null;
+            }
+
+            return {
+              domain: domain,
+              alignments: alignmentData?.alignments || []
+            };
+          } catch (error) {
+            console.error(`Alignment error for ${thinker.name} (${domain}):`, error);
+            return null;
+          }
+        });
+
+        const alignmentResults = await Promise.all(alignmentPromises);
+        result.alignments = alignmentResults.filter(Boolean);
       }
 
-      if (debugMode) {
-        console.log(`✅ ${thinker.name} completed:`, data.expansions?.length, 'expansions');
-      }
-
-      return {
-        ...thinkerResult,
-        status: 'completed',
-        expansions: data.expansions || [],
-        processingTime: Date.now() - startTime,
-        model: data.metadata?.batchResults?.[0]?.model || 'gpt-4.1-2025-04-14'
-      };
+      result.status = 'completed';
+      result.processingTime = Date.now() - startTime;
 
     } catch (error) {
-      if (debugMode) {
-        console.error(`💥 ${thinker.name} crashed:`, error);
-      }
-      return {
-        ...thinkerResult,
-        status: 'failed',
-        error: error.message || 'Network error',
-        processingTime: Date.now() - startTime
-      };
+      console.error(`Error processing ${thinker.name}:`, error);
+      result.status = 'failed';
+      result.error = error.message;
+      result.processingTime = Date.now() - startTime;
     }
+
+    return result;
   };
 
-  // Update progress and results
-  const updateThinkerResult = (index: number, updatedResult: ThinkerResult) => {
-    setResults(prev => {
-      const newResults = [...prev];
-      newResults[index] = updatedResult;
-      return newResults;
-    });
-    
-    setProgress(prev => {
-      if (!prev) return null;
-      
-      const completed = updatedResult.status === 'completed' ? prev.completed + 1 : prev.completed;
-      const failed = updatedResult.status === 'failed' ? prev.failed + 1 : prev.failed;
-      const current = completed + failed;
-      
-      // Estimate time remaining
-      const elapsed = Date.now() - prev.startTime;
-      const rate = current > 0 ? elapsed / current : 0;
-      const remaining = prev.total - current;
-      const estimatedTimeRemaining = remaining > 0 ? rate * remaining : 0;
-      
-      return {
-        ...prev,
-        current,
-        completed,
-        failed,
-        estimatedTimeRemaining
-      };
-    });
-  };
-
-  // Main processing loop with concurrency control
-  const runBulkExpansion = async () => {
+  const startBulkProcessing = async () => {
     setIsRunning(true);
-    setIsPaused(false);
-    initializeRun();
-    
-    toast({
-      title: "🚀 Bulk Expansion Started",
-      description: `Processing all ${THINKERS.length} thinkers with concurrency ${concurrency}`
-    });
-    
-    const processingQueue = [...THINKERS];
-    const activePromises = new Map<number, Promise<void>>();
-    let currentIndex = 0;
-    
-    while (currentIndex < THINKERS.length && isRunning) {
-      // Check if paused
-      while (isPaused && isRunning) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-      
-      if (!isRunning) break;
-      
-      // Start new tasks up to concurrency limit
-      while (activePromises.size < concurrency && currentIndex < THINKERS.length) {
-        const index = currentIndex;
-        const thinkerResult = results[index] || { thinker: THINKERS[index], status: 'pending' as const };
-        
-        // Mark as processing
-        setResults(prev => {
-          const newResults = [...prev];
-          newResults[index] = { ...thinkerResult, status: 'processing' };
-          return newResults;
-        });
-        
-        // Start processing
-        const promise = processThinker(thinkerResult).then(result => {
-          updateThinkerResult(index, result);
-          activePromises.delete(index);
-        });
-        
-        activePromises.set(index, promise);
-        currentIndex++;
-      }
-      
-      // Wait for at least one task to complete
-      if (activePromises.size > 0) {
-        await Promise.race(activePromises.values());
-      }
-    }
-    
-    // Wait for all remaining tasks to complete
-    await Promise.all(activePromises.values());
-    
-    setIsRunning(false);
-    setIsPaused(false);
-    
-    // Final toast
-    const finalResults = results.filter(r => r.status === 'completed' || r.status === 'failed');
-    const completedCount = finalResults.filter(r => r.status === 'completed').length;
-    const failedCount = finalResults.filter(r => r.status === 'failed').length;
-    
-    toast({
-      title: "🎉 Bulk Expansion Complete",
-      description: `${completedCount} succeeded, ${failedCount} failed out of ${THINKERS.length} thinkers`
-    });
-  };
-
-  const pauseRun = () => {
-    setIsPaused(!isPaused);
-    toast({
-      title: isPaused ? "▶️ Resumed" : "⏸️ Paused",
-      description: isPaused ? "Bulk expansion resumed" : "Bulk expansion paused"
-    });
-  };
-
-  const stopRun = () => {
-    setIsRunning(false);
-    setIsPaused(false);
-    toast({
-      title: "🛑 Stopped",
-      description: "Bulk expansion stopped"
-    });
-  };
-
-  const resetRun = () => {
     setResults([]);
-    setProgress(null);
-    setIsRunning(false);
-    setIsPaused(false);
-    toast({
-      title: "🔄 Reset",
-      description: "Ready to start new bulk expansion"
-    });
+    setCompletedCount(0);
+    setTotalCount(THINKERS.length);
+    setProgress(0);
+    setStartTime(Date.now());
+    setEstimatedTimeRemaining('calculating...');
+
+    const initialResults = THINKERS.map(thinker => ({
+      thinker: thinker.name,
+      lobe: thinker.lobe,
+      status: 'processing',
+      expansions: [],
+      alignments: [],
+      processingTime: 0
+    } as ThinkerResult));
+    setResults(initialResults);
+
+    const startTime = Date.now();
+    let completed = 0;
+
+    const processNext = async (index: number) => {
+      if (!isRunning || index >= THINKERS.length) {
+        return;
+      }
+
+      const thinker = THINKERS[index];
+      logDebug(`Starting processing for ${thinker.name} at index ${index}`);
+
+      const result = await processThinker(thinker);
+      logDebug(`Finished processing for ${thinker.name} with status ${result.status}`);
+
+      setResults(prevResults => {
+        const newResults = [...prevResults];
+        newResults[index] = result;
+        return newResults;
+      });
+
+      completed++;
+      setCompletedCount(completed);
+      const newProgress = (completed / THINKERS.length) * 100;
+      setProgress(newProgress);
+
+      // Estimate time remaining
+      const elapsedTime = Date.now() - startTime;
+      const averageTimePerThinker = elapsedTime / completed;
+      const remainingThinkers = THINKERS.length - completed;
+      const estimatedMsRemaining = averageTimePerThinker * remainingThinkers;
+      const estimatedSeconds = Math.round(estimatedMsRemaining / 1000);
+      const minutes = Math.floor(estimatedSeconds / 60);
+      const seconds = estimatedSeconds % 60;
+      setEstimatedTimeRemaining(`${minutes}m ${seconds}s`);
+
+      // Recursive call
+      processNext(index + concurrency);
+    };
+
+    // Start concurrent processing
+    for (let i = 0; i < concurrency; i++) {
+      processNext(i);
+    }
   };
 
-  // Export all results
-  const handleExport = (format: 'json' | 'csv') => {
-    const completedResults = results.filter(r => r.status === 'completed' && r.expansions?.length);
-    
-    if (completedResults.length === 0) {
-      toast({
-        title: "No Data",
-        description: "No completed results to export",
-        variant: "destructive"
-      });
-      return;
-    }
+  const exportResults = () => {
+    const exportData = results.map(result => ({
+      thinker: result.thinker,
+      lobe: result.lobe,
+      status: result.status,
+      processing_time_ms: result.processingTime,
+      expansions: result.expansions,
+      ...(includeAlignment && { alignments: result.alignments }),
+      error: result.error || null
+    }));
 
-    let content: string;
-    let filename: string;
-    let mimeType: string;
-
-    if (format === 'json') {
-      const exportData = {
-        generatedAt: new Date().toISOString(),
-        totalThinkers: THINKERS.length,
-        completedThinkers: completedResults.length,
-        results: completedResults.map(result => ({
-          thinker: result.thinker.name,
-          area: result.thinker.area,
-          lobe: result.thinker.lobe,
-          processingTime: result.processingTime,
-          model: result.model,
-          expansions: result.expansions
-        }))
-      };
-      
-      content = JSON.stringify(exportData, null, 2);
-      filename = `all_thinkers_expansion_${new Date().toISOString().split('T')[0]}.json`;
-      mimeType = 'application/json';
-    } else {
-      // CSV format - flatten all expansions
-      const headers = ['Thinker', 'Area', 'Lobe', 'Domain', 'Relevance', 'Key Insights', 'Applications', 'Implementation', 'Challenges', 'Metrics'];
-      const rows: string[][] = [];
-      
-      completedResults.forEach(result => {
-        result.expansions?.forEach(expansion => {
-          rows.push([
-            result.thinker.name,
-            result.thinker.area,
-            result.thinker.lobe,
-            expansion.domain,
-            expansion.relevance,
-            expansion.keyInsights?.join('; ') || '',
-            expansion.practicalApplications?.join('; ') || '',
-            expansion.implementationSteps?.join('; ') || '',
-            expansion.challenges?.join('; ') || '',
-            expansion.metrics?.join('; ') || ''
-          ]);
-        });
-      });
-      
-      content = [headers, ...rows]
-        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
-        .join('\n');
-      filename = `all_thinkers_expansion_${new Date().toISOString().split('T')[0]}.csv`;
-      mimeType = 'text/csv';
-    }
-
-    const blob = new Blob([content], { type: mimeType });
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
+    a.download = `thinkers-bulk-expansion-${includeAlignment ? 'with-alignment-' : ''}${new Date().toISOString().split('T')[0]}.json`;
     a.click();
-    document.body.removeChild(a);
     URL.revokeObjectURL(url);
-
-    toast({
-      title: "Export Complete",
-      description: `${completedResults.length} thinker results exported as ${format.toUpperCase()}`
-    });
-  };
-
-  const formatTime = (ms: number) => {
-    const seconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    
-    if (hours > 0) {
-      return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
-    } else if (minutes > 0) {
-      return `${minutes}m ${seconds % 60}s`;
-    } else {
-      return `${seconds}s`;
-    }
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-3">
-        <Brain className="w-6 h-6 text-primary" />
-        <div>
-          <h2 className="text-2xl font-bold">All Thinkers Expansion</h2>
-          <p className="text-muted-foreground">
-            Generate framework expansions for all {THINKERS.length} thinkers using GPT-4.x
-          </p>
-        </div>
+      <div className="text-center space-y-4">
+        <h3 className="text-2xl font-semibold text-foreground flex items-center justify-center gap-2">
+          <Brain className="w-6 h-6 text-brand" />
+          Bulk Thinker Expansion & Alignment
+        </h3>
+        <p className="text-muted-foreground max-w-3xl mx-auto">
+          Automatically expand all {THINKERS.length} thinkers across domains using GPT-4.1, with optional WorkFamilyAI Neural Ennead alignment
+        </p>
       </div>
 
       {/* Controls */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Zap className="w-5 h-5" />
-            Bulk Processing Controls
-          </CardTitle>
+          <CardTitle>Bulk Processing Controls</CardTitle>
+          <CardDescription>
+            Configure and run bulk expansion across all thinkers
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Concurrency (1-3 parallel requests)</Label>
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setConcurrency(Math.max(1, concurrency - 1))}
-                  disabled={isRunning || concurrency <= 1}
-                >
-                  -
-                </Button>
-                <Badge variant="secondary" className="px-3">
-                  {concurrency}
-                </Badge>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setConcurrency(Math.min(3, concurrency + 1))}
-                  disabled={isRunning || concurrency >= 3}
-                >
-                  +
-                </Button>
+              <label className="text-sm font-medium text-foreground">Concurrency</label>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-muted-foreground">1</span>
+                <Slider
+                  value={[concurrency]}
+                  onValueChange={(value) => setConcurrency(value[0])}
+                  max={3}
+                  min={1}
+                  step={1}
+                  className="flex-1"
+                />
+                <span className="text-sm text-muted-foreground">3</span>
+                <span className="text-sm font-medium min-w-[3ch]">{concurrency}</span>
               </div>
             </div>
-
+            
             <div className="flex items-center space-x-2">
               <Switch
                 id="debug-mode"
                 checked={debugMode}
                 onCheckedChange={setDebugMode}
-                disabled={isRunning}
               />
-              <Label htmlFor="debug-mode">Debug Mode</Label>
+              <label htmlFor="debug-mode" className="text-sm font-medium">
+                Debug Mode
+              </label>
             </div>
           </div>
 
-          <Separator />
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="include-alignment"
+              checked={includeAlignment}
+              onCheckedChange={setIncludeAlignment}
+            />
+            <label htmlFor="include-alignment" className="text-sm font-medium">
+              Include WorkFamilyAI Neural Ennead Alignment
+            </label>
+          </div>
 
-          <div className="flex gap-2">
-            {!isRunning ? (
-              <Button onClick={runBulkExpansion} className="flex items-center gap-2">
+          <div className="flex gap-4">
+            <Button
+              onClick={startBulkProcessing}
+              disabled={isRunning}
+              className="flex items-center gap-2"
+            >
+              {isRunning ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
                 <Play className="w-4 h-4" />
-                Start Bulk Expansion
-              </Button>
-            ) : (
-              <Button onClick={pauseRun} variant="outline" className="flex items-center gap-2">
-                {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-                {isPaused ? 'Resume' : 'Pause'}
-              </Button>
-            )}
+              )}
+              Start Bulk Processing
+            </Button>
             
             {isRunning && (
-              <Button onClick={stopRun} variant="destructive" className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4" />
-                Stop
+              <Button
+                onClick={() => setIsRunning(false)}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <Pause className="w-4 h-4" />
+                Pause
               </Button>
             )}
             
-            {!isRunning && results.length > 0 && (
-              <Button onClick={resetRun} variant="outline" className="flex items-center gap-2">
-                <RotateCcw className="w-4 h-4" />
-                Reset
+            {results.length > 0 && (
+              <Button
+                onClick={exportResults}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                Export Results ({results.length})
               </Button>
             )}
           </div>
+
+          {/* Progress */}
+          {(progress > 0 || isRunning) && (
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Progress: {completedCount}/{totalCount} thinkers</span>
+                <span>{Math.round(progress)}% • ETA: {estimatedTimeRemaining}</span>
+              </div>
+              <Progress value={progress} className="w-full" />
+            </div>
+          )}
         </CardContent>
       </Card>
-
-      {/* Progress */}
-      {progress && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span className="flex items-center gap-2">
-                <Users className="w-5 h-5" />
-                Progress
-              </span>
-              <div className="flex items-center gap-4 text-sm">
-                <Badge variant="secondary">{progress.current}/{progress.total}</Badge>
-                <Badge variant="outline" className="text-green-600">
-                  <CheckCircle className="w-3 h-3 mr-1" />
-                  {progress.completed}
-                </Badge>
-                <Badge variant="outline" className="text-red-600">
-                  <AlertCircle className="w-3 h-3 mr-1" />
-                  {progress.failed}
-                </Badge>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <Progress value={(progress.current / progress.total) * 100} className="h-2" />
-            
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>
-                {progress.current > 0 && progress.estimatedTimeRemaining 
-                  ? `ETA: ${formatTime(progress.estimatedTimeRemaining)}`
-                  : 'Calculating...'
-                }
-              </span>
-              <span>
-                Elapsed: {formatTime(Date.now() - progress.startTime)}
-              </span>
-            </div>
-            
-            {isPaused && (
-              <Alert>
-                <Pause className="w-4 h-4" />
-                <AlertDescription>
-                  Processing is paused. Click Resume to continue.
-                </AlertDescription>
-              </Alert>
-            )}
-          </CardContent>
-        </Card>
-      )}
 
       {/* Results */}
       {results.length > 0 && (
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
-                Results ({results.filter(r => r.status === 'completed').length}/{results.length})
-              </CardTitle>
-              
-              {results.some(r => r.status === 'completed') && (
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleExport('json')}
-                    className="flex items-center gap-1"
-                  >
-                    <Download className="w-3 h-3" />
-                    JSON
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleExport('csv')}
-                    className="flex items-center gap-1"
-                  >
-                    <Download className="w-3 h-3" />
-                    CSV
-                  </Button>
-                </div>
-              )}
-            </div>
+            <CardTitle>Processing Results</CardTitle>
+            <CardDescription>
+              {results.filter(r => r.status === 'completed').length} completed, {' '}
+              {results.filter(r => r.status === 'failed').length} failed, {' '}
+              {results.filter(r => r.status === 'processing').length} in progress
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <ScrollArea className="h-96">
-              <div className="space-y-2">
-                {results.map((result, index) => (
-                  <div key={result.thinker.name} className="flex items-center justify-between p-3 border rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2">
-                        {result.status === 'pending' && <Clock className="w-4 h-4 text-muted-foreground" />}
-                        {result.status === 'processing' && <Loader className="w-4 h-4 animate-spin text-primary" />}
-                        {result.status === 'completed' && <CheckCircle className="w-4 h-4 text-green-600" />}
-                        {result.status === 'failed' && <AlertCircle className="w-4 h-4 text-red-600" />}
-                        
-                        <Badge variant="outline" className="text-xs">
-                          {index + 1}
-                        </Badge>
-                      </div>
-                      
-                      <div>
-                        <div className="font-medium">{result.thinker.name}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {result.thinker.area} • {result.thinker.lobe}
-                        </div>
-                      </div>
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {results.map((result, index) => (
+                <div key={result.thinker} className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      {result.status === 'completed' && <CheckCircle className="w-4 h-4 text-green-500" />}
+                      {result.status === 'failed' && <XCircle className="w-4 h-4 text-destructive" />}
+                      {result.status === 'processing' && <Loader2 className="w-4 h-4 text-brand animate-spin" />}
                     </div>
-                    
-                    <div className="flex items-center gap-3 text-sm">
-                      {result.status === 'completed' && (
-                        <>
-                          <Badge variant="secondary">
-                            {result.expansions?.length || 0} expansions
-                          </Badge>
-                          {result.processingTime && (
-                            <span className="text-muted-foreground">
-                              {formatTime(result.processingTime)}
-                            </span>
-                          )}
-                        </>
-                      )}
-                      
-                      {result.status === 'failed' && result.error && (
-                        <span className="text-red-600 text-xs max-w-48 truncate" title={result.error}>
-                          {result.error}
-                        </span>
-                      )}
+                    <div>
+                      <span className="font-medium">{result.thinker}</span>
+                      <div className="text-sm text-muted-foreground">
+                        {result.lobe} • {result.expansions.length} expansions
+                        {includeAlignment && result.alignments && (
+                          <span> • {result.alignments.length} alignments</span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </ScrollArea>
+                  <div className="text-right text-sm text-muted-foreground">
+                    {result.processingTime > 0 && `${(result.processingTime / 1000).toFixed(1)}s`}
+                    {result.error && <div className="text-destructive text-xs">{result.error}</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Debug Output */}
+      {debugMode && debugLogs.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Debug Logs</CardTitle>
+            <CardDescription>
+              Detailed output for troubleshooting
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-1 max-h-64 overflow-y-auto text-xs">
+              {debugLogs.map((log, index) => (
+                <div key={index} className="font-mono">{log}</div>
+              ))}
+            </div>
           </CardContent>
         </Card>
       )}
     </div>
   );
 };
+
+export default AllThinkersExpansion;
