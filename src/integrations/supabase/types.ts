@@ -9577,6 +9577,51 @@ export type Database = {
         }
         Relationships: []
       }
+      engagement_analytics: {
+        Row: {
+          action_type: string
+          created_at: string
+          engagement_score: number | null
+          id: string
+          metadata: Json | null
+          resource_id: string
+          resource_title: string | null
+          resource_type: string
+          role_name: string | null
+          session_id: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          action_type: string
+          created_at?: string
+          engagement_score?: number | null
+          id?: string
+          metadata?: Json | null
+          resource_id: string
+          resource_title?: string | null
+          resource_type: string
+          role_name?: string | null
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          created_at?: string
+          engagement_score?: number | null
+          id?: string
+          metadata?: Json | null
+          resource_id?: string
+          resource_title?: string | null
+          resource_type?: string
+          role_name?: string | null
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       "enhanced agent match": {
         Row: {
           Agent_ID: string | null
@@ -15214,6 +15259,70 @@ export type Database = {
           version?: number
         }
         Relationships: []
+      }
+      neural_ennead_members: {
+        Row: {
+          canonical_keywords: string[]
+          created_at: string
+          description: string | null
+          display_name: string
+          exemplar_roles: string[]
+          member_code: string
+          primary_family_code: string
+          secondary_family_code: string
+          short_label: string | null
+          tertiary_family_code: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_keywords?: string[]
+          created_at?: string
+          description?: string | null
+          display_name: string
+          exemplar_roles?: string[]
+          member_code: string
+          primary_family_code: string
+          secondary_family_code: string
+          short_label?: string | null
+          tertiary_family_code: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_keywords?: string[]
+          created_at?: string
+          description?: string | null
+          display_name?: string
+          exemplar_roles?: string[]
+          member_code?: string
+          primary_family_code?: string
+          secondary_family_code?: string
+          short_label?: string | null
+          tertiary_family_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "neural_ennead_members_primary_family_code_fkey"
+            columns: ["primary_family_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_families"
+            referencedColumns: ["family_code"]
+          },
+          {
+            foreignKeyName: "neural_ennead_members_secondary_family_code_fkey"
+            columns: ["secondary_family_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_families"
+            referencedColumns: ["family_code"]
+          },
+          {
+            foreignKeyName: "neural_ennead_members_tertiary_family_code_fkey"
+            columns: ["tertiary_family_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_families"
+            referencedColumns: ["family_code"]
+          },
+        ]
       }
       neural_specs: {
         Row: {
@@ -25125,6 +25234,80 @@ export type Database = {
             referencedColumns: ["family_code"]
           },
         ]
+      }
+      thinker_member_alignment: {
+        Row: {
+          confidence: number | null
+          created_at: string
+          domain: string
+          id: string
+          member_code: string
+          metadata: Json | null
+          model_used: string | null
+          rank: number
+          rationale: string | null
+          thinker_name: string
+          transitions: Json | null
+          updated_at: string
+        }
+        Insert: {
+          confidence?: number | null
+          created_at?: string
+          domain: string
+          id?: string
+          member_code: string
+          metadata?: Json | null
+          model_used?: string | null
+          rank?: number
+          rationale?: string | null
+          thinker_name: string
+          transitions?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          confidence?: number | null
+          created_at?: string
+          domain?: string
+          id?: string
+          member_code?: string
+          metadata?: Json | null
+          model_used?: string | null
+          rank?: number
+          rationale?: string | null
+          thinker_name?: string
+          transitions?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "thinker_member_alignment_member_code_fkey"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members"
+            referencedColumns: ["member_code"]
+          },
+        ]
+      }
+      thinker_pet_topics: {
+        Row: {
+          created_at: string
+          pet_topic: string
+          thinker_name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          pet_topic: string
+          thinker_name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          pet_topic?: string
+          thinker_name?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       "top 100": {
         Row: {
