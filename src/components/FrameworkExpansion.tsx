@@ -71,6 +71,19 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
     }
 
     setIsGenerating(true);
+    const requestStartTime = Date.now();
+    
+    console.log('=== Framework Expansion Request ===');
+    console.log('Thinker:', thinker.name);
+    console.log('Selected domains:', selectedDomains);
+    console.log('Request payload:', {
+      thinkerName: thinker.name,
+      thinkerArea: thinker.area,
+      coreIdea: thinker.coreIdea,
+      aiShift: thinker.aiShift,
+      selectedDomains
+    });
+    
     try {
       const { data, error } = await supabase.functions.invoke('expand-thinker', {
         body: {
@@ -82,18 +95,137 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
         }
       });
 
-      if (error) throw error;
+      console.log('Supabase response received:', { data, error });
 
+      if (error) {
+        console.error('Supabase function error:', error);
+        
+        // Handle different types of errors
+        let errorTitle = "Generation Failed";
+        let errorDescription = "Failed to expand framework. Please try again.";
+        
+        if (error.message) {
+          if (error.message.includes('OPENAI_API_KEY') || error.message.includes('Configuration Error')) {
+            errorTitle = "Configuration Error";
+            errorDescription = "OpenAI API key is not properly configured. Please contact support.";
+          } else if (error.message.includes('timeout') || error.message.includes('TIMEOUT')) {
+            errorTitle = "Request Timeout";
+            errorDescription = "The request took too long to process. Please try with fewer domains.";
+          } else if (error.message.includes('rate limit') || error.message.includes('RATE_LIMIT')) {
+            errorTitle = "Rate Limit Exceeded";
+            errorDescription = "Too many requests. Please wait a moment and try again.";
+          } else if (error.message.includes('network') || error.message.includes('NETWORK_ERROR')) {
+            errorTitle = "Network Error";
+            errorDescription = "Unable to connect to the service. Please check your internet connection.";
+          }
+        }
+        
+        toast({
+          title: errorTitle,
+          description: errorDescription,
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Validate response data structure
+      if (!data) {
+        console.error('No data received from function');
+        toast({
+          title: "No Response",
+          description: "No data received from the service. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (!data.expansions) {
+        console.error('Invalid response structure - missing expansions:', data);
+        
+        // Handle error responses from the function
+        if (data.error) {
+          const errorMessage = data.details || data.error;
+          console.error('Function returned error:', data);
+          
+          toast({
+            title: data.error,
+            description: errorMessage,
+            variant: "destructive"
+          });
+          return;
+        }
+        
+        toast({
+          title: "Invalid Response",
+          description: "Received unexpected response format. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (!Array.isArray(data.expansions)) {
+        console.error('Expansions is not an array:', data.expansions);
+        toast({
+          title: "Invalid Data Format",
+          description: "Received data in unexpected format. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (data.expansions.length === 0) {
+        console.warn('No expansions generated');
+        toast({
+          title: "No Results",
+          description: "No framework expansions were generated. Please try different domains.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Success!
       setResults(data.expansions);
+      const requestTime = Date.now() - requestStartTime;
+      
+      console.log('✓ Framework expansion successful:', {
+        expansionCount: data.expansions.length,
+        domains: selectedDomains.length,
+        processingTime: data.metadata?.processingTimeMs || requestTime,
+        expansions: data.expansions
+      });
+      
       toast({
         title: "Framework Expanded",
-        description: `Generated insights for ${selectedDomains.length} business domains.`
+        description: `Generated insights for ${selectedDomains.length} business domains in ${Math.round(requestTime / 1000)}s.`
       });
+      
     } catch (error) {
-      console.error('Expansion error:', error);
+      const requestTime = Date.now() - requestStartTime;
+      console.error('✗ Expansion request failed:', error);
+      console.error('Request details:', {
+        thinker: thinker.name,
+        domains: selectedDomains,
+        processingTime: requestTime
+      });
+      
+      // Determine error type and provide specific guidance
+      let errorTitle = "Generation Failed";
+      let errorDescription = "An unexpected error occurred. Please try again.";
+      
+      if (error.message?.includes('Failed to fetch') || error.message?.includes('network')) {
+        errorTitle = "Network Error";
+        errorDescription = "Unable to connect to the service. Please check your connection and try again.";
+      } else if (error.message?.includes('timeout')) {
+        errorTitle = "Request Timeout";
+        errorDescription = "The request took too long. Try selecting fewer domains or try again later.";
+      } else if (error.message?.includes('JSON')) {
+        errorTitle = "Response Error";
+        errorDescription = "Received invalid response format. This may be a temporary issue - please try again.";
+      }
+      
       toast({
-        title: "Generation Failed",
-        description: "Failed to expand framework. Please try again.",
+        title: errorTitle,
+        description: errorDescription,
         variant: "destructive"
       });
     } finally {
