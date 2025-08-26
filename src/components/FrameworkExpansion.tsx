@@ -76,6 +76,7 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
     console.log('=== Framework Expansion Request ===');
     console.log('Thinker:', thinker.name);
     console.log('Selected domains:', selectedDomains);
+    console.log('Thinker object full:', thinker);
     console.log('Request payload:', {
       thinkerName: thinker.name,
       thinkerArea: thinker.area,
@@ -84,7 +85,18 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
       selectedDomains
     });
     
+    // Add debug validation
+    const debugValidation = {
+      hasName: !!thinker.name,
+      hasArea: !!thinker.area,
+      hasCoreIdea: !!thinker.coreIdea,
+      hasAiShift: !!thinker.aiShift,
+      hasSelectedDomains: selectedDomains.length > 0
+    };
+    console.log('Frontend validation check:', debugValidation);
+    
     try {
+      console.log('About to invoke Supabase function...');
       const { data, error } = await supabase.functions.invoke('expand-thinker', {
         body: {
           thinkerName: thinker.name,
@@ -95,7 +107,8 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
         }
       });
 
-      console.log('Supabase response received:', { data, error });
+      console.log('Supabase function call completed');
+      console.log('Raw Supabase response:', { data, error });
 
       if (error) {
         console.error('Supabase function error:', error);

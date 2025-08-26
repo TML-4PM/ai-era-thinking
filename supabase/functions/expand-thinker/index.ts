@@ -41,6 +41,10 @@ serve(async (req) => {
 
   const startTime = Date.now();
   console.log('=== Framework Expansion Request Started ===');
+  console.log('Request method:', req.method);
+  console.log('Request URL:', req.url);
+  console.log('Environment check - OPENAI_API_KEY exists:', !!OPENAI_API_KEY);
+  console.log('Environment check - OPENAI_API_KEY length:', OPENAI_API_KEY ? OPENAI_API_KEY.length : 0);
 
   try {
     // Validate API key first
