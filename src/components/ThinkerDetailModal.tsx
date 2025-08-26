@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, MessageSquare, Brain, Lightbulb, Zap, Users } from "lucide-react";
 import { Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
-import ThinkerChat from "./ThinkerChat";
+import { ThinkerChat } from "./ThinkerChat";
 import ThinkerWorkfamilyChat from "./ThinkerWorkfamilyChat";
 
 interface ThinkerDetailModalProps {
@@ -161,10 +161,13 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
 
           <TabsContent value="chat">
             <ThinkerChat
-              thinkerName={thinker.name}
-              thinkerArea={thinker.area}
-              coreIdea={thinker.coreIdea}
-              aiShift={thinker.aiShift}
+              thinker={{
+                name: thinker.name,
+                area: thinker.area,
+                coreIdea: thinker.coreIdea,
+                aiShift: thinker.aiShift,
+                ...expandedThinker
+              }}
             />
           </TabsContent>
 
