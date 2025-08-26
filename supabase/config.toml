@@ -1,3 +1,4 @@
+
 project_id = "lzfgigiyqpuuxslsygjt"
 
 [functions.thinker-chat]
@@ -7,4 +8,22 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.openai-health]
+verify_jwt = false
+
+[functions.duo-chat]
+verify_jwt = false
+
+[functions.align-workfamily]
+verify_jwt = false
+
+[functions.align-workfamily-members]
+verify_jwt = false
+
+[functions.seed-neural-ennead]
+verify_jwt = false
+
+[functions.seed-neural-ennead-members]
+verify_jwt = false
+
+[functions.build-thinker-team]
 verify_jwt = false

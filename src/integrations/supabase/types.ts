@@ -25185,6 +25185,99 @@ export type Database = {
         }
         Relationships: []
       }
+      thinker_alignment_team_members: {
+        Row: {
+          contribution_focus: string | null
+          created_at: string
+          member_code: string
+          metadata: Json | null
+          order_index: number
+          rationale: string | null
+          role_on_team: string | null
+          team_id: string
+          updated_at: string
+        }
+        Insert: {
+          contribution_focus?: string | null
+          created_at?: string
+          member_code: string
+          metadata?: Json | null
+          order_index?: number
+          rationale?: string | null
+          role_on_team?: string | null
+          team_id: string
+          updated_at?: string
+        }
+        Update: {
+          contribution_focus?: string | null
+          created_at?: string
+          member_code?: string
+          metadata?: Json | null
+          order_index?: number
+          rationale?: string | null
+          role_on_team?: string | null
+          team_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members"
+            referencedColumns: ["member_code"]
+          },
+          {
+            foreignKeyName: "thinker_alignment_team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "thinker_alignment_teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      thinker_alignment_teams: {
+        Row: {
+          constraints: Json | null
+          created_at: string
+          domain: string
+          id: string
+          industries: string[]
+          model_used: string | null
+          overlap_cap: number
+          selection_strategy: string | null
+          team_size: number
+          thinker_name: string
+          updated_at: string
+        }
+        Insert: {
+          constraints?: Json | null
+          created_at?: string
+          domain: string
+          id?: string
+          industries?: string[]
+          model_used?: string | null
+          overlap_cap?: number
+          selection_strategy?: string | null
+          team_size?: number
+          thinker_name: string
+          updated_at?: string
+        }
+        Update: {
+          constraints?: Json | null
+          created_at?: string
+          domain?: string
+          id?: string
+          industries?: string[]
+          model_used?: string | null
+          overlap_cap?: number
+          selection_strategy?: string | null
+          team_size?: number
+          thinker_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       thinker_family_alignment: {
         Row: {
           confidence: number

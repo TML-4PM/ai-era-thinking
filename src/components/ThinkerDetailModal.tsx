@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import { Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
 import { ThinkerChat } from "./ThinkerChat";
 import ThinkerWorkfamilyChat from "./ThinkerWorkfamilyChat";
+import ThinkerTeamSection from "./ThinkerTeamSection";
 
 interface ThinkerDetailModalProps {
   thinker: Thinker | null;
@@ -24,7 +26,7 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
   if (!thinker) return null;
 
   const expandedThinker = getExpandedThinker(thinker.name);
-  const [activeTab, setActiveTab] = useState("duo-chat");
+  const [activeTab, setActiveTab] = useState("team");
 
   const eraMapping = {
     onPrem: "On-Premises Era",
@@ -56,7 +58,11 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="team" className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              Team
+            </TabsTrigger>
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
               Overview
@@ -74,6 +80,15 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
               Applications
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="team">
+            <ThinkerTeamSection
+              thinkerName={thinker.name}
+              thinkerArea={thinker.area}
+              coreIdea={thinker.coreIdea}
+              aiShift={thinker.aiShift}
+            />
+          </TabsContent>
 
           <TabsContent value="overview" className="space-y-4">
             {/* Core Ideas */}
@@ -115,7 +130,6 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
               </Card>
             )}
 
-            {/* Practical Applications */}
             {expandedThinker && (
               <Card>
                 <CardHeader>
@@ -140,7 +154,6 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
               </Card>
             )}
 
-            {/* Related Thinkers */}
             {expandedThinker && expandedThinker.relatedThinkers.length > 0 && (
               <Card>
                 <CardHeader>
