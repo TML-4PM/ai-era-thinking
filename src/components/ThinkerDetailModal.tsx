@@ -24,7 +24,7 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
   if (!thinker) return null;
 
   const expandedThinker = getExpandedThinker(thinker.name);
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("duo-chat");
 
   const eraMapping = {
     onPrem: "On-Premises Era",
