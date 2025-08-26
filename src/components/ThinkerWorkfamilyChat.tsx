@@ -7,8 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { supabase } from "@/integrations/supabase/client";
-import { MessageSquare, Clock, Users, Brain, Loader2 } from "lucide-react";
+import { MessageSquare, Clock, Users, Brain, Loader2, Check, ChevronsUpDown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ThinkerWorkfamilyChatProps {
@@ -23,6 +26,12 @@ interface Member {
   display_name: string;
   description: string;
   exemplar_roles: string[];
+  confidence?: number;
+}
+
+interface Industry {
+  id: string;
+  name: string;
 }
 
 interface DuoDialogue {
@@ -52,21 +61,41 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
   aiShift
 }) => {
   const [members, setMembers] = useState<Member[]>([]);
+  const [filteredMembers, setFilteredMembers] = useState<Member[]>([]);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [topAlignments, setTopAlignments] = useState<Member[]>([]);
   const [petTopic, setPetTopic] = useState<string>('');
   const [usePetTopic, setUsePetTopic] = useState(true);
   const [customTopic, setCustomTopic] = useState('');
   const [domain, setDomain] = useState('strategic-planning');
+  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [open, setOpen] = useState(false);
+  const [alignmentLoading, setAlignmentLoading] = useState(false);
   const [dialogue, setDialogue] = useState<DuoDialogue | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  const industries: Industry[] = [
+    { id: 'government', name: 'Government & Public Sector' },
+    { id: 'healthcare', name: 'Healthcare & Life Sciences' },
+    { id: 'finance', name: 'Finance & Banking' },
+    { id: 'technology', name: 'Technology & Software' },
+    { id: 'education', name: 'Education & Research' },
+    { id: 'manufacturing', name: 'Manufacturing & Industrial' },
+    { id: 'retail', name: 'Retail & Consumer' },
+    { id: 'energy', name: 'Energy & Utilities' },
+  ];
 
   useEffect(() => {
     loadMembers();
     loadTopAlignments();
     loadPetTopic();
   }, [thinkerName]);
+
+  useEffect(() => {
+    setFilteredMembers(members);
+  }, [members]);
 
   const loadMembers = async () => {
     try {
@@ -84,6 +113,7 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
 
   const loadTopAlignments = async () => {
     try {
+      setAlignmentLoading(true);
       const { data, error } = await supabase
         .from('thinker_member_alignment')
         .select(`
@@ -108,7 +138,8 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
           member_code: item.neural_ennead_members.member_code,
           display_name: item.neural_ennead_members.display_name,
           description: item.neural_ennead_members.description,
-          exemplar_roles: item.neural_ennead_members.exemplar_roles || []
+          exemplar_roles: item.neural_ennead_members.exemplar_roles || [],
+          confidence: item.confidence
         }));
       
       setTopAlignments(alignedMembers);
@@ -119,6 +150,8 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
       }
     } catch (error) {
       console.error('Error loading top alignments:', error);
+    } finally {
+      setAlignmentLoading(false);
     }
   };
 
@@ -171,7 +204,8 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
           memberDescription: selectedMember.description,
           topic,
           petTopic: usePetTopic ? petTopic : undefined,
-          domain
+          domain,
+          industries: selectedIndustries
         }
       });
 
@@ -211,50 +245,115 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Member Selection */}
-          <div className="space-y-2">
-            <Label htmlFor="member-select">WorkFamily Member</Label>
-            <Select 
-              value={selectedMember?.member_code || ''} 
-              onValueChange={(value) => {
-                const member = members.find(m => m.member_code === value);
-                setSelectedMember(member || null);
-              }}
-            >
-              <SelectTrigger id="member-select">
-                <SelectValue placeholder="Select a Neural Ennead member" />
-              </SelectTrigger>
-              <SelectContent>
-                {topAlignments.length > 0 && (
-                  <>
-                    <div className="px-2 py-1 text-xs font-medium text-muted-foreground">
-                      Top Alignments for {thinkerName}
-                    </div>
-                    {topAlignments.map((member) => (
-                      <SelectItem key={`top-${member.member_code}`} value={member.member_code}>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-xs">Top</Badge>
-                          {member.display_name}
-                        </div>
-                      </SelectItem>
-                    ))}
-                    <div className="px-2 py-1 text-xs font-medium text-muted-foreground border-t mt-2 pt-2">
-                      All Members
-                    </div>
-                  </>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <Label>WorkFamily Member ({members.length} available)</Label>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={loadTopAlignments}
+                disabled={alignmentLoading}
+                className="h-7 px-2"
+              >
+                {alignmentLoading ? (
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                ) : (
+                  <RefreshCw className="w-3 h-3" />
                 )}
-                {members.map((member) => (
-                  <SelectItem key={member.member_code} value={member.member_code}>
-                    {member.display_name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+                Refresh alignments
+              </Button>
+            </div>
+            
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className="w-full justify-between"
+                >
+                  {selectedMember ? selectedMember.display_name : "Search 729 agents..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0" align="start">
+                <Command>
+                  <CommandInput 
+                    placeholder="Search agents..." 
+                    value={searchValue}
+                    onValueChange={setSearchValue}
+                  />
+                  <CommandList>
+                    <CommandEmpty>No agents found.</CommandEmpty>
+                    
+                    {topAlignments.length > 0 && (
+                      <CommandGroup heading="Top Alignments">
+                        {topAlignments.map((member) => (
+                          <CommandItem
+                            key={`top-${member.member_code}`}
+                            value={member.display_name}
+                            onSelect={() => {
+                              setSelectedMember(member);
+                              setOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={`mr-2 h-4 w-4 ${
+                                selectedMember?.member_code === member.member_code ? "opacity-100" : "opacity-0"
+                              }`}
+                            />
+                            <div className="flex items-center gap-2 flex-1">
+                              <Badge variant="secondary" className="text-xs">
+                                {Math.round((member.confidence || 0) * 100)}%
+                              </Badge>
+                              <span>{member.display_name}</span>
+                            </div>
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    )}
+                    
+                    <CommandGroup heading="All Members">
+                      {filteredMembers.slice(0, 50).map((member) => (
+                        <CommandItem
+                          key={member.member_code}
+                          value={member.display_name}
+                          onSelect={() => {
+                            setSelectedMember(member);
+                            setOpen(false);
+                          }}
+                        >
+                          <Check
+                            className={`mr-2 h-4 w-4 ${
+                              selectedMember?.member_code === member.member_code ? "opacity-100" : "opacity-0"
+                            }`}
+                          />
+                          {member.display_name}
+                        </CommandItem>
+                      ))}
+                      {filteredMembers.length > 50 && (
+                        <div className="px-2 py-1 text-xs text-muted-foreground">
+                          ... and {filteredMembers.length - 50} more. Keep typing to refine search.
+                        </div>
+                      )}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
             
             {selectedMember && (
               <div className="p-3 bg-muted/20 rounded-lg">
-                <p className="text-sm text-muted-foreground">{selectedMember.description}</p>
+                <div className="flex items-start justify-between mb-2">
+                  <p className="text-sm text-muted-foreground flex-1">{selectedMember.description}</p>
+                  {selectedMember.confidence && (
+                    <Badge variant="secondary" className="ml-2">
+                      {Math.round(selectedMember.confidence * 100)}% match
+                    </Badge>
+                  )}
+                </div>
                 {selectedMember.exemplar_roles.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mt-2">
+                  <div className="flex flex-wrap gap-1">
                     {selectedMember.exemplar_roles.slice(0, 4).map(role => (
                       <Badge key={role} variant="outline" className="text-xs">
                         {role}
@@ -262,6 +361,43 @@ export const ThinkerWorkfamilyChat: React.FC<ThinkerWorkfamilyChatProps> = ({
                     ))}
                   </div>
                 )}
+              </div>
+            )}
+          </div>
+
+          {/* Industry Selection */}
+          <div className="space-y-3">
+            <Label>Industry Context (optional)</Label>
+            <div className="grid grid-cols-2 gap-2">
+              {industries.map((industry) => (
+                <div key={industry.id} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={industry.id}
+                    checked={selectedIndustries.includes(industry.id)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedIndustries([...selectedIndustries, industry.id]);
+                      } else {
+                        setSelectedIndustries(selectedIndustries.filter(id => id !== industry.id));
+                      }
+                    }}
+                  />
+                  <Label htmlFor={industry.id} className="text-xs">
+                    {industry.name}
+                  </Label>
+                </div>
+              ))}
+            </div>
+            {selectedIndustries.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {selectedIndustries.map(industryId => {
+                  const industry = industries.find(i => i.id === industryId);
+                  return (
+                    <Badge key={industryId} variant="outline" className="text-xs">
+                      {industry?.name}
+                    </Badge>
+                  );
+                })}
               </div>
             )}
           </div>

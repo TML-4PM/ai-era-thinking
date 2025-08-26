@@ -20,6 +20,7 @@ interface DuoChatRequest {
   topic: string;
   petTopic?: string;
   domain: string;
+  industries?: string[];
 }
 
 serve(async (req) => {
@@ -42,12 +43,15 @@ serve(async (req) => {
       memberDescription,
       topic,
       petTopic,
-      domain
+      domain,
+      industries = []
     }: DuoChatRequest = await req.json();
 
     console.log(`Duo chat: ${thinkerName} × ${memberCode} about: ${topic}`);
 
-    const systemPrompt = `You are facilitating a structured dialogue between ${thinkerName} (a renowned thought leader) and ${memberDisplayName} (a Neural Ennead work family member) about ${topic} in the context of ${domain}.
+    const industryContext = industries.length > 0 ? ` with specific focus on: ${industries.join(', ')} industries` : '';
+    
+    const systemPrompt = `You are facilitating a structured dialogue between ${thinkerName} (a renowned thought leader) and ${memberDisplayName} (a Neural Ennead work family member) about ${topic} in the context of ${domain}${industryContext}.
 
 PARTICIPANTS:
 
@@ -89,9 +93,9 @@ Keep responses concise, authentic to each participant's expertise, and focused o
 
     const userPrompt = `Topic: ${topic}
 
-Generate a structured dialogue between ${thinkerName} and ${memberDisplayName} about this topic in the ${domain} domain. Focus on their different perspectives and how they would approach implementation across 0-6, 6-18, and 18-36 month timeframes.
+Generate a structured dialogue between ${thinkerName} and ${memberDisplayName} about this topic in the ${domain} domain${industryContext}. Focus on their different perspectives and how they would approach implementation across 0-6, 6-18, and 18-36 month timeframes.
 
-Make sure ${thinkerName} speaks from their core theoretical framework while ${memberDisplayName} responds from their work family archetype capabilities.`;
+Make sure ${thinkerName} speaks from their core theoretical framework while ${memberDisplayName} responds from their work family archetype capabilities.${industries.length > 0 ? ` Consider practical applications and sector-specific challenges relevant to ${industries.join(', ')} industries.` : ''}`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
