@@ -2,10 +2,15 @@ import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { BookOpen, Brain, Lightbulb, Quote, Users, ArrowRight, Download } from "lucide-react";
+import { BookOpen, Brain, Lightbulb, Quote, Users, Download, MessageCircle, BarChart3, Sparkles } from "lucide-react";
 import { ExpandedThinker } from "@/data/expanded-thinkers";
+import { ThinkerChat } from "./ThinkerChat";
+import { FrameworkExpansion } from "./FrameworkExpansion";
+import { computeTopicScores, computeEraScores } from "@/lib/scoring";
+import { ERAS } from "@/data/eras";
 import { cn } from "@/lib/utils";
 
 interface ThinkerDetailModalProps {
@@ -14,12 +19,39 @@ interface ThinkerDetailModalProps {
   thinker: ExpandedThinker | null;
 }
 
-export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
-  isOpen,
-  onClose,
-  thinker
+export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  thinker 
 }) => {
   if (!thinker) return null;
+
+  const topicScores = computeTopicScores({ 
+    name: thinker.name,
+    area: thinker.area,
+    coreIdea: thinker.coreIdea,
+    aiShift: thinker.aiShift,
+    lobe: thinker.lobe
+  }, thinker);
+
+  const eraScores = computeEraScores({ 
+    name: thinker.name,
+    area: thinker.area,
+    coreIdea: thinker.coreIdea,
+    aiShift: thinker.aiShift,
+    lobe: thinker.lobe
+  }, thinker);
+
+  // Prepare chart data
+  const topicChartData = Object.entries(topicScores).map(([topic, score]) => ({
+    topic: topic.replace(/\//g, '/\n'),
+    score: score
+  }));
+
+  const eraChartData = ERAS.map(era => ({
+    era: era.shortName,
+    score: eraScores[era.name] || 0
+  }));
 
   const getLobeIcon = (lobe: string) => {
     switch (lobe.split("/")[0]) {
@@ -45,7 +77,7 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3 text-2xl">
             <div className={cn("p-2 rounded-lg", getLobeColor(thinker.lobe))}>
@@ -58,152 +90,75 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
-          {/* Core Information */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Core Contribution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div>
-                    <span className="font-medium text-sm">Area:</span>
-                    <p className="text-muted-foreground">{thinker.area}</p>
+        <Tabs defaultValue="overview" className="h-[600px] flex flex-col">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="chat" className="flex items-center gap-2">
+              <MessageCircle className="w-4 h-4" />
+              Chat
+            </TabsTrigger>
+            <TabsTrigger value="expand" className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4" />
+              Expand
+            </TabsTrigger>
+            <TabsTrigger value="related">Related</TabsTrigger>
+          </TabsList>
+
+          <div className="flex-1 mt-4">
+            <TabsContent value="overview" className="h-full">
+              <ScrollArea className="h-[500px]">
+                <div className="space-y-4 pr-4">
+                  <div className="bg-muted/50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Core Idea</h3>
+                    <p className="text-sm">{thinker.coreIdea}</p>
                   </div>
-                  <div>
-                    <span className="font-medium text-sm">Core Idea:</span>
-                    <p className="text-muted-foreground">{thinker.coreIdea}</p>
+                  
+                  <div className="bg-gradient-to-r from-primary/5 to-secondary/5 p-4 rounded-lg border">
+                    <h3 className="font-semibold mb-2">AI Transformation</h3>
+                    <p className="text-sm">{thinker.aiShift}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="font-semibold">Implementation Timeline</h3>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <Badge className="bg-green-100 text-green-800">Immediate</Badge>
+                        <p className="text-sm">{thinker.practicalApplications.immediate}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Badge className="bg-yellow-100 text-yellow-800">Medium-term</Badge>
+                        <p className="text-sm">{thinker.practicalApplications.mediumTerm}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Badge className="bg-blue-100 text-blue-800">Long-term</Badge>
+                        <p className="text-sm">{thinker.practicalApplications.longTerm}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </ScrollArea>
+            </TabsContent>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">AI Transformation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{thinker.aiShift}</p>
-              </CardContent>
-            </Card>
-          </div>
+            <TabsContent value="chat" className="h-full">
+              <ThinkerChat thinker={thinker} />
+            </TabsContent>
 
-          {/* Cross-Era Relevance */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Cross-Era Relevance</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {Object.entries(thinker.crossEraRelevance).map(([era, description]) => (
-                  <div key={era} className="p-3 bg-gradient-subtle rounded-lg">
-                    <h4 className="font-medium text-sm capitalize mb-1">
-                      {era.replace(/([A-Z])/g, ' $1').trim()}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">{description}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+            <TabsContent value="expand" className="h-full">
+              <FrameworkExpansion thinker={thinker} />
+            </TabsContent>
 
-        {/* Usage Prompts */}
-        {thinker.usagePrompts.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Practical Applications</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {thinker.usagePrompts.map((prompt, idx) => (
-                  <div key={idx} className="p-3 bg-gradient-subtle rounded-lg border">
-                    <h4 className="font-medium text-sm mb-2">{prompt.question}</h4>
-                    <p className="text-xs text-muted-foreground mb-2">
-                      <span className="font-medium">Context:</span> {prompt.context}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      <span className="font-medium">Application:</span> {prompt.application}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Practical Applications */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Implementation Timeline</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="p-3 border rounded-lg bg-green-50 dark:bg-green-950/20">
-                <h4 className="font-medium text-sm text-green-700 dark:text-green-300">
-                  Immediate (0-6 months)
-                </h4>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {thinker.practicalApplications.immediate}
-                </p>
-              </div>
-              <div className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950/20">
-                <h4 className="font-medium text-sm text-blue-700 dark:text-blue-300">
-                  Medium Term (6-18 months)
-                </h4>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {thinker.practicalApplications.mediumTerm}
-                </p>
-              </div>
-              <div className="p-3 border rounded-lg bg-purple-50 dark:bg-purple-950/20">
-                <h4 className="font-medium text-sm text-purple-700 dark:text-purple-300">
-                  Long Term (18+ months)
-                </h4>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {thinker.practicalApplications.longTerm}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-          {/* Related Thinkers */}
-          {Array.isArray(thinker.relatedThinkers) && thinker.relatedThinkers.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Related Thinkers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {thinker.relatedThinkers.map((related) => (
-                    <Badge key={related} variant="outline" className="text-sm">
-                      {related}
-                    </Badge>
+            <TabsContent value="related" className="h-full">
+              <ScrollArea className="h-[500px]">
+                <div className="space-y-2 pr-4">
+                  <h3 className="font-semibold">Related Thinkers</h3>
+                  {thinker.relatedThinkers.map((name, i) => (
+                    <div key={i} className="p-2 border rounded">{name}</div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          )}
-
-          <Separator />
-
-          {/* Action Buttons */}
-          <div className="flex justify-between items-center">
-            <div className="text-sm text-muted-foreground">
-              Use this profile in workshops, strategy sessions, or AI transformation planning
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                Export Profile
-              </Button>
-              <Button variant="outline" size="sm">
-                <Users className="h-4 w-4 mr-2" />
-                Share
-              </Button>
-            </div>
+              </ScrollArea>
+            </TabsContent>
           </div>
-        </div>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );

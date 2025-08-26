@@ -12,23 +12,26 @@ import Tools from "./pages/Tools";
 
 const queryClient = new QueryClient();
 
+import { FavoritesProvider } from "./context/FavoritesContext";
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/era/:eraId" element={<EraDetail />} />
-            <Route path="/governance" element={<Governance />} />
-            <Route path="/tools" element={<Tools />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <FavoritesProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/era/:eraId" element={<EraDetail />} />
+              <Route path="/governance" element={<Governance />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </FavoritesProvider>
     </QueryClientProvider>
   </HelmetProvider>
 );

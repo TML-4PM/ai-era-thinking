@@ -1,1 +1,7 @@
 project_id = "lzfgigiyqpuuxslsygjt"
+
+[functions.thinker-chat]
+verify_jwt = false
+
+[functions.expand-thinker]
+verify_jwt = false
