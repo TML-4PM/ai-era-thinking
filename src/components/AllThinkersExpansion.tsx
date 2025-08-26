@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,7 +17,9 @@ import {
   Play,
   Pause,
   CheckCircle,
-  XCircle
+  XCircle,
+  Target,
+  Factory
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,9 +32,23 @@ interface ThinkerResult {
   status: 'processing' | 'completed' | 'failed';
   expansions: any[];
   alignments: any[];
+  teamMembers: any[];
   processingTime: number;
   error?: string;
 }
+
+const INDUSTRY_OPTIONS = [
+  'Government & Public Sector',
+  'Financial Services',
+  'Healthcare',
+  'Technology',
+  'Manufacturing',
+  'Education',
+  'Retail',
+  'Energy & Utilities',
+  'Transportation',
+  'Media & Entertainment'
+];
 
 export const AllThinkersExpansion: React.FC = () => {
   const [concurrency, setConcurrency] = useState(1);
@@ -46,7 +63,12 @@ export const AllThinkersExpansion: React.FC = () => {
   const [estimatedTimeRemaining, setEstimatedTimeRemaining] = useState('calculating...');
   const { toast } = useToast();
   
+  const [includeExpansion, setIncludeExpansion] = useState(true);
   const [includeAlignment, setIncludeAlignment] = useState(false);
+  const [includeMemberAlignment, setIncludeMemberAlignment] = useState(false);
+  const [includeTeamBuilding, setIncludeTeamBuilding] = useState(false);
+  const [includeProfiles, setIncludeProfiles] = useState(false);
+  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
 
   const logDebug = (message: string) => {
     if (debugMode) {
@@ -79,31 +101,34 @@ export const AllThinkersExpansion: React.FC = () => {
       status: 'processing',
       expansions: [],
       alignments: [],
+      teamMembers: [],
       processingTime: 0
     };
 
     const startTime = Date.now();
 
     try {
-      // Expansion
-      const { data: expansionData, error: expansionError } = await supabase.functions.invoke('expand-thinker', {
-        body: {
-          thinkerName: thinker.name,
-          thinkerArea: thinker.area,
-          coreIdea: thinker.coreIdea,
-          aiShift: thinker.aiShift,
-          selectedDomains: domains,
-          preferredModel: 'gpt-4.1-2025-04-14'
-        }
-      });
+      // 1. Expansion (if enabled)
+      if (includeExpansion) {
+        const { data: expansionData, error: expansionError } = await supabase.functions.invoke('expand-thinker', {
+          body: {
+            thinkerName: thinker.name,
+            thinkerArea: thinker.area,
+            coreIdea: thinker.coreIdea,
+            aiShift: thinker.aiShift,
+            selectedDomains: domains,
+            preferredModel: 'gpt-4.1-2025-04-14'
+          }
+        });
 
-      if (expansionError) {
-        throw new Error(`Expansion failed: ${expansionError.message}`);
+        if (expansionError) {
+          throw new Error(`Expansion failed: ${expansionError.message}`);
+        }
+
+        result.expansions = expansionData?.results || [];
       }
 
-      result.expansions = expansionData?.results || [];
-
-      // WorkFamilyAI Alignment (if enabled)
+      // 2. WorkFamilyAI Alignment (if enabled)
       if (includeAlignment) {
         const alignmentPromises = domains.map(async (domain) => {
           try {
@@ -136,6 +161,86 @@ export const AllThinkersExpansion: React.FC = () => {
         result.alignments = alignmentResults.filter(Boolean);
       }
 
+      // 3. Member Alignment (top-2 agents if enabled)
+      if (includeMemberAlignment) {
+        for (const domain of domains.slice(0, 1)) { // Just use first domain to avoid duplicates
+          try {
+            const { data: memberAlignmentData, error: memberAlignmentError } = await supabase.functions.invoke('align-workfamily-members', {
+              body: {
+                thinkerName: thinker.name,
+                thinkerArea: thinker.area,
+                coreIdea: thinker.coreIdea,
+                aiShift: thinker.aiShift,
+                domain: domain
+              }
+            });
+
+            if (memberAlignmentError) {
+              console.error(`Member alignment failed for ${thinker.name} (${domain}):`, memberAlignmentError);
+            }
+          } catch (error) {
+            console.error(`Member alignment error for ${thinker.name}:`, error);
+          }
+        }
+      }
+
+      // 4. Team Building (9-member teams if enabled)
+      if (includeTeamBuilding) {
+        try {
+          const { data: teamData, error: teamError } = await supabase.functions.invoke('build-thinker-team', {
+            body: {
+              thinkerName: thinker.name,
+              thinkerArea: thinker.area,
+              coreIdea: thinker.coreIdea,
+              aiShift: thinker.aiShift,
+              domain: 'strategic-planning',
+              industries: selectedIndustries,
+              teamSize: 9
+            }
+          });
+
+          if (teamError) {
+            console.error(`Team building failed for ${thinker.name}:`, teamError);
+          } else {
+            result.teamMembers = teamData?.team?.thinker_alignment_team_members || [];
+          }
+        } catch (error) {
+          console.error(`Team building error for ${thinker.name}:`, error);
+        }
+      }
+
+      // 5. Profile Storage (if enabled)
+      if (includeProfiles && result.expansions.length > 0) {
+        try {
+          // Extract profile data from expansion results
+          const profileData = {
+            thinker_name: thinker.name,
+            area: thinker.area,
+            core_idea: thinker.coreIdea,
+            ai_shift: thinker.aiShift,
+            lobe: thinker.lobe,
+            cross_era_relevance: {},
+            usage_prompts: [],
+            practical_applications: {},
+            related_thinkers: [],
+            metadata: {
+              generated_at: new Date().toISOString(),
+              source: 'bulk_expansion'
+            }
+          };
+
+          const { error: profileError } = await supabase
+            .from('thinker_profiles')
+            .upsert(profileData, { onConflict: 'thinker_name' });
+
+          if (profileError) {
+            console.error(`Profile storage failed for ${thinker.name}:`, profileError);
+          }
+        } catch (error) {
+          console.error(`Profile storage error for ${thinker.name}:`, error);
+        }
+      }
+
       result.status = 'completed';
       result.processingTime = Date.now() - startTime;
 
@@ -164,6 +269,7 @@ export const AllThinkersExpansion: React.FC = () => {
       status: 'processing',
       expansions: [],
       alignments: [],
+      teamMembers: [],
       processingTime: 0
     } as ThinkerResult));
     setResults(initialResults);
@@ -221,6 +327,7 @@ export const AllThinkersExpansion: React.FC = () => {
       processing_time_ms: result.processingTime,
       expansions: result.expansions,
       ...(includeAlignment && { alignments: result.alignments }),
+      ...(includeTeamBuilding && { team_members: result.teamMembers }),
       error: result.error || null
     }));
 
@@ -228,9 +335,17 @@ export const AllThinkersExpansion: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `thinkers-bulk-expansion-${includeAlignment ? 'with-alignment-' : ''}${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `thinkers-bulk-processing-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleIndustryChange = (industry: string, checked: boolean) => {
+    if (checked) {
+      setSelectedIndustries(prev => [...prev, industry]);
+    } else {
+      setSelectedIndustries(prev => prev.filter(i => i !== industry));
+    }
   };
 
   return (
@@ -239,10 +354,10 @@ export const AllThinkersExpansion: React.FC = () => {
       <div className="text-center space-y-4">
         <h3 className="text-2xl font-semibold text-foreground flex items-center justify-center gap-2">
           <Brain className="w-6 h-6 text-brand" />
-          Bulk Thinker Expansion & Alignment
+          Bulk Thinker Processing & Team Assembly
         </h3>
         <p className="text-muted-foreground max-w-3xl mx-auto">
-          Automatically expand all {THINKERS.length} thinkers across domains using GPT-4.1, with optional WorkFamilyAI Neural Ennead alignment
+          Automatically process all {THINKERS.length} thinkers with expansion, alignment, team building, and profile storage
         </p>
       </div>
 
@@ -251,55 +366,138 @@ export const AllThinkersExpansion: React.FC = () => {
         <CardHeader>
           <CardTitle>Bulk Processing Controls</CardTitle>
           <CardDescription>
-            Configure and run bulk expansion across all thinkers
+            Configure what to process for each thinker
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+          {/* Processing Options */}
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Concurrency</label>
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-muted-foreground">1</span>
-                <Slider
-                  value={[concurrency]}
-                  onValueChange={(value) => setConcurrency(value[0])}
-                  max={3}
-                  min={1}
-                  step={1}
-                  className="flex-1"
+            <div className="space-y-4">
+              <h4 className="font-medium">Processing Options</h4>
+              
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="include-expansion"
+                  checked={includeExpansion}
+                  onCheckedChange={setIncludeExpansion}
                 />
-                <span className="text-sm text-muted-foreground">3</span>
-                <span className="text-sm font-medium min-w-[3ch]">{concurrency}</span>
+                <label htmlFor="include-expansion" className="text-sm font-medium">
+                  Domain Expansion (GPT-4.1)
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="include-alignment"
+                  checked={includeAlignment}
+                  onCheckedChange={setIncludeAlignment}
+                />
+                <label htmlFor="include-alignment" className="text-sm font-medium">
+                  WorkFamily Alignment (Legacy)
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="include-member-alignment"
+                  checked={includeMemberAlignment}
+                  onCheckedChange={setIncludeMemberAlignment}
+                />
+                <label htmlFor="include-member-alignment" className="text-sm font-medium">
+                  Top-2 Member Alignment
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="include-team-building"
+                  checked={includeTeamBuilding}
+                  onCheckedChange={setIncludeTeamBuilding}
+                />
+                <label htmlFor="include-team-building" className="text-sm font-medium">
+                  9-Member Dream Teams
+                </label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="include-profiles"
+                  checked={includeProfiles}
+                  onCheckedChange={setIncludeProfiles}
+                />
+                <label htmlFor="include-profiles" className="text-sm font-medium">
+                  Store Deep Profiles
+                </label>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="debug-mode"
-                checked={debugMode}
-                onCheckedChange={setDebugMode}
-              />
-              <label htmlFor="debug-mode" className="text-sm font-medium">
-                Debug Mode
-              </label>
+
+            <div className="space-y-4">
+              <h4 className="font-medium">System Settings</h4>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Concurrency</label>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-muted-foreground">1</span>
+                  <Slider
+                    value={[concurrency]}
+                    onValueChange={(value) => setConcurrency(value[0])}
+                    max={3}
+                    min={1}
+                    step={1}
+                    className="flex-1"
+                  />
+                  <span className="text-sm text-muted-foreground">3</span>
+                  <span className="text-sm font-medium min-w-[3ch]">{concurrency}</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="debug-mode"
+                  checked={debugMode}
+                  onCheckedChange={setDebugMode}
+                />
+                <label htmlFor="debug-mode" className="text-sm font-medium">
+                  Debug Mode
+                </label>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <Switch
-              id="include-alignment"
-              checked={includeAlignment}
-              onCheckedChange={setIncludeAlignment}
-            />
-            <label htmlFor="include-alignment" className="text-sm font-medium">
-              Include WorkFamilyAI Neural Ennead Alignment
-            </label>
-          </div>
+          {/* Industry Context for Team Building */}
+          {includeTeamBuilding && (
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Factory className="w-4 h-4" />
+                <span className="text-sm font-medium">Industry Context (For Team Building)</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {INDUSTRY_OPTIONS.map(industry => (
+                  <div key={industry} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id={`industry-${industry}`}
+                      checked={selectedIndustries.includes(industry)}
+                      onChange={(e) => handleIndustryChange(industry, e.target.checked)}
+                      className="rounded"
+                    />
+                    <label
+                      htmlFor={`industry-${industry}`}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {industry}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
+          {/* Action Buttons */}
           <div className="flex gap-4">
             <Button
               onClick={startBulkProcessing}
-              disabled={isRunning}
+              disabled={isRunning || (!includeExpansion && !includeAlignment && !includeMemberAlignment && !includeTeamBuilding && !includeProfiles)}
               className="flex items-center gap-2"
             >
               {isRunning ? (
@@ -373,6 +571,9 @@ export const AllThinkersExpansion: React.FC = () => {
                         {result.lobe} • {result.expansions.length} expansions
                         {includeAlignment && result.alignments && (
                           <span> • {result.alignments.length} alignments</span>
+                        )}
+                        {includeTeamBuilding && result.teamMembers && (
+                          <span> • {result.teamMembers.length} team members</span>
                         )}
                       </div>
                     </div>

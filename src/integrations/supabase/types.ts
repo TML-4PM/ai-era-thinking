@@ -3201,6 +3201,36 @@ export type Database = {
           },
         ]
       }
+      app_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json | null
+          room_id: string | null
+          session_id: string | null
+          user_role: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          room_id?: string | null
+          session_id?: string | null
+          user_role?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          room_id?: string | null
+          session_id?: string | null
+          user_role?: string | null
+        }
+        Relationships: []
+      }
       application_logs: {
         Row: {
           created_at: string | null
@@ -25221,6 +25251,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "fk_team_member_to_neural_member"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members"
+            referencedColumns: ["member_code"]
+          },
+          {
             foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
             columns: ["member_code"]
             isOneToOne: false
@@ -25399,6 +25436,54 @@ export type Database = {
           pet_topic?: string
           thinker_name?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      thinker_profiles: {
+        Row: {
+          ai_shift: string | null
+          area: string | null
+          core_idea: string | null
+          created_at: string
+          cross_era_relevance: Json
+          id: string
+          lobe: string | null
+          metadata: Json | null
+          practical_applications: Json
+          related_thinkers: string[]
+          thinker_name: string
+          updated_at: string
+          usage_prompts: Json
+        }
+        Insert: {
+          ai_shift?: string | null
+          area?: string | null
+          core_idea?: string | null
+          created_at?: string
+          cross_era_relevance?: Json
+          id?: string
+          lobe?: string | null
+          metadata?: Json | null
+          practical_applications?: Json
+          related_thinkers?: string[]
+          thinker_name: string
+          updated_at?: string
+          usage_prompts?: Json
+        }
+        Update: {
+          ai_shift?: string | null
+          area?: string | null
+          core_idea?: string | null
+          created_at?: string
+          cross_era_relevance?: Json
+          id?: string
+          lobe?: string | null
+          metadata?: Json | null
+          practical_applications?: Json
+          related_thinkers?: string[]
+          thinker_name?: string
+          updated_at?: string
+          usage_prompts?: Json
         }
         Relationships: []
       }
@@ -29971,6 +30056,14 @@ export type Database = {
           agent_display_name?: string | null
           summary?: string | null
           title?: string | null
+        }
+        Relationships: []
+      }
+      app_event_daily_counts: {
+        Row: {
+          count: number | null
+          day: string | null
+          event_type: string | null
         }
         Relationships: []
       }
