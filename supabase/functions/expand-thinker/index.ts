@@ -74,8 +74,7 @@ Domains to analyze: ${selectedDomains.join(', ')}`;
           { role: 'system', content: systemPrompt },
           { role: 'user', content: `Generate framework expansion analysis for these business domains: ${selectedDomains.join(', ')}` }
         ],
-        max_completion_tokens: 2000,
-        temperature: 0.3
+        max_completion_tokens: 2000
       }),
     });
 

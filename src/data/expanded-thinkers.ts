@@ -29,34 +29,54 @@ export interface ExpandedThinker {
 export const EXPANDED_THINKERS: ExpandedThinker[] = [
   {
     name: "Daniel Kahneman",
-    area: "Decision Science",
-    coreIdea: "Thinking, Fast and Slow",
-    aiShift: "Fast/slow dichotomy breaks when AI operates in parallel at both speeds.",
+    area: "Behavioral Economics & Decision Science",
+    coreIdea: "Dual-process theory: System 1 (fast, intuitive) vs System 2 (slow, deliberate) thinking shapes all human judgment under uncertainty",
+    aiShift: "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data",
     lobe: "Decision/Action",
     crossEraRelevance: {
-      onPrem: "System 2 thinking dominates - slow, deliberate processes in controlled environments",
-      cloudNative: "System 1 emerges via automated dashboards and instant scaling decisions",
-      genAI: "AI collapses the fast/slow distinction - parallel processing at human intuitive speed",
-      agenticAI: "Agents embody both systems simultaneously, challenging human decision monopoly",
-      bci: "Direct neural interface bypasses conscious deliberation entirely"
+      onPrem: "System 2 thinking dominates enterprise decision-making - careful analysis of controlled data sets, deliberate rule-based systems, slow but methodical processes in risk-averse environments",
+      cloudNative: "System 1 emerges through real-time dashboards, automated scaling decisions, and instant feedback loops that mirror human intuitive pattern recognition at machine speed",
+      genAI: "AI models collapse the fast/slow distinction by processing vast pattern recognition (System 1) and logical reasoning (System 2) simultaneously, creating new hybrid decision architectures",
+      agenticAI: "Autonomous agents embody both systems in parallel - making thousands of micro-decisions intuitively while maintaining analytical oversight, fundamentally challenging human decision authority",
+      bci: "Neural interfaces bypass conscious System 1/2 processing entirely, enabling direct thought-to-action pathways that eliminate traditional cognitive bottlenecks and biases"
     },
     usagePrompts: [
       {
-        question: "How does System 1/System 2 thinking apply to AI decision architecture?",
-        context: "Designing decision flows in agentic systems",
-        application: "Map which decisions need human System 2 override vs. AI System 1 automation"
+        question: "How should we design AI decision architectures that leverage both System 1 and System 2 thinking?",
+        context: "Building hybrid AI systems that balance speed and accuracy",
+        application: "Create decision trees where routine choices use System 1 patterns, while high-stakes decisions trigger System 2 analytical processes with human oversight"
       },
       {
-        question: "What cognitive biases could AI agents inherit from training data?",
-        context: "Bias auditing for deployed AI systems",
-        application: "Build bias detection into agent decision logs and override triggers"
+        question: "What cognitive biases are our AI systems inheriting from training data, and how do we detect them?",
+        context: "Bias auditing for deployed AI systems across different domains",
+        application: "Build bias detection dashboards that monitor for availability heuristic, anchoring bias, and confirmation bias in AI outputs with automated alerts"
+      },
+      {
+        question: "How do we design 'nudge architectures' for AI agents interacting with humans?",
+        context: "Creating AI systems that guide human decision-making ethically",
+        application: "Implement choice architecture principles in AI interfaces that preserve human agency while optimizing outcomes through behavioral insights"
+      },
+      {
+        question: "What happens to human judgment when AI handles most System 1 processing?",
+        context: "Designing human-AI collaboration that preserves human decision-making skills",
+        application: "Build AI systems with 'judgment preservation modes' that occasionally require human System 1 input to maintain cognitive capabilities"
+      },
+      {
+        question: "How do we apply prospect theory to AI risk assessment and resource allocation?",
+        context: "Building AI systems that understand human risk perception and loss aversion",
+        application: "Design AI recommendation systems that account for human loss aversion by framing choices in terms of gains rather than losses"
+      },
+      {
+        question: "What decision-making processes should remain exclusively human in an AI-dominant world?",
+        context: "Defining the boundaries between human and AI decision authority",
+        application: "Create decision classification frameworks that reserve high-uncertainty, value-laden, and irreversible choices for human System 2 processing"
       }
     ],
-    relatedThinkers: ["Amos Tversky", "Gerd Gigerenzer", "Herbert Simon"],
+    relatedThinkers: ["Amos Tversky", "Gerd Gigerenzer", "Herbert Simon", "Dan Ariely", "Richard Thaler", "Nassim Nicholas Taleb"],
     practicalApplications: {
-      immediate: "Audit current AI systems for inherited cognitive biases",
-      mediumTerm: "Design dual-system AI architectures with fast/slow decision paths",
-      longTerm: "Develop neurally-informed decision systems that bypass traditional cognitive limitations"
+      immediate: "Audit existing AI systems for inherited cognitive biases using behavioral economics frameworks, implement bias detection alerts, and create decision classification systems",
+      mediumTerm: "Design hybrid AI architectures with explicit System 1/System 2 pathways, build nudge-based human-AI interfaces, and develop AI systems that preserve human judgment skills",
+      longTerm: "Create post-cognitive AI systems that transcend human decision-making limitations while preserving human agency in value-critical choices"
     }
   },
   {

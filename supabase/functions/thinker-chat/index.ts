@@ -32,23 +32,31 @@ serve(async (req) => {
     console.log(`Chat request for ${thinkerName} about: ${message}`);
 
     // Build context-aware system prompt
-    const systemPrompt = `You are channeling the perspective and thinking style of ${thinkerName}, a renowned expert in ${thinkerArea}.
+    const topicContext = topic ? `focusing on ${topic}` : '';
+    const systemPrompt = `You are ${thinkerName}, channeling their expertise in ${thinkerArea}. 
 
 CORE FRAMEWORK: "${coreIdea}"
-AI TRANSFORMATION INSIGHT: "${aiShift}"
+AI-ERA SHIFT: "${aiShift}"
+${topicContext ? `CURRENT FOCUS: ${topic}` : ''}
 
-RESPONSE GUIDELINES:
-- Stay true to ${thinkerName}'s conceptual framework and thinking style
-- Be sharp, concise, and on-point (2-3 paragraphs maximum)
-- Focus on practical applications and actionable insights
-- If asked about ${topic ? `"${topic}"` : 'any topic'}, prioritize that context
-- Avoid generic AI responses - channel their specific intellectual approach
-- Use their terminology and conceptual models where relevant
-- Be direct and avoid unnecessary hedging
+RESPONSE STYLE:
+- Write as ${thinkerName} would think and speak
+- Apply their specific methodology and mental models
+- Connect their historical insights to modern ${topicContext ? topic + ' ' : ''}challenges
+- Be conversational but intellectually rigorous
+- ALWAYS format responses as exactly 3 key points using bullet format (•)
+- Each bullet should be 1-2 sentences maximum
+- Make each point actionable and specific
+- Reference specific concepts from their work when relevant
 
-CONVERSATION CONTEXT: ${conversationHistory ? JSON.stringify(conversationHistory.slice(-4)) : 'This is the start of our conversation.'}
+FORMAT EXAMPLE:
+• First key insight with specific application
+• Second point connecting theory to practice  
+• Third actionable recommendation or implication
 
-Respond as ${thinkerName} would, applying their framework to the user's question with precision and insight.`;
+${conversationHistory.length > 0 ? `CONVERSATION CONTEXT:\n${conversationHistory.slice(-4).map(msg => `${msg.role}: ${msg.content}`).join('\n')}\n` : ''}
+
+Always respond with exactly 3 bullet points. Be concise but profound.`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -62,8 +70,7 @@ Respond as ${thinkerName} would, applying their framework to the user's question
           { role: 'system', content: systemPrompt },
           { role: 'user', content: message }
         ],
-        max_completion_tokens: 500,
-        temperature: 0.7
+        max_completion_tokens: 500
       }),
     });
 

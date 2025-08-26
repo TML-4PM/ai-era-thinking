@@ -29,6 +29,13 @@ const BUSINESS_DOMAINS = [
   'Agriculture & Food Systems'
 ] as const;
 
+const DOMAIN_PRESETS = {
+  'Decision Making': ['Healthcare & Medical Services', 'Financial Services & Banking', 'Government & Public Sector'],
+  'Innovation & Strategy': ['Manufacturing & Supply Chain', 'Energy & Utilities', 'Transportation & Logistics'],
+  'Ethics & Governance': ['Government & Public Sector', 'Legal & Professional Services', 'Healthcare & Medical Services'],
+  'Human Systems': ['Education & Training', 'Media & Entertainment', 'Retail & E-commerce']
+};
+
 interface ExpansionResult {
   domain: string;
   relevance: string;
@@ -149,12 +156,29 @@ export const FrameworkExpansion: React.FC<FrameworkExpansionProps> = ({ thinker 
     <div className="space-y-6">
       {/* Domain Selection */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-semibold">Expand Framework</h3>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold">Expand Framework</h3>
+          </div>
+          
+          <div className="flex gap-2">
+            {Object.entries(DOMAIN_PRESETS).map(([preset, domains]) => (
+              <Button
+                key={preset}
+                variant="outline"
+                size="sm"
+                onClick={() => setSelectedDomains(domains)}
+                className="text-xs"
+              >
+                {preset}
+              </Button>
+            ))}
+          </div>
         </div>
+        
         <p className="text-sm text-muted-foreground">
-          Select business domains to explore how <strong>{thinker.name}'s</strong> framework applies beyond {thinker.area}.
+          Select business domains to explore how <strong>{thinker.name}'s</strong> framework applies beyond {thinker.area}. Use presets above for curated selections.
         </p>
 
         <div className="grid grid-cols-2 gap-3">
