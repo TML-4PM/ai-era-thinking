@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,10 +10,17 @@ import NotFound from "./pages/NotFound";
 import EraDetail from "./pages/EraDetail";
 import Governance from "./pages/Governance";
 import Tools from "./pages/Tools";
-
-const queryClient = new QueryClient();
-
 import { FavoritesProvider } from "./context/FavoritesContext";
+
+// Create a stable QueryClient instance with proper configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <HelmetProvider>
