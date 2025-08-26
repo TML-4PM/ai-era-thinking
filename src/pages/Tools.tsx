@@ -3,11 +3,12 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Download, Code, Users, BarChart } from "lucide-react";
+import { ArrowLeft, Download, Code, Users, BarChart, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 import { GOVERNANCE_TOOLS, getToolsByCategory } from "@/data/governance-tools";
 import { WORKSHOP_SCENARIOS, ASSESSMENT_QUESTIONS } from "@/data/workshop-materials";
 import MetricsDashboard from "@/components/MetricsDashboard";
+import { AllThinkersExpansion } from "@/components/AllThinkersExpansion";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -52,8 +53,12 @@ export default function Tools() {
           </p>
         </div>
 
-        <Tabs defaultValue="governance" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="bulk" className="w-full">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="bulk" className="flex items-center gap-2">
+              <Brain className="h-4 w-4" />
+              Bulk Expansion
+            </TabsTrigger>
             <TabsTrigger value="governance" className="flex items-center gap-2">
               <Code className="h-4 w-4" />
               Policy as Code
@@ -72,7 +77,11 @@ export default function Tools() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="governance" className="space-y-6">
+        <TabsContent value="bulk" className="space-y-6">
+          <AllThinkersExpansion />
+        </TabsContent>
+
+        <TabsContent value="governance" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {getToolsByCategory("policy-as-code").map((tool) => (
                 <Card key={tool.id} className="framework-card cursor-pointer" onClick={() => setSelectedTool(tool.id)}>

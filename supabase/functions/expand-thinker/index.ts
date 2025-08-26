@@ -11,11 +11,11 @@ const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
 const REQUEST_TIMEOUT = 45000; // 45 seconds for batched requests
 const MAX_DOMAINS_PER_BATCH = 3;
 
-// Model fallback sequence
+// Model fallback sequence - GPT-4.x focused
 const MODELS = [
-  'gpt-5-2025-08-07',
-  'gpt-5-mini-2025-08-07', 
-  'gpt-4.1-2025-04-14'
+  'gpt-4.1-2025-04-14',  // Primary GPT-4.x model
+  'gpt-4.1-mini-2025-04-14', // Fallback GPT-4.x
+  'gpt-5-mini-2025-08-07' // Last resort
 ];
 
 // Validation function
@@ -49,9 +49,10 @@ async function makeOpenAIRequest(
   prompt: string, 
   userMessage: string, 
   modelIndex = 0, 
-  retryCount = 0
+  retryCount = 0,
+  modelsToUse = MODELS
 ): Promise<{ content: string; model: string; attempts: number }> {
-  const model = MODELS[modelIndex];
+  const model = modelsToUse[modelIndex];
   const maxRetries = 2;
   
   console.log(`🤖 Attempting OpenAI request with ${model} (attempt ${retryCount + 1})`);
@@ -96,9 +97,9 @@ async function makeOpenAIRequest(
           return makeOpenAIRequest(prompt, userMessage, modelIndex, retryCount + 1);
         }
         // If max retries reached, try next model
-        if (modelIndex < MODELS.length - 1) {
+        if (modelIndex < modelsToUse.length - 1) {
           console.log(`🔄 Max retries reached, trying next model`);
-          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0, modelsToUse);
         }
         throw new Error(`RATE_LIMIT:${errorData}`);
       }
@@ -109,9 +110,9 @@ async function makeOpenAIRequest(
       
       if (response.status >= 500) {
         // Server error - try next model if available
-        if (modelIndex < MODELS.length - 1) {
+        if (modelIndex < modelsToUse.length - 1) {
           console.log(`🔄 Server error, trying next model`);
-          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+          return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0, modelsToUse);
         }
         throw new Error(`OPENAI_SERVER_ERROR:${errorData}`);
       }
@@ -135,8 +136,8 @@ async function makeOpenAIRequest(
   } catch (error) {
     if (error.name === 'AbortError') {
       console.error(`⏱️ ${model} request timed out`);
-      if (modelIndex < MODELS.length - 1) {
-        return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+      if (modelIndex < modelsToUse.length - 1) {
+        return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0, modelsToUse);
       }
       throw new Error('TIMEOUT:Request timed out after trying all models');
     }
@@ -147,9 +148,9 @@ async function makeOpenAIRequest(
     }
     
     // Network or other error - try next model if available
-    if (modelIndex < MODELS.length - 1) {
+    if (modelIndex < modelsToUse.length - 1) {
       console.log(`🔄 Network error, trying next model: ${error.message}`);
-      return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0);
+      return makeOpenAIRequest(prompt, userMessage, modelIndex + 1, 0, modelsToUse);
     }
     
     throw new Error(`NETWORK_ERROR:${error.message}`);
@@ -211,7 +212,8 @@ async function processDomainBatch(
   thinkerName: string, 
   thinkerArea: string, 
   coreIdea: string, 
-  aiShift: string
+  aiShift: string,
+  modelsToUse = MODELS
 ): Promise<{ expansions: any[]; model: string; batchSize: number; processingTime: number }> {
   const startTime = Date.now();
   
@@ -250,7 +252,7 @@ Domains: ${domains.join(', ')}`;
 
   const userMessage = `Generate framework expansion analysis for: ${domains.join(', ')}`;
   
-  const { content, model, attempts } = await makeOpenAIRequest(systemPrompt, userMessage);
+  const { content, model, attempts } = await makeOpenAIRequest(systemPrompt, userMessage, 0, 0, modelsToUse);
   const expansions = parseFrameworkJSON(content);
   
   // Validate structure
@@ -325,7 +327,10 @@ serve(async (req) => {
       });
     }
 
-    const { thinkerName, thinkerArea, coreIdea, aiShift, selectedDomains } = requestBody;
+    const { thinkerName, thinkerArea, coreIdea, aiShift, selectedDomains, preferredModel } = requestBody;
+    
+    // Allow override of model selection
+    const modelsToUse = preferredModel ? [preferredModel, ...MODELS] : MODELS;
 
     console.log(`✓ Processing ${selectedDomains.length} domains for ${thinkerName}`);
 
@@ -349,7 +354,8 @@ serve(async (req) => {
           thinkerName, 
           thinkerArea, 
           coreIdea, 
-          aiShift
+          aiShift,
+          modelsToUse
         );
         
         allExpansions.push(...result.expansions);
