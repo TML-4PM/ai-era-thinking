@@ -69,6 +69,7 @@ export const AllThinkersExpansion: React.FC = () => {
   const [includeTeamBuilding, setIncludeTeamBuilding] = useState(false);
   const [includeProfiles, setIncludeProfiles] = useState(false);
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+  const [batchUsageTracker, setBatchUsageTracker] = useState<Map<string, number>>(new Map());
 
   const logDebug = (message: string) => {
     if (debugMode) {
@@ -184,9 +185,19 @@ export const AllThinkersExpansion: React.FC = () => {
         }
       }
 
-      // 4. Team Building (9-member teams if enabled)
+      // 4. Team Building (9-member teams if enabled) with batch-aware reuse cap
       if (includeTeamBuilding) {
         try {
+          // Calculate excluded members based on batch reuse cap
+          const totalTeamsBuilt = results.filter(r => r.teamMembers && r.teamMembers.length > 0).length;
+          const excludedMembers: string[] = [];
+          
+          for (const [memberCode, usageCount] of batchUsageTracker.entries()) {
+            if (usageCount >= Math.ceil(totalTeamsBuilt * 0.25)) {
+              excludedMembers.push(memberCode);
+            }
+          }
+
           const { data: teamData, error: teamError } = await supabase.functions.invoke('build-thinker-team', {
             body: {
               thinkerName: thinker.name,
@@ -195,14 +206,22 @@ export const AllThinkersExpansion: React.FC = () => {
               aiShift: thinker.aiShift,
               domain: 'strategic-planning',
               industries: selectedIndustries,
-              teamSize: 9
+              teamSize: 9,
+              excludeMemberCodes: excludedMembers
             }
           });
 
           if (teamError) {
             console.error(`Team building failed for ${thinker.name}:`, teamError);
           } else {
-            result.teamMembers = teamData?.team?.thinker_alignment_team_members || [];
+            const teamMembers = teamData?.team?.thinker_alignment_team_members || [];
+            result.teamMembers = teamMembers;
+            
+            // Update batch usage tracker
+            teamMembers.forEach((member: any) => {
+              const currentCount = batchUsageTracker.get(member.member_code) || 0;
+              batchUsageTracker.set(member.member_code, currentCount + 1);
+            });
           }
         } catch (error) {
           console.error(`Team building error for ${thinker.name}:`, error);
@@ -403,8 +422,8 @@ export const AllThinkersExpansion: React.FC = () => {
                   checked={includeMemberAlignment}
                   onCheckedChange={setIncludeMemberAlignment}
                 />
-                <label htmlFor="include-member-alignment" className="text-sm font-medium">
-                  Top-2 Member Alignment
+                <label htmlFor="include-member-alignment" className="text-sm font-medium text-primary">
+                  Top-2 Member Alignments
                 </label>
               </div>
 
@@ -414,8 +433,8 @@ export const AllThinkersExpansion: React.FC = () => {
                   checked={includeTeamBuilding}
                   onCheckedChange={setIncludeTeamBuilding}
                 />
-                <label htmlFor="include-team-building" className="text-sm font-medium">
-                  9-Member Dream Teams
+                <label htmlFor="include-team-building" className="text-sm font-medium text-primary">
+                  Build Teams (9) - Batch-Aware Reuse Cap
                 </label>
               </div>
 

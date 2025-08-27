@@ -17,12 +17,9 @@ interface TeamMember {
     display_name: string;
     description: string;
     exemplar_roles: string[];
-    brain_system: string;
-    thinking_style: string;
-    decision_style: string;
-    neural_ennead_families?: {
-      family_name: string;
-    };
+    primary_family_code: string;
+    secondary_family_code?: string;
+    tertiary_family_code?: string;
   };
 }
 
@@ -91,10 +88,9 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
               display_name,
               description,
               exemplar_roles,
-              brain_system,
-              thinking_style,
-              decision_style,
-              neural_ennead_families(family_name)
+              primary_family_code,
+              secondary_family_code,
+              tertiary_family_code
             )
           )
         `)
@@ -283,9 +279,9 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
                           <h4 className="font-medium">
                             {member.neural_ennead_members?.display_name || member.member_code}
                           </h4>
-                          <p className="text-sm text-muted-foreground">
-                            {member.neural_ennead_members?.neural_ennead_families?.family_name || 'Neural Ennead Member'}
-                          </p>
+                           <p className="text-sm text-muted-foreground">
+                             Neural Ennead Member
+                           </p>
                         </div>
                       </div>
                       <Badge variant="outline" className="text-xs">
@@ -318,15 +314,12 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
                       )}
                     </div>
 
-                    <div className="text-xs text-muted-foreground grid grid-cols-3 gap-2 pt-2 border-t">
+                    <div className="text-xs text-muted-foreground grid grid-cols-2 gap-2 pt-2 border-t">
                       <div>
-                        <strong>Brain:</strong> {member.neural_ennead_members?.brain_system || 'N/A'}
+                        <strong>Primary:</strong> {member.neural_ennead_members?.primary_family_code || 'N/A'}
                       </div>
                       <div>
-                        <strong>Thinking:</strong> {member.neural_ennead_members?.thinking_style || 'N/A'}
-                      </div>
-                      <div>
-                        <strong>Decision:</strong> {member.neural_ennead_members?.decision_style || 'N/A'}
+                        <strong>Secondary:</strong> {member.neural_ennead_members?.secondary_family_code || 'N/A'}
                       </div>
                     </div>
                   </div>

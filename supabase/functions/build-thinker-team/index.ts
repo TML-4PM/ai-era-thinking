@@ -16,6 +16,7 @@ interface TeamBuildRequest {
   domain: string;
   industries?: string[];
   teamSize?: number;
+  excludeMemberCodes?: string[];
 }
 
 serve(async (req) => {
@@ -36,7 +37,8 @@ serve(async (req) => {
       aiShift,
       domain,
       industries = [],
-      teamSize = 9
+      teamSize = 9,
+      excludeMemberCodes = []
     }: TeamBuildRequest = await req.json();
 
     console.log(`Building team for ${thinkerName} in ${domain} domain`);
@@ -49,10 +51,9 @@ serve(async (req) => {
         display_name,
         description,
         exemplar_roles,
-        family_code,
-        brain_system,
-        thinking_style,
-        decision_style,
+        primary_family_code,
+        secondary_family_code,
+        tertiary_family_code,
         neural_ennead_families(family_name)
       `);
 
@@ -74,10 +75,15 @@ serve(async (req) => {
     const totalTeams = Object.keys(usageCounts).length > 0 ? Math.max(...Object.values(usageCounts)) : 0;
     const maxUsagePerMember = Math.ceil(totalTeams * 0.25); // 25% cap
 
-    // 3. Filter available members (those under usage cap)
-    const availableMembers = allMembers.filter(member => 
-      (usageCounts[member.member_code] || 0) < maxUsagePerMember
-    );
+    // 3. Filter available members (those under usage cap and not in exclude list)
+    const availableMembers = allMembers.filter(member => {
+      // Check if member is in exclude list (batch-aware cap)
+      if (excludeMemberCodes.includes(member.member_code)) {
+        return false;
+      }
+      // Check traditional usage cap
+      return (usageCounts[member.member_code] || 0) < maxUsagePerMember;
+    });
 
     console.log(`Available members after usage filter: ${availableMembers.length}/${allMembers.length}`);
 
@@ -100,11 +106,11 @@ ${industryContext}
 
 AVAILABLE TEAM MEMBERS:
 ${availableMembers.map(member => 
-  `${member.member_code}: ${member.display_name}
-  Family: ${member.neural_ennead_families?.family_name}
-  Description: ${member.description}
-  Brain System: ${member.brain_system} | Thinking: ${member.thinking_style} | Decision: ${member.decision_style}
-  Exemplar Roles: ${member.exemplar_roles?.join(', ') || 'N/A'}`
+   `${member.member_code}: ${member.display_name}
+   Family: ${member.neural_ennead_families?.family_name}
+   Description: ${member.description}
+   Primary Family: ${member.primary_family_code} | Secondary: ${member.secondary_family_code || 'N/A'}
+   Exemplar Roles: ${member.exemplar_roles?.join(', ') || 'N/A'}`
 ).join('\n\n')}
 
 TASK: Select exactly ${teamSize} members who would form the most effective team to help ${thinkerName} explore, debate, and apply their ideas in ${domain}. 
@@ -245,10 +251,9 @@ Respond ONLY in this JSON format:
             display_name,
             description,
             exemplar_roles,
-            family_code,
-            brain_system,
-            thinking_style,
-            decision_style,
+            primary_family_code,
+            secondary_family_code,
+            tertiary_family_code,
             neural_ennead_families(family_name)
           )
         )
