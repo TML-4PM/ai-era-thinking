@@ -74,44 +74,107 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
   const loadExistingTeam = async () => {
     try {
       setLoadingExisting(true);
-      const { data, error } = await supabase
+      
+      // First, get the team record
+      const { data: teamData, error: teamError } = await supabase
         .from('thinker_alignment_teams')
-        .select(`
-          *,
-          thinker_alignment_team_members (
-            member_code,
-            order_index,
-            role_on_team,
-            rationale,
-            contribution_focus,
-            neural_ennead_members!thinker_alignment_team_members_member_code_fkey (
-              display_name,
-              description,
-              exemplar_roles,
-              primary_family_code,
-              secondary_family_code,
-              tertiary_family_code
-            )
-          )
-        `)
+        .select('*')
         .eq('thinker_name', thinkerName)
         .eq('domain', domain)
         .order('created_at', { ascending: false })
         .limit(1);
 
-      if (error) {
-        console.error('Error loading existing team:', error);
+      if (teamError) {
+        console.error('Error loading team:', teamError);
         return;
       }
 
-      if (data && data.length > 0) {
-        setExistingTeam(data[0]);
-        setSelectedIndustries(data[0].industries || []);
+      if (!teamData || teamData.length === 0) {
+        return;
+      }
+
+      const team = teamData[0];
+
+      // Then, get the team members separately to avoid circular JOIN
+      const { data: membersData, error: membersError } = await supabase
+        .from('thinker_alignment_team_members')
+        .select('member_code, order_index, role_on_team, rationale, contribution_focus')
+        .eq('team_id', team.id)
+        .order('order_index');
+
+      if (membersError) {
+        console.error('Error loading team members:', membersError);
+        return;
+      }
+
+      // Finally, get member details separately
+      if (membersData && membersData.length > 0) {
+        const memberCodes = membersData.map(m => m.member_code);
+        const { data: memberDetails, error: detailsError } = await supabase
+          .from('neural_ennead_members')
+          .select('member_code, display_name, description, exemplar_roles, primary_family_code, secondary_family_code, tertiary_family_code')
+          .in('member_code', memberCodes);
+
+        if (detailsError) {
+          console.error('Error loading member details:', detailsError);
+        }
+
+        // Merge the data
+        const enrichedMembers = membersData.map(member => ({
+          ...member,
+          neural_ennead_members: memberDetails?.find(detail => detail.member_code === member.member_code) || null
+        }));
+
+        setExistingTeam({
+          ...team,
+          thinker_alignment_team_members: enrichedMembers
+        });
+        setSelectedIndustries(team.industries || []);
+      } else {
+        setExistingTeam({
+          ...team,
+          thinker_alignment_team_members: []
+        });
+        setSelectedIndustries(team.industries || []);
       }
     } catch (error) {
       console.error('Error loading team:', error);
     } finally {
       setLoadingExisting(false);
+    }
+  };
+
+  const seedNeuralEnneadData = async () => {
+    try {
+      setLoading(true);
+      toast({
+        title: "Seeding Data",
+        description: "Initializing Neural Ennead members (this may take a moment)...",
+      });
+
+      const { data, error } = await supabase.functions.invoke('seed-neural-ennead-members');
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (data.success) {
+        toast({
+          title: "Data Seeded Successfully",
+          description: `Initialized ${data.total_members} Neural Ennead members`,
+        });
+      } else {
+        throw new Error(data.error || 'Failed to seed data');
+      }
+    } catch (error) {
+      console.error('Error seeding data:', error);
+      toast({
+        title: "Seeding Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -145,14 +208,25 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
       });
 
       setExistingTeam(data.team);
+      await loadExistingTeam(); // Reload to get fresh data
       
     } catch (error) {
       console.error('Error building team:', error);
-      toast({
-        title: "Team Building Failed",
-        description: error.message,
-        variant: "destructive"
-      });
+      
+      // Check if error indicates missing data
+      if (error.message.includes('Neural Ennead members found') || error.message.includes('No available members')) {
+        toast({
+          title: "Data Missing",
+          description: "Neural Ennead data needs to be initialized first. Click 'Initialize Data' below.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Team Building Failed",
+          description: error.message,
+          variant: "destructive"
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -232,14 +306,27 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
           </div>
 
           {/* Build Team Button */}
-          <Button
-            onClick={buildNewTeam}
-            disabled={loading}
-            className="flex items-center gap-2 w-full"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            {existingTeam ? 'Rebuild Team' : 'Assemble Dream Team'}
-          </Button>
+          <div className="space-y-2">
+            <Button
+              onClick={buildNewTeam}
+              disabled={loading}
+              className="flex items-center gap-2 w-full"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              {existingTeam ? 'Rebuild Team' : 'Assemble Dream Team'}
+            </Button>
+            
+            <Button
+              onClick={seedNeuralEnneadData}
+              disabled={loading}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2 w-full"
+            >
+              <Brain className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Initialize Neural Ennead Data (729 members)
+            </Button>
+          </div>
         </CardContent>
       </Card>
 

@@ -143,36 +143,43 @@ Respond ONLY in this JSON format:
       throw new Error(`Invalid AI response format: ${parseError.message}`);
     }
 
-    // Store the expanded profile
+    // Store the expanded profile - use thinker_profiles table for now
     const { data: existingProfile } = await supabase
-      .from('expanded_thinker_profiles')
+      .from('thinker_profiles')
       .select('id')
       .eq('thinker_name', thinkerName)
-      .single();
+      .maybeSingle();
 
+    // Map profile data to existing thinker_profiles table structure
     const profileRecord = {
       thinker_name: thinkerName,
-      thinker_area: thinkerArea,
+      area: thinkerArea,
       core_idea: coreIdea,
       ai_shift: aiShift,
       lobe: lobe,
-      ai_relevance: profileData.ai_relevance,
-      usage_prompts: profileData.usage_prompts,
-      related_thinkers: profileData.related_thinkers,
-      practical_applications: profileData.practical_applications,
-      cross_era_relevance: profileData.cross_era_relevance,
-      implementation_timeline: profileData.implementation_timeline,
-      industries: industries,
-      processing_metadata: {
+      cross_era_relevance: {
+        ai_relevance: profileData.ai_relevance,
+        cross_era_relevance: profileData.cross_era_relevance,
+        implementation_timeline: profileData.implementation_timeline
+      },
+      usage_prompts: {
+        prompts: profileData.usage_prompts
+      },
+      practical_applications: {
+        applications: profileData.practical_applications
+      },
+      related_thinkers: profileData.related_thinkers || [],
+      metadata: {
         model_used: 'gpt-5-2025-08-07',
         processing_time_ms: Date.now() - startTime,
-        domains_considered: domains
+        domains_considered: domains,
+        industries: industries
       }
     };
 
     if (existingProfile) {
       const { data: updatedProfile, error: updateError } = await supabase
-        .from('expanded_thinker_profiles')
+        .from('thinker_profiles')
         .update(profileRecord)
         .eq('id', existingProfile.id)
         .select()
@@ -194,7 +201,7 @@ Respond ONLY in this JSON format:
       });
     } else {
       const { data: newProfile, error: insertError } = await supabase
-        .from('expanded_thinker_profiles')
+        .from('thinker_profiles')
         .insert(profileRecord)
         .select()
         .single();

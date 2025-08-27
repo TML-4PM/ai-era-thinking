@@ -9286,6 +9286,42 @@ export type Database = {
         }
         Relationships: []
       }
+      download_passes: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          passes_purchased: number
+          passes_remaining: number
+          session_id: string
+          stripe_session_id: string | null
+          updated_at: string
+          user_email: string | null
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          passes_purchased?: number
+          passes_remaining?: number
+          session_id: string
+          stripe_session_id?: string | null
+          updated_at?: string
+          user_email?: string | null
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          passes_purchased?: number
+          passes_remaining?: number
+          session_id?: string
+          stripe_session_id?: string | null
+          updated_at?: string
+          user_email?: string | null
+        }
+        Relationships: []
+      }
       ecosystem_items: {
         Row: {
           business: string
@@ -10198,6 +10234,33 @@ export type Database = {
             referencedColumns: ["tag_id"]
           },
         ]
+      }
+      envato_strategy_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          note_key: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          note_key: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          note_key?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       "EOFY Bundles": {
         Row: {

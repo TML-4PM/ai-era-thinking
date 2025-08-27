@@ -34,6 +34,7 @@ interface ThinkerResult {
   alignments: any[];
   teamMembers: any[];
   processingTime: number;
+  profileStored?: boolean;
   error?: string;
 }
 
@@ -228,35 +229,28 @@ export const AllThinkersExpansion: React.FC = () => {
         }
       }
 
-      // 5. Profile Storage (if enabled)
-      if (includeProfiles && result.expansions.length > 0) {
+      // 5. Deep Profile Building (if enabled)
+      if (includeProfiles) {
         try {
-          // Extract profile data from expansion results
-          const profileData = {
-            thinker_name: thinker.name,
-            area: thinker.area,
-            core_idea: thinker.coreIdea,
-            ai_shift: thinker.aiShift,
-            lobe: thinker.lobe,
-            cross_era_relevance: {},
-            usage_prompts: [],
-            practical_applications: {},
-            related_thinkers: [],
-            metadata: {
-              generated_at: new Date().toISOString(),
-              source: 'bulk_expansion'
+          const { data: profileData, error: profileError } = await supabase.functions.invoke('build-thinker-profile', {
+            body: {
+              thinkerName: thinker.name,
+              thinkerArea: thinker.area,
+              coreIdea: thinker.coreIdea,
+              aiShift: thinker.aiShift,
+              lobe: thinker.lobe,
+              industries: selectedIndustries
             }
-          };
-
-          const { error: profileError } = await supabase
-            .from('thinker_profiles')
-            .upsert(profileData, { onConflict: 'thinker_name' });
+          });
 
           if (profileError) {
-            console.error(`Profile storage failed for ${thinker.name}:`, profileError);
+            console.error(`Profile building failed for ${thinker.name}:`, profileError);
+          } else if (profileData?.success) {
+            result.profileStored = true;
+            logDebug(`Profile stored for ${thinker.name}`);
           }
         } catch (error) {
-          console.error(`Profile storage error for ${thinker.name}:`, error);
+          console.error(`Profile building error for ${thinker.name}:`, error);
         }
       }
 
