@@ -17,7 +17,6 @@ interface TeamMember {
     display_name: string;
     description: string;
     exemplar_roles: string[];
-    family_code: string;
     brain_system: string;
     thinking_style: string;
     decision_style: string;
@@ -92,7 +91,6 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
               display_name,
               description,
               exemplar_roles,
-              family_code,
               brain_system,
               thinking_style,
               decision_style,
@@ -172,13 +170,8 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     }
   };
 
-  const getFamilyIcon = (familyCode: string) => {
-    switch (familyCode) {
-      case 'ORACLE': return <Target className="w-4 h-4" />;
-      case 'GUARDIAN': return <Users className="w-4 h-4" />;
-      case 'ARCHITECT': return <Lightbulb className="w-4 h-4" />;
-      default: return <Brain className="w-4 h-4" />;
-    }
+  const getFamilyIcon = () => {
+    return <Brain className="w-4 h-4" />;
   };
 
   if (loadingExisting) {
@@ -284,14 +277,14 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
                         <div className="p-2 rounded-full bg-brand/10">
-                          {getFamilyIcon(member.neural_ennead_members?.family_code || '')}
+                          {getFamilyIcon()}
                         </div>
                         <div>
                           <h4 className="font-medium">
-                            {member.neural_ennead_members?.display_name}
+                            {member.neural_ennead_members?.display_name || member.member_code}
                           </h4>
                           <p className="text-sm text-muted-foreground">
-                            {member.neural_ennead_members?.neural_ennead_families?.family_name}
+                            {member.neural_ennead_members?.neural_ennead_families?.family_name || 'Neural Ennead Member'}
                           </p>
                         </div>
                       </div>
@@ -327,13 +320,13 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
 
                     <div className="text-xs text-muted-foreground grid grid-cols-3 gap-2 pt-2 border-t">
                       <div>
-                        <strong>Brain:</strong> {member.neural_ennead_members?.brain_system}
+                        <strong>Brain:</strong> {member.neural_ennead_members?.brain_system || 'N/A'}
                       </div>
                       <div>
-                        <strong>Thinking:</strong> {member.neural_ennead_members?.thinking_style}
+                        <strong>Thinking:</strong> {member.neural_ennead_members?.thinking_style || 'N/A'}
                       </div>
                       <div>
-                        <strong>Decision:</strong> {member.neural_ennead_members?.decision_style}
+                        <strong>Decision:</strong> {member.neural_ennead_members?.decision_style || 'N/A'}
                       </div>
                     </div>
                   </div>
