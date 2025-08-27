@@ -24,6 +24,8 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const startTime = Date.now();
+
   try {
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -54,7 +56,7 @@ serve(async (req) => {
         primary_family_code,
         secondary_family_code,
         tertiary_family_code,
-        neural_ennead_families(family_name)
+        canonical_keywords
       `);
 
     if (membersError || !allMembers) {
@@ -72,8 +74,9 @@ serve(async (req) => {
       return acc;
     }, {} as Record<string, number>) || {};
 
-    const totalTeams = Object.keys(usageCounts).length > 0 ? Math.max(...Object.values(usageCounts)) : 0;
-    const maxUsagePerMember = Math.ceil(totalTeams * 0.25); // 25% cap
+    // Count total teams built in last 30 days, not max usage per member
+    const totalTeamsBuilt = new Set(existingUsage?.map(usage => usage.team_id) || []).size;
+    const maxUsagePerMember = Math.max(1, Math.ceil(totalTeamsBuilt * 0.25)); // Never allow 0
 
     // 3. Filter available members (those under usage cap and not in exclude list)
     const availableMembers = allMembers.filter(member => {
@@ -106,10 +109,10 @@ ${industryContext}
 
 AVAILABLE TEAM MEMBERS:
 ${availableMembers.map(member => 
-   `${member.member_code}: ${member.display_name}
-   Family: ${member.neural_ennead_families?.family_name}
+    `${member.member_code}: ${member.display_name}
    Description: ${member.description}
    Primary Family: ${member.primary_family_code} | Secondary: ${member.secondary_family_code || 'N/A'}
+   Keywords: ${member.canonical_keywords?.join(', ') || 'N/A'}
    Exemplar Roles: ${member.exemplar_roles?.join(', ') || 'N/A'}`
 ).join('\n\n')}
 
@@ -142,7 +145,7 @@ Respond ONLY in this JSON format:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o',
+        model: 'gpt-5-2025-08-07',
         messages: [
           { 
             role: 'system', 
@@ -150,8 +153,7 @@ Respond ONLY in this JSON format:
           },
           { role: 'user', content: teamSelectionPrompt }
         ],
-        temperature: 0.7,
-        max_tokens: 4000
+        max_completion_tokens: 4000
       }),
     });
 
@@ -168,10 +170,12 @@ Respond ONLY in this JSON format:
 
     let teamData;
     try {
-      teamData = JSON.parse(aiContent);
+      // Clean the response to handle potential markdown formatting
+      const cleanContent = aiContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      teamData = JSON.parse(cleanContent);
     } catch (parseError) {
       console.error('Failed to parse AI response:', aiContent);
-      throw new Error('Invalid AI response format');
+      throw new Error(`Invalid AI response format: ${parseError.message}`);
     }
 
     // 5. Validate selected members exist and create team record
@@ -194,7 +198,7 @@ Respond ONLY in this JSON format:
         industries: industries,
         overlap_cap: 0.25,
         selection_strategy: 'AI-powered team assembly based on Neural Ennead cognitive profiles and domain expertise',
-        model_used: 'gpt-4o',
+        model_used: 'gpt-5-2025-08-07',
         constraints: {
           requested_size: teamSize,
           available_pool: availableMembers.length,
@@ -254,7 +258,7 @@ Respond ONLY in this JSON format:
             primary_family_code,
             secondary_family_code,
             tertiary_family_code,
-            neural_ennead_families(family_name)
+            canonical_keywords
           )
         )
       `)
@@ -265,7 +269,7 @@ Respond ONLY in this JSON format:
       success: true,
       team: completeTeam,
       message: `Successfully assembled ${validMembers.length}-member team for ${thinkerName} in ${domain}`,
-      processing_time: `${Date.now() - Date.now()}ms`
+      processing_time: `${Date.now() - startTime}ms`
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
