@@ -71,63 +71,38 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     loadExistingTeam();
   }, [thinkerName]);
 
-  // Create fallback team when API fails
+  // Create fallback team using hard-coded data
   const createFallbackTeam = async () => {
     try {
-      // Insert basic team record
-      const { data: teamRecord, error: teamError } = await supabase
-        .from('thinker_alignment_teams')
-        .insert({
-          thinker_name: thinkerName,
-          domain: 'strategic-planning',
-          team_size: 5,
-          industries: selectedIndustries,
-          selection_strategy: 'Fallback team - OpenAI unavailable'
-        })
-        .select()
-        .single();
-
-      if (teamError || !teamRecord) {
-        console.error('Failed to create fallback team:', teamError);
+      const { getExpandedThinker } = await import('@/data/expanded-thinkers');
+      const expandedThinker = getExpandedThinker(thinkerName);
+      
+      if (!expandedThinker?.hardCodedTeam) {
+        console.error('No hard-coded team found for', thinkerName);
         return null;
       }
 
-      // Create basic fallback team structure
+      // Create basic fallback team structure using hard-coded data
       return {
-        id: teamRecord.id,
+        id: `fallback-${Date.now()}`,
         thinker_name: thinkerName,
         domain: 'strategic-planning',
-        team_size: 5,
+        team_size: expandedThinker.hardCodedTeam.length,
         industries: selectedIndustries,
-        created_at: teamRecord.created_at,
-        thinker_alignment_team_members: [
-          {
-            member_code: 'FALLBACK_01',
-            order_index: 1,
-            role_on_team: 'Strategic Analyst',
-            rationale: 'Fallback team member - full functionality requires OpenAI setup',
-            contribution_focus: 'Strategic planning and analysis',
-            neural_ennead_members: {
-              display_name: 'Strategic Analyst',
-              description: 'Fallback team member for strategic analysis',
-              exemplar_roles: ['Strategic Planning', 'Analysis'],
-              primary_family_code: 'FALLBACK'
-            }
-          },
-          {
-            member_code: 'FALLBACK_02',
-            order_index: 2,
-            role_on_team: 'Implementation Specialist',
-            rationale: 'Fallback team member - full functionality requires OpenAI setup',
-            contribution_focus: 'Implementation and execution',
-            neural_ennead_members: {
-              display_name: 'Implementation Specialist',
-              description: 'Fallback team member for implementation',
-              exemplar_roles: ['Implementation', 'Project Management'],
-              primary_family_code: 'FALLBACK'
-            }
+        created_at: new Date().toISOString(),
+        thinker_alignment_team_members: expandedThinker.hardCodedTeam.map((member, index) => ({
+          member_code: member.member_code,
+          order_index: index + 1,
+          role_on_team: member.role_on_team,
+          rationale: member.rationale,
+          contribution_focus: `Specialist in ${member.role_on_team.toLowerCase()}`,
+          neural_ennead_members: {
+            display_name: member.display_name,
+            description: member.description,
+            exemplar_roles: [member.role_on_team],
+            primary_family_code: thinkerName.toUpperCase().replace(' ', '_')
           }
-        ]
+        }))
       };
     } catch (error) {
       console.error('Error creating fallback team:', error);
@@ -382,7 +357,7 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
             WorkFamily Dream Team
           </CardTitle>
           <CardDescription>
-            AI-assembled team of Neural Ennead members to help {thinkerName} explore and apply their framework
+            Chat with {thinkerName} and their FamilyAI team, gain new insights, or work together to grow your understanding and develop strategic applications
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

@@ -124,11 +124,11 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
             </TabsTrigger>
             <TabsTrigger value="chat" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <MessageSquare className="w-3 h-3" />
-              <span className="hidden sm:inline">Chat with author</span>
+              <span className="hidden sm:inline">Chat</span>
             </TabsTrigger>
             <TabsTrigger value="team-chat" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <Users className="w-3 h-3" />
-              <span className="hidden sm:inline">Chat with author and the team</span>
+              <span className="hidden sm:inline">Team Chat</span>
             </TabsTrigger>
             <TabsTrigger value="applications" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <Zap className="w-3 h-3" />
@@ -245,25 +245,51 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
           </TabsContent>
 
           <TabsContent value="chat">
-            <ThinkerChat
-              thinker={{
-                name: thinker.name,
-                area: thinker.area,
-                coreIdea: thinker.coreIdea,
-                aiShift: thinker.aiShift,
-                ...expandedThinker
-              }}
-            />
+            <div className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-brand" />
+                    Chat with {thinker.name}
+                  </CardTitle>
+                  <CardDescription>
+                    Engage directly with {thinker.name} about their framework, ask questions, gain new insights, or just chat about their ideas and how they apply to your context.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+              <ThinkerChat
+                thinker={{
+                  name: thinker.name,
+                  area: thinker.area,
+                  coreIdea: thinker.coreIdea,
+                  aiShift: thinker.aiShift,
+                  ...expandedThinker
+                }}
+              />
+            </div>
           </TabsContent>
 
           <TabsContent value="team-chat">
-            <ThinkerTeamChat
-              thinkerName={thinker.name}
-              thinkerArea={thinker.area}
-              coreIdea={thinker.coreIdea}
-              aiShift={thinker.aiShift}
-              assignedTeam={teamMembers}
-            />
+            <div className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Users className="w-5 h-5 text-brand" />
+                    Chat with {thinker.name} & the FamilyAI Team
+                  </CardTitle>
+                  <CardDescription>
+                    Work together with {thinker.name} and their carefully assembled team to explore applications, grow your understanding, and develop strategic insights for your organization.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+              <ThinkerTeamChat
+                thinkerName={thinker.name}
+                thinkerArea={thinker.area}
+                coreIdea={thinker.coreIdea}
+                aiShift={thinker.aiShift}
+                assignedTeam={teamMembers}
+              />
+            </div>
           </TabsContent>
 
           <TabsContent value="applications" className="space-y-4">

@@ -1,11 +1,20 @@
 import { Lobe } from "./thinkers";
 
+export interface TeamMember {
+  member_code: string;
+  display_name: string;
+  description: string;
+  role_on_team: string;
+  rationale: string;
+}
+
 export interface ExpandedThinker {
   name: string;
   area: string;
   coreIdea: string;
   aiShift: string;
   lobe: Lobe;
+  hardCodedTeam?: TeamMember[];
   crossEraRelevance: {
     onPrem: {
       people: string;
@@ -58,6 +67,43 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     coreIdea: "Dual-process theory: System 1 (fast, intuitive) vs System 2 (slow, deliberate) thinking shapes all human judgment under uncertainty",
     aiShift: "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data",
     lobe: "Decision/Action",
+    hardCodedTeam: [
+      {
+        member_code: "KAHNEMAN_01",
+        display_name: "Behavioral Data Scientist",
+        description: "Specialist in detecting cognitive biases in AI systems and human-AI interaction patterns",
+        role_on_team: "Bias Detection Lead",
+        rationale: "Essential for implementing Kahneman's insights about System 1/2 thinking in AI architectures and preventing inherited biases"
+      },
+      {
+        member_code: "KAHNEMAN_02", 
+        display_name: "Nudge Architecture Designer",
+        description: "Expert in behavioral economics applications for AI interface design and choice architecture",
+        role_on_team: "UX Behavioral Economist",
+        rationale: "Applies prospect theory and loss aversion principles to create ethical AI recommendation systems"
+      },
+      {
+        member_code: "KAHNEMAN_03",
+        display_name: "Decision Systems Architect", 
+        description: "Specializes in hybrid decision-making frameworks that preserve human judgment while leveraging AI speed",
+        role_on_team: "System Design Lead",
+        rationale: "Designs AI systems with explicit System 1/System 2 pathways and human oversight triggers"
+      },
+      {
+        member_code: "KAHNEMAN_04",
+        display_name: "Cognitive Preservation Specialist",
+        description: "Focuses on maintaining human decision-making skills in AI-augmented environments",
+        role_on_team: "Human Factor Consultant", 
+        rationale: "Ensures AI systems include 'judgment preservation modes' to maintain human cognitive capabilities"
+      },
+      {
+        member_code: "KAHNEMAN_05",
+        display_name: "Risk Assessment Modeler",
+        description: "Applies behavioral economics to AI risk evaluation and resource allocation decisions",
+        role_on_team: "Risk Strategy Advisor",
+        rationale: "Implements prospect theory in AI systems to better understand and account for human risk perception patterns"
+      }
+    ],
     crossEraRelevance: {
       onPrem: {
         people: "Decision makers rely heavily on System 2 thinking - deliberate analysis, risk committees, slow methodical review processes with human expertise central to all major choices",
@@ -134,7 +180,44 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     area: "Systems Thinking",
     coreIdea: "Leverage points, system archetypes",
     aiShift: "Agentic AI dynamically alters leverage points.",
-    lobe: "Innovation/Strategy",
+    lobe: "Innovation/Strategy", 
+    hardCodedTeam: [
+      {
+        member_code: "MEADOWS_01",
+        display_name: "Systems Dynamics Modeler",
+        description: "Expert in mapping complex organizational and technical system interdependencies",
+        role_on_team: "Systems Mapping Lead",
+        rationale: "Essential for identifying leverage points in AI transformation and understanding system feedback loops"
+      },
+      {
+        member_code: "MEADOWS_02",
+        display_name: "Leverage Point Analyst", 
+        description: "Specialist in Meadows' 12 leverage points framework and intervention design",
+        role_on_team: "Strategic Intervention Designer",
+        rationale: "Applies systems thinking to find high-impact points for AI deployment and organizational change"
+      },
+      {
+        member_code: "MEADOWS_03",
+        display_name: "Emergence Facilitator",
+        description: "Focuses on creating conditions for beneficial system behaviors to emerge from AI integration",
+        role_on_team: "System Behavior Designer", 
+        rationale: "Designs AI systems that enable positive emergent behaviors while preventing unintended consequences"
+      },
+      {
+        member_code: "MEADOWS_04",
+        display_name: "Constraint Architecture Specialist",
+        description: "Expert in designing system constraints that guide but don't restrict beneficial AI evolution",
+        role_on_team: "Governance Framework Designer",
+        rationale: "Builds constraints preventing AI agents from altering critical system leverage points inappropriately"
+      },
+      {
+        member_code: "MEADOWS_05",
+        display_name: "System Evolution Strategist",
+        description: "Specializes in managing transitions between different system paradigms and mental models",
+        role_on_team: "Transition Strategy Lead",
+        rationale: "Guides organizations through paradigm shifts required for successful AI-human collaboration patterns"
+      }
+    ],
     crossEraRelevance: {
       onPrem: {
         people: "Systems thinkers are rare specialists - few understand complex interdependencies, change initiatives require extensive training and cultural shifts",
@@ -188,10 +271,47 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
   },
   {
     name: "Shoshana Zuboff",
-    area: "Political Economy",
+    area: "Political Economy", 
     coreIdea: "Surveillance capitalism",
     aiShift: "Agentic AI deepens surveillance-utility trade-off.",
     lobe: "Ethics/Governance",
+    hardCodedTeam: [
+      {
+        member_code: "ZUBOFF_01",
+        display_name: "Behavioral Surplus Auditor",
+        description: "Specialist in identifying and measuring extraction of behavioral data for commercial purposes",
+        role_on_team: "Privacy Impact Assessor",
+        rationale: "Essential for detecting surveillance capitalism patterns in AI systems and protecting user behavioral data"
+      },
+      {
+        member_code: "ZUBOFF_02",
+        display_name: "Consent Dynamics Designer",
+        description: "Expert in creating meaningful consent frameworks for continuously learning AI agents",
+        role_on_team: "Ethical AI Consent Lead",
+        rationale: "Develops dynamic consent systems that adapt to agent learning while preserving user agency and choice"
+      },
+      {
+        member_code: "ZUBOFF_03", 
+        display_name: "Value Creation Strategist",
+        description: "Focuses on business models that create value without exploiting user behavioral surplus",
+        role_on_team: "Post-Surveillance Business Designer",
+        rationale: "Pioneers alternative value creation models that benefit users without extracting behavioral data for manipulation"
+      },
+      {
+        member_code: "ZUBOFF_04",
+        display_name: "Digital Rights Advocate",
+        description: "Specializes in protecting cognitive liberty and mental privacy in AI-human interactions",
+        role_on_team: "Human Autonomy Guardian",
+        rationale: "Ensures AI systems preserve human decision-making autonomy and protect against manipulation techniques"
+      },
+      {
+        member_code: "ZUBOFF_05",
+        display_name: "Regulatory Framework Analyst",
+        description: "Expert in governance frameworks that prevent regulatory capture by AI companies",
+        role_on_team: "Democratic Governance Lead",
+        rationale: "Develops governance structures that prioritize public interest over corporate surveillance and behavioral control"
+      }
+    ],
     crossEraRelevance: {
       onPrem: {
         people: "Workers largely unaware of data extraction - limited visibility into what data is collected, stored locally with minimal sharing between systems",
