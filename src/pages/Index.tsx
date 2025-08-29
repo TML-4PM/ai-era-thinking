@@ -58,8 +58,8 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>AI-Era Thinking - Leaders Live Forever</title>
-        <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply in the age of artificial intelligence" />
+        <title>Tech4Humanity - Leaders Live Forever</title>
+        <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
       </Helmet>
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
@@ -68,14 +68,14 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <img 
                     src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
-                    alt="T4H logo" 
-                    className="h-8 w-8 rounded" 
+                    alt="Tech4Humanity logo" 
+                    className="h-12 w-12 rounded-lg object-contain" 
                   />
-                  <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    AI‑Era Thinking
+                  <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Tech4Humanity
                   </span>
                 </div>
                 
@@ -122,20 +122,12 @@ const Index = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                AI-Era Thinking - Leaders Live Forever
+                Leaders Live Forever
               </span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-              Explore how our favourite thinkers' frameworks evolve and apply in the age of artificial intelligence
+              Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts
             </p>
-            <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
-                5 Cognitive Lobes
-              </Badge>
-              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
-                Cross-Era Analysis
-              </Badge>
-            </div>
             <div className="flex justify-center">
               <Button 
                 asChild 
@@ -156,10 +148,6 @@ const Index = () => {
             selectedLobe={selectedLobe}
             onLobeChange={setSelectedLobe}
           />
-
-          <div className="mb-6">
-            <EraNavigation />
-          </div>
 
           {currentView === 'map' && (
             <OrganMap 
