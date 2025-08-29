@@ -49,14 +49,13 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-semibold text-lg mb-4">About The Organ Framework</h3>
+            <h3 className="font-semibold text-lg mb-4">About Leaders Live Forever</h3>
             <p className="text-muted-foreground mb-4">
-              50 famous thinkers brought to life to discuss agentic AI and brain-computer interfaces 
-              with the WorkFamilyAI. Navigate AI transformation through interactive exploration 
-              and practical implementation tools.
+              50 famous thinkers brought to life to discuss agentic AI and brain-computer interfaces. 
+              Their wisdom transcends time through interactive exploration and practical implementation tools.
             </p>
             <div className="text-sm text-muted-foreground">
-              © 2024 The Organ Framework. All rights reserved.
+              © 2024 Leaders Live Forever. All rights reserved.
             </div>
           </div>
         </div>

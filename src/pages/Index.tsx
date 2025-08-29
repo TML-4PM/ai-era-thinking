@@ -74,7 +74,7 @@ const Index = () => {
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container h-14 flex items-center justify-between">
-          <Link to="/" className="font-semibold">The Organ Framework</Link>
+          <Link to="/" className="font-semibold">Leaders Live Forever</Link>
           <nav className="flex items-center gap-3">
             <Link to="/governance" className="text-sm hover:underline">Governance</Link>
             <Link to="/tools" className="text-sm hover:underline">Tools</Link>
@@ -85,24 +85,24 @@ const Index = () => {
 
       <main id="main" className="min-h-screen">
       <Helmet>
-        <title>Agentic AI Organ Map – Top 50 Thinkers</title>
-        <meta name="description" content="Explore the Agentic AI organ map with Top 50 thinkers, their lenses, and practical shifts. Download CSVs and use this as a working framework." />
+        <title>Leaders Live Forever – Top 50 AI Thinkers</title>
+        <meta name="description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles, practical insights, and interactive analysis. Transform your understanding of agentic AI." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/' : '/'} />
-        <meta property="og:title" content="Agentic AI Organ Map – Top 50 Thinkers" />
-        <meta property="og:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
+        <meta property="og:title" content="Leaders Live Forever – Top 50 AI Thinkers" />
+        <meta property="og:description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles and practical insights." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://ai-thinker-flux.lovable.app/'} />
         <meta property="og:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Agentic AI Organ Map – Top 50 Thinkers" />
-        <meta name="twitter:description" content="Explore the Agentic AI organ map with Top 50 thinkers, lenses, and practical shifts." />
+        <meta name="twitter:title" content="Leaders Live Forever – Top 50 AI Thinkers" />
+        <meta name="twitter:description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles and practical insights." />
         <meta name="twitter:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "Agentic AI Organ Map – Top 50 Thinkers",
+          name: "Leaders Live Forever – Top 50 AI Thinkers",
           about: "Perception, Decision, Innovation, Ethics, Culture",
-          isPartOf: { "@type": "WebSite", name: "ai-thinker-flux" }
+          isPartOf: { "@type": "WebSite", name: "Leaders Live Forever" }
         })}</script>
       </Helmet>
 
@@ -117,11 +117,11 @@ const Index = () => {
                   Enhanced Framework v2.0
                 </Badge>
                 <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-hero bg-clip-text text-transparent">
-                  The Organ Framework
+                  Leaders Live Forever
                 </h1>
                 <p className="text-muted-foreground text-xl mb-8 leading-relaxed">
-                  Navigate AI transformation with 50+ thinkers, interactive maps, and practical tools. 
-                  From strategy to implementation—your complete guide to agentic AI adoption.
+                  Explore how history's greatest minds approach agentic AI. Interactive profiles, 
+                  practical insights, and transformative conversations that live on forever.
                 </p>
               </div>
               
@@ -167,10 +167,45 @@ const Index = () => {
           <h2 className="text-2xl font-bold mb-4">
             Thinker Profiles {filtered.length < THINKERS.length && `(${filtered.length} of ${THINKERS.length})`}
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-6">
             Each thinker brings unique insights that transform in the agentic AI era. 
             Click "Explore Deep Profile" for expanded analysis and practical applications.
           </p>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-8 text-sm">
+            <div>
+              <h3 className="font-semibold text-primary mb-2">How to use this:</h3>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Browse thinkers by era, lobe, or search</li>
+                <li>• Click profiles for deep analysis</li>
+                <li>• Engage in interactive dialogues</li>
+                <li>• Build custom teams for scenarios</li>
+                <li>• Download data for workshops</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-primary mb-2">Why this matters:</h3>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Leaders' wisdom transcends their era</li>
+                <li>• Past insights illuminate AI futures</li>
+                <li>• Different perspectives reveal blind spots</li>
+                <li>• Historical patterns predict challenges</li>
+                <li>• Diverse thinking drives innovation</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-primary mb-2">What you can do here:</h3>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Chat with individual thinkers</li>
+                <li>• Create multi-thinker teams</li>
+                <li>• Explore governance frameworks</li>
+                <li>• Access implementation tools</li>
+                <li>• Study cross-era patterns</li>
+              </ul>
+            </div>
+          </div>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -40,16 +40,16 @@ export const EraDetail: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{era.name} | The Organ - AI Transformation Framework</title>
+        <title>{era.name} | Leaders Live Forever - AI Transformation Framework</title>
         <meta name="description" content={`Deep dive into the ${era.name}: ${era.description}. ${era.context.substring(0, 150)}...`} />
         <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/era/${era.id}`} />
-        <meta property="og:title" content={`${era.name} | The Organ`} />
+        <meta property="og:title" content={`${era.name} | Leaders Live Forever`} />
         <meta property="og:description" content={`${era.description}`} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/era/${era.id}`} />
         <meta property="og:image" content={`https://ai-thinker-flux.lovable.app/og-share.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${era.name} | The Organ`} />
+        <meta name="twitter:title" content={`${era.name} | Leaders Live Forever`} />
         <meta name="twitter:description" content={`${era.description}`} />
         <meta name="twitter:image" content={`https://ai-thinker-flux.lovable.app/og-share.jpg`} />
       </Helmet>
@@ -63,7 +63,7 @@ export const EraDetail: React.FC = () => {
                 <Link to="/">
                   <Button variant="ghost" size="sm">
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Organ Map
+                    Back to Leaders
                   </Button>
                 </Link>
                 <h1 className="text-2xl font-bold text-foreground">{era.name}</h1>
