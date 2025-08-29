@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { OrganMap } from "@/components/OrganMap";
@@ -11,7 +12,7 @@ import { TopThinkersPanel } from "@/components/TopThinkersPanel";
 import { EnhancedOrganMap } from "@/components/EnhancedOrganMap";
 import { Footer } from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { THINKERS } from "@/data/thinkers";
+import { THINKERS, type Lobe } from "@/data/thinkers";
 import { ERAS } from "@/data/eras";
 import { useFavorites } from "@/context/FavoritesContext";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,7 @@ const Index = () => {
   const [selectedThinker, setSelectedThinker] = useState<any>(null);
   const [selectedEra, setSelectedEra] = useState("genAI");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLobe, setSelectedLobe] = useState<string | null>(null);
+  const [selectedLobe, setSelectedLobe] = useState<Lobe | "All">("All");
   const [currentView, setCurrentView] = useState<'map' | 'timeline' | 'grid' | 'enhanced'>('enhanced');
   const [useEnhancedModal, setUseEnhancedModal] = useState(true);
   const { showFavoritesOnly } = useFavorites();
@@ -36,7 +37,7 @@ const Index = () => {
                            thinker.coreIdea.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            thinker.aiShift.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesLobe = !selectedLobe || thinker.lobe === selectedLobe;
+      const matchesLobe = selectedLobe === "All" || thinker.lobe === selectedLobe;
       
       return matchesSearch && matchesLobe;
     });
@@ -154,48 +155,40 @@ const Index = () => {
             onLobeChange={setSelectedLobe}
           />
 
-          <EraNavigation 
-            selectedEra={selectedEra}
-            onEraChange={setSelectedEra}
-            currentView={currentView}
-            onViewChange={setCurrentView}
-          />
+          <div className="mb-6">
+            <EraNavigation />
+          </div>
 
           {currentView === 'map' && (
             <OrganMap 
-              selectedEra={selectedEra} 
-              onThinkerSelect={handleThinkerSelect}
-              filteredThinkers={filteredThinkers}
-              searchTerm={searchTerm}
+              selected={selectedLobe} 
+              onSelect={setSelectedLobe}
             />
           )}
 
           {currentView === 'enhanced' && (
             <EnhancedOrganMap 
-              selectedEra={selectedEra} 
-              onThinkerSelect={handleThinkerSelect}
-              filteredThinkers={filteredThinkers}
-              searchTerm={searchTerm}
+              selected={selectedLobe}
+              onSelect={setSelectedLobe}
             />
           )}
 
           {currentView === 'timeline' && (
-            <EraTimeline onThinkerSelect={handleThinkerSelect} />
+            <EraTimeline />
           )}
 
           {currentView === 'grid' && (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-3">
-                <AllThinkersGrid 
-                  thinkers={filteredThinkers}
-                  onThinkerSelect={handleThinkerSelect}
-                  showFavoritesOnly={showFavoritesOnly}
-                />
+                <AllThinkersGrid />
               </div>
               <div className="lg:col-span-1">
                 <TopThinkersPanel 
-                  selectedEra={selectedEra}
-                  onThinkerSelect={handleThinkerSelect}
+                  thinkers={filteredThinkers}
+                  onThinkerSelect={(name: string) => {
+                    const thinker = THINKERS.find(t => t.name === name);
+                    if (thinker) handleThinkerSelect(thinker);
+                  }}
                 />
               </div>
             </div>
