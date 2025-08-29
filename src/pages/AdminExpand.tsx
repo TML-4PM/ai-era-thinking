@@ -450,3 +450,5 @@ export const AdminExpandPage: React.FC = () => {
     </div>
   );
 };
+
+export default AdminExpandPage;

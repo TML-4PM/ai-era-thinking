@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import EraDetail from "./pages/EraDetail";
 import Governance from "./pages/Governance";
 import Tools from "./pages/Tools";
+import AdminExpand from "./pages/AdminExpand";
 import { FavoritesProvider } from "./context/FavoritesContext";
 
 // Create a stable QueryClient instance with proper configuration
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/era/:eraId" element={<EraDetail />} />
               <Route path="/governance" element={<Governance />} />
               <Route path="/tools" element={<Tools />} />
+              <Route path="/admin/expand" element={<AdminExpand />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
