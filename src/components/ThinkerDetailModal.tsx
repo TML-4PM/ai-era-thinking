@@ -55,7 +55,7 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
 
   const loadTeamData = async () => {
     try {
-      // First get the team
+      // First get the team from DB
       const { data: teamData } = await supabase
         .from('thinker_alignment_teams')
         .select('id')
@@ -92,10 +92,30 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
             };
           });
           setTeamMembers(enrichedMembers);
+          return;
         }
+      }
+
+      // Fallback to localStorage
+      const localTeam = localStorage.getItem(`team-${thinker.name}`);
+      if (localTeam) {
+        setTeamMembers(JSON.parse(localTeam));
+        return;
+      }
+
+      // Final fallback to hard-coded team
+      if (expandedThinker?.hardCodedTeam) {
+        setTeamMembers(expandedThinker.hardCodedTeam);
       }
     } catch (error) {
       console.error('Error loading team data:', error);
+      // On error, try localStorage fallback
+      const localTeam = localStorage.getItem(`team-${thinker.name}`);
+      if (localTeam) {
+        setTeamMembers(JSON.parse(localTeam));
+      } else if (expandedThinker?.hardCodedTeam) {
+        setTeamMembers(expandedThinker.hardCodedTeam);
+      }
     }
   };
 
@@ -113,10 +133,14 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-          <TabsList className="grid w-full grid-cols-5 h-auto">
+          <TabsList className="grid w-full grid-cols-6 h-auto">
             <TabsTrigger value="overview" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <BookOpen className="w-3 h-3" />
               <span className="hidden sm:inline">Overview</span>
+            </TabsTrigger>
+            <TabsTrigger value="bio" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <Brain className="w-3 h-3" />
+              <span className="hidden sm:inline">Bio</span>
             </TabsTrigger>
             <TabsTrigger value="team" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <Users className="w-3 h-3" />
@@ -304,6 +328,22 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
                 </CardContent>
               </Card>
             )}
+          </TabsContent>
+
+          <TabsContent value="bio" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-brand" />
+                  About {thinker.name}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm leading-relaxed">
+                  {expandedThinker?.bio || `${thinker.name} is a leading thinker in ${thinker.area}, best known for ${thinker.coreIdea}. Their work has significant implications for how we approach AI development and deployment in the modern era.`}
+                </p>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="team">

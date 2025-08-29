@@ -62,6 +62,20 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
   const [existingTeam, setExistingTeam] = useState<ThinkerTeam | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+
+  // Persist team to localStorage when it changes
+  useEffect(() => {
+    if (existingTeam?.thinker_alignment_team_members?.length) {
+      const minimal = existingTeam.thinker_alignment_team_members.map(m => ({
+        member_code: m.member_code,
+        display_name: m.neural_ennead_members?.display_name ?? m.member_code,
+        description: m.neural_ennead_members?.description ?? '',
+        role_on_team: m.role_on_team,
+        rationale: m.rationale,
+      }));
+      localStorage.setItem(`team-${thinkerName}`, JSON.stringify(minimal));
+    }
+  }, [existingTeam, thinkerName]);
   const [loadingExisting, setLoadingExisting] = useState(true);
   const { toast } = useToast();
 

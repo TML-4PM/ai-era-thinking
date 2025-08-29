@@ -14,6 +14,7 @@ export interface ExpandedThinker {
   coreIdea: string;
   aiShift: string;
   lobe: Lobe;
+  bio?: string;
   hardCodedTeam?: TeamMember[];
   crossEraRelevance: {
     onPrem: {
@@ -67,6 +68,7 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     coreIdea: "Dual-process theory: System 1 (fast, intuitive) vs System 2 (slow, deliberate) thinking shapes all human judgment under uncertainty",
     aiShift: "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data",
     lobe: "Decision/Action",
+    bio: "Nobel Prize-winning psychologist and economist whose groundbreaking work on behavioral economics and decision-making under uncertainty fundamentally changed how we understand human judgment. His dual-process theory distinguishing System 1 (fast, intuitive) and System 2 (slow, deliberate) thinking has profound implications for designing AI systems that complement rather than replace human cognition. Author of 'Thinking, Fast and Slow' and pioneer in prospect theory, his insights are crucial for building AI that understands and works with human cognitive biases rather than against them.",
     hardCodedTeam: [
       {
         member_code: "KAHNEMAN_01",
