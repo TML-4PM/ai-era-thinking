@@ -73,20 +73,38 @@ export const EraTimeline: React.FC<EraTimelineProps> = ({
                       {era.description}
                     </p>
                     
-                    <p className="text-xs text-muted-foreground italic">
-                      {era.culturalPosture}
-                    </p>
-                    
-                    {isSelected && (
-                      <div className="mt-3 pt-3 border-t border-border">
-                        <Link 
-                          to={`/era/${era.id}`}
-                          className="inline-flex items-center text-sm text-brand hover:text-brand-2 transition-colors"
-                        >
-                          Explore Deep Dive →
-                        </Link>
-                      </div>
-                    )}
+                     <p className="text-xs text-muted-foreground italic">
+                       {era.culturalPosture}
+                     </p>
+                     
+                     {isSelected && (
+                       <div className="mt-3 pt-3 border-t border-border space-y-2">
+                         <div className="grid grid-cols-2 gap-2 text-xs">
+                           <div className="space-y-1">
+                             <div className="font-medium text-brand">People</div>
+                             <div className="text-muted-foreground">Cultural mindset shifts</div>
+                           </div>
+                           <div className="space-y-1">
+                             <div className="font-medium text-brand">Policy</div>
+                             <div className="text-muted-foreground">Governance & compliance</div>
+                           </div>
+                           <div className="space-y-1">
+                             <div className="font-medium text-brand">Process</div>
+                             <div className="text-muted-foreground">Operational workflows</div>
+                           </div>
+                           <div className="space-y-1">
+                             <div className="font-medium text-brand">Technology</div>
+                             <div className="text-muted-foreground">Technical architecture</div>
+                           </div>
+                         </div>
+                         <Link 
+                           to={`/era/${era.id}`}
+                           className="inline-flex items-center text-sm text-brand hover:text-brand-2 transition-colors"
+                         >
+                           Explore Deep Dive →
+                         </Link>
+                       </div>
+                     )}
                   </div>
                 </div>
               </div>

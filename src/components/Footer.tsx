@@ -55,7 +55,7 @@ export const Footer = () => {
               Their wisdom transcends time through interactive exploration and practical implementation tools.
             </p>
             <div className="text-sm text-muted-foreground">
-              © 2024 Leaders Live Forever. All rights reserved.
+              © 2025 Tech 4 Humanity. All rights reserved.
             </div>
           </div>
         </div>

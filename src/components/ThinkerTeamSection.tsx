@@ -442,12 +442,14 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
                           {getFamilyIcon()}
                         </div>
                         <div>
-                          <h4 className="font-medium">
-                            {member.neural_ennead_members?.display_name || member.member_code}
-                          </h4>
-                           <p className="text-sm text-muted-foreground">
-                             Neural Ennead Member
-                           </p>
+                           <h4 className="font-medium">
+                             {member.neural_ennead_members?.display_name || member.member_code}
+                           </h4>
+                            <p className="text-sm text-muted-foreground">
+                              {member.role_on_team === 'Cognitive Preservation Specialist' 
+                                ? 'Cognitive Preservation Specialist - Neural Ennead Member' 
+                                : 'Neural Ennead Member'}
+                            </p>
                         </div>
                       </div>
                       <Badge variant="outline" className="text-xs">
