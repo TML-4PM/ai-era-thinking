@@ -1,253 +1,217 @@
+import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import heroImage from "@/assets/hero-organ.jpg";
+import { OrganMap } from "@/components/OrganMap";
+import { EraTimeline } from "@/components/EraTimeline";
+import { ThinkerDetailModal } from "@/components/ThinkerDetailModal";
+import { EnhancedThinkerModal } from "@/components/EnhancedThinkerModal";
+import { SearchBar } from "@/components/SearchBar";
+import { EraNavigation } from "@/components/EraNavigation";
+import { AllThinkersGrid } from "@/components/AllThinkersGrid";
+import { TopThinkersPanel } from "@/components/TopThinkersPanel";
+import { EnhancedOrganMap } from "@/components/EnhancedOrganMap";
+import { Footer } from "@/components/Footer";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { THINKERS } from "@/data/thinkers";
+import { ERAS } from "@/data/eras";
+import { useFavorites } from "@/context/FavoritesContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import GlowField from "@/components/GlowField";
-import { EraTimeline } from "@/components/EraTimeline";
-import ThinkerCard from "@/components/ThinkerCard";
-import SearchBar from "@/components/SearchBar";
-import { EnhancedThinkerModal } from "@/components/EnhancedThinkerModal";
-import Footer from "@/components/Footer";
-import { THINKERS, type Lobe, type Thinker } from "@/data/thinkers";
-import { getExpandedThinker } from "@/data/expanded-thinkers";
-import { Link, useSearchParams } from "react-router-dom";
-import { useMemo, useState, useEffect } from "react";
-import ThemeToggle from "@/components/ThemeToggle";
+import { Heart, Plus, Home, Compass, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const [query, setQuery] = useState("");
-  const [lobe, setLobe] = useState<Lobe | "All">("All");
-  const [selectedEra, setSelectedEra] = useState("all");
-  const [selectedThinker, setSelectedThinker] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const [selectedThinker, setSelectedThinker] = useState<any>(null);
+  const [selectedEra, setSelectedEra] = useState("genAI");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLobe, setSelectedLobe] = useState<string | null>(null);
+  const [currentView, setCurrentView] = useState<'map' | 'timeline' | 'grid' | 'enhanced'>('enhanced');
+  const [useEnhancedModal, setUseEnhancedModal] = useState(true);
+  const { showFavoritesOnly } = useFavorites();
 
-  const filtered = useMemo(() => {
-    const q = query.toLowerCase();
-    return THINKERS.filter((t) =>
-      (lobe === "All" || t.lobe === lobe) &&
-      (t.name.toLowerCase().includes(q) || t.area.toLowerCase().includes(q) || t.coreIdea.toLowerCase().includes(q) || t.aiShift.toLowerCase().includes(q))
-    );
-  }, [query, lobe]);
+  const filteredThinkers = useMemo(() => {
+    return THINKERS.filter(thinker => {
+      const matchesSearch = thinker.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           thinker.area.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           thinker.coreIdea.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           thinker.aiShift.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesLobe = !selectedLobe || thinker.lobe === selectedLobe;
+      
+      return matchesSearch && matchesLobe;
+    });
+  }, [searchTerm, selectedLobe]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const currentEra = ERAS.find(era => era.id === selectedEra);
+
+  const handleThinkerSelect = (thinker: any) => {
+    setSelectedThinker(thinker);
+  };
+
   useEffect(() => {
-    const t = searchParams.get("thinker");
-    const l = searchParams.get("lobe");
-    const e = searchParams.get("era");
-    if (t) setSelectedThinker(t);
-    if (l) setLobe(l as Lobe | "All"); else setLobe("All");
-    if (e) setSelectedEra(e); else setSelectedEra("all");
-  }, [searchParams]);
-
-  const handleThinkerExplore = (name: string) => {
-    setSelectedThinker(name);
-    const sp = new URLSearchParams(searchParams);
-    sp.set('thinker', name);
-    setSearchParams(sp, { replace: true });
-  };
-
-  const handleLobeChange = (nextLobe: Lobe | "All") => {
-    setLobe(nextLobe);
-    const sp = new URLSearchParams(searchParams);
-    if (nextLobe !== "All") sp.set('lobe', String(nextLobe)); else sp.delete('lobe');
-    setSearchParams(sp, { replace: true });
-  };
-
-  const handleEraChange = (era: string) => {
-    setSelectedEra(era);
-    const sp = new URLSearchParams(searchParams);
-    if (era && era !== "all") sp.set('era', era); else sp.delete('era');
-    setSearchParams(sp, { replace: true });
-  };
-
-  const selectedThinkerObject = selectedThinker ? THINKERS.find(t => t.name === selectedThinker) : null;
-
-  const handleCloseModal = () => {
-    setSelectedThinker(null);
-    if (searchParams.get('thinker')) {
-      const sp = new URLSearchParams(searchParams);
-      sp.delete('thinker');
-      setSearchParams(sp, { replace: true });
+    if (selectedThinker && !useEnhancedModal) {
+      setUseEnhancedModal(true);
     }
-  };
+  }, [selectedThinker]);
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container h-14 flex items-center justify-between">
-          <Link to="/" className="font-semibold">Leaders Live Forever</Link>
-          <nav className="flex items-center gap-3">
-            <Link to="/governance" className="text-sm hover:underline">Governance</Link>
-            <Link to="/tools" className="text-sm hover:underline">Tools</Link>
-            <ThemeToggle />
-          </nav>
-        </div>
-      </header>
-
-      <main id="main" className="min-h-screen">
       <Helmet>
-        <title>Leaders Live Forever – Top 50 AI Thinkers</title>
-        <meta name="description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles, practical insights, and interactive analysis. Transform your understanding of agentic AI." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/' : '/'} />
-        <meta property="og:title" content="Leaders Live Forever – Top 50 AI Thinkers" />
-        <meta property="og:description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles and practical insights." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : 'https://ai-thinker-flux.lovable.app/'} />
-        <meta property="og:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Leaders Live Forever – Top 50 AI Thinkers" />
-        <meta name="twitter:description" content="Leaders Live Forever: Explore Top 50 AI thinkers with deep profiles and practical insights." />
-        <meta name="twitter:image" content={typeof window !== 'undefined' ? window.location.origin + '/og-share.jpg' : '/og-share.jpg'} />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "Leaders Live Forever – Top 50 AI Thinkers",
-          about: "Perception, Decision, Innovation, Ethics, Culture",
-          isPartOf: { "@type": "WebSite", name: "Leaders Live Forever" }
-        })}</script>
+        <title>Organ Framework - AI-Era Thinking Architecture</title>
+        <meta name="description" content="A comprehensive framework for understanding how great thinkers' ideas evolve and apply in the age of AI" />
       </Helmet>
-
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-hero opacity-10" />
-        <GlowField />
-        <div className="container relative py-20 md:py-28">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div>
-                <Badge className="mb-4 bg-gradient-warm text-white">
-                  Enhanced Framework v2.0
-                </Badge>
-                <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-hero bg-clip-text text-transparent">
-                  Leaders Live Forever
-                </h1>
-                <p className="text-muted-foreground text-xl mb-8 leading-relaxed">
-                  Explore how history's greatest minds approach agentic AI. Interactive profiles, 
-                  practical insights, and transformative conversations that live on forever.
-                </p>
+      
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
+        {/* Navigation Header */}
+        <div className="border-b bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">O</span>
+                  </div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Organ Framework
+                  </span>
+                </div>
+                
+                <nav className="hidden md:flex items-center gap-4">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/")}
+                    className="flex items-center gap-2"
+                  >
+                    <Home className="w-4 h-4" />
+                    Explore
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/favorites")}
+                    className="flex items-center gap-2"
+                  >
+                    <Heart className="w-4 h-4" />
+                    Favorites
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/add-thinker")}
+                    className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Add your own guru
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/governance")}
+                    className="flex items-center gap-2"
+                  >
+                    <Settings className="w-4 h-4" />
+                    Governance
+                  </Button>
+                </nav>
               </div>
-              
-            </div>
-            
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-hero opacity-20 blur-xl rounded-2xl"></div>
-              <img 
-                src={heroImage} 
-                alt="The Organ Framework - Interactive AI transformation map" 
-                loading="eager" fetchPriority="high" decoding="async"
-                className="relative rounded-2xl shadow-2xl border glow-effect" 
-              />
+
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="container py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Explore 50 Famous Thinkers</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover how leading minds approach agentic AI and brain-computer interfaces. 
-            Each thinker offers unique perspectives brought to life through interactive dialogues.
-          </p>
-        </div>
-        
-        <div className="space-y-8">
-          {/* Enhanced Search */}
-          <SearchBar
-            query={query}
-            onQueryChange={setQuery}
-            selectedLobe={lobe}
-            onLobeChange={handleLobeChange}
-            selectedEra={selectedEra}
-            onEraChange={handleEraChange}
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                AI-Era Thinking
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+              Explore how great thinkers' frameworks evolve and apply in the age of artificial intelligence
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
+                {THINKERS.length} Thinkers
+              </Badge>
+              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
+                5 Cognitive Lobes
+              </Badge>
+              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
+                Cross-Era Analysis
+              </Badge>
+            </div>
+          </div>
+
+          <SearchBar 
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            selectedLobe={selectedLobe}
+            onLobeChange={setSelectedLobe}
           />
-        </div>
-      </section>
 
-      <section className="container pb-20">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">
-            Thinker Profiles {filtered.length < THINKERS.length && `(${filtered.length} of ${THINKERS.length})`}
-          </h2>
-          <p className="text-muted-foreground mb-6">
-            Each thinker brings unique insights that transform in the agentic AI era. 
-            Click "Explore Deep Profile" for expanded analysis and practical applications.
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-6 mb-8 text-sm">
-            <div>
-              <h3 className="font-semibold text-primary mb-2">How to use this:</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• Browse thinkers by era, lobe, or search</li>
-                <li>• Click profiles for deep analysis</li>
-                <li>• Engage in interactive dialogues</li>
-                <li>• Build custom teams for scenarios</li>
-                <li>• Download data for workshops</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-primary mb-2">Why this matters:</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• Leaders' wisdom transcends their era</li>
-                <li>• Past insights illuminate AI futures</li>
-                <li>• Different perspectives reveal blind spots</li>
-                <li>• Historical patterns predict challenges</li>
-                <li>• Diverse thinking drives innovation</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-primary mb-2">What you can do here:</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• Chat with individual thinkers</li>
-                <li>• Create multi-thinker teams</li>
-                <li>• Explore governance frameworks</li>
-                <li>• Access implementation tools</li>
-                <li>• Study cross-era patterns</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((t: Thinker) => (
-            <ThinkerCard 
-              key={t.name} 
-              thinker={t} 
-              onExplore={handleThinkerExplore}
-              className="interactive-hover"
+          <EraNavigation 
+            selectedEra={selectedEra}
+            onEraChange={setSelectedEra}
+            currentView={currentView}
+            onViewChange={setCurrentView}
+          />
+
+          {currentView === 'map' && (
+            <OrganMap 
+              selectedEra={selectedEra} 
+              onThinkerSelect={handleThinkerSelect}
+              filteredThinkers={filteredThinkers}
+              searchTerm={searchTerm}
             />
-          ))}
-        </div>
-        
-        {filtered.length === 0 && (
-          <div className="text-center py-16">
-            <div className="max-w-md mx-auto">
-              <h3 className="text-lg font-medium mb-2">No matches found</h3>
-              <p className="text-muted-foreground mb-6">
-                Try adjusting your search terms or filters to discover relevant thinkers.
-              </p>
-              <Button onClick={() => {
-                setQuery("");
-                handleLobeChange("All");
-                handleEraChange("all");
-              }}>
-                Clear All Filters
-              </Button>
-            </div>
-          </div>
-        )}
-      </section>
+          )}
 
-      {/* Thinker Detail Modal */}
-      {selectedThinkerObject && (
-        <EnhancedThinkerModal
-          isOpen={!!selectedThinker}
-          onClose={handleCloseModal}
-          thinker={selectedThinkerObject}
-        />
-      )}
-    </main>
-    <Footer />
+          {currentView === 'enhanced' && (
+            <EnhancedOrganMap 
+              selectedEra={selectedEra} 
+              onThinkerSelect={handleThinkerSelect}
+              filteredThinkers={filteredThinkers}
+              searchTerm={searchTerm}
+            />
+          )}
+
+          {currentView === 'timeline' && (
+            <EraTimeline onThinkerSelect={handleThinkerSelect} />
+          )}
+
+          {currentView === 'grid' && (
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div className="lg:col-span-3">
+                <AllThinkersGrid 
+                  thinkers={filteredThinkers}
+                  onThinkerSelect={handleThinkerSelect}
+                  showFavoritesOnly={showFavoritesOnly}
+                />
+              </div>
+              <div className="lg:col-span-1">
+                <TopThinkersPanel 
+                  selectedEra={selectedEra}
+                  onThinkerSelect={handleThinkerSelect}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <Footer />
+
+        {selectedThinker && (
+          <EnhancedThinkerModal
+            thinker={selectedThinker}
+            isOpen={!!selectedThinker}
+            onClose={() => setSelectedThinker(null)}
+          />
+        )}
+      </div>
     </>
   );
 };

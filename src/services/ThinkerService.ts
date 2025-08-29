@@ -1,6 +1,8 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { EXPANDED_THINKERS, type ExpandedThinker } from "@/data/expanded-thinkers";
 import { THINKERS, type Thinker } from "@/data/thinkers";
+import { UserThinker } from "@/types/UserThinker";
 
 export interface ThinkerProfile {
   id: string;
@@ -38,12 +40,14 @@ export interface EnhancedThinker extends Thinker {
   expandedData?: ExpandedThinker;
   profileData?: ThinkerProfile;
   teamData?: ThinkerTeam;
+  isUserCreated?: boolean;
+  userThinkerData?: UserThinker;
 }
 
 export class ThinkerService {
   
   /**
-   * Get all thinkers with their enhancement status
+   * Get all thinkers with their enhancement status (including user-created)
    */
   async getAllEnhancedThinkers(): Promise<EnhancedThinker[]> {
     // Get all profiles and teams in parallel
@@ -59,8 +63,8 @@ export class ThinkerService {
     const profileMap = new Map(profiles.map(p => [p.thinker_name, p]));
     const teamMap = new Map(teams.map(t => [t.thinker_name, t]));
 
-    // Enhance each thinker
-    return THINKERS.map(thinker => {
+    // Enhance each built-in thinker
+    const enhancedBuiltInThinkers = THINKERS.map(thinker => {
       const expandedData = EXPANDED_THINKERS.find(et => et.name === thinker.name);
       const profileData = profileMap.get(thinker.name);
       const teamData = teamMap.get(thinker.name);
@@ -71,24 +75,52 @@ export class ThinkerService {
         hasTeam: !!teamData || !!expandedData?.hardCodedTeam,
         expandedData,
         profileData,
-        teamData
+        teamData,
+        isUserCreated: false
       };
     });
+
+    return enhancedBuiltInThinkers;
   }
 
   /**
-   * Get a specific enhanced thinker by name
+   * Get a specific enhanced thinker by name (built-in or user-created)
    */
-  async getEnhancedThinker(name: string): Promise<EnhancedThinker | null> {
-    const baseThinker = THINKERS.find(t => t.name === name);
+  async getEnhancedThinker(nameOrId: string, isUserCreated = false): Promise<EnhancedThinker | null> {
+    if (isUserCreated) {
+      // Handle user-created thinker
+      const { data: userThinker } = await supabase
+        .from('user_thinkers')
+        .select('*')
+        .eq('id', nameOrId)
+        .single();
+
+      if (!userThinker) return null;
+
+      // Convert UserThinker to EnhancedThinker format
+      return {
+        name: userThinker.name,
+        area: userThinker.area,
+        coreIdea: userThinker.core_idea,
+        aiShift: userThinker.ai_shift,
+        lobe: userThinker.lobe as any,
+        hasDeepProfile: true, // User thinkers always have deep profiles
+        hasTeam: false, // Teams not supported for user thinkers yet
+        isUserCreated: true,
+        userThinkerData: userThinker
+      };
+    }
+
+    // Handle built-in thinker
+    const baseThinker = THINKERS.find(t => t.name === nameOrId);
     if (!baseThinker) return null;
 
     const [profileResult, teamResult] = await Promise.all([
-      supabase.from('thinker_profiles').select('*').eq('thinker_name', name).maybeSingle(),
-      supabase.from('thinker_alignment_teams').select('*').eq('thinker_name', name).maybeSingle()
+      supabase.from('thinker_profiles').select('*').eq('thinker_name', nameOrId).maybeSingle(),
+      supabase.from('thinker_alignment_teams').select('*').eq('thinker_name', nameOrId).maybeSingle()
     ]);
 
-    const expandedData = EXPANDED_THINKERS.find(et => et.name === name);
+    const expandedData = EXPANDED_THINKERS.find(et => et.name === nameOrId);
     const profileData = profileResult.data;
     const teamData = teamResult.data;
 
@@ -98,7 +130,8 @@ export class ThinkerService {
       hasTeam: !!teamData || !!expandedData?.hardCodedTeam,
       expandedData,
       profileData,
-      teamData
+      teamData,
+      isUserCreated: false
     };
   }
 

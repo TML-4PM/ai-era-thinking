@@ -11,6 +11,8 @@ import EraDetail from "./pages/EraDetail";
 import Governance from "./pages/Governance";
 import Tools from "./pages/Tools";
 import AdminExpand from "./pages/AdminExpand";
+import AddThinker from "./pages/AddThinker";
+import Favorites from "./pages/Favorites";
 import { FavoritesProvider } from "./context/FavoritesContext";
 
 // Create a stable QueryClient instance with proper configuration
@@ -37,6 +39,8 @@ const App = () => (
               <Route path="/governance" element={<Governance />} />
               <Route path="/tools" element={<Tools />} />
               <Route path="/admin/expand" element={<AdminExpand />} />
+              <Route path="/add-thinker" element={<AddThinker />} />
+              <Route path="/favorites" element={<Favorites />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

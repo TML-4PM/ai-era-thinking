@@ -3530,6 +3530,48 @@ export type Database = {
           },
         ]
       }
+      assessment_progress: {
+        Row: {
+          assessment_type: string
+          completion_percentage: number
+          created_at: string
+          current_step: number
+          id: string
+          is_completed: boolean
+          last_saved: string
+          responses: Json
+          total_steps: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          assessment_type: string
+          completion_percentage?: number
+          created_at?: string
+          current_step?: number
+          id?: string
+          is_completed?: boolean
+          last_saved?: string
+          responses?: Json
+          total_steps?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          assessment_type?: string
+          completion_percentage?: number
+          created_at?: string
+          current_step?: number
+          id?: string
+          is_completed?: boolean
+          last_saved?: string
+          responses?: Json
+          total_steps?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       assessment_progress_tracking: {
         Row: {
           assessment_type: string
