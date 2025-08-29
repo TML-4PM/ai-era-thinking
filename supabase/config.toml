@@ -1,4 +1,3 @@
-
 project_id = "lzfgigiyqpuuxslsygjt"
 
 [functions.thinker-chat]
@@ -26,4 +25,10 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.build-thinker-team]
+verify_jwt = false
+
+[functions.team-chat]
+verify_jwt = false
+
+[functions.build-thinker-profile]
 verify_jwt = false
