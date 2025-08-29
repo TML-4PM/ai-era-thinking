@@ -496,6 +496,45 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
               </div>
             )}
           </div>
+          
+          {/* Team action buttons */}
+          <div className="flex gap-2">
+            <Button 
+              onClick={buildNewTeam}
+              disabled={loading}
+              variant="outline"
+              size="sm"
+            >
+              {loading ? (
+                <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+              ) : (
+                <Users className="w-4 h-4 mr-2" />
+              )}
+              {existingTeam ? 'Regenerate Team' : 'Build Team'}
+            </Button>
+
+            <Button 
+              onClick={seedNeuralEnneadData}
+              disabled={loading}
+              variant="outline"
+              size="sm"
+              className="text-xs"
+            >
+              {loading ? (
+                <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+              ) : (
+                <Brain className="w-4 h-4 mr-2" />
+              )}
+              Seed Members
+            </Button>
+          </div>
+
+          {!existingTeam && !loading && (
+            <div className="text-sm text-muted-foreground flex items-center gap-2">
+              <RefreshCw className="w-4 h-4 animate-pulse" />
+              No team yet—assembling one now...
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

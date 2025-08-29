@@ -51,6 +51,7 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
   const [isGenerating, setIsGenerating] = useState(false);
   const [showMoreFramework, setShowMoreFramework] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const expandedThinker = getExpandedThinker(thinker.name);
@@ -58,11 +59,14 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
   useEffect(() => {
     const loadEnhancedData = async () => {
       if (isOpen && thinker) {
+        setIsLoading(true);
         try {
           const enhanced = await thinkerService.getEnhancedThinker(thinker.name);
           setEnhancedThinker(enhanced);
         } catch (error) {
           console.error('Error loading enhanced thinker data:', error);
+        } finally {
+          setIsLoading(false);
         }
       }
     };
@@ -243,7 +247,101 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {expandedThinker?.coreFramework ? (
+                {/* DB-first rendering with fallback */}
+                {enhancedThinker?.profileData ? (
+                  // Render from DB profile
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <p className="text-sm leading-relaxed">
+                        {enhancedThinker.profileData.ai_shift || thinker.aiShift}
+                      </p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-medium text-sm text-muted-foreground mb-2">Original Insight</h4>
+                          <p className="text-sm">{thinker.coreIdea}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-sm text-muted-foreground mb-2">AI-Era Shift</h4>
+                          <p className="text-sm">{thinker.aiShift}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* AI Relevance from DB */}
+                    {enhancedThinker.profileData.cross_era_relevance?.ai_relevance && (
+                      <div className="border rounded-lg p-4 bg-purple-50/50 dark:bg-purple-950/20">
+                        <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                          <Brain className="w-4 h-4 text-purple-600" />
+                          AI Relevance
+                        </h4>
+                        <p className="text-sm leading-relaxed">
+                          {enhancedThinker.profileData.cross_era_relevance.ai_relevance}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Cross-Era Evolution Summary from DB */}
+                    {enhancedThinker.profileData.cross_era_relevance?.cross_era_relevance && (
+                      <div className="border rounded-lg p-4 bg-blue-50/50 dark:bg-blue-950/20">
+                        <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                          <TrendingUp className="w-4 h-4 text-blue-600" />
+                          Cross-Era Evolution
+                        </h4>
+                        <p className="text-sm leading-relaxed">
+                          {enhancedThinker.profileData.cross_era_relevance.cross_era_relevance}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Implementation Timeline from DB */}
+                    {enhancedThinker.profileData.cross_era_relevance?.implementation_timeline && (
+                      <div className="border rounded-lg p-4 bg-green-50/50 dark:bg-green-950/20">
+                        <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                          <Clock className="w-4 h-4 text-green-600" />
+                          Implementation Timeline
+                        </h4>
+                        <div className="space-y-3">
+                          {enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_1 && (
+                            <div>
+                              <h5 className="font-medium text-xs text-green-700 dark:text-green-300 mb-1">Phase 1 (0-6 months)</h5>
+                              <p className="text-sm">{enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_1}</p>
+                            </div>
+                          )}
+                          {enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_2 && (
+                            <div>
+                              <h5 className="font-medium text-xs text-green-700 dark:text-green-300 mb-1">Phase 2 (6-18 months)</h5>
+                              <p className="text-sm">{enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_2}</p>
+                            </div>
+                          )}
+                          {enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_3 && (
+                            <div>
+                              <h5 className="font-medium text-xs text-green-700 dark:text-green-300 mb-1">Phase 3 (18+ months)</h5>
+                              <p className="text-sm">{enhancedThinker.profileData.cross_era_relevance.implementation_timeline.phase_3}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Related Thinkers from DB */}
+                    {enhancedThinker.profileData.related_thinkers && enhancedThinker.profileData.related_thinkers.length > 0 && (
+                      <div className="border rounded-lg p-4 bg-amber-50/50 dark:bg-amber-950/20">
+                        <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                          <Users className="w-4 h-4 text-amber-600" />
+                          Related Thinkers
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {enhancedThinker.profileData.related_thinkers.map((relatedName: string, index: number) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {relatedName}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : expandedThinker?.coreFramework ? (
                   <>
                     <div className="space-y-3">
                       <p className="text-sm leading-relaxed">{expandedThinker.coreFramework.summary}</p>
@@ -490,8 +588,41 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
           </TabsContent>
 
           <TabsContent value="applications" className="space-y-4">
-            {expandedThinker?.usagePrompts ? (
+            {/* DB-first rendering for applications */}
+            {enhancedThinker?.profileData?.usage_prompts?.prompts ? (
               <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Usage Prompts</h3>
+                <div className="grid gap-4">
+                  {enhancedThinker.profileData.usage_prompts.prompts.map((prompt: string, index: number) => (
+                    <Card key={index}>
+                      <CardContent className="pt-4">
+                        <p className="text-sm">{prompt}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {enhancedThinker?.profileData?.practical_applications?.applications ? (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Practical Applications</h3>
+                <div className="grid gap-4">
+                  {enhancedThinker.profileData.practical_applications.applications.map((app: string, index: number) => (
+                    <Card key={index}>
+                      <CardContent className="pt-4">
+                        <p className="text-sm">{app}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Fallback to local expanded thinker data */}
+            {!enhancedThinker?.profileData && expandedThinker?.usagePrompts ? (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Usage Examples</h3>
                 {expandedThinker.usagePrompts.map((prompt, index) => (
                   <Card key={index}>
                     <CardHeader>
@@ -510,7 +641,12 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
                   </Card>
                 ))}
               </div>
-            ) : (
+            ) : null}
+
+            {/* Final fallback when no applications available */}
+            {!enhancedThinker?.profileData?.usage_prompts?.prompts && 
+             !enhancedThinker?.profileData?.practical_applications?.applications && 
+             !expandedThinker?.usagePrompts && (
               <Card className="border-dashed">
                 <CardContent className="pt-6">
                   <div className="text-center space-y-4">

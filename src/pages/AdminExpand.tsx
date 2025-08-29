@@ -15,8 +15,10 @@ import {
   Clock,
   Sparkles,
   Database,
-  Zap
+  Zap,
+  Settings
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { thinkerService, type EnhancedThinker } from "@/services/ThinkerService";
 import { AllThinkersGrid } from "@/components/AllThinkersGrid";
 import { useToast } from "@/hooks/use-toast";
@@ -76,40 +78,55 @@ export const AdminExpandPage: React.FC = () => {
     
     addToLog(`Starting profile generation for ${thinkersWithoutProfiles.length} thinkers`);
 
+    const CHUNK_SIZE = 3; // Process 3 at a time for concurrency
     let completed = 0;
-    for (const thinker of thinkersWithoutProfiles) {
+
+    for (let i = 0; i < thinkersWithoutProfiles.length; i += CHUNK_SIZE) {
       if (!isGenerating) break; // Stop if cancelled
       
-      setCurrentBatch(completed + 1);
-      addToLog(`Generating profile for ${thinker.name}...`);
+      const chunk = thinkersWithoutProfiles.slice(i, i + CHUNK_SIZE);
       
-      try {
-        const result = await thinkerService.generateProfile(thinker.name);
-        if (result.success) {
-          addToLog(`✓ Profile generated for ${thinker.name}`);
-        } else {
-          addToLog(`✗ Failed to generate profile for ${thinker.name}: ${result.error}`);
+      // Process chunk in parallel
+      const chunkPromises = chunk.map(async (thinker) => {
+        addToLog(`Generating profile for ${thinker.name}...`);
+        
+        try {
+          const result = await thinkerService.generateProfile(thinker.name);
+          if (result.success) {
+            addToLog(`✓ Profile generated for ${thinker.name}`);
+            return { success: true, thinker: thinker.name };
+          } else {
+            addToLog(`✗ Failed to generate profile for ${thinker.name}: ${result.error}`);
+            return { success: false, thinker: thinker.name, error: result.error };
+          }
+        } catch (error) {
+          addToLog(`✗ Error generating profile for ${thinker.name}: ${error}`);
+          return { success: false, thinker: thinker.name, error: String(error) };
         }
-      } catch (error) {
-        addToLog(`✗ Error generating profile for ${thinker.name}: ${error}`);
-      }
+      });
+
+      // Wait for chunk to complete
+      const chunkResults = await Promise.all(chunkPromises);
+      completed += chunkResults.length;
       
-      completed++;
+      setCurrentBatch(completed);
       setProgress((completed / thinkersWithoutProfiles.length) * 100);
       
-      // Small delay to prevent overwhelming the API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Small delay between chunks to prevent overwhelming
+      if (i + CHUNK_SIZE < thinkersWithoutProfiles.length) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
     }
 
     setIsGenerating(false);
-    addToLog(`Profile generation completed. ${completed} out of ${thinkersWithoutProfiles.length} profiles generated.`);
+    addToLog(`Profile generation completed. ${completed} out of ${thinkersWithoutProfiles.length} profiles processed.`);
     
     // Reload data
     await loadData();
     
     toast({
       title: "Batch Generation Complete",
-      description: `Generated ${completed} profiles`,
+      description: `Processed ${completed} profiles`,
     });
   };
 
@@ -131,46 +148,95 @@ export const AdminExpandPage: React.FC = () => {
     
     addToLog(`Starting team generation for ${thinkersWithoutTeams.length} thinkers`);
 
+    const CHUNK_SIZE = 3; // Process 3 at a time for concurrency
     let completed = 0;
-    for (const thinker of thinkersWithoutTeams) {
+
+    for (let i = 0; i < thinkersWithoutTeams.length; i += CHUNK_SIZE) {
       if (!isGenerating) break; // Stop if cancelled
       
-      setCurrentBatch(completed + 1);
-      addToLog(`Assembling team for ${thinker.name}...`);
+      const chunk = thinkersWithoutTeams.slice(i, i + CHUNK_SIZE);
       
-      try {
-        const result = await thinkerService.generateTeam(thinker.name);
-        if (result.success) {
-          addToLog(`✓ Team assembled for ${thinker.name}`);
-        } else {
-          addToLog(`✗ Failed to assemble team for ${thinker.name}: ${result.error}`);
+      // Process chunk in parallel
+      const chunkPromises = chunk.map(async (thinker) => {
+        addToLog(`Assembling team for ${thinker.name}...`);
+        
+        try {
+          const result = await thinkerService.generateTeam(thinker.name);
+          if (result.success) {
+            addToLog(`✓ Team assembled for ${thinker.name}`);
+            return { success: true, thinker: thinker.name };
+          } else {
+            addToLog(`✗ Failed to assemble team for ${thinker.name}: ${result.error}`);
+            return { success: false, thinker: thinker.name, error: result.error };
+          }
+        } catch (error) {
+          addToLog(`✗ Error assembling team for ${thinker.name}: ${error}`);
+          return { success: false, thinker: thinker.name, error: String(error) };
         }
-      } catch (error) {
-        addToLog(`✗ Error assembling team for ${thinker.name}: ${error}`);
-      }
+      });
+
+      // Wait for chunk to complete
+      const chunkResults = await Promise.all(chunkPromises);
+      completed += chunkResults.length;
       
-      completed++;
+      setCurrentBatch(completed);
       setProgress((completed / thinkersWithoutTeams.length) * 100);
       
-      // Small delay to prevent overwhelming the API
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Small delay between chunks to prevent overwhelming
+      if (i + CHUNK_SIZE < thinkersWithoutTeams.length) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
     }
 
     setIsGenerating(false);
-    addToLog(`Team generation completed. ${completed} out of ${thinkersWithoutTeams.length} teams assembled.`);
+    addToLog(`Team generation completed. ${completed} out of ${thinkersWithoutTeams.length} teams processed.`);
     
     // Reload data
     await loadData();
     
     toast({
       title: "Batch Generation Complete",
-      description: `Assembled ${completed} teams`,
+      description: `Processed ${completed} teams`,
     });
   };
 
   const stopGeneration = () => {
     setIsGenerating(false);
     addToLog("Generation stopped by user");
+  };
+
+  const seedNeuralEnneadMembers = async () => {
+    try {
+      addToLog("Starting Neural Ennead member seeding...");
+      toast({
+        title: "Seeding Data",
+        description: "Initializing Neural Ennead members (this may take a moment)...",
+      });
+
+      const { data, error } = await supabase.functions.invoke('seed-neural-ennead-members');
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (data.success) {
+        addToLog(`✓ Successfully seeded ${data.total_members} Neural Ennead members`);
+        toast({
+          title: "Data Seeded Successfully",
+          description: `Initialized ${data.total_members} Neural Ennead members`,
+        });
+      } else {
+        throw new Error(data.error || 'Failed to seed data');
+      }
+    } catch (error) {
+      console.error('Error seeding Neural Ennead members:', error);
+      addToLog(`✗ Failed to seed Neural Ennead members: ${error.message}`);
+      toast({
+        title: "Seeding Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -318,6 +384,31 @@ export const AdminExpandPage: React.FC = () => {
         </TabsContent>
 
         <TabsContent value="batch" className="space-y-6">
+          {/* Seed Neural Ennead Members Button */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Settings className="w-5 h-5" />
+                System Setup
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Ensure Neural Ennead members are seeded before generating teams. This is required for proper team assembly.
+                </p>
+                <Button 
+                  onClick={seedNeuralEnneadMembers}
+                  disabled={isGenerating}
+                  variant="outline"
+                >
+                  <Database className="w-4 h-4 mr-2" />
+                  Seed Neural Ennead Members
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Generation Progress */}
           {isGenerating && (
             <Card>
@@ -340,7 +431,7 @@ export const AdminExpandPage: React.FC = () => {
                 </div>
                 <Progress value={progress} className="h-3" />
                 <div className="text-center text-sm text-muted-foreground">
-                  {progress.toFixed(1)}% Complete
+                  {progress.toFixed(1)}% Complete (Concurrency: 3)
                 </div>
               </CardContent>
             </Card>

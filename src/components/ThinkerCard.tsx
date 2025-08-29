@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Brain, Lightbulb, Quote } from "lucide-react";
+import { BookOpen, Brain, Lightbulb, Quote, Sparkles } from "lucide-react";
 import { ExpandedThinker, getExpandedThinker } from "@/data/expanded-thinkers";
 import { Thinker } from "@/data/thinkers";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ThinkerCardProps {
   thinker: Thinker;
@@ -20,6 +21,37 @@ export const ThinkerCard: React.FC<ThinkerCardProps> = ({
 }) => {
   const expanded = getExpandedThinker(thinker.name);
   const hasExpanded = !!expanded;
+  const [hasDeepProfile, setHasDeepProfile] = useState<boolean | null>(null);
+
+  // Check for DB profile existence with session cache
+  useEffect(() => {
+    const checkProfileExists = async () => {
+      const cacheKey = `profile-exists-${thinker.name}`;
+      const cached = sessionStorage.getItem(cacheKey);
+      
+      if (cached !== null) {
+        setHasDeepProfile(cached === 'true');
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('thinker_profiles')
+          .select('id')
+          .eq('thinker_name', thinker.name)
+          .maybeSingle();
+
+        const exists = !error && !!data;
+        setHasDeepProfile(exists);
+        sessionStorage.setItem(cacheKey, exists.toString());
+      } catch (error) {
+        console.error('Error checking profile existence:', error);
+        setHasDeepProfile(false);
+      }
+    };
+
+    checkProfileExists();
+  }, [thinker.name]);
 
   const getLobeIcon = (lobe: string) => {
     switch (lobe.split("/")[0]) {
@@ -47,9 +79,17 @@ export const ThinkerCard: React.FC<ThinkerCardProps> = ({
             {getLobeIcon(thinker.lobe)}
             {thinker.name}
           </span>
-          <Badge variant="secondary" className="flex items-center gap-1">
-            {thinker.lobe.split("/")[0]}
-          </Badge>
+          <div className="flex items-center gap-2">
+            {hasDeepProfile && (
+              <Badge className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0">
+                <Sparkles className="w-3 h-3 mr-1" />
+                Deep profile
+              </Badge>
+            )}
+            <Badge variant="secondary" className="flex items-center gap-1">
+              {thinker.lobe.split("/")[0]}
+            </Badge>
+          </div>
         </CardTitle>
       </CardHeader>
       

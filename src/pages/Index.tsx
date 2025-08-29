@@ -239,11 +239,13 @@ const Index = () => {
       </section>
 
       {/* Thinker Detail Modal */}
-      <EnhancedThinkerModal
-        isOpen={!!selectedThinker}
-        onClose={handleCloseModal}
-        thinker={selectedThinkerObject!}
-      />
+      {selectedThinkerObject && (
+        <EnhancedThinkerModal
+          isOpen={!!selectedThinker}
+          onClose={handleCloseModal}
+          thinker={selectedThinkerObject}
+        />
+      )}
     </main>
     <Footer />
     </>
