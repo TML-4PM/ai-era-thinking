@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,8 +9,9 @@ import { BookOpen, MessageSquare, Brain, Lightbulb, Zap, Users } from "lucide-re
 import { Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
 import { ThinkerChat } from "./ThinkerChat";
-import ThinkerWorkfamilyChat from "./ThinkerWorkfamilyChat";
+import ThinkerTeamChat from "./ThinkerTeamChat";
 import ThinkerTeamSection from "./ThinkerTeamSection";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ThinkerDetailModalProps {
   thinker: Thinker | null;
@@ -26,7 +27,8 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
   if (!thinker) return null;
 
   const expandedThinker = getExpandedThinker(thinker.name);
-  const [activeTab, setActiveTab] = useState("team");
+  const [activeTab, setActiveTab] = useState("overview");
+  const [teamMembers, setTeamMembers] = useState([]);
 
   const eraMapping = {
     onPrem: "On-Premises Era",
@@ -44,6 +46,59 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
     bci: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
   };
 
+  // Load team data when modal opens
+  useEffect(() => {
+    if (isOpen && thinker) {
+      loadTeamData();
+    }
+  }, [isOpen, thinker?.name]);
+
+  const loadTeamData = async () => {
+    try {
+      // First get the team
+      const { data: teamData } = await supabase
+        .from('thinker_alignment_teams')
+        .select('id')
+        .eq('thinker_name', thinker.name)
+        .eq('domain', 'strategic-planning')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (teamData && teamData.length > 0) {
+        const teamId = teamData[0].id;
+        
+        // Then get team members
+        const { data: membersData } = await supabase
+          .from('thinker_alignment_team_members')
+          .select('member_code, role_on_team, rationale')
+          .eq('team_id', teamId);
+
+        if (membersData && membersData.length > 0) {
+          // Finally get member details
+          const memberCodes = membersData.map(m => m.member_code);
+          const { data: memberDetails } = await supabase
+            .from('neural_ennead_members')
+            .select('member_code, display_name, description')
+            .in('member_code', memberCodes);
+
+          const enrichedMembers = membersData.map(member => {
+            const details = memberDetails?.find(d => d.member_code === member.member_code);
+            return {
+              member_code: member.member_code,
+              display_name: details?.display_name || member.member_code,
+              description: details?.description || '',
+              role_on_team: member.role_on_team,
+              rationale: member.rationale
+            };
+          });
+          setTeamMembers(enrichedMembers);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading team data:', error);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -59,36 +114,27 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="team" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Team
-            </TabsTrigger>
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
               Overview
             </TabsTrigger>
+            <TabsTrigger value="team" className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              Team
+            </TabsTrigger>
             <TabsTrigger value="chat" className="flex items-center gap-2">
               <MessageSquare className="w-4 h-4" />
-              Chat
+              Chat with author
             </TabsTrigger>
-            <TabsTrigger value="duo-chat" className="flex items-center gap-2">
+            <TabsTrigger value="team-chat" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
-              Duo Chat
+              Chat with author and the team
             </TabsTrigger>
             <TabsTrigger value="applications" className="flex items-center gap-2">
               <Zap className="w-4 h-4" />
-              Applications
+              Author statements
             </TabsTrigger>
           </TabsList>
-
-          <TabsContent value="team">
-            <ThinkerTeamSection
-              thinkerName={thinker.name}
-              thinkerArea={thinker.area}
-              coreIdea={thinker.coreIdea}
-              aiShift={thinker.aiShift}
-            />
-          </TabsContent>
 
           <TabsContent value="overview" className="space-y-4">
             {/* Core Ideas */}
@@ -172,6 +218,15 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
             )}
           </TabsContent>
 
+          <TabsContent value="team">
+            <ThinkerTeamSection
+              thinkerName={thinker.name}
+              thinkerArea={thinker.area}
+              coreIdea={thinker.coreIdea}
+              aiShift={thinker.aiShift}
+            />
+          </TabsContent>
+
           <TabsContent value="chat">
             <ThinkerChat
               thinker={{
@@ -184,12 +239,13 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
             />
           </TabsContent>
 
-          <TabsContent value="duo-chat">
-            <ThinkerWorkfamilyChat
+          <TabsContent value="team-chat">
+            <ThinkerTeamChat
               thinkerName={thinker.name}
               thinkerArea={thinker.area}
               coreIdea={thinker.coreIdea}
               aiShift={thinker.aiShift}
+              assignedTeam={teamMembers}
             />
           </TabsContent>
 

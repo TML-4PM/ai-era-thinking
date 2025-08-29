@@ -71,6 +71,16 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     loadExistingTeam();
   }, [thinkerName]);
 
+  // Auto-build team if none exists
+  useEffect(() => {
+    if (!loadingExisting && !existingTeam && !loading) {
+      const timer = setTimeout(() => {
+        buildNewTeam();
+      }, 1000); // Small delay to prevent immediate build on load
+      return () => clearTimeout(timer);
+    }
+  }, [loadingExisting, existingTeam, loading]);
+
   const loadExistingTeam = async () => {
     try {
       setLoadingExisting(true);
@@ -182,6 +192,22 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     try {
       setLoading(true);
       
+      // Get list of already assigned members to ensure uniqueness
+      const { data: existingTeams } = await supabase
+        .from('thinker_alignment_teams')
+        .select(`
+          thinker_name,
+          thinker_alignment_team_members(member_code)
+        `)
+        .neq('thinker_name', thinkerName);
+
+      const usedMemberCodes = existingTeams?.flatMap(team => 
+        team.thinker_alignment_team_members?.map(member => member.member_code) || []
+      ) || [];
+
+      // Determine team size (5-9 members)
+      const teamSize = Math.floor(Math.random() * 5) + 5; // Random between 5-9
+
       const { data, error } = await supabase.functions.invoke('build-thinker-team', {
         body: {
           thinkerName,
@@ -190,7 +216,8 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
           aiShift,
           domain,
           industries: selectedIndustries,
-          teamSize: 9
+          teamSize,
+          excludeMemberCodes: usedMemberCodes
         }
       });
 
@@ -213,13 +240,25 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     } catch (error) {
       console.error('Error building team:', error);
       
-      // Check if error indicates missing data
+      // Check if error indicates missing data - auto-seed if needed
       if (error.message.includes('Neural Ennead members found') || error.message.includes('No available members')) {
         toast({
-          title: "Data Missing",
-          description: "Neural Ennead data needs to be initialized first. Click 'Initialize Data' below.",
-          variant: "destructive"
+          title: "Auto-seeding Data",
+          description: "Initializing Neural Ennead members, then rebuilding team...",
         });
+        
+        // Auto-seed and retry
+        try {
+          await supabase.functions.invoke('seed-neural-ennead-members');
+          await buildNewTeam(); // Retry building team
+          return;
+        } catch (seedError) {
+          toast({
+            title: "Seeding Failed",
+            description: "Could not initialize member data automatically.",
+            variant: "destructive"
+          });
+        }
       } else {
         toast({
           title: "Team Building Failed",
@@ -313,18 +352,7 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
               className="flex items-center gap-2 w-full"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              {existingTeam ? 'Rebuild Team' : 'Assemble Dream Team'}
-            </Button>
-            
-            <Button
-              onClick={seedNeuralEnneadData}
-              disabled={loading}
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-2 w-full"
-            >
-              <Brain className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              Initialize Neural Ennead Data (729 members)
+              {existingTeam ? 'Rebuild Team' : 'Auto-Assign Team'}
             </Button>
           </div>
         </CardContent>
