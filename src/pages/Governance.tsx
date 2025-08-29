@@ -16,16 +16,16 @@ export const Governance: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Governance & Safety | The Organ - AI Transformation Framework</title>
+        <title>Governance & Safety - AI‑Era Thinking</title>
         <meta name="description" content="Comprehensive governance and safety framework for AI transformation. Context integrity, provenance tracking, guardrails as code, and reflex stops across all technology eras." />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/governance" />
-        <meta property="og:title" content="Governance & Safety | The Organ" />
+        <meta property="og:title" content="Governance & Safety - AI‑Era Thinking" />
         <meta property="og:description" content="Comprehensive governance and safety framework for AI transformation." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://ai-thinker-flux.lovable.app/governance" />
         <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Governance & Safety | The Organ" />
+        <meta name="twitter:title" content="Governance & Safety - AI‑Era Thinking" />
         <meta name="twitter:description" content="Comprehensive governance and safety framework for AI transformation." />
         <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
@@ -39,7 +39,7 @@ export const Governance: React.FC = () => {
                 <Link to="/">
                   <Button variant="ghost" size="sm">
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Organ Map
+                    Back to Home
                   </Button>
                 </Link>
                 <h1 className="text-2xl font-bold text-foreground">Governance & Safety</h1>
@@ -59,7 +59,7 @@ export const Governance: React.FC = () => {
             </div>
             <h2 className="text-4xl font-bold text-foreground mb-4">Governance & Safety Framework</h2>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Governance in the Organ isn't a compliance tick-box. It's the difference between a system that scales and a system that collapses under its own automation. When the pace of action outstrips the pace of human oversight, governance must move into the guts — as executable code, live metrics, and reflex stops.
+              Governance isn't a compliance tick-box. It's the difference between a system that scales and a system that collapses under its own automation. When the pace of action outstrips the pace of human oversight, governance must move into the guts — as executable code, live metrics, and reflex stops.
             </p>
           </section>
 
@@ -265,7 +265,7 @@ export const Governance: React.FC = () => {
           <div className="flex justify-center gap-4 pt-8">
             <Link to="/">
               <Button variant="outline">
-                Back to Organ Map
+                Back to Home
               </Button>
             </Link>
             <Link to="/era/agentic-ai">

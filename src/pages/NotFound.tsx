@@ -15,7 +15,7 @@ const NotFound = () => {
   return (
     <main id="main" className="min-h-screen flex items-center justify-center bg-background">
       <Helmet>
-        <title>404 - Page Not Found | The Organ Framework</title>
+        <title>404 - Page Not Found | AI‑Era Thinking</title>
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/404" />
       </Helmet>

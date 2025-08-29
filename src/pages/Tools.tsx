@@ -18,17 +18,17 @@ export default function Tools() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Implementation Tools - The Organ Framework</title>
-        <meta name="description" content="Practical tools for implementing The Organ framework: governance code, workshop materials, and metrics dashboards." />
+        <title>Implementation Tools - AI‑Era Thinking</title>
+        <meta name="description" content="Practical tools for implementing AI‑Era thinking frameworks: governance code, workshop materials, and metrics dashboards." />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/tools" />
-        <meta property="og:title" content="Implementation Tools - The Organ" />
-        <meta property="og:description" content="Practical tools for implementing The Organ framework." />
+        <meta property="og:title" content="Implementation Tools - AI‑Era Thinking" />
+        <meta property="og:description" content="Practical tools for implementing AI‑Era thinking frameworks." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ai-thinker-flux.lovable.app/tools" />
         <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Implementation Tools - The Organ" />
-        <meta name="twitter:description" content="Practical tools for implementing The Organ framework." />
+        <meta name="twitter:title" content="Implementation Tools - AI‑Era Thinking" />
+        <meta name="twitter:description" content="Practical tools for implementing AI‑Era thinking frameworks." />
         <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
 
@@ -38,7 +38,7 @@ export default function Tools() {
           <Button variant="ghost" size="sm" asChild>
             <Link to="/" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Back to Organ Map
+              Back to Home
             </Link>
           </Button>
           <ThemeToggle />
@@ -49,7 +49,7 @@ export default function Tools() {
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold">Implementation Tools</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From theory to deployment: practical tools for building The Organ into your organization
+            From theory to deployment: practical tools for building AI‑Era thinking into your organization
           </p>
         </div>
 

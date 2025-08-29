@@ -69,11 +69,13 @@ const Index = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">O</span>
-                  </div>
+                  <img 
+                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
+                    alt="T4H logo" 
+                    className="h-8 w-8 rounded" 
+                  />
                   <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    Organ Framework
+                    AI‑Era Thinking
                   </span>
                 </div>
                 

@@ -16,7 +16,7 @@ const AddThinker = () => {
   return (
     <>
       <Helmet>
-        <title>Add Your Own Guru - Organ Framework</title>
+        <title>Add Your Own Guru - AI‑Era Thinking</title>
         <meta name="description" content="Create a comprehensive profile for any thinker, philosopher, or mentor" />
       </Helmet>
       

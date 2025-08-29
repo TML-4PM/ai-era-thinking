@@ -135,7 +135,7 @@ export const EnhancedOrganMap: React.FC<EnhancedOrganMapProps> = ({
 
       {/* SVG Map */}
       <div className="relative">
-        <svg viewBox="0 0 800 320" className="w-full h-auto" aria-label="Enhanced Agentic AI organ map">
+        <svg viewBox="0 0 800 320" className="w-full h-auto" aria-label="Enhanced Agentic AI map">
           <defs>
             <linearGradient id="lobeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="hsl(var(--brand))" />

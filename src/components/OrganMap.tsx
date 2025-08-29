@@ -19,7 +19,7 @@ const LOBES: { key: Lobe; label: string; x: number; y: number; w: number; h: num
 export const OrganMap: React.FC<OrganMapProps> = ({ selected = "All", onSelect, className }) => {
   return (
     <div className={cn("relative", className)}>
-      <svg viewBox="0 0 800 320" className="w-full h-auto" aria-label="Agentic AI organ map">
+      <svg viewBox="0 0 800 320" className="w-full h-auto" aria-label="Agentic AI map">
         <defs>
           <linearGradient id="lobeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="hsl(var(--brand))" />
