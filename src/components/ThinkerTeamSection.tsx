@@ -250,7 +250,8 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
         // Auto-seed and retry
         try {
           await supabase.functions.invoke('seed-neural-ennead-members');
-          await buildNewTeam(); // Retry building team
+          // Small delay then retry
+          setTimeout(() => buildNewTeam(), 2000);
           return;
         } catch (seedError) {
           toast({

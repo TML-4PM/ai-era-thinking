@@ -92,7 +92,7 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
           topic,
           domain,
           industries: selectedIndustries,
-          teamMembers: assignedTeam
+          assignedTeam
         }
       });
 

@@ -11,10 +11,10 @@ interface TeamChatRequest {
   thinkerArea: string;
   coreIdea: string;
   aiShift: string;
-  topic: string;
+  topic?: string;
   domain: string;
   industries?: string[];
-  teamMembers: {
+  assignedTeam: {
     member_code: string;
     display_name: string;
     description: string;
@@ -37,10 +37,10 @@ serve(async (req) => {
       topic,
       domain,
       industries = [],
-      teamMembers
+      assignedTeam
     }: TeamChatRequest = await req.json();
 
-    console.log(`Generating team chat for ${thinkerName} with ${teamMembers.length} team members`);
+    console.log(`Generating team chat for ${thinkerName} with ${assignedTeam.length} team members`);
 
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
     if (!openAIApiKey) {
@@ -50,7 +50,7 @@ serve(async (req) => {
     const industryContext = industries.length > 0 ? 
       `Focus the conversation on challenges and opportunities in: ${industries.join(', ')}` : '';
 
-    const teamMembersList = teamMembers.map(member => 
+    const teamMembersList = assignedTeam.map(member => 
       `${member.display_name} (${member.role_on_team}): ${member.description}`
     ).join('\n');
 
@@ -65,7 +65,7 @@ THINKER PROFILE:
 TEAM MEMBERS:
 ${teamMembersList}
 
-CONVERSATION TOPIC: ${topic}
+CONVERSATION TOPIC: ${topic || coreIdea}
 DOMAIN: ${domain}
 ${industryContext}
 
@@ -75,20 +75,20 @@ The conversation should feel natural but purposeful, with each team member bring
 
 Respond in this exact JSON format:
 {
-  "topic": "${topic}",
-  "participants": ["${thinkerName}", ${teamMembers.map(m => `"${m.display_name}"`).join(', ')}],
+  "topic": "${topic || coreIdea}",
+  "participants": ["${thinkerName}", ${assignedTeam.map(m => `"${m.display_name}"`).join(', ')}],
   "timeframes": {
     "now_0_6": {
       "${thinkerName}": "Thinker's immediate perspective on the topic",
-      ${teamMembers.map(m => `"${m.display_name}": "Member's immediate contribution based on their role: ${m.role_on_team}"`).join(',\n      ')}
+      ${assignedTeam.map(m => `"${m.display_name}": "Member's immediate contribution based on their role: ${m.role_on_team}"`).join(',\n      ')}
     },
     "mid_6_18": {
       "${thinkerName}": "Thinker's medium-term perspective",
-      ${teamMembers.map(m => `"${m.display_name}": "Member's medium-term strategic input"`).join(',\n      ')}
+      ${assignedTeam.map(m => `"${m.display_name}": "Member's medium-term strategic input"`).join(',\n      ')}
     },
     "long_18_36": {
       "${thinkerName}": "Thinker's long-term vision",
-      ${teamMembers.map(m => `"${m.display_name}": "Member's long-term strategic contribution"`).join(',\n      ')}
+      ${assignedTeam.map(m => `"${m.display_name}": "Member's long-term strategic contribution"`).join(',\n      ')}
     }
   },
   "synthesis": "Summary of key tensions, synergies, and next steps from the team conversation"
