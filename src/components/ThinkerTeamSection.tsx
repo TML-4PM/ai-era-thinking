@@ -350,65 +350,6 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-brand" />
-            WorkFamily Dream Team
-          </CardTitle>
-          <CardDescription>
-            Chat with {thinkerName} and their FamilyAI team, gain new insights, or work together to grow your understanding and develop strategic applications
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Industry Context Selection */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Factory className="w-4 h-4" />
-              <span className="text-sm font-medium">Industry Context (Optional)</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {INDUSTRY_OPTIONS.map(industry => (
-                <div key={industry} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={industry}
-                    checked={selectedIndustries.includes(industry)}
-                    onCheckedChange={(checked) => handleIndustryChange(industry, checked as boolean)}
-                  />
-                  <label
-                    htmlFor={industry}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    {industry}
-                  </label>
-                </div>
-              ))}
-            </div>
-            {selectedIndustries.length > 0 && (
-              <div className="flex flex-wrap gap-1 mt-2">
-                {selectedIndustries.map(industry => (
-                  <Badge key={industry} variant="secondary" className="text-xs">
-                    {industry}
-                  </Badge>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Build Team Button */}
-          <div className="space-y-2">
-            <Button
-              onClick={buildNewTeam}
-              disabled={loading}
-              className="flex items-center gap-2 w-full"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              {existingTeam ? 'Rebuild Team' : 'Auto-Assign Team'}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Display Existing Team */}
       {existingTeam && (
         <Card>
@@ -496,6 +437,53 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
           </CardContent>
         </Card>
       )}
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-brand" />
+            WorkFamily Dream Team
+          </CardTitle>
+          <CardDescription>
+            Chat with {thinkerName} and their FamilyAI team, gain new insights, or work together to grow your understanding and develop strategic applications
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Industry Context Selection */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Factory className="w-4 h-4" />
+              <span className="text-sm font-medium">Industry Context (Optional)</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {INDUSTRY_OPTIONS.map(industry => (
+                <div key={industry} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={industry}
+                    checked={selectedIndustries.includes(industry)}
+                    onCheckedChange={(checked) => handleIndustryChange(industry, checked as boolean)}
+                  />
+                  <label
+                    htmlFor={industry}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {industry}
+                  </label>
+                </div>
+              ))}
+            </div>
+            {selectedIndustries.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {selectedIndustries.map(industry => (
+                  <Badge key={industry} variant="secondary" className="text-xs">
+                    {industry}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
