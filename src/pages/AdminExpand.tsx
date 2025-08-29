@@ -35,8 +35,12 @@ export const AdminExpandPage: React.FC = () => {
     withProfiles: 0,
     withTeams: 0,
     withBoth: 0,
+    withExpansions: 0,
     coverage: 0
   });
+  const [auditResults, setAuditResults] = useState<any>(null);
+  const [isExpanding, setIsExpanding] = useState(false);
+  const [isAuditing, setIsAuditing] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -205,6 +209,147 @@ export const AdminExpandPage: React.FC = () => {
     addToLog("Generation stopped by user");
   };
 
+  const generateAllExpansions = async () => {
+    const thinkersWithProfiles = enhancedThinkers.filter(t => t.hasDeepProfile);
+    if (thinkersWithProfiles.length === 0) {
+      toast({
+        title: "No Profiles Found",
+        description: "Generate profiles first before creating expansions",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsExpanding(true);
+    setGenerationLog([]);
+    addToLog(`Starting framework expansions for ${thinkersWithProfiles.length} thinkers`);
+
+    const CHUNK_SIZE = 2; // Lower concurrency for expansions
+    let completed = 0;
+
+    for (let i = 0; i < thinkersWithProfiles.length; i += CHUNK_SIZE) {
+      if (!isExpanding) break;
+      
+      const chunk = thinkersWithProfiles.slice(i, i + CHUNK_SIZE);
+      
+      const chunkPromises = chunk.map(async (thinker) => {
+        addToLog(`Generating expansions for ${thinker.name}...`);
+        
+        try {
+          const result = await thinkerService.generateFrameworkExpansions(thinker.name);
+          if (result.success) {
+            addToLog(`✓ Expansions generated for ${thinker.name}`);
+            return { success: true, thinker: thinker.name };
+          } else {
+            addToLog(`✗ Failed expansions for ${thinker.name}: ${result.error}`);
+            return { success: false, thinker: thinker.name, error: result.error };
+          }
+        } catch (error) {
+          addToLog(`✗ Error expanding ${thinker.name}: ${error}`);
+          return { success: false, thinker: thinker.name, error: String(error) };
+        }
+      });
+
+      await Promise.all(chunkPromises);
+      completed += chunk.length;
+      
+      if (i + CHUNK_SIZE < thinkersWithProfiles.length) {
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+    }
+
+    setIsExpanding(false);
+    addToLog(`Framework expansion completed. ${completed} thinkers processed.`);
+    await loadData();
+    
+    toast({
+      title: "Expansion Complete",
+      description: `Generated framework expansions for ${completed} thinkers`,
+    });
+  };
+
+  const runIntegrityCheck = async () => {
+    setIsAuditing(true);
+    addToLog("Running integrity check...");
+
+    try {
+      const results = await thinkerService.runIntegrityCheck();
+      setAuditResults(results);
+      
+      addToLog(`Integrity check complete:`);
+      addToLog(`  Missing profiles: ${results.missingProfiles.length}`);
+      addToLog(`  Missing teams: ${results.missingTeams.length}`);
+      addToLog(`  Incomplete profiles: ${results.incompleteProfiles.length}`);
+      addToLog(`  Total gaps: ${results.totalGaps}`);
+
+      toast({
+        title: "Integrity Check Complete",
+        description: `Found ${results.totalGaps} gaps across all thinkers`,
+        variant: results.totalGaps > 0 ? "destructive" : "default"
+      });
+    } catch (error) {
+      addToLog(`✗ Integrity check failed: ${error}`);
+      toast({
+        title: "Check Failed",
+        description: String(error),
+        variant: "destructive"
+      });
+    }
+
+    setIsAuditing(false);
+  };
+
+  const fixAllGaps = async () => {
+    if (!auditResults) return;
+
+    setIsGenerating(true);
+    addToLog("Starting gap remediation...");
+
+    try {
+      // Fix missing profiles
+      if (auditResults.missingProfiles.length > 0) {
+        addToLog(`Retrying ${auditResults.missingProfiles.length} missing profiles...`);
+        const profileResults = await thinkerService.autoRetry(auditResults.missingProfiles, 'profile');
+        const profileSuccesses = profileResults.results.filter(r => r.success).length;
+        addToLog(`✓ Fixed ${profileSuccesses}/${auditResults.missingProfiles.length} missing profiles`);
+      }
+
+      // Fix missing teams
+      if (auditResults.missingTeams.length > 0) {
+        addToLog(`Retrying ${auditResults.missingTeams.length} missing teams...`);
+        const teamResults = await thinkerService.autoRetry(auditResults.missingTeams, 'team');
+        const teamSuccesses = teamResults.results.filter(r => r.success).length;
+        addToLog(`✓ Fixed ${teamSuccesses}/${auditResults.missingTeams.length} missing teams`);
+      }
+
+      // Fix incomplete profiles
+      if (auditResults.incompleteProfiles.length > 0) {
+        addToLog(`Retrying ${auditResults.incompleteProfiles.length} incomplete profiles...`);
+        const incompleteResults = await thinkerService.autoRetry(auditResults.incompleteProfiles, 'profile');
+        const incompleteSuccesses = incompleteResults.results.filter(r => r.success).length;
+        addToLog(`✓ Fixed ${incompleteSuccesses}/${auditResults.incompleteProfiles.length} incomplete profiles`);
+      }
+
+      addToLog("Gap remediation completed");
+      await loadData();
+      setAuditResults(null);
+
+      toast({
+        title: "Gaps Fixed",
+        description: "All identified gaps have been addressed",
+      });
+    } catch (error) {
+      addToLog(`✗ Gap remediation failed: ${error}`);
+      toast({
+        title: "Fix Failed",
+        description: String(error),
+        variant: "destructive"
+      });
+    }
+
+    setIsGenerating(false);
+  };
+
   const seedNeuralEnneadMembers = async () => {
     try {
       addToLog("Starting Neural Ennead member seeding...");
@@ -300,12 +445,19 @@ export const AdminExpandPage: React.FC = () => {
                     <Progress value={coverageStats.coverage} className="h-2" />
                   </div>
                 </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-cyan-600">{coverageStats.withExpansions}</div>
+                  <div className="text-sm text-muted-foreground">With Expansions</div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {coverageStats.total > 0 ? ((coverageStats.withExpansions / coverageStats.total) * 100).toFixed(1) : 0}%
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -322,7 +474,7 @@ export const AdminExpandPage: React.FC = () => {
                 </div>
                 <Button 
                   onClick={generateAllProfiles}
-                  disabled={isGenerating || (coverageStats.total - coverageStats.withProfiles) === 0}
+                  disabled={isGenerating || isExpanding || (coverageStats.total - coverageStats.withProfiles) === 0}
                   className="w-full"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
@@ -347,7 +499,7 @@ export const AdminExpandPage: React.FC = () => {
                 </div>
                 <Button 
                   onClick={generateAllTeams}
-                  disabled={isGenerating || (coverageStats.total - coverageStats.withTeams) === 0}
+                  disabled={isGenerating || isExpanding || (coverageStats.total - coverageStats.withTeams) === 0}
                   className="w-full"
                 >
                   <Users className="w-4 h-4 mr-2" />
@@ -359,25 +511,63 @@ export const AdminExpandPage: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <RefreshCw className="w-5 h-5 text-blue-600" />
-                  System Refresh
+                  <Sparkles className="w-5 h-5 text-cyan-600" />
+                  Framework Expansions
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-2xl font-bold">
-                  {new Date().toLocaleString()}
+                  {coverageStats.total - coverageStats.withExpansions}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Last updated
+                  Need expansions
                 </div>
                 <Button 
-                  onClick={loadData}
-                  variant="outline"
+                  onClick={generateAllExpansions}
+                  disabled={isExpanding || isGenerating}
                   className="w-full"
                 >
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Refresh Data
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Generate All Expansions
                 </Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <RefreshCw className="w-5 h-5 text-blue-600" />
+                  System Integrity
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-2xl font-bold">
+                  {auditResults ? auditResults.totalGaps : '?'}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {auditResults ? 'Total gaps found' : 'Run audit check'}
+                </div>
+                <div className="space-y-2">
+                  <Button 
+                    onClick={runIntegrityCheck}
+                    disabled={isAuditing || isGenerating}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    <CheckCircle className="w-4 h-4 mr-2" />
+                    {isAuditing ? 'Checking...' : 'Integrity Check'}
+                  </Button>
+                  {auditResults && auditResults.totalGaps > 0 && (
+                    <Button 
+                      onClick={fixAllGaps}
+                      disabled={isGenerating}
+                      className="w-full"
+                    >
+                      <AlertCircle className="w-4 h-4 mr-2" />
+                      Fix All Gaps
+                    </Button>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -399,7 +589,7 @@ export const AdminExpandPage: React.FC = () => {
                 </p>
                 <Button 
                   onClick={seedNeuralEnneadMembers}
-                  disabled={isGenerating}
+                  disabled={isGenerating || isExpanding}
                   variant="outline"
                 >
                   <Database className="w-4 h-4 mr-2" />
@@ -410,7 +600,7 @@ export const AdminExpandPage: React.FC = () => {
           </Card>
 
           {/* Generation Progress */}
-          {isGenerating && (
+          {(isGenerating || isExpanding) && (
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
@@ -418,7 +608,11 @@ export const AdminExpandPage: React.FC = () => {
                     <Clock className="w-5 h-5 animate-pulse text-blue-600" />
                     Generation in Progress
                   </div>
-                  <Button onClick={stopGeneration} variant="destructive" size="sm">
+                  <Button 
+                    onClick={isExpanding ? () => setIsExpanding(false) : stopGeneration} 
+                    variant="destructive" 
+                    size="sm"
+                  >
                     <Pause className="w-4 h-4 mr-2" />
                     Stop
                   </Button>
@@ -431,7 +625,7 @@ export const AdminExpandPage: React.FC = () => {
                 </div>
                 <Progress value={progress} className="h-3" />
                 <div className="text-center text-sm text-muted-foreground">
-                  {progress.toFixed(1)}% Complete (Concurrency: 3)
+                  {isExpanding ? 'Generating framework expansions...' : `${progress.toFixed(1)}% Complete (Concurrency: ${isExpanding ? 2 : 3})`}
                 </div>
               </CardContent>
             </Card>

@@ -206,6 +206,139 @@ export class ThinkerService {
   }
 
   /**
+   * Generate framework expansions for a thinker
+   */
+  async generateFrameworkExpansions(
+    thinkerName: string, 
+    domains: string[] = [
+      'Healthcare', 'Financial Services', 'Manufacturing', 'Education',
+      'Retail', 'Public Sector', 'Energy', 'Logistics', 'Media', 
+      'Legal', 'Real Estate', 'Agriculture'
+    ]
+  ): Promise<{ success: boolean; error?: string; expansions?: any }> {
+    try {
+      const thinker = THINKERS.find(t => t.name === thinkerName);
+      if (!thinker) {
+        return { success: false, error: 'Thinker not found' };
+      }
+
+      const { data, error } = await supabase.functions.invoke('expand-thinker', {
+        body: {
+          thinker_name: thinker.name,
+          thinker_area: thinker.area,
+          core_idea: thinker.coreIdea,
+          ai_shift: thinker.aiShift,
+          selected_domains: domains.slice(0, 10) // Limit to 10 domains max
+        }
+      });
+
+      if (error) {
+        console.error('Framework expansion error:', error);
+        return { success: false, error: error.message };
+      }
+
+      // Store expansions in profile metadata
+      if (data?.expansions) {
+        const { error: updateError } = await supabase
+          .from('thinker_profiles')
+          .update({
+            metadata: {
+              framework_expansions: data.expansions,
+              expansion_domains: domains.slice(0, 10),
+              expanded_at: new Date().toISOString()
+            }
+          })
+          .eq('thinker_name', thinkerName);
+
+        if (updateError) {
+          console.error('Error updating profile with expansions:', updateError);
+          return { success: false, error: 'Failed to save expansions' };
+        }
+      }
+
+      return { success: true, expansions: data?.expansions };
+    } catch (err) {
+      console.error('Framework expansion failed:', err);
+      return { success: false, error: 'Framework expansion failed' };
+    }
+  }
+
+  /**
+   * Run integrity check and identify gaps
+   */
+  async runIntegrityCheck(): Promise<{
+    missingProfiles: string[];
+    missingTeams: string[];
+    incompleteProfiles: string[];
+    totalGaps: number;
+  }> {
+    const enhanced = await this.getAllEnhancedThinkers();
+    const missingProfiles: string[] = [];
+    const missingTeams: string[] = [];
+    const incompleteProfiles: string[] = [];
+
+    for (const thinker of enhanced) {
+      if (!thinker.hasDeepProfile) {
+        missingProfiles.push(thinker.name);
+      } else if (thinker.profileData) {
+        // Check if profile has core required fields
+        const profile = thinker.profileData;
+        const hasValidSummary = profile.metadata?.summary && profile.metadata.summary.length > 0;
+        const hasValidConcepts = profile.metadata?.key_concepts && profile.metadata.key_concepts.length > 0;
+        const hasValidImplications = profile.metadata?.ai_implications && profile.metadata.ai_implications.length > 0;
+        
+        if (!hasValidSummary || !hasValidConcepts || !hasValidImplications) {
+          incompleteProfiles.push(thinker.name);
+        }
+      }
+
+      if (!thinker.hasTeam) {
+        missingTeams.push(thinker.name);
+      }
+    }
+
+    return {
+      missingProfiles,
+      missingTeams,
+      incompleteProfiles,
+      totalGaps: missingProfiles.length + missingTeams.length + incompleteProfiles.length
+    };
+  }
+
+  /**
+   * Auto-retry failed items
+   */
+  async autoRetry(items: string[], type: 'profile' | 'team'): Promise<{ success: boolean; results: any[] }> {
+    const results = [];
+    
+    for (const thinkerName of items) {
+      try {
+        if (type === 'profile') {
+          const result = await this.generateProfile(thinkerName);
+          results.push({ thinker: thinkerName, ...result });
+        } else {
+          const result = await this.generateTeam(thinkerName);
+          results.push({ thinker: thinkerName, ...result });
+        }
+        
+        // Small delay between retries
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (error) {
+        results.push({ 
+          thinker: thinkerName, 
+          success: false, 
+          error: String(error) 
+        });
+      }
+    }
+
+    return {
+      success: results.every(r => r.success),
+      results
+    };
+  }
+
+  /**
    * Get coverage statistics
    */
   async getCoverageStats(): Promise<{
@@ -213,6 +346,7 @@ export class ThinkerService {
     withProfiles: number;
     withTeams: number;
     withBoth: number;
+    withExpansions: number;
     coverage: number;
   }> {
     const enhanced = await this.getAllEnhancedThinkers();
@@ -220,6 +354,10 @@ export class ThinkerService {
     const withProfiles = enhanced.filter(t => t.hasDeepProfile).length;
     const withTeams = enhanced.filter(t => t.hasTeam).length;
     const withBoth = enhanced.filter(t => t.hasDeepProfile && t.hasTeam).length;
+    const withExpansions = enhanced.filter(t => 
+      t.profileData?.metadata?.framework_expansions && 
+      Object.keys(t.profileData.metadata.framework_expansions).length >= 8
+    ).length;
     const coverage = (withBoth / total) * 100;
 
     return {
@@ -227,6 +365,7 @@ export class ThinkerService {
       withProfiles,
       withTeams,
       withBoth,
+      withExpansions,
       coverage
     };
   }
