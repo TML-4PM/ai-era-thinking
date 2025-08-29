@@ -1,0 +1,2 @@
+-- Check if we need to add the OpenAI API key for functions
+-- This is just a comment to ensure OpenAI functionality is available
