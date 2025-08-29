@@ -18,8 +18,8 @@ const Favorites = () => {
   return (
     <>
       <Helmet>
-        <title>My Favorites - Organ Framework</title>
-        <meta name="description" content="Your favorite thinkers and custom gurus" />
+        <title>Favorites - Organ Framework</title>
+        <meta name="description" content="Favorite thinkers and custom gurus" />
       </Helmet>
       
       <div className="min-h-screen bg-background">
@@ -29,10 +29,10 @@ const Favorites = () => {
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-3">
                 <Heart className="w-8 h-8 text-red-500" />
-                My Favorites
+                Favorites
               </h1>
               <p className="text-muted-foreground mt-2">
-                Your collection of favorite thinkers and custom gurus
+                Collection of favorite thinkers and custom gurus
               </p>
             </div>
             

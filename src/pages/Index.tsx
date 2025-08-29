@@ -26,7 +26,7 @@ const Index = () => {
   const [selectedEra, setSelectedEra] = useState("genAI");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLobe, setSelectedLobe] = useState<Lobe | "All">("All");
-  const [currentView, setCurrentView] = useState<'map' | 'timeline' | 'grid' | 'enhanced'>('enhanced');
+  const [currentView, setCurrentView] = useState<'map' | 'timeline' | 'grid' | 'enhanced'>('grid');
   const [useEnhancedModal, setUseEnhancedModal] = useState(true);
   const { showFavoritesOnly } = useFavorites();
 
@@ -129,16 +129,13 @@ const Index = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                AI-Era Thinking
+                Organ Framework
               </span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-              Explore how great thinkers' frameworks evolve and apply in the age of artificial intelligence
+              Organ Map - Explore how great thinkers' frameworks evolve and apply in the age of artificial intelligence
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
-                {THINKERS.length} Thinkers
-              </Badge>
               <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
                 5 Cognitive Lobes
               </Badge>
@@ -166,12 +163,6 @@ const Index = () => {
             />
           )}
 
-          {currentView === 'enhanced' && (
-            <EnhancedOrganMap 
-              selected={selectedLobe}
-              onSelect={setSelectedLobe}
-            />
-          )}
 
           {currentView === 'timeline' && (
             <EraTimeline />
