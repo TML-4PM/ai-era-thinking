@@ -71,6 +71,7 @@ export const AllThinkersExpansion: React.FC = () => {
   const [includeProfiles, setIncludeProfiles] = useState(false);
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const [batchUsageTracker, setBatchUsageTracker] = useState<Map<string, number>>(new Map());
+  const [loading, setLoading] = useState(false);
 
   const logDebug = (message: string) => {
     if (debugMode) {
@@ -218,10 +219,14 @@ export const AllThinkersExpansion: React.FC = () => {
             const teamMembers = teamData?.team?.thinker_alignment_team_members || [];
             result.teamMembers = teamMembers;
             
-            // Update batch usage tracker
+            // Update batch usage tracker (immutable update)
             teamMembers.forEach((member: any) => {
               const currentCount = batchUsageTracker.get(member.member_code) || 0;
-              batchUsageTracker.set(member.member_code, currentCount + 1);
+              setBatchUsageTracker(prevTracker => {
+                const newTracker = new Map(prevTracker);
+                newTracker.set(member.member_code, currentCount + 1);
+                return newTracker;
+              });
             });
           }
         } catch (error) {
@@ -353,6 +358,40 @@ export const AllThinkersExpansion: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const seedNeuralEnneadData = async () => {
+    setLoading(true);
+    toast({
+      title: "Seeding Data",
+      description: "Initializing Neural Ennead members (this may take a moment)...",
+    });
+
+    try {
+      const { data, error } = await supabase.functions.invoke('seed-neural-ennead-members');
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (data.success) {
+        toast({
+          title: "Data Seeded Successfully",
+          description: `Initialized ${data.total_members} Neural Ennead members`,
+        });
+      } else {
+        throw new Error(data.error || 'Failed to seed data');
+      }
+    } catch (error) {
+      console.error('Error seeding data:', error);
+      toast({
+        title: "Seeding Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleIndustryChange = (industry: string, checked: boolean) => {
     if (checked) {
       setSelectedIndustries(prev => [...prev, industry]);
@@ -374,7 +413,7 @@ export const AllThinkersExpansion: React.FC = () => {
         </p>
       </div>
 
-      {/* Controls */}
+          {/* Controls */}
       <Card>
         <CardHeader>
           <CardTitle>Bulk Processing Controls</CardTitle>
@@ -383,6 +422,26 @@ export const AllThinkersExpansion: React.FC = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          {/* Initialize Data First */}
+          <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
+            <h4 className="font-medium mb-2 flex items-center gap-2">
+              <Brain className="w-4 h-4" />
+              Neural Ennead Data Setup
+            </h4>
+            <p className="text-sm text-muted-foreground mb-3">
+              Initialize the 729 Neural Ennead members before team building
+            </p>
+            <Button
+              onClick={seedNeuralEnneadData}
+              disabled={loading}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              <Brain className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Initialize Neural Ennead Data
+            </Button>
+          </div>
           {/* Processing Options */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-4">
