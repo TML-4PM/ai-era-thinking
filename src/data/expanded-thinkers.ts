@@ -8,6 +8,16 @@ export interface TeamMember {
   rationale: string;
 }
 
+export interface CoreFramework {
+  summary: string;
+  keyConcepts: string[];
+  whyItMatters: string;
+  aiImplications: string;
+  recommendedPractices: string[];
+  commonPitfalls: string[];
+  successMetrics: string[];
+}
+
 export interface ExpandedThinker {
   name: string;
   area: string;
@@ -15,6 +25,7 @@ export interface ExpandedThinker {
   aiShift: string;
   lobe: Lobe;
   bio?: string;
+  coreFramework?: CoreFramework;
   hardCodedTeam?: TeamMember[];
   crossEraRelevance: {
     onPrem: {
@@ -69,6 +80,45 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     aiShift: "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data",
     lobe: "Decision/Action",
     bio: "Nobel Prize-winning psychologist and economist whose groundbreaking work on behavioral economics and decision-making under uncertainty fundamentally changed how we understand human judgment. His dual-process theory distinguishing System 1 (fast, intuitive) and System 2 (slow, deliberate) thinking has profound implications for designing AI systems that complement rather than replace human cognition. Author of 'Thinking, Fast and Slow' and pioneer in prospect theory, his insights are crucial for building AI that understands and works with human cognitive biases rather than against them.",
+    coreFramework: {
+      summary: "Kahneman's dual-process theory reveals that human cognition operates through two distinct systems: System 1 (fast, automatic, intuitive) and System 2 (slow, deliberate, analytical). This framework has profound implications for AI design, as it helps us understand both the cognitive biases we might accidentally embed in AI systems and how to create AI that complements rather than replaces human judgment. In the AI era, this becomes critical for designing human-AI collaboration that leverages the strengths of both systems.",
+      keyConcepts: [
+        "System 1 Thinking: Fast, automatic, pattern-based decisions that feel effortless",
+        "System 2 Thinking: Slow, deliberate analysis requiring conscious mental effort",
+        "Cognitive Biases: Systematic errors in thinking that affect decisions and judgments",
+        "Prospect Theory: How people make decisions involving risk and uncertainty",
+        "Loss Aversion: The tendency to prefer avoiding losses over acquiring equivalent gains",
+        "Availability Heuristic: Judging probability by how easily examples come to mind",
+        "Anchoring Bias: Over-relying on first piece of information encountered"
+      ],
+      whyItMatters: "As AI systems become more sophisticated, understanding human cognitive limitations becomes essential for several reasons: (1) AI training data reflects human biases that can be amplified at scale, (2) Human-AI collaboration requires designing interfaces that work with, not against, human psychology, (3) Critical decisions still require human judgment, especially for high-stakes, value-laden choices, and (4) AI systems need to be designed to help humans make better decisions, not just faster ones.",
+      aiImplications: "AI systems can simultaneously operate at both System 1 and System 2 speeds, potentially transcending human cognitive limitations. However, they also risk inheriting and amplifying human biases present in training data. The key is designing AI that enhances human decision-making by providing System 1 speed with System 2 accuracy, while preserving human agency in critical choices and maintaining awareness of when human judgment is essential.",
+      recommendedPractices: [
+        "Implement bias detection systems that monitor AI outputs for common human biases",
+        "Design decision architectures with explicit System 1/System 2 pathways",
+        "Create 'judgment preservation modes' that require human input to maintain cognitive skills",
+        "Use prospect theory principles in AI interface design to account for loss aversion",
+        "Build in human oversight triggers for high-uncertainty or value-critical decisions",
+        "Apply behavioral economics to create ethical AI recommendation systems",
+        "Design choice architecture that preserves human agency while optimizing outcomes"
+      ],
+      commonPitfalls: [
+        "Assuming AI is immune to cognitive biases when it inherits them from training data",
+        "Over-automating decisions that require human judgment and contextual understanding",
+        "Ignoring loss aversion in AI recommendations, leading to user resistance",
+        "Designing AI interfaces that work against human psychology rather than with it",
+        "Failing to preserve human decision-making skills in AI-augmented environments",
+        "Not accounting for availability bias in AI training data selection"
+      ],
+      successMetrics: [
+        "Bias detection rate: Percentage of cognitive biases caught before deployment",
+        "Human override rate: Frequency humans choose different paths than AI recommendations",
+        "Decision accuracy improvement: Measurable better outcomes with AI assistance",
+        "Cognitive skill retention: Evidence humans maintain judgment capabilities",
+        "User acceptance rate: How readily people adopt AI decision support",
+        "Ethical compliance score: Adherence to behavioral economics principles in design"
+      ]
+    },
     hardCodedTeam: [
       {
         member_code: "KAHNEMAN_01",

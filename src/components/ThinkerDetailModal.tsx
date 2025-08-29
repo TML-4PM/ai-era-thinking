@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, MessageSquare, Brain, Lightbulb, Zap, Users } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { BookOpen, MessageSquare, Brain, Lightbulb, Zap, Users, ChevronDown, Target, AlertTriangle, TrendingUp } from "lucide-react";
 import { Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
 import { ThinkerChat } from "./ThinkerChat";
@@ -29,6 +30,7 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
   const expandedThinker = getExpandedThinker(thinker.name);
   const [activeTab, setActiveTab] = useState("overview");
   const [teamMembers, setTeamMembers] = useState([]);
+  const [showMoreFramework, setShowMoreFramework] = useState(false);
 
   const eraMapping = {
     onPrem: "On-Premises Era",
@@ -161,20 +163,156 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
-            {/* Core Ideas */}
+            {/* Core Framework */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Core Framework</CardTitle>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-brand" />
+                  Core Framework
+                </CardTitle>
+                <CardDescription>
+                  {expandedThinker?.coreFramework ? 
+                    "Deep dive into the theoretical foundation and practical applications" :
+                    "Foundational concepts and AI-era implications"
+                  }
+                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <h4 className="font-medium text-sm text-muted-foreground">Original Insight</h4>
-                  <p className="text-sm">{thinker.coreIdea}</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-sm text-muted-foreground">AI-Era Shift</h4>
-                  <p className="text-sm">{thinker.aiShift}</p>
-                </div>
+              <CardContent className="space-y-4">
+                {expandedThinker?.coreFramework ? (
+                  <>
+                    <div className="space-y-3">
+                      <p className="text-sm leading-relaxed">{expandedThinker.coreFramework.summary}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-medium text-sm text-muted-foreground mb-2">Original Insight</h4>
+                          <p className="text-sm">{thinker.coreIdea}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-sm text-muted-foreground mb-2">AI-Era Shift</h4>
+                          <p className="text-sm">{thinker.aiShift}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Collapsible open={showMoreFramework} onOpenChange={setShowMoreFramework}>
+                      <CollapsibleTrigger asChild>
+                        <Button variant="outline" size="sm" className="w-full justify-between">
+                          Show deeper framework guidance
+                          <ChevronDown className={`h-4 w-4 transition-transform ${showMoreFramework ? 'rotate-180' : ''}`} />
+                        </Button>
+                      </CollapsibleTrigger>
+                      
+                      <CollapsibleContent className="space-y-4 mt-4">
+                        {/* Key Concepts */}
+                        <div className="border rounded-lg p-4 bg-blue-50/50 dark:bg-blue-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <Lightbulb className="w-4 h-4 text-blue-600" />
+                            Key Concepts
+                          </h4>
+                          <ul className="space-y-2">
+                            {expandedThinker.coreFramework.keyConcepts.map((concept, index) => (
+                              <li key={index} className="text-sm flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
+                                {concept}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Why It Matters */}
+                        <div className="border rounded-lg p-4 bg-green-50/50 dark:bg-green-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <Target className="w-4 h-4 text-green-600" />
+                            Why It Matters
+                          </h4>
+                          <p className="text-sm leading-relaxed">{expandedThinker.coreFramework.whyItMatters}</p>
+                        </div>
+
+                        {/* AI Implications */}
+                        <div className="border rounded-lg p-4 bg-purple-50/50 dark:bg-purple-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <Brain className="w-4 h-4 text-purple-600" />
+                            AI Implications
+                          </h4>
+                          <p className="text-sm leading-relaxed">{expandedThinker.coreFramework.aiImplications}</p>
+                        </div>
+
+                        {/* Recommended Practices */}
+                        <div className="border rounded-lg p-4 bg-emerald-50/50 dark:bg-emerald-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <TrendingUp className="w-4 h-4 text-emerald-600" />
+                            Recommended Practices
+                          </h4>
+                          <ul className="space-y-2">
+                            {expandedThinker.coreFramework.recommendedPractices.map((practice, index) => (
+                              <li key={index} className="text-sm flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full mt-2 flex-shrink-0" />
+                                {practice}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Common Pitfalls */}
+                        <div className="border rounded-lg p-4 bg-red-50/50 dark:bg-red-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <AlertTriangle className="w-4 h-4 text-red-600" />
+                            Common Pitfalls
+                          </h4>
+                          <ul className="space-y-2">
+                            {expandedThinker.coreFramework.commonPitfalls.map((pitfall, index) => (
+                              <li key={index} className="text-sm flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 bg-red-600 rounded-full mt-2 flex-shrink-0" />
+                                {pitfall}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Success Metrics */}
+                        <div className="border rounded-lg p-4 bg-amber-50/50 dark:bg-amber-950/20">
+                          <h4 className="font-medium text-sm flex items-center gap-2 mb-3">
+                            <Target className="w-4 h-4 text-amber-600" />
+                            Success Metrics
+                          </h4>
+                          <ul className="space-y-2">
+                            {expandedThinker.coreFramework.successMetrics.map((metric, index) => (
+                              <li key={index} className="text-sm flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
+                                {metric}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="pt-2 border-t">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={() => setActiveTab("applications")}
+                            className="w-full"
+                          >
+                            <Zap className="w-4 h-4 mr-2" />
+                            View Applications & Usage Examples
+                          </Button>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </>
+                ) : (
+                  // Fallback for thinkers without expanded framework
+                  <div className="space-y-3">
+                    <div>
+                      <h4 className="font-medium text-sm text-muted-foreground">Original Insight</h4>
+                      <p className="text-sm">{thinker.coreIdea}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-sm text-muted-foreground">AI-Era Shift</h4>
+                      <p className="text-sm">{thinker.aiShift}</p>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
