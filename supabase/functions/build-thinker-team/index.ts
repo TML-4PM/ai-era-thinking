@@ -113,9 +113,25 @@ serve(async (req) => {
 
     // 4. Use AI to select and create narratives for team members
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+    
+    let teamData;
+    
     if (!openAIApiKey) {
-      throw new Error('OpenAI API key not configured');
-    }
+      console.log('OpenAI API key not configured, using fallback team selection');
+      // Fallback: select random members with predefined roles
+      const shuffledMembers = availableMembers.sort(() => Math.random() - 0.5);
+      const actualTeamSize = Math.min(finalTeamSize, availableMembers.length);
+      const selectedMembers = shuffledMembers.slice(0, actualTeamSize);
+      
+      teamData = {
+        selected_team: selectedMembers.map((member, index) => ({
+          member_code: member.member_code,
+          role_on_team: `${member.primary_family_code} Specialist`,
+          rationale: `Selected for their expertise in ${member.primary_family_code} and complementary skills with ${thinkerName}'s framework in ${domain}.`,
+          contribution_focus: index % 3 === 0 ? 'Strategy & Framework' : index % 3 === 1 ? 'Implementation & Execution' : 'Analysis & Innovation'
+        }))
+      };
+    } else {
 
     const industryContext = industries.length > 0 ? `
 Context Industries: ${industries.join(', ')}
@@ -189,20 +205,20 @@ Respond ONLY in this JSON format:
     const aiResult = await openAIResponse.json();
     const aiContent = aiResult.choices[0].message.content;
     
-    console.log('AI Response received');
+      console.log('AI Response received');
 
-    let teamData;
-    try {
-      // Improved JSON parsing with better error handling
-      const cleanContent = aiContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-      teamData = JSON.parse(cleanContent);
-      
-      if (!teamData.selected_team || !Array.isArray(teamData.selected_team)) {
-        throw new Error('AI response missing selected_team array');
+      try {
+        // Improved JSON parsing with better error handling
+        const cleanContent = aiContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        teamData = JSON.parse(cleanContent);
+        
+        if (!teamData.selected_team || !Array.isArray(teamData.selected_team)) {
+          throw new Error('AI response missing selected_team array');
+        }
+      } catch (parseError) {
+        console.error('Failed to parse AI response:', aiContent);
+        throw new Error(`Invalid AI response format: ${parseError.message}`);
       }
-    } catch (parseError) {
-      console.error('Failed to parse AI response:', aiContent);
-      throw new Error(`Invalid AI response format: ${parseError.message}`);
     }
 
     // 5. Validate selected members exist and create team record

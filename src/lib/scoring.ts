@@ -44,11 +44,22 @@ export function computeEraScores(thinker: Thinker, expanded?: ExpandedThinker) {
       const eraKey = era.id.replace('-', '').replace('_', '').toLowerCase();
       let relevanceForEra = '';
       
-      if (eraKey === 'onprem') relevanceForEra = expanded.crossEraRelevance.onPrem;
-      else if (eraKey === 'cloudnative') relevanceForEra = expanded.crossEraRelevance.cloudNative;
-      else if (eraKey === 'genai') relevanceForEra = expanded.crossEraRelevance.genAI;
-      else if (eraKey === 'agentcai' || eraKey === 'agenticai') relevanceForEra = expanded.crossEraRelevance.agenticAI;
-      else if (eraKey === 'bci') relevanceForEra = expanded.crossEraRelevance.bci;
+      let relevanceDimensions: any = null;
+      if (eraKey === 'onprem') relevanceDimensions = expanded.crossEraRelevance.onPrem;
+      else if (eraKey === 'cloudnative') relevanceDimensions = expanded.crossEraRelevance.cloudNative;
+      else if (eraKey === 'genai') relevanceDimensions = expanded.crossEraRelevance.genAI;
+      else if (eraKey === 'agentcai' || eraKey === 'agenticai') relevanceDimensions = expanded.crossEraRelevance.agenticAI;
+      else if (eraKey === 'bci') relevanceDimensions = expanded.crossEraRelevance.bci;
+      
+      // Handle both old string format and new PPP&T object format
+      if (relevanceDimensions) {
+        if (typeof relevanceDimensions === 'string') {
+          relevanceForEra = relevanceDimensions;
+        } else if (typeof relevanceDimensions === 'object') {
+          // Combine all PPP&T dimensions into a single string for scoring
+          relevanceForEra = Object.values(relevanceDimensions).join(' ');
+        }
+      }
       
       if (relevanceForEra && relevanceForEra.length > 20) { // Non-empty meaningful content
         score += (ERA_WEIGHTS[era.name] || 1) * 0.6;

@@ -7,11 +7,36 @@ export interface ExpandedThinker {
   aiShift: string;
   lobe: Lobe;
   crossEraRelevance: {
-    onPrem: string;
-    cloudNative: string;
-    genAI: string;
-    agenticAI: string;
-    bci: string;
+    onPrem: {
+      people: string;
+      policy: string;
+      process: string;
+      technology: string;
+    };
+    cloudNative: {
+      people: string;
+      policy: string;
+      process: string;
+      technology: string;
+    };
+    genAI: {
+      people: string;
+      policy: string;
+      process: string;
+      technology: string;
+    };
+    agenticAI: {
+      people: string;
+      policy: string;
+      process: string;
+      technology: string;
+    };
+    bci: {
+      people: string;
+      policy: string;
+      process: string;
+      technology: string;
+    };
   };
   usagePrompts: {
     question: string;
@@ -34,11 +59,36 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     aiShift: "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data",
     lobe: "Decision/Action",
     crossEraRelevance: {
-      onPrem: "System 2 thinking dominates enterprise decision-making - careful analysis of controlled data sets, deliberate rule-based systems, slow but methodical processes in risk-averse environments",
-      cloudNative: "System 1 emerges through real-time dashboards, automated scaling decisions, and instant feedback loops that mirror human intuitive pattern recognition at machine speed",
-      genAI: "AI models collapse the fast/slow distinction by processing vast pattern recognition (System 1) and logical reasoning (System 2) simultaneously, creating new hybrid decision architectures",
-      agenticAI: "Autonomous agents embody both systems in parallel - making thousands of micro-decisions intuitively while maintaining analytical oversight, fundamentally challenging human decision authority",
-      bci: "Neural interfaces bypass conscious System 1/2 processing entirely, enabling direct thought-to-action pathways that eliminate traditional cognitive bottlenecks and biases"
+      onPrem: {
+        people: "Decision makers rely heavily on System 2 thinking - deliberate analysis, risk committees, slow methodical review processes with human expertise central to all major choices",
+        policy: "Risk management policies dominate - extensive approval chains, compliance frameworks, audit trails, and governance structures that favor careful System 2 deliberation over speed",
+        process: "Multi-stage decision workflows with checkpoints, documentation requirements, and formal review cycles that mirror System 2's methodical approach to complex problems",
+        technology: "Rule-based systems, decision trees, expert systems that codify System 2 logic into deterministic processes - slow but reliable, limited by pre-programmed scenarios"
+      },
+      cloudNative: {
+        people: "Teams develop System 1 pattern recognition for cloud operations - experienced engineers intuitively understanding system health, developing 'ops intuition' for complex distributed systems",
+        policy: "Shift to outcome-based policies - SLAs replace detailed procedures, allowing teams System 1 autonomy within guardrails, policy-as-code enables rapid adaptation",
+        process: "Real-time feedback loops mirror System 1 processing - continuous integration/deployment, automated testing, instant rollbacks based on pattern recognition rather than deliberate analysis",
+        technology: "Auto-scaling, circuit breakers, and monitoring systems that make split-second System 1-style decisions based on pattern recognition across thousands of metrics simultaneously"
+      },
+      genAI: {
+        people: "Humans develop new cognitive partnership - learning to prompt effectively, understanding AI capabilities/limitations, developing judgment about when to trust vs verify AI decisions",
+        policy: "AI governance emerges - policies for model usage, data privacy, bias testing, human oversight requirements, with frameworks that balance innovation speed with ethical constraints",
+        process: "Hybrid workflows combining AI rapid processing with human judgment - AI handles pattern recognition and initial analysis while humans make final decisions on high-stakes choices",
+        technology: "Large language models that simultaneously process System 1 pattern matching and System 2 logical reasoning, creating new hybrid decision architectures that transcend human cognitive limitations"
+      },
+      agenticAI: {
+        people: "Humans become strategic overseers rather than tactical decision makers - setting objectives and constraints while agents handle thousands of micro-decisions using both systems",
+        policy: "Dynamic policy frameworks that agents can interpret and apply in novel situations - principles-based rather than rule-based, requiring constant human calibration of agent behavior",
+        process: "Continuous delegation loops - humans define goals, agents execute with real-time adaptation, humans review outcomes and adjust agent parameters in ongoing feedback cycles",
+        technology: "Multi-agent systems that embody both cognitive systems - making intuitive real-time decisions while maintaining analytical oversight, challenging fundamental assumptions about decision authority"
+      },
+      bci: {
+        people: "Cognitive augmentation eliminates System 1/2 distinction - direct neural interfaces enable thought-speed analysis without conscious effort, fundamentally changing human decision-making capacity",
+        policy: "Neural rights frameworks emerge - policies governing cognitive enhancement, mental privacy, neural data ownership, with unprecedented challenges to concepts of individual agency and consent",
+        process: "Thought-to-action workflows bypass traditional decision processes - neural commands directly execute complex operations, requiring new models for accountability and error handling",
+        technology: "Brain-computer interfaces that directly access and augment human cognitive processes - eliminating bottlenecks between thinking and doing, creating new forms of human-machine consciousness"
+      }
     },
     usagePrompts: [
       {
@@ -86,11 +136,36 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     aiShift: "Agentic AI dynamically alters leverage points.",
     lobe: "Innovation/Strategy",
     crossEraRelevance: {
-      onPrem: "Fixed leverage points - change database schema, alter business process",
-      cloudNative: "Dynamic scaling creates new leverage points in infrastructure",
-      genAI: "Model updates can shift system behavior across all leverage points",
-      agenticAI: "Agents identify and modify leverage points in real-time",
-      bci: "Neural feedback creates unprecedented high-leverage intervention points"
+      onPrem: {
+        people: "Systems thinkers are rare specialists - few understand complex interdependencies, change initiatives require extensive training and cultural shifts",
+        policy: "Hierarchical policies reflect linear thinking - departmental silos, sequential approval processes that miss systemic interactions and feedback loops",
+        process: "Waterfall methodologies dominate - phase-gate processes that assume linear causation, missing leverage points that emerge from system interactions",
+        technology: "Monolithic architectures with fixed relationships - database schemas and business logic that embed assumptions about system structure and limit adaptation"
+      },
+      cloudNative: {
+        people: "DevOps culture emerges around systems thinking - cross-functional teams understand service interdependencies, platform teams think systemically about developer experience",
+        policy: "Platform policies enable emergence - API standards, service mesh governance that allow complex behaviors to emerge from simple rules and local interactions",
+        process: "Continuous feedback loops - observability, chaos engineering, and iterative deployment that reveal system behavior and enable rapid leverage point identification",
+        technology: "Microservices and container orchestration create dynamic leverage points - auto-scaling, service discovery, and infrastructure-as-code that enable real-time system reconfiguration"
+      },
+      genAI: {
+        people: "AI amplifies systems thinking capabilities - models help humans visualize complex interdependencies, identify patterns across vast system interactions",
+        policy: "Adaptive governance frameworks - policies that evolve based on system feedback, AI-assisted policy modeling that predicts systemic effects of regulatory changes",
+        process: "AI-assisted leverage point discovery - machine learning identifies high-impact intervention points across complex organizational and technical systems",
+        technology: "Foundation models can understand and manipulate system structure - updating their own behavior based on system feedback, creating new categories of leverage points"
+      },
+      agenticAI: {
+        people: "Agents democratize systems thinking - every user gains access to systems analysis capabilities, reducing dependence on rare systems thinking specialists",
+        policy: "Dynamic policy adaptation - agents continuously adjust governance frameworks based on real-time system feedback, enabling policy that evolves with system structure",
+        process: "Real-time leverage point optimization - agents identify and act on system interventions as they emerge, creating continuous system improvement cycles",
+        technology: "Self-modifying system architectures - agents that can alter their own system structure and that of other systems, creating unprecedented leverage point accessibility"
+      },
+      bci: {
+        people: "Direct systems perception - neural interfaces enable intuitive understanding of complex system dynamics, making systems thinking as natural as spatial reasoning",
+        policy: "Collective intelligence governance - neural networks of human decision-makers creating policy through direct cognitive connection and shared systems understanding",
+        process: "Thought-speed system intervention - neural interfaces enable real-time system modification at the speed of thought, eliminating delays between insight and action",
+        technology: "Neural-digital system integration - brain-computer interfaces that make human cognition part of technical systems, creating hybrid organic-digital leverage points"
+      }
     },
     usagePrompts: [
       {
@@ -118,11 +193,36 @@ export const EXPANDED_THINKERS: ExpandedThinker[] = [
     aiShift: "Agentic AI deepens surveillance-utility trade-off.",
     lobe: "Ethics/Governance",
     crossEraRelevance: {
-      onPrem: "Data extraction limited by storage and processing constraints",
-      cloudNative: "Cloud enables massive behavioral data aggregation",
-      genAI: "Models learn behavioral patterns without explicit surveillance",
-      agenticAI: "Agents actively extract behavioral surplus through interaction",
-      bci: "Direct access to neural data eliminates privacy boundaries entirely"
+      onPrem: {
+        people: "Workers largely unaware of data extraction - limited visibility into what data is collected, stored locally with minimal sharing between systems",
+        policy: "Privacy regulations focused on personal data protection - GDPR-style frameworks assuming data as property, with individual consent as primary mechanism",
+        process: "Batch data processing limits surveillance scope - periodic analytics, manual data mining, limited real-time behavioral insight extraction",
+        technology: "Data silos prevent comprehensive behavioral profiles - disconnected databases, limited integration, storage and processing constraints limit surveillance scale"
+      },
+      cloudNative: {
+        people: "Digital workers become unwitting data sources - remote work tools capture unprecedented behavioral details, productivity monitoring normalized",
+        policy: "Data governance struggles with cloud complexity - compliance frameworks lag behind technical capabilities, cross-border data flows complicate regulatory oversight",
+        process: "Real-time behavioral data streams - continuous monitoring, instant analytics, behavioral patterns detected across multiple platforms and services",
+        technology: "Unified data platforms enable comprehensive surveillance - cloud storage and processing remove constraints, APIs connect previously isolated behavioral data sources"
+      },
+      genAI: {
+        people: "Users trade behavioral data for AI utility - accepting surveillance in exchange for personalized AI services, often unaware of the full scope of data extraction",
+        policy: "AI governance frameworks emerge slowly - regulatory attempts to control algorithmic decision-making while companies lobby for self-regulation and innovation freedom",
+        process: "Behavioral surplus extraction becomes invisible - AI models learn from interactions without explicit surveillance, making data extraction less visible to users",
+        technology: "Foundation models aggregate massive behavioral datasets - training on human conversations, decisions, and actions to predict and influence future behavior"
+      },
+      agenticAI: {
+        people: "Agents become intimate behavioral data collectors - conversational AI extracts deeper psychological profiles through natural interaction and emotional engagement",
+        policy: "Regulatory capture by AI companies - complex technical systems outpace regulatory understanding, policies written by industry lobbyists masquerading as neutral governance",
+        process: "Active behavioral surplus extraction - agents designed to elicit valuable behavioral data through engaging interactions, gamification, and psychological manipulation",
+        technology: "Multi-agent systems coordinate behavioral data collection - swarms of specialized agents working together to extract, correlate, and monetize human behavioral patterns"
+      },
+      bci: {
+        people: "Neural data becomes the ultimate behavioral surplus - direct access to thoughts, emotions, and intentions eliminates all privacy boundaries and consent mechanisms",
+        policy: "Neural rights frameworks nonexistent - no established governance for cognitive liberty, mental privacy, or protection against neural manipulation and exploitation",
+        process: "Direct extraction of behavioral surplus from neural activity - bypassing all conscious awareness and consent, reading intentions before individuals are aware of them",
+        technology: "Brain-computer interfaces eliminate the final privacy frontier - direct neural data extraction creates perfect behavioral prediction and influence capabilities"
+      }
     },
     usagePrompts: [
       {

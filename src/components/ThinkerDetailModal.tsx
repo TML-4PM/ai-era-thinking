@@ -154,22 +154,39 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
               </CardContent>
             </Card>
 
-            {/* Cross-Era Relevance */}
+            {/* Cross-Era Evolution */}
             {expandedThinker && (
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Cross-Era Evolution</CardTitle>
                   <CardDescription>
-                    How {thinker.name}'s framework applies across technological eras
+                    How {thinker.name}'s framework transforms across technological eras through People, Policy, Process & Technology
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  {Object.entries(expandedThinker.crossEraRelevance).map(([era, description]) => (
-                    <div key={era} className="space-y-2">
+                <CardContent className="space-y-6">
+                  {Object.entries(expandedThinker.crossEraRelevance).map(([era, dimensions]) => (
+                    <div key={era} className="space-y-3">
                       <Badge className={eraColors[era as keyof typeof eraColors]}>
                         {eraMapping[era as keyof typeof eraMapping]}
                       </Badge>
-                      <p className="text-sm text-muted-foreground pl-2">{description}</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-2">
+                        <div className="space-y-1">
+                          <h5 className="text-xs font-medium text-primary">People</h5>
+                          <p className="text-xs text-muted-foreground">{dimensions.people}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <h5 className="text-xs font-medium text-primary">Policy</h5>
+                          <p className="text-xs text-muted-foreground">{dimensions.policy}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <h5 className="text-xs font-medium text-primary">Process</h5>
+                          <p className="text-xs text-muted-foreground">{dimensions.process}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <h5 className="text-xs font-medium text-primary">Technology</h5>
+                          <p className="text-xs text-muted-foreground">{dimensions.technology}</p>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </CardContent>
