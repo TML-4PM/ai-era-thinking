@@ -59,7 +59,7 @@ const Index = () => {
     setSearchParams(sp, { replace: true });
   };
 
-  const expandedThinker = selectedThinker ? getExpandedThinker(selectedThinker) : null;
+  const selectedThinkerObject = selectedThinker ? THINKERS.find(t => t.name === selectedThinker) : null;
 
   const handleCloseModal = () => {
     setSelectedThinker(null);
@@ -239,10 +239,10 @@ const Index = () => {
       </section>
 
       {/* Thinker Detail Modal */}
-      <ThinkerDetailModal
+      <EnhancedThinkerModal
         isOpen={!!selectedThinker}
         onClose={handleCloseModal}
-        thinker={expandedThinker}
+        thinker={selectedThinkerObject!}
       />
     </main>
     <Footer />
