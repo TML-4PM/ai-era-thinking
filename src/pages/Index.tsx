@@ -18,7 +18,7 @@ import { useFavorites } from "@/context/FavoritesContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Plus, Home, Compass, Settings } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -58,8 +58,8 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Organ Framework - AI-Era Thinking Architecture</title>
-        <meta name="description" content="A comprehensive framework for understanding how great thinkers' ideas evolve and apply in the age of AI" />
+        <title>AI-Era Thinking - Leaders Live Forever</title>
+        <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply in the age of artificial intelligence" />
       </Helmet>
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
@@ -81,20 +81,11 @@ const Index = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => navigate("/")}
-                    className="flex items-center gap-2"
-                  >
-                    <Home className="w-4 h-4" />
-                    Explore
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
                     onClick={() => navigate("/favorites")}
                     className="flex items-center gap-2"
                   >
                     <Heart className="w-4 h-4" />
-                    Favorites
+                    Crowd Sourced thinkers
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -129,11 +120,11 @@ const Index = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                Organ Framework
+                AI-Era Thinking - Leaders Live Forever
               </span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-              Organ Map - Explore how great thinkers' frameworks evolve and apply in the age of artificial intelligence
+              Explore how our favourite thinkers' frameworks evolve and apply in the age of artificial intelligence
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-6">
               <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
@@ -142,6 +133,18 @@ const Index = () => {
               <Badge variant="outline" className="bg-white/50 dark:bg-gray-800/50">
                 Cross-Era Analysis
               </Badge>
+            </div>
+            <div className="flex justify-center">
+              <Button 
+                asChild 
+                variant="outline" 
+                className="gap-2 bg-white/50 dark:bg-gray-800/50 border-indigo-200 dark:border-indigo-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+              >
+                <Link to="/add-thinker">
+                  <Plus className="w-4 h-4" />
+                  Add your own — discuss in real time the effects of new frameworks across teams, workfamilies, and governance.
+                </Link>
+              </Button>
             </div>
           </div>
 

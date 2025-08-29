@@ -63,6 +63,17 @@ export const Governance: React.FC = () => {
             </p>
           </section>
 
+          {/* Community Submissions Management & Rules */}
+          <Card className="p-6 bg-muted/40 border-dashed">
+            <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+              <Shield className="w-5 h-5 text-brand" />
+              Community Submissions: Management & Rules
+            </h3>
+            <p className="text-muted-foreground">
+              Community submissions ("Add your own guru") are governed by clear rules: dual review before public listing (two‑person rule), provenance and attribution preserved, context integrity verified on every use, and automated unsafe‑content screening. Submissions are monitored via live metrics (surprise index, adverse events) and subject to rapid takedown if needed.
+            </p>
+          </Card>
+
           {/* Main Content Tabs */}
           <Tabs defaultValue="principles" className="w-full">
             <TabsList className="grid w-full grid-cols-5">
