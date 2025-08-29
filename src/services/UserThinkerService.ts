@@ -7,9 +7,9 @@ export class UserThinkerService {
   /**
    * Create a new user thinker
    */
-  async createThinker(thinkerData: Omit<UserThinker, 'id' | 'creator_id' | 'created_at' | 'updated_at'>): Promise<{ data: UserThinker | null; error: any }> {
+  async createThinker(thinkerData: Omit<UserThinker, 'id' | 'creator_id' | 'created_at' | 'updated_at'>): Promise<{ data: any | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .insert({
         ...thinkerData,
         creator_id: (await supabase.auth.getUser()).data.user?.id
@@ -23,9 +23,9 @@ export class UserThinkerService {
   /**
    * Get user's own thinkers
    */
-  async getUserThinkers(): Promise<{ data: UserThinker[] | null; error: any }> {
+  async getUserThinkers(): Promise<{ data: any[] | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .select('*')
       .eq('creator_id', (await supabase.auth.getUser()).data.user?.id)
       .order('created_at', { ascending: false });
@@ -36,9 +36,9 @@ export class UserThinkerService {
   /**
    * Get all public thinkers
    */
-  async getPublicThinkers(): Promise<{ data: UserThinker[] | null; error: any }> {
+  async getPublicThinkers(): Promise<{ data: any[] | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .select('*')
       .eq('visibility', 'public')
       .eq('approved', true)
@@ -50,9 +50,9 @@ export class UserThinkerService {
   /**
    * Get a specific user thinker by ID
    */
-  async getThinkerById(id: string): Promise<{ data: UserThinker | null; error: any }> {
+  async getThinkerById(id: string): Promise<{ data: any | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .select('*')
       .eq('id', id)
       .single();
@@ -63,9 +63,9 @@ export class UserThinkerService {
   /**
    * Update a user thinker
    */
-  async updateThinker(id: string, updates: Partial<UserThinker>): Promise<{ data: UserThinker | null; error: any }> {
+  async updateThinker(id: string, updates: Partial<UserThinker>): Promise<{ data: any | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .update(updates)
       .eq('id', id)
       .select()
@@ -79,7 +79,7 @@ export class UserThinkerService {
    */
   async deleteThinker(id: string): Promise<{ error: any }> {
     const { error } = await supabase
-      .from('user_thinkers')
+      .from('user_thinkers' as any)
       .delete()
       .eq('id', id);
 
@@ -91,7 +91,7 @@ export class UserThinkerService {
    */
   async addBuiltInToFavorites(thinkerName: string): Promise<{ error: any }> {
     const { error } = await supabase
-      .from('user_favorites')
+      .from('user_favorites' as any)
       .insert({
         user_id: (await supabase.auth.getUser()).data.user?.id,
         thinker_name: thinkerName
@@ -105,7 +105,7 @@ export class UserThinkerService {
    */
   async addUserThinkerToFavorites(userThinkerId: string): Promise<{ error: any }> {
     const { error } = await supabase
-      .from('user_favorites')
+      .from('user_favorites' as any)
       .insert({
         user_id: (await supabase.auth.getUser()).data.user?.id,
         user_thinker_id: userThinkerId
@@ -119,7 +119,7 @@ export class UserThinkerService {
    */
   async removeFromFavorites(favoriteId: string): Promise<{ error: any }> {
     const { error } = await supabase
-      .from('user_favorites')
+      .from('user_favorites' as any)
       .delete()
       .eq('id', favoriteId);
 
@@ -129,9 +129,9 @@ export class UserThinkerService {
   /**
    * Get user's favorites
    */
-  async getFavorites(): Promise<{ data: UserFavorite[] | null; error: any }> {
+  async getFavorites(): Promise<{ data: any[] | null; error: any }> {
     const { data, error } = await supabase
-      .from('user_favorites')
+      .from('user_favorites' as any)
       .select(`
         *,
         user_thinker:user_thinkers(*)
@@ -150,7 +150,7 @@ export class UserThinkerService {
     if (!userId) return false;
 
     let query = supabase
-      .from('user_favorites')
+      .from('user_favorites' as any)
       .select('id')
       .eq('user_id', userId);
 

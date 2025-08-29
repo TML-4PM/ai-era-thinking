@@ -217,16 +217,47 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
         <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           Add Your Own Guru
         </h1>
-        <p className="text-muted-foreground mt-2">
-          Create a comprehensive profile for any thinker, philosopher, or mentor
+        <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+          Create a comprehensive profile for any thinker, philosopher, or mentor. Fill out as much detail as possible to create rich, interactive profiles with AI-powered features.
         </p>
+        
+        <Card className="mt-6 max-w-3xl mx-auto">
+          <CardContent className="pt-6">
+            <div className="space-y-4 text-left">
+              <h3 className="font-semibold text-primary">📋 What You'll Create:</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>• <strong>Interactive Profile:</strong> Full thinker card with hover states and detailed modal views</li>
+                <li>• <strong>AI Chat Features:</strong> Engage in conversations as or with your thinker</li>
+                <li>• <strong>Deep Framework Analysis:</strong> Rich content that integrates with existing thinkers</li>
+                <li>• <strong>Cross-Era Relevance:</strong> Timeline showing evolution across technological eras</li>
+              </ul>
+              
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h4 className="font-medium text-primary text-sm">✨ Required Fields:</h4>
+                  <p className="text-xs text-muted-foreground">Name, Area, Cognitive Lobe, Core Idea, AI-Era Shift</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-primary text-sm">🎯 Pro Tips:</h4>
+                  <p className="text-xs text-muted-foreground">More detail = richer AI interactions and better content</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
         <Card>
           <CardHeader>
-            <CardTitle>Basic Information</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              📝 Basic Information
+              <Badge variant="secondary" className="text-xs">Required</Badge>
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Start with the essentials. This information appears on the thinker card and determines how they're categorized.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -241,14 +272,17 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
                 />
               </div>
               <div>
-                <Label htmlFor="area">Area *</Label>
+                <Label htmlFor="area">Area of Expertise *</Label>
                 <Input
                   id="area"
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
-                  placeholder="e.g., Behavioral Economics"
+                  placeholder="e.g., Behavioral Economics, Cognitive Psychology, Systems Theory"
                   required
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Their main field or domain of expertise
+                </p>
               </div>
             </div>
 
@@ -267,6 +301,13 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
                     ))}
                   </SelectContent>
                 </Select>
+                <div className="text-xs text-muted-foreground mt-1 space-y-1">
+                  <p><strong>Perception/Patterning:</strong> How we see and understand patterns</p>
+                  <p><strong>Decision/Action:</strong> How we make choices and act</p>
+                  <p><strong>Innovation/Strategy:</strong> Creating new approaches and long-term thinking</p>
+                  <p><strong>Ethics/Governance:</strong> Values, principles, and social structures</p>
+                  <p><strong>Culture/Behaviour:</strong> Human behavior and social dynamics</p>
+                </div>
               </div>
               <div>
                 <Label htmlFor="visibility">Visibility</Label>
@@ -289,11 +330,12 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
                 id="coreIdea"
                 value={coreIdea}
                 onChange={(e) => setCoreIdea(e.target.value)}
-                placeholder="e.g., Thinking, Fast and Slow"
+                placeholder="e.g., 'System 1 (fast, intuitive) vs System 2 (slow, deliberate) thinking processes shape all human decisions' or 'First principles thinking: breaking problems down to fundamental truths'"
                 required
+                rows={3}
               />
               <p className="text-xs text-muted-foreground mt-1">
-                The main concept or theory they're known for
+                <strong>The main concept or theory they're known for.</strong> Be specific and comprehensive - this drives AI interactions and content generation.
               </p>
             </div>
 
@@ -303,11 +345,12 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
                 id="aiShift"
                 value={aiShift}
                 onChange={(e) => setAiShift(e.target.value)}
-                placeholder="e.g., Fast/slow dichotomy breaks when AI operates in parallel at both speeds."
+                placeholder="e.g., 'Fast/slow dichotomy breaks when AI operates in parallel at both speeds, requiring new frameworks for human-AI decision making' or 'First principles become automated through AI reasoning, shifting focus to principle selection and validation'"
                 required
+                rows={3}
               />
               <p className="text-xs text-muted-foreground mt-1">
-                How their ideas change or become more relevant in the AI era
+                <strong>How their ideas evolve in the AI era.</strong> Consider: What changes? What becomes more important? What new challenges emerge? This creates cross-era relevance.
               </p>
             </div>
 
@@ -338,7 +381,13 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
         {/* Deep Profile Framework */}
         <Card>
           <CardHeader>
-            <CardTitle>Deep Profile Framework</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              🧠 Deep Profile Framework
+              <Badge variant="outline" className="text-xs">Enhanced Features</Badge>
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Rich content that powers AI conversations and detailed analysis. The more detail you provide, the better the AI interactions become.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -403,15 +452,27 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
         {/* Applications & Usage */}
         <Card>
           <CardHeader>
-            <CardTitle>Applications & Usage</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              🛠️ Applications & Usage
+              <Badge variant="outline" className="text-xs">Interactive</Badge>
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Practical ways to apply their thinking. These become conversation starters and real-world examples in AI interactions.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
-            <ArrayInput
-              label="Usage Prompts"
-              values={usagePrompts}
-              setter={setUsagePrompts}
-              placeholder="Enter a usage prompt or example..."
-            />
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Usage Prompts</Label>
+              <p className="text-xs text-muted-foreground mb-2">
+                Specific questions or scenarios where their framework applies. Examples: "How would Kahneman analyze this decision?" or "Apply Systems Thinking to..."
+              </p>
+              <ArrayInput
+                label=""
+                values={usagePrompts}
+                setter={setUsagePrompts}
+                placeholder="e.g., 'Use System 1/2 thinking to evaluate this product decision' or 'Apply their framework to team dynamics'"
+              />
+            </div>
 
             <ArrayInput
               label="Practical Applications"
@@ -432,7 +493,13 @@ export const AddThinkerForm: React.FC<AddThinkerFormProps> = ({ onSuccess }) => 
         {/* Cross-Era Relevance */}
         <Card>
           <CardHeader>
-            <CardTitle>Cross-Era Relevance</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              🕒 Cross-Era Relevance
+              <Badge variant="outline" className="text-xs">Timeline</Badge>
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              How their ideas evolve and remain relevant across different technological eras. This creates the timeline view showing their enduring impact.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>

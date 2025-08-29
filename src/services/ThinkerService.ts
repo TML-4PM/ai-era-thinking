@@ -90,24 +90,26 @@ export class ThinkerService {
     if (isUserCreated) {
       // Handle user-created thinker
       const { data: userThinker } = await supabase
-        .from('user_thinkers')
+        .from('user_thinkers' as any)
         .select('*')
         .eq('id', nameOrId)
         .single();
 
       if (!userThinker) return null;
 
+      const userData = userThinker as any;
+
       // Convert UserThinker to EnhancedThinker format
       return {
-        name: userThinker.name,
-        area: userThinker.area,
-        coreIdea: userThinker.core_idea,
-        aiShift: userThinker.ai_shift,
-        lobe: userThinker.lobe as any,
+        name: userData.name,
+        area: userData.area,
+        coreIdea: userData.core_idea,
+        aiShift: userData.ai_shift,
+        lobe: userData.lobe as any,
         hasDeepProfile: true, // User thinkers always have deep profiles
         hasTeam: false, // Teams not supported for user thinkers yet
         isUserCreated: true,
-        userThinkerData: userThinker
+        userThinkerData: userData as UserThinker
       };
     }
 
@@ -227,6 +229,31 @@ export class ThinkerService {
       withBoth,
       coverage
     };
+  }
+  /**
+   * Get user-created thinkers and convert to compatible format
+   */
+  async getUserCreatedThinkers(): Promise<EnhancedThinker[]> {
+    const { data, error } = await supabase
+      .from('user_thinkers' as any)
+      .select('*')
+      .eq('visibility', 'public')
+      .eq('approved', true);
+
+    if (error || !data) return [];
+
+    // Convert UserThinker to EnhancedThinker format
+    return data.map((userThinker: any) => ({
+      name: userThinker.name,
+      area: userThinker.area,
+      coreIdea: userThinker.core_idea,
+      aiShift: userThinker.ai_shift,
+      lobe: userThinker.lobe as any,
+      hasDeepProfile: true,
+      hasTeam: false,
+      isUserCreated: true,
+      userThinkerData: userThinker as UserThinker
+    } as EnhancedThinker));
   }
 }
 
