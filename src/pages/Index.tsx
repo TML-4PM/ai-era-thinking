@@ -6,7 +6,7 @@ import GlowField from "@/components/GlowField";
 import { EraTimeline } from "@/components/EraTimeline";
 import ThinkerCard from "@/components/ThinkerCard";
 import SearchBar from "@/components/SearchBar";
-import ThinkerDetailModal from "@/components/ThinkerDetailModal";
+import { EnhancedThinkerModal } from "@/components/EnhancedThinkerModal";
 import Footer from "@/components/Footer";
 import { THINKERS, type Lobe, type Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
