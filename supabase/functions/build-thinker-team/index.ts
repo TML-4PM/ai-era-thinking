@@ -38,7 +38,7 @@ serve(async (req) => {
       aiShift,
       domain,
       industries = [],
-      teamSize = 9,
+      teamSize,
       excludeMemberCodes = []
     }: TeamBuildRequest = await req.json();
 
@@ -60,47 +60,54 @@ serve(async (req) => {
 
     console.log(`Found ${allMembers.length} members available for team building`);
 
-    // 2. Check existing team usage to enforce 25% overlap cap
-    const { data: existingUsage, error: usageError } = await supabase
-      .from('thinker_alignment_team_members')
-      .select('member_code, team_id')
-      .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString());
+    // 2. ENFORCE GLOBAL UNIQUENESS: Get all members already assigned to other thinkers
+    const { data: allExistingTeams, error: teamsError } = await supabase
+      .from('thinker_alignment_teams')
+      .select(`
+        thinker_name,
+        thinker_alignment_team_members(member_code)
+      `)
+      .neq('thinker_name', thinkerName); // Exclude current thinker's existing teams
 
-    if (usageError) {
-      console.error('Error fetching usage data:', usageError);
-      // Continue without usage filtering rather than failing
+    if (teamsError) {
+      console.error('Error fetching existing teams:', teamsError);
+      // Continue without global uniqueness filtering rather than failing
     }
 
-    const usageCounts = (existingUsage || []).reduce((acc, { member_code }) => {
-      acc[member_code] = (acc[member_code] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    // Build set of member codes already used by other thinkers
+    const globallyUsedMemberCodes = new Set<string>();
+    if (allExistingTeams) {
+      allExistingTeams.forEach(team => {
+        team.thinker_alignment_team_members?.forEach(member => {
+          globallyUsedMemberCodes.add(member.member_code);
+        });
+      });
+    }
 
-    // Fixed: Count unique teams, not total member entries
-    const uniqueTeamIds = new Set((existingUsage || []).map(usage => usage.team_id));
-    const totalTeamsBuilt = uniqueTeamIds.size;
-    
-    // Fixed: Ensure maxUsagePerMember is never 0 and handle edge cases
-    const maxUsagePerMember = totalTeamsBuilt === 0 ? 1 : Math.max(1, Math.ceil(totalTeamsBuilt * 0.25));
+    console.log(`Globally used members: ${globallyUsedMemberCodes.size} out of ${allMembers.length}`);
 
-    console.log(`Usage analysis: ${totalTeamsBuilt} teams built, max usage per member: ${maxUsagePerMember}`);
-
-    // 3. Filter available members (those under usage cap and not in exclude list)
+    // 3. Filter available members to ensure global uniqueness
     const availableMembers = allMembers.filter(member => {
-      // Check if member is in exclude list (batch-aware cap)
+      // Exclude if already used by another thinker
+      if (globallyUsedMemberCodes.has(member.member_code)) {
+        return false;
+      }
+      // Exclude if in explicit exclude list
       if (excludeMemberCodes.includes(member.member_code)) {
         return false;
       }
-      // Check traditional usage cap
-      return (usageCounts[member.member_code] || 0) < maxUsagePerMember;
+      return true;
     });
 
-    console.log(`Available members after filtering: ${availableMembers.length}/${allMembers.length}`);
+    console.log(`Available members after global uniqueness filtering: ${availableMembers.length}/${allMembers.length}`);
 
-    if (availableMembers.length < teamSize) {
-      console.warn(`Warning: Only ${availableMembers.length} members available for team of ${teamSize}`);
+    // 4. Determine team size (5-9 if not specified)
+    const finalTeamSize = teamSize || (Math.floor(Math.random() * 5) + 5); // 5-9 members
+
+    if (availableMembers.length < finalTeamSize) {
+      console.warn(`Warning: Only ${availableMembers.length} unique members available for team of ${finalTeamSize}`);
       if (availableMembers.length === 0) {
-        throw new Error('No available members for team building. All members may be at usage cap.');
+        throw new Error('No available members for team building. All members may be assigned to other thinkers.');
       }
     }
 
@@ -114,7 +121,7 @@ serve(async (req) => {
 Context Industries: ${industries.join(', ')}
 Focus the team selection and narratives on how these members would help ${thinkerName} address challenges and opportunities in these specific industries.` : '';
 
-    const actualTeamSize = Math.min(teamSize, availableMembers.length);
+    const actualTeamSize = Math.min(finalTeamSize, availableMembers.length);
 
     const teamSelectionPrompt = `You are assembling a dream team of ${actualTeamSize} Neural Ennead WorkFamily members to help ${thinkerName} (${thinkerArea}) explore and apply their framework in the ${domain} domain.
 
@@ -222,9 +229,9 @@ Respond ONLY in this JSON format:
         selection_strategy: 'AI-powered team assembly based on Neural Ennead cognitive profiles and domain expertise',
         model_used: 'gpt-5-2025-08-07',
         constraints: {
-          requested_size: teamSize,
+          requested_size: finalTeamSize,
           available_pool: availableMembers.length,
-          usage_filtered: allMembers.length - availableMembers.length,
+          globally_used: globallyUsedMemberCodes.size,
           processing_time_ms: Date.now() - startTime
         }
       })
@@ -325,8 +332,8 @@ Respond ONLY in this JSON format:
         model_used: 'gpt-5-2025-08-07',
         members_available: availableMembers.length,
         members_total: allMembers.length,
-        usage_cap_applied: maxUsagePerMember,
-        teams_built_last_30d: totalTeamsBuilt
+        globally_used: globallyUsedMemberCodes.size,
+        unique_team_guarantee: true
       }
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
