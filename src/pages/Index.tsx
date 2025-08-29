@@ -149,8 +149,8 @@ const Index = () => {
           </div>
 
           <SearchBar 
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
+            query={searchTerm}
+            onQueryChange={setSearchTerm}
             selectedLobe={selectedLobe}
             onLobeChange={setSelectedLobe}
           />
