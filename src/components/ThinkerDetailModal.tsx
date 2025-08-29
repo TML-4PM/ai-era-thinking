@@ -196,21 +196,92 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
             {expandedThinker && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Implementation Timeline</CardTitle>
+                  <CardTitle className="text-lg">Implementation Roadmap</CardTitle>
+                  <CardDescription>
+                    Era-aligned implementation pathway across People, Policy, Process & Technology dimensions
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="grid gap-3">
-                    <div>
-                      <Badge variant="outline" className="mb-2">Immediate (0-6 months)</Badge>
-                      <p className="text-sm">{expandedThinker.practicalApplications.immediate}</p>
+                <CardContent className="space-y-4">
+                  <div className="grid gap-4">
+                    <div className="border rounded-lg p-3 bg-green-50/50 dark:bg-green-950/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                          Immediate (0-6 months) • Current Era
+                        </Badge>
+                      </div>
+                      <p className="text-sm mb-3">{expandedThinker.practicalApplications.immediate}</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="font-medium text-primary">People:</span>
+                          <span className="text-muted-foreground ml-1">Build awareness, train key stakeholders</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Policy:</span>
+                          <span className="text-muted-foreground ml-1">Establish governance frameworks</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Process:</span>
+                          <span className="text-muted-foreground ml-1">Pilot implementations, feedback loops</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Technology:</span>
+                          <span className="text-muted-foreground ml-1">Infrastructure assessment, tool selection</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <Badge variant="outline" className="mb-2">Medium-term (6-18 months)</Badge>
-                      <p className="text-sm">{expandedThinker.practicalApplications.mediumTerm}</p>
+                    
+                    <div className="border rounded-lg p-3 bg-blue-50/50 dark:bg-blue-950/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="outline" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                          Medium-term (6-18 months) • Era Transition
+                        </Badge>
+                      </div>
+                      <p className="text-sm mb-3">{expandedThinker.practicalApplications.mediumTerm}</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="font-medium text-primary">People:</span>
+                          <span className="text-muted-foreground ml-1">Scale training, develop expertise</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Policy:</span>
+                          <span className="text-muted-foreground ml-1">Adaptive policies, real-time governance</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Process:</span>
+                          <span className="text-muted-foreground ml-1">Automated workflows, optimization</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Technology:</span>
+                          <span className="text-muted-foreground ml-1">Full deployment, integration</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <Badge variant="outline" className="mb-2">Long-term (18-36 months)</Badge>
-                      <p className="text-sm">{expandedThinker.practicalApplications.longTerm}</p>
+                    
+                    <div className="border rounded-lg p-3 bg-purple-50/50 dark:bg-purple-950/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="outline" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                          Long-term (18-36 months) • Future Era
+                        </Badge>
+                      </div>
+                      <p className="text-sm mb-3">{expandedThinker.practicalApplications.longTerm}</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="font-medium text-primary">People:</span>
+                          <span className="text-muted-foreground ml-1">Strategic oversight, AI collaboration</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Policy:</span>
+                          <span className="text-muted-foreground ml-1">Dynamic, self-adapting governance</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Process:</span>
+                          <span className="text-muted-foreground ml-1">Autonomous operations, continuous evolution</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-primary">Technology:</span>
+                          <span className="text-muted-foreground ml-1">Self-modifying systems, emergence</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

@@ -47,7 +47,27 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const [dialogue, setDialogue] = useState<TeamDialogue | null>(null);
   const [loading, setLoading] = useState(false);
+  const [localTeam, setLocalTeam] = useState(assignedTeam);
   const { toast } = useToast();
+
+  // Update local team when assigned team changes and persist to localStorage
+  React.useEffect(() => {
+    if (assignedTeam && assignedTeam.length > 0) {
+      setLocalTeam(assignedTeam);
+      localStorage.setItem(`team-${thinkerName}`, JSON.stringify(assignedTeam));
+    } else {
+      // Try to load from localStorage first
+      const savedTeam = localStorage.getItem(`team-${thinkerName}`);
+      if (savedTeam) {
+        try {
+          const parsedTeam = JSON.parse(savedTeam);
+          setLocalTeam(parsedTeam);
+        } catch (error) {
+          console.error('Error parsing saved team:', error);
+        }
+      }
+    }
+  }, [assignedTeam, thinkerName]);
 
   const industries = [
     { id: 'government', name: 'Government & Public Sector' },
@@ -71,7 +91,7 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
       return;
     }
 
-    if (!assignedTeam || assignedTeam.length === 0) {
+    if (!localTeam || localTeam.length === 0) {
       toast({
         title: "No Team",
         description: "No team members assigned. Please build a team first.",
@@ -92,7 +112,7 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
           topic,
           domain,
           industries: selectedIndustries,
-          assignedTeam
+          assignedTeam: localTeam
         }
       });
 
@@ -102,7 +122,7 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
       
       toast({
         title: "Team Chat Generated",
-        description: `Generated conversation between ${thinkerName} and ${assignedTeam.length} team members`,
+        description: `Generated conversation between ${thinkerName} and ${localTeam.length} team members`,
       });
       
     } catch (error) {
@@ -135,10 +155,10 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4" />
-              <span className="text-sm font-medium">Assigned Team ({assignedTeam.length} members)</span>
+              <span className="text-sm font-medium">Assigned Team ({localTeam.length} members)</span>
             </div>
             <div className="grid grid-cols-1 gap-2">
-              {assignedTeam.map(member => (
+              {localTeam.map(member => (
                 <div key={member.member_code} className="flex items-center gap-2 p-2 bg-muted/20 rounded-lg">
                   <Brain className="w-4 h-4 text-brand" />
                   <div className="flex-1">
@@ -149,6 +169,35 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Topic Configuration */}
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label htmlFor="custom-topic">Topic (default: core idea)</Label>
+              <Input
+                id="custom-topic"
+                placeholder={`Enter topic or use: ${coreIdea.slice(0, 50)}...`}
+                value={customTopic}
+                onChange={(e) => setCustomTopic(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="domain-select">Application Domain</Label>
+              <Select value={domain} onValueChange={setDomain}>
+                <SelectTrigger id="domain-select">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="strategic-planning">Strategic Planning</SelectItem>
+                  <SelectItem value="digital-transformation">Digital Transformation</SelectItem>
+                  <SelectItem value="change-management">Change Management</SelectItem>
+                  <SelectItem value="risk-assessment">Risk Assessment</SelectItem>
+                  <SelectItem value="organizational-culture">Organizational Culture</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -189,38 +238,9 @@ export const ThinkerTeamChat: React.FC<ThinkerTeamChatProps> = ({
             )}
           </div>
 
-          {/* Topic Configuration */}
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label htmlFor="custom-topic">Topic (default: core idea)</Label>
-              <Input
-                id="custom-topic"
-                placeholder={`Enter topic or use: ${coreIdea.slice(0, 50)}...`}
-                value={customTopic}
-                onChange={(e) => setCustomTopic(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="domain-select">Application Domain</Label>
-              <Select value={domain} onValueChange={setDomain}>
-                <SelectTrigger id="domain-select">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="strategic-planning">Strategic Planning</SelectItem>
-                  <SelectItem value="digital-transformation">Digital Transformation</SelectItem>
-                  <SelectItem value="change-management">Change Management</SelectItem>
-                  <SelectItem value="risk-assessment">Risk Assessment</SelectItem>
-                  <SelectItem value="organizational-culture">Organizational Culture</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
           <Button 
             onClick={generateTeamChat} 
-            disabled={loading || assignedTeam.length === 0}
+            disabled={loading || localTeam.length === 0}
             className="w-full flex items-center gap-2"
           >
             {loading ? (
