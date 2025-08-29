@@ -32,7 +32,7 @@ import { thinkerService, type EnhancedThinker } from "@/services/ThinkerService"
 import { useToast } from "@/hooks/use-toast";
 
 interface EnhancedThinkerModalProps {
-  thinker: Thinker;
+  thinker: Thinker | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -42,6 +42,11 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
   isOpen, 
   onClose 
 }) => {
+  // Early return if no thinker - this prevents the null reference error
+  if (!thinker) {
+    return null;
+  }
+
   const [enhancedThinker, setEnhancedThinker] = useState<EnhancedThinker | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showMoreFramework, setShowMoreFramework] = useState(false);
@@ -52,7 +57,7 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
 
   useEffect(() => {
     const loadEnhancedData = async () => {
-      if (isOpen) {
+      if (isOpen && thinker) {
         try {
           const enhanced = await thinkerService.getEnhancedThinker(thinker.name);
           setEnhancedThinker(enhanced);
