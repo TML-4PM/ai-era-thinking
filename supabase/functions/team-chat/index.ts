@@ -44,7 +44,46 @@ serve(async (req) => {
 
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
     if (!openAIApiKey) {
-      throw new Error('OpenAI API key not configured');
+      console.log('OpenAI API key not configured, returning fallback response');
+      
+      // Return structured fallback dialogue
+      const fallbackDialogue = {
+        topic: topic || coreIdea,
+        participants: [thinkerName, ...assignedTeam.map(m => m.display_name)],
+        timeframes: {
+          now_0_6: {
+            [thinkerName]: `From my perspective on ${topic || coreIdea}, the immediate focus should be on establishing foundational understanding and identifying key leverage points.`,
+            ...Object.fromEntries(assignedTeam.map(m => [
+              m.display_name, 
+              `As ${m.role_on_team}, I believe we should prioritize ${m.description?.split(' ').slice(0, 8).join(' ')}... in our immediate strategy.`
+            ]))
+          },
+          mid_6_18: {
+            [thinkerName]: `In the medium term, we need to scale our approach and integrate these concepts more broadly across the organization.`,
+            ...Object.fromEntries(assignedTeam.map(m => [
+              m.display_name,
+              `Over the next 6-18 months, my focus as ${m.role_on_team} will be on building sustainable systems and processes.`
+            ]))
+          },
+          long_18_36: {
+            [thinkerName]: `Long-term success depends on embedding these principles into the culture and ensuring they survive leadership changes.`,
+            ...Object.fromEntries(assignedTeam.map(m => [
+              m.display_name,
+              `Looking ahead 18-36 months, I see opportunities to transform how we approach these challenges fundamentally.`
+            ]))
+          }
+        },
+        synthesis: "This fallback conversation demonstrates the team's diverse perspectives across different timeframes. For full AI-powered dialogue generation, please configure the OpenAI API key."
+      };
+
+      return new Response(JSON.stringify({
+        success: true,
+        teamDialogue: fallbackDialogue,
+        fallback: true,
+        message: "Generated fallback dialogue - OpenAI API key required for full functionality"
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     const industryContext = industries.length > 0 ? 

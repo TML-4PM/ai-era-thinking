@@ -71,6 +71,70 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
     loadExistingTeam();
   }, [thinkerName]);
 
+  // Create fallback team when API fails
+  const createFallbackTeam = async () => {
+    try {
+      // Insert basic team record
+      const { data: teamRecord, error: teamError } = await supabase
+        .from('thinker_alignment_teams')
+        .insert({
+          thinker_name: thinkerName,
+          domain: 'strategic-planning',
+          team_size: 5,
+          industries: selectedIndustries,
+          selection_strategy: 'Fallback team - OpenAI unavailable'
+        })
+        .select()
+        .single();
+
+      if (teamError || !teamRecord) {
+        console.error('Failed to create fallback team:', teamError);
+        return null;
+      }
+
+      // Create basic fallback team structure
+      return {
+        id: teamRecord.id,
+        thinker_name: thinkerName,
+        domain: 'strategic-planning',
+        team_size: 5,
+        industries: selectedIndustries,
+        created_at: teamRecord.created_at,
+        thinker_alignment_team_members: [
+          {
+            member_code: 'FALLBACK_01',
+            order_index: 1,
+            role_on_team: 'Strategic Analyst',
+            rationale: 'Fallback team member - full functionality requires OpenAI setup',
+            contribution_focus: 'Strategic planning and analysis',
+            neural_ennead_members: {
+              display_name: 'Strategic Analyst',
+              description: 'Fallback team member for strategic analysis',
+              exemplar_roles: ['Strategic Planning', 'Analysis'],
+              primary_family_code: 'FALLBACK'
+            }
+          },
+          {
+            member_code: 'FALLBACK_02',
+            order_index: 2,
+            role_on_team: 'Implementation Specialist',
+            rationale: 'Fallback team member - full functionality requires OpenAI setup',
+            contribution_focus: 'Implementation and execution',
+            neural_ennead_members: {
+              display_name: 'Implementation Specialist',
+              description: 'Fallback team member for implementation',
+              exemplar_roles: ['Implementation', 'Project Management'],
+              primary_family_code: 'FALLBACK'
+            }
+          }
+        ]
+      };
+    } catch (error) {
+      console.error('Error creating fallback team:', error);
+      return null;
+    }
+  };
+
   // Auto-build team if none exists
   useEffect(() => {
     if (!loadingExisting && !existingTeam && !loading) {
@@ -261,6 +325,17 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
           });
         }
       } else {
+        // If API call fails completely, create a fallback team
+        const fallbackTeam = await createFallbackTeam();
+        if (fallbackTeam) {
+          setExistingTeam(fallbackTeam);
+          toast({
+            title: "Team Created",
+            description: "Created a fallback team. Some functionality may be limited.",
+          });
+          return;
+        }
+        
         toast({
           title: "Team Building Failed",
           description: error.message,

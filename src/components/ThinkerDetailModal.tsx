@@ -113,26 +113,26 @@ export const ThinkerDetailModal: React.FC<ThinkerDetailModalProps> = ({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="overview" className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
-              Overview
+          <TabsList className="grid w-full grid-cols-5 h-auto">
+            <TabsTrigger value="overview" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <BookOpen className="w-3 h-3" />
+              <span className="hidden sm:inline">Overview</span>
             </TabsTrigger>
-            <TabsTrigger value="team" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Team
+            <TabsTrigger value="team" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <Users className="w-3 h-3" />
+              <span className="hidden sm:inline">Team</span>
             </TabsTrigger>
-            <TabsTrigger value="chat" className="flex items-center gap-2">
-              <MessageSquare className="w-4 h-4" />
-              Chat with author
+            <TabsTrigger value="chat" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <MessageSquare className="w-3 h-3" />
+              <span className="hidden sm:inline">Chat with author</span>
             </TabsTrigger>
-            <TabsTrigger value="team-chat" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Chat with author and the team
+            <TabsTrigger value="team-chat" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <Users className="w-3 h-3" />
+              <span className="hidden sm:inline">Chat with author and the team</span>
             </TabsTrigger>
-            <TabsTrigger value="applications" className="flex items-center gap-2">
-              <Zap className="w-4 h-4" />
-              Author statements
+            <TabsTrigger value="applications" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <Zap className="w-3 h-3" />
+              <span className="hidden sm:inline">Author statements</span>
             </TabsTrigger>
           </TabsList>
 

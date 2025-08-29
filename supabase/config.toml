@@ -1,27 +1,31 @@
 project_id = "lzfgigiyqpuuxslsygjt"
 
-[functions.thinker-chat]
-verify_jwt = false
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public"]
+max_rows = 1000
 
-[functions.expand-thinker]
-verify_jwt = false
+[db]
+port = 54322
+
+[auth]
+enabled = true
+port = 54324
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54325
 
 [functions.openai-health]
 verify_jwt = false
 
-[functions.duo-chat]
-verify_jwt = false
-
-[functions.align-workfamily]
-verify_jwt = false
-
-[functions.align-workfamily-members]
-verify_jwt = false
-
-[functions.seed-neural-ennead]
-verify_jwt = false
-
-[functions.seed-neural-ennead-members]
+[functions.build-thinker-profile]
 verify_jwt = false
 
 [functions.build-thinker-team]
@@ -30,5 +34,23 @@ verify_jwt = false
 [functions.team-chat]
 verify_jwt = false
 
-[functions.build-thinker-profile]
+[functions.seed-neural-ennead]
+verify_jwt = false
+
+[functions.seed-neural-ennead-members]
+verify_jwt = false
+
+[functions.align-workfamily-members]
+verify_jwt = false
+
+[functions.align-workfamily]
+verify_jwt = false
+
+[functions.expand-thinker]
+verify_jwt = false
+
+[functions.thinker-chat]
+verify_jwt = false
+
+[functions.duo-chat]
 verify_jwt = false
