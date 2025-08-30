@@ -34,6 +34,7 @@ import { thinkerService, type EnhancedThinker } from "@/services/ThinkerService"
 import { userThinkerService } from "@/services/UserThinkerService";
 import { useToast } from "@/hooks/use-toast";
 import { UserThinker } from "@/types/UserThinker";
+import { supabase } from "@/integrations/supabase/client";
 
 interface EnhancedThinkerModalProps {
   thinker: Thinker | (Thinker & { isUserCreated?: boolean; userThinkerData?: UserThinker }) | null;
@@ -58,6 +59,8 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
   const [isUpdatingFavorite, setIsUpdatingFavorite] = useState(false);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [teamLoadState, setTeamLoadState] = useState<'loading' | 'loaded' | 'fallback'>('loading');
   const { toast } = useToast();
 
   const expandedThinker = getExpandedThinker(thinker.name);
@@ -86,6 +89,9 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
             // Handle built-in thinker
             const enhanced = await thinkerService.getEnhancedThinker(thinker.name);
             setEnhancedThinker(enhanced);
+            
+            // Load team data for built-in thinkers
+            await loadTeamData();
           }
           
           // Check if favorited
@@ -104,6 +110,84 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
 
     loadEnhancedData();
   }, [isOpen, thinker.name, isUserCreated, userThinkerData]);
+
+  const loadTeamData = async () => {
+    try {
+      setTeamLoadState('loading');
+      
+      // First get the team from DB using the same logic as ThinkerDetailModal
+      const { data: teamData } = await supabase
+        .from('thinker_alignment_teams')
+        .select('id')
+        .eq('thinker_name', thinker.name)
+        .eq('domain', 'strategic-planning')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (teamData && teamData.length > 0) {
+        const teamId = teamData[0].id;
+        
+        // Then get team members
+        const { data: membersData } = await supabase
+          .from('thinker_alignment_team_members')
+          .select('member_code, role_on_team, rationale')
+          .eq('team_id', teamId);
+
+        if (membersData && membersData.length > 0) {
+          // Finally get member details
+          const memberCodes = membersData.map(m => m.member_code);
+          const { data: memberDetails } = await supabase
+            .from('neural_ennead_members')
+            .select('member_code, display_name, description')
+            .in('member_code', memberCodes);
+
+          const enrichedMembers = membersData.map(member => {
+            const details = memberDetails?.find(d => d.member_code === member.member_code);
+            return {
+              member_code: member.member_code,
+              display_name: details?.display_name || member.member_code,
+              description: details?.description || '',
+              role_on_team: member.role_on_team,
+              rationale: member.rationale
+            };
+          });
+          
+          setTeamMembers(enrichedMembers);
+          setTeamLoadState('loaded');
+          return;
+        }
+      }
+
+      // Fallback to localStorage
+      const localTeam = localStorage.getItem(`team-${thinker.name}`);
+      if (localTeam) {
+        setTeamMembers(JSON.parse(localTeam));
+        setTeamLoadState('fallback');
+        return;
+      }
+
+      // Final fallback to hard-coded team
+      const expandedThinker = getExpandedThinker(thinker.name);
+      if (expandedThinker?.hardCodedTeam) {
+        setTeamMembers(expandedThinker.hardCodedTeam);
+        setTeamLoadState('fallback');
+      }
+    } catch (error) {
+      console.error('Error loading team data:', error);
+      // On error, try localStorage fallback
+      const localTeam = localStorage.getItem(`team-${thinker.name}`);
+      if (localTeam) {
+        setTeamMembers(JSON.parse(localTeam));
+        setTeamLoadState('fallback');
+      } else {
+        const expandedThinker = getExpandedThinker(thinker.name);
+        if (expandedThinker?.hardCodedTeam) {
+          setTeamMembers(expandedThinker.hardCodedTeam);
+          setTeamLoadState('fallback');
+        }
+      }
+    }
+  };
 
   const handleGenerateProfile = async () => {
     if (isUserCreated) return; // User thinkers don't need profile generation
@@ -760,12 +844,25 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
 
           {!isUserCreated && (
             <TabsContent value="team-chat">
+              {teamLoadState === 'fallback' && (
+                <Card className="mb-4 border-amber-200 bg-amber-50/50 dark:bg-amber-950/20">
+                  <CardContent className="pt-4">
+                    <div className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
+                      <AlertCircle className="w-4 h-4" />
+                      <span className="text-sm font-medium">Fallback team shown</span>
+                    </div>
+                    <p className="text-sm text-amber-600 dark:text-amber-400 mt-1">
+                      Using saved or hard-coded team data. Build a new team for latest Neural Ennead members.
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
               <ThinkerTeamChat 
                 thinkerName={thinker.name}
                 thinkerArea={thinker.area}
                 coreIdea={thinker.coreIdea}
                 aiShift={thinker.aiShift}
-                assignedTeam={[]}
+                assignedTeam={teamMembers}
               />
             </TabsContent>
           )}

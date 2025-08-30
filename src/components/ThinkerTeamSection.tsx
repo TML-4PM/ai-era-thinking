@@ -212,22 +212,34 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
       setLoading(true);
       toast({
         title: "Seeding Data",
-        description: "Initializing Neural Ennead members (this may take a moment)...",
+        description: "Initializing Neural Ennead families, then members...",
       });
 
-      const { data, error } = await supabase.functions.invoke('seed-neural-ennead-members');
+      // First seed the families
+      const { data: familiesData, error: familiesError } = await supabase.functions.invoke('seed-neural-ennead');
       
-      if (error) {
-        throw new Error(error.message);
+      if (familiesError) {
+        throw new Error(familiesError.message);
       }
 
-      if (data.success) {
+      if (!familiesData.success) {
+        throw new Error(familiesData.error || 'Failed to seed families');
+      }
+
+      // Then seed the members
+      const { data: membersData, error: membersError } = await supabase.functions.invoke('seed-neural-ennead-members');
+      
+      if (membersError) {
+        throw new Error(membersError.message);
+      }
+
+      if (membersData.success) {
         toast({
           title: "Data Seeded Successfully",
-          description: `Initialized ${data.total_members} Neural Ennead members`,
+          description: `Initialized ${familiesData.total_families} families and ${membersData.total_members} Neural Ennead members`,
         });
       } else {
-        throw new Error(data.error || 'Failed to seed data');
+        throw new Error(membersData.error || 'Failed to seed member data');
       }
     } catch (error) {
       console.error('Error seeding data:', error);
@@ -297,11 +309,12 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
       if (error.message.includes('Neural Ennead members found') || error.message.includes('No available members')) {
         toast({
           title: "Auto-seeding Data",
-          description: "Initializing Neural Ennead members, then rebuilding team...",
+          description: "Initializing Neural Ennead families and members, then rebuilding team...",
         });
         
-        // Auto-seed and retry
+        // Auto-seed families first, then members, then retry
         try {
+          await supabase.functions.invoke('seed-neural-ennead');
           await supabase.functions.invoke('seed-neural-ennead-members');
           // Small delay then retry
           setTimeout(() => buildNewTeam(), 2000);
