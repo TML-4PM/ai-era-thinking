@@ -25540,10 +25540,24 @@ export type Database = {
             referencedColumns: ["member_code"]
           },
           {
+            foreignKeyName: "fk_team_member_to_neural_member"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members_overview"
+            referencedColumns: ["member_code"]
+          },
+          {
             foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
             columns: ["member_code"]
             isOneToOne: false
             referencedRelation: "neural_ennead_members"
+            referencedColumns: ["member_code"]
+          },
+          {
+            foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members_overview"
             referencedColumns: ["member_code"]
           },
           {
@@ -25696,6 +25710,13 @@ export type Database = {
             columns: ["member_code"]
             isOneToOne: false
             referencedRelation: "neural_ennead_members"
+            referencedColumns: ["member_code"]
+          },
+          {
+            foreignKeyName: "thinker_member_alignment_member_code_fkey"
+            columns: ["member_code"]
+            isOneToOne: false
+            referencedRelation: "neural_ennead_members_overview"
             referencedColumns: ["member_code"]
           },
         ]
@@ -30906,6 +30927,21 @@ export type Database = {
           role?: string | null
           sfia_level?: string | null
           task_coverage_pct?: number | null
+        }
+        Relationships: []
+      }
+      neural_ennead_members_overview: {
+        Row: {
+          canonical_keywords: string[] | null
+          created_at: string | null
+          description: string | null
+          display_name: string | null
+          exemplar_roles: string[] | null
+          member_code: string | null
+          primary_family: string | null
+          secondary_family: string | null
+          short_label: string | null
+          tertiary_family: string | null
         }
         Relationships: []
       }
