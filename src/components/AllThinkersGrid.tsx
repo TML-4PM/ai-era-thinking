@@ -151,43 +151,9 @@ export const AllThinkersGrid: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Coverage Stats */}
-      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Brain className="w-5 h-5" />
-            Thinker Coverage Statistics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">{coverageStats.total}</div>
-              <div className="text-sm text-muted-foreground">Total Thinkers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{coverageStats.withProfiles}</div>
-              <div className="text-sm text-muted-foreground">With Profiles</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">{coverageStats.withTeams}</div>
-              <div className="text-sm text-muted-foreground">With Teams</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-orange-600">{coverageStats.withBoth}</div>
-              <div className="text-sm text-muted-foreground">Fully Enhanced</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-indigo-600">{coverageStats.coverage.toFixed(1)}%</div>
-              <div className="text-sm text-muted-foreground">Coverage</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
+      {/* Simple Search */}
+      <div className="flex justify-center mb-6">
+        <div className="relative w-full max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
             placeholder="Search thinkers..."
@@ -196,28 +162,6 @@ export const AllThinkersGrid: React.FC = () => {
             className="pl-10"
           />
         </div>
-        <Select value={lobeFilter} onValueChange={setLobeFilter}>
-          <SelectTrigger className="w-full sm:w-[200px]">
-            <SelectValue placeholder="Filter by lobe" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Lobes</SelectItem>
-            {lobes.map(lobe => (
-              <SelectItem key={lobe} value={lobe}>{lobe}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-[200px]">
-            <SelectValue placeholder="Filter by status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Status</SelectItem>
-            <SelectItem value="enhanced">Fully Enhanced</SelectItem>
-            <SelectItem value="partial">Partially Enhanced</SelectItem>
-            <SelectItem value="basic">Basic Only</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       {/* Thinkers Grid */}

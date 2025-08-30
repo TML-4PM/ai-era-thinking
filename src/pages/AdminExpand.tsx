@@ -384,6 +384,66 @@ export const AdminExpandPage: React.FC = () => {
     }
   };
 
+  const completeAllThinkers = async () => {
+    setIsGenerating(true);
+    setGenerationLog([]);
+    addToLog("🚀 Starting Complete All Thinkers workflow...");
+    
+    try {
+      // Step 1: Seed Neural Ennead Members
+      addToLog("Phase 1: Seeding Neural Ennead members...");
+      await seedNeuralEnneadMembers();
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Step 2: Generate All Profiles
+      addToLog("Phase 2: Generating all profiles...");
+      await generateAllProfiles();
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Step 3: Generate All Teams
+      addToLog("Phase 3: Assembling all teams...");
+      setIsGenerating(true); // Keep generating true for teams
+      await generateAllTeams();
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Step 4: Generate All Expansions
+      addToLog("Phase 4: Generating framework expansions...");
+      setIsExpanding(true);
+      await generateAllExpansions();
+      setIsExpanding(false);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Step 5: Run Integrity Check and Fix Gaps
+      addToLog("Phase 5: Running integrity check and fixing gaps...");
+      await runIntegrityCheck();
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      if (auditResults && auditResults.totalGaps > 0) {
+        addToLog("Phase 6: Fixing identified gaps...");
+        await fixAllGaps();
+      }
+      
+      addToLog("🎉 Complete All Thinkers workflow finished successfully!");
+      toast({
+        title: "Complete Workflow Finished",
+        description: "All profiles, teams, and expansions have been generated successfully",
+      });
+      
+    } catch (error) {
+      addToLog(`✗ Complete workflow failed: ${error}`);
+      toast({
+        title: "Workflow Failed",
+        description: String(error),
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+      setIsExpanding(false);
+      setIsAuditing(false);
+      await loadData();
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
@@ -456,8 +516,35 @@ export const AdminExpandPage: React.FC = () => {
             </CardContent>
           </Card>
 
+          {/* One-Click Complete */}
+          <Card className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-300">
+                <Zap className="w-5 h-5" />
+                Complete All Thinkers
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                One-click to seed data, generate all profiles, teams, expansions, and fix any gaps.
+              </p>
+              <Button 
+                onClick={completeAllThinkers}
+                disabled={isGenerating || isExpanding || isAuditing}
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white"
+              >
+                {isGenerating || isExpanding || isAuditing ? (
+                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Zap className="w-4 h-4 mr-2" />
+                )}
+                Complete All Thinkers
+              </Button>
+            </CardContent>
+          </Card>
+
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">

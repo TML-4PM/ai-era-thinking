@@ -18,7 +18,7 @@ const Favorites = () => {
   return (
     <>
       <Helmet>
-        <title>Crowd Sourced Thinkers - AI-Era Thinking</title>
+        <title>Crowd Sourced Thinkers - Leaders Live Forever</title>
         <meta name="description" content="Community‑submitted thinkers and custom gurus" />
       </Helmet>
       

@@ -149,10 +149,10 @@ export class ThinkerService {
 
       const { data, error } = await supabase.functions.invoke('build-thinker-profile', {
         body: {
-          thinker_name: thinker.name,
-          thinker_area: thinker.area,
-          core_idea: thinker.coreIdea,
-          ai_shift: thinker.aiShift,
+          thinkerName: thinker.name,
+          thinkerArea: thinker.area,
+          coreIdea: thinker.coreIdea,
+          aiShift: thinker.aiShift,
           lobe: thinker.lobe,
           industries: industries || []
         }
@@ -182,14 +182,14 @@ export class ThinkerService {
 
       const { data, error } = await supabase.functions.invoke('build-thinker-team', {
         body: {
-          thinker_name: thinker.name,
-          thinker_area: thinker.area,
-          core_idea: thinker.coreIdea,
-          ai_shift: thinker.aiShift,
+          thinkerName: thinker.name,
+          thinkerArea: thinker.area,
+          coreIdea: thinker.coreIdea,
+          aiShift: thinker.aiShift,
           lobe: thinker.lobe,
           domain: thinker.area,
           industries: industries || [],
-          team_size: teamSize || 7
+          teamSize: teamSize || 7
         }
       });
 
@@ -224,11 +224,11 @@ export class ThinkerService {
 
       const { data, error } = await supabase.functions.invoke('expand-thinker', {
         body: {
-          thinker_name: thinker.name,
-          thinker_area: thinker.area,
-          core_idea: thinker.coreIdea,
-          ai_shift: thinker.aiShift,
-          selected_domains: domains.slice(0, 10) // Limit to 10 domains max
+          thinkerName: thinker.name,
+          thinkerArea: thinker.area,
+          coreIdea: thinker.coreIdea,
+          aiShift: thinker.aiShift,
+          selectedDomains: domains.slice(0, 10) // Limit to 10 domains max
         }
       });
 
