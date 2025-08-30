@@ -525,21 +525,6 @@ export const ThinkerTeamSection: React.FC<ThinkerTeamSectionProps> = ({
               )}
               {existingTeam ? 'Regenerate Team' : 'Build Team'}
             </Button>
-
-            <Button 
-              onClick={seedNeuralEnneadData}
-              disabled={loading}
-              variant="outline"
-              size="sm"
-              className="text-xs"
-            >
-              {loading ? (
-                <RefreshCw className="w-4 h-4 animate-spin mr-2" />
-              ) : (
-                <Brain className="w-4 h-4 mr-2" />
-              )}
-              Seed Members
-            </Button>
           </div>
 
           {!existingTeam && !loading && (
