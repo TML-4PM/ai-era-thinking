@@ -15594,6 +15594,60 @@ export type Database = {
           },
         ]
       }
+      neural_ennead_members_simple: {
+        Row: {
+          canonical_keywords: string[]
+          created_at: string
+          description: string
+          display_name: string
+          exemplar_roles: string[]
+          id: string
+          member_code: string
+          primary_family_code: string
+          primary_family_name: string
+          secondary_family_code: string
+          secondary_family_name: string
+          short_label: string
+          tertiary_family_code: string
+          tertiary_family_name: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_keywords?: string[]
+          created_at?: string
+          description: string
+          display_name: string
+          exemplar_roles?: string[]
+          id?: string
+          member_code: string
+          primary_family_code: string
+          primary_family_name: string
+          secondary_family_code: string
+          secondary_family_name: string
+          short_label: string
+          tertiary_family_code: string
+          tertiary_family_name: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_keywords?: string[]
+          created_at?: string
+          description?: string
+          display_name?: string
+          exemplar_roles?: string[]
+          id?: string
+          member_code?: string
+          primary_family_code?: string
+          primary_family_name?: string
+          secondary_family_code?: string
+          secondary_family_name?: string
+          short_label?: string
+          tertiary_family_code?: string
+          tertiary_family_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       neural_specs: {
         Row: {
           created_at: string
