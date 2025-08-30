@@ -1,0 +1,28 @@
+{
+  "name": "Daniel Kahneman",
+  "domain": "Decision Science",
+  "focus": "Decision Action",
+  "blurb": "Thinking Fast and Slow",
+  "buttons": [
+    {"label": "Deep Profile", "href": "https://example.com/deep"},
+    {"label": "Dream Team", "href": "https://example.com/team"}
+  ],
+  "tabs": [
+    {
+      "title": "Overview",
+      "sections": [
+        {"heading": "Core Framework", "body": "AI can run intuitive and analytical modes in parallel while inheriting human bias"},
+        {"heading": "AI Relevance", "body": "Use to design human AI collaboration"},
+        {"heading": "Cross Era Evolution", "body": "Dual process becomes hybrid decision base"}
+      ]
+    },
+    {
+      "title": "Implementation",
+      "sections": [
+        {"heading": "Phase 1", "body": "Audit and detection"},
+        {"heading": "Phase 2", "body": "Hybrid architecture with oversight"},
+        {"heading": "Phase 3", "body": "Post cognitive systems that preserve agency"}
+      ]
+    }
+  ]
+}

@@ -60,6 +60,7 @@ const Index = () => {
       <Helmet>
         <title>Tech4Humanity - Leaders Live Forever</title>
         <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <script type="module" src="/assets/thinker-card.js"></script>
       </Helmet>
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
@@ -165,6 +166,11 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-3">
                 <AllThinkersGrid />
+                <div className="mt-6">
+                  <div dangerouslySetInnerHTML={{
+                    __html: '<thinker-card data-src="/data/kahneman.json"></thinker-card>'
+                  }} />
+                </div>
               </div>
               <div className="lg:col-span-1">
                 <TopThinkersPanel 
