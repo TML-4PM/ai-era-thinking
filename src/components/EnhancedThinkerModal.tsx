@@ -115,50 +115,68 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
     try {
       setTeamLoadState('loading');
       
-      // First get the team from DB using the same logic as ThinkerDetailModal
-      const { data: teamData } = await supabase
+      // First try to load existing team from database
+      console.log(`Loading team for ${thinker.name}...`);
+      const { data: teamData, error } = await supabase
         .from('thinker_alignment_teams')
-        .select('id')
+        .select(`
+          *,
+          thinker_alignment_team_members (
+            *,
+            neural_ennead_members (*)
+          )
+        `)
         .eq('thinker_name', thinker.name)
-        .eq('domain', 'strategic-planning')
         .order('created_at', { ascending: false })
-        .limit(1);
+        .limit(1)
+        .maybeSingle();
 
-      if (teamData && teamData.length > 0) {
-        const teamId = teamData[0].id;
+      if (error) {
+        console.error('Error loading team:', error);
+        throw error;
+      }
+
+      if (teamData && teamData.thinker_alignment_team_members?.length > 0) {
+        console.log(`Found database team with ${teamData.thinker_alignment_team_members.length} members`);
+        setTeamMembers(teamData.thinker_alignment_team_members);
+        setTeamLoadState('loaded');
+        return;
+      }
+
+      // No database team found - try to build one automatically
+      console.log('No team found, attempting to build one...');
+      try {
+        await supabase.functions.invoke('seed-neural-ennead');
+        await supabase.functions.invoke('seed-neural-ennead-members');
         
-        // Then get team members
-        const { data: membersData } = await supabase
-          .from('thinker_alignment_team_members')
-          .select('member_code, role_on_team, rationale')
-          .eq('team_id', teamId);
+        const { data: buildResult, error: buildError } = await supabase.functions.invoke('build-thinker-team', {
+          body: {
+            thinkerName: thinker.name,
+            thinkerArea: thinker.area,
+            coreIdea: thinker.coreIdea || "Core philosophical insights",
+            aiShift: thinker.aiShift || "Enhanced human potential through AI collaboration",
+            domain: thinker.area || "General",
+            industries: [],
+            teamSize: 7
+          }
+        });
 
-        if (membersData && membersData.length > 0) {
-          // Finally get member details
-          const memberCodes = membersData.map(m => m.member_code);
-          const { data: memberDetails } = await supabase
-            .from('neural_ennead_members')
-            .select('member_code, display_name, description')
-            .in('member_code', memberCodes);
+        if (buildError) {
+          console.error('Error building team:', buildError);
+          throw buildError;
+        }
 
-          const enrichedMembers = membersData.map(member => {
-            const details = memberDetails?.find(d => d.member_code === member.member_code);
-            return {
-              member_code: member.member_code,
-              display_name: details?.display_name || member.member_code,
-              description: details?.description || '',
-              role_on_team: member.role_on_team,
-              rationale: member.rationale
-            };
-          });
-          
-          setTeamMembers(enrichedMembers);
+        if (buildResult?.team) {
+          console.log(`Built new team with ${buildResult.team.thinker_alignment_team_members?.length || 0} members`);
+          setTeamMembers(buildResult.team.thinker_alignment_team_members || []);
           setTeamLoadState('loaded');
           return;
         }
+      } catch (buildError) {
+        console.error('Failed to build team automatically:', buildError);
       }
 
-      // Fallback to localStorage
+      // If automatic build fails, fallback to localStorage
       const localTeam = localStorage.getItem(`team-${thinker.name}`);
       if (localTeam) {
         setTeamMembers(JSON.parse(localTeam));
