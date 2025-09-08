@@ -56,6 +56,11 @@
   
   <!-- Feature Pages -->
   <url>
+    <loc>https://ai-thinker-flux.lovable.app/books</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ai-thinker-flux.lovable.app/thinkers</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
