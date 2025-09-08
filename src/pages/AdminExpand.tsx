@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -445,7 +446,14 @@ export const AdminExpandPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
+    <>
+      <Helmet>
+        <title>Admin - Expand Thinkers</title>
+        <meta name="description" content="Admin interface for expanding thinker profiles" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      
+      <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           Thinker Expansion Admin
@@ -820,6 +828,7 @@ export const AdminExpandPage: React.FC = () => {
         </TabsContent>
       </Tabs>
     </div>
+    </>
   );
 };
 

@@ -60,6 +60,16 @@ const Index = () => {
       <Helmet>
         <title>Tech4Humanity - Leaders Live Forever</title>
         <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/" />
+        <meta property="og:title" content="Tech4Humanity - Leaders Live Forever" />
+        <meta property="og:description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tech4Humanity - Leaders Live Forever" />
+        <meta name="twitter:description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <script type="module" src="/assets/thinker-card.js"></script>
       </Helmet>
       

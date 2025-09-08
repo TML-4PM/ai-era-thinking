@@ -18,17 +18,17 @@ export default function Tools() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Implementation Tools - AI‑Era Thinking</title>
-        <meta name="description" content="Practical tools for implementing AI‑Era thinking frameworks: governance code, workshop materials, and metrics dashboards." />
+        <title>Tools - Tech4Humanity Assessment & Planning</title>
+        <meta name="description" content="AI transformation tools, governance frameworks, and assessment resources for modern organizations." />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/tools" />
-        <meta property="og:title" content="Implementation Tools - AI‑Era Thinking" />
-        <meta property="og:description" content="Practical tools for implementing AI‑Era thinking frameworks." />
+        <meta property="og:title" content="Tools - Tech4Humanity Assessment & Planning" />
+        <meta property="og:description" content="AI transformation tools, governance frameworks, and assessment resources for modern organizations." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ai-thinker-flux.lovable.app/tools" />
         <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Implementation Tools - AI‑Era Thinking" />
-        <meta name="twitter:description" content="Practical tools for implementing AI‑Era thinking frameworks." />
+        <meta name="twitter:title" content="Tools - Tech4Humanity Assessment & Planning" />
+        <meta name="twitter:description" content="AI transformation tools, governance frameworks, and assessment resources." />
         <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
 

@@ -16,8 +16,14 @@ const AddThinker = () => {
   return (
     <>
       <Helmet>
-        <title>Add Your Own Guru - AI‑Era Thinking</title>
-        <meta name="description" content="Create a comprehensive profile for any thinker, philosopher, or mentor" />
+        <title>Add Thinker - Contribute Your Guru | Tech4Humanity</title>
+        <meta name="description" content="Share your favorite thinker or guru with our community. Add their frameworks and insights to help others learn from transformative ideas." />
+        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/add-thinker" />
+        <meta property="og:title" content="Add Thinker - Contribute Your Guru | Tech4Humanity" />
+        <meta property="og:description" content="Share your favorite thinker or guru with our community." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/add-thinker" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
       
       <div className="min-h-screen bg-background">

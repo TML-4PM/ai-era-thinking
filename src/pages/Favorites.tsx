@@ -20,6 +20,12 @@ const Favorites = () => {
       <Helmet>
         <title>Crowd Sourced Thinkers - Leaders Live Forever</title>
         <meta name="description" content="Community‑submitted thinkers and custom gurus" />
+        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/favorites" />
+        <meta property="og:title" content="Crowd Sourced Thinkers - Leaders Live Forever" />
+        <meta property="og:description" content="Community‑submitted thinkers and custom gurus" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/favorites" />
+        <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
       </Helmet>
       
       <div className="min-h-screen bg-background">

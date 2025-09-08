@@ -13,6 +13,18 @@ import Tools from "./pages/Tools";
 import AdminExpand from "./pages/AdminExpand";
 import AddThinker from "./pages/AddThinker";
 import Favorites from "./pages/Favorites";
+import Thinkers from "./pages/Thinkers";
+import Frameworks from "./pages/Frameworks";
+import Chat from "./pages/Chat";
+import WorkFamily from "./pages/WorkFamily";
+import Calculators from "./pages/Calculators";
+import Resources from "./pages/Resources";
+import Workshops from "./pages/Workshops";
+import CaseStudies from "./pages/CaseStudies";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import { FavoritesProvider } from "./context/FavoritesContext";
 
 // Create a stable QueryClient instance with proper configuration
@@ -41,6 +53,18 @@ const App = () => (
               <Route path="/admin/expand" element={<AdminExpand />} />
               <Route path="/add-thinker" element={<AddThinker />} />
               <Route path="/favorites" element={<Favorites />} />
+              <Route path="/thinkers" element={<Thinkers />} />
+              <Route path="/frameworks" element={<Frameworks />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/workfamily" element={<WorkFamily />} />
+              <Route path="/calculators" element={<Calculators />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/resources/workshops" element={<Workshops />} />
+              <Route path="/resources/case-studies" element={<CaseStudies />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
