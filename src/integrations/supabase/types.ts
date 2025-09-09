@@ -4624,39 +4624,99 @@ export type Database = {
         }
         Relationships: []
       }
+      book_activity: {
+        Row: {
+          action: string
+          book_id: string | null
+          chapter_id: string | null
+          created_at: string | null
+          id: string
+          payload: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          book_id?: string | null
+          chapter_id?: string | null
+          created_at?: string | null
+          id?: string
+          payload?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          book_id?: string | null
+          chapter_id?: string | null
+          created_at?: string | null
+          id?: string
+          payload?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_activity_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_activity_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "book_chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       book_chapters: {
         Row: {
           book_id: string
           chapter_order: number
+          chapter_status: Database["public"]["Enums"]["chapter_status"] | null
           content: string | null
           created_at: string
+          est_read_minutes: number | null
           id: string
+          is_published: boolean | null
           progress_percentage: number | null
           sections: Json | null
+          slug: string | null
           title: string
           updated_at: string
+          word_count: number | null
         }
         Insert: {
           book_id: string
           chapter_order: number
+          chapter_status?: Database["public"]["Enums"]["chapter_status"] | null
           content?: string | null
           created_at?: string
+          est_read_minutes?: number | null
           id?: string
+          is_published?: boolean | null
           progress_percentage?: number | null
           sections?: Json | null
+          slug?: string | null
           title: string
           updated_at?: string
+          word_count?: number | null
         }
         Update: {
           book_id?: string
           chapter_order?: number
+          chapter_status?: Database["public"]["Enums"]["chapter_status"] | null
           content?: string | null
           created_at?: string
+          est_read_minutes?: number | null
           id?: string
+          is_published?: boolean | null
           progress_percentage?: number | null
           sections?: Json | null
+          slug?: string | null
           title?: string
           updated_at?: string
+          word_count?: number | null
         }
         Relationships: [
           {
@@ -4664,6 +4724,41 @@ export type Database = {
             columns: ["book_id"]
             isOneToOne: false
             referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      book_comments: {
+        Row: {
+          body: string
+          chapter_id: string | null
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          body: string
+          chapter_id?: string | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          body?: string
+          chapter_id?: string | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_comments_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "book_chapters"
             referencedColumns: ["id"]
           },
         ]
@@ -32735,6 +32830,10 @@ export type Database = {
         Args: { scope: string }
         Returns: undefined
       }
+      reorder_book_chapters: {
+        Args: { p_book_id: string; p_chapter_ids: string[] }
+        Returns: undefined
+      }
       reset_user_training_progress: {
         Args: { p_user_id: string }
         Returns: undefined
@@ -32958,6 +33057,14 @@ export type Database = {
         | "customer_rejected"
         | "completed"
         | "archived"
+      chapter_status:
+        | "draft"
+        | "outline"
+        | "writing"
+        | "review"
+        | "edited"
+        | "approved"
+        | "published"
       ladder_tier: "bronze" | "silver" | "gold" | "platinum" | "elite"
       metric_type: "numeric" | "text" | "boolean" | "date"
       sales_stage:
@@ -33107,6 +33214,15 @@ export const Constants = {
         "customer_rejected",
         "completed",
         "archived",
+      ],
+      chapter_status: [
+        "draft",
+        "outline",
+        "writing",
+        "review",
+        "edited",
+        "approved",
+        "published",
       ],
       ladder_tier: ["bronze", "silver", "gold", "platinum", "elite"],
       metric_type: ["numeric", "text", "boolean", "date"],

@@ -16,6 +16,7 @@ import Favorites from "./pages/Favorites";
 import Auth from "./pages/Auth";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
+import ChapterPage from "./pages/ChapterPage";
 import AdminBooks from "./pages/AdminBooks";
 import Thinkers from "./pages/Thinkers";
 import Frameworks from "./pages/Frameworks";
@@ -60,6 +61,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
               <Route path="/books/:slug" element={<BookDetail />} />
+              <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/thinkers" element={<Thinkers />} />
               <Route path="/frameworks" element={<Frameworks />} />
