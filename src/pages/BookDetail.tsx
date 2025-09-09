@@ -78,10 +78,10 @@ const BookDetail = () => {
       <Helmet>
         <title>{book.title} — Tech for Humanity</title>
         <meta name="description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
-        <link rel="canonical" href={`https://lovable.dev/books/${book.slug}`} />
+        <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta property="og:title" content={`${book.title} — Tech for Humanity`} />
         <meta property="og:description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
-        <meta property="og:url" content={`https://lovable.dev/books/${book.slug}`} />
+        <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta name="twitter:title" content={`${book.title} — Tech for Humanity`} />
         <meta name="twitter:description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
       </Helmet>

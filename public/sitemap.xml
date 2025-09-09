@@ -54,11 +54,26 @@
     <priority>0.7</priority>
   </url>
   
-  <!-- Feature Pages -->
+  <!-- Books -->
   <url>
     <loc>https://ai-thinker-flux.lovable.app/books</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ai-thinker-flux.lovable.app/books/workfamilyai-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ai-thinker-flux.lovable.app/books/sovereign-systems</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ai-thinker-flux.lovable.app/books/neural-ennead</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ai-thinker-flux.lovable.app/thinkers</loc>

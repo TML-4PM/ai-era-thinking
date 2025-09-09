@@ -118,6 +118,14 @@ const Index = () => {
                     <Settings className="w-4 h-4" />
                     Governance
                   </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/auth")}
+                    className="flex items-center gap-2"
+                  >
+                    Sign In
+                  </Button>
                 </nav>
               </div>
 

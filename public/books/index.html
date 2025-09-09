@@ -2,70 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Tech for Humanity — Books</title>
+  <title>Redirecting...</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="preload" href="/assets/fonts/system.css" as="style">
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; margin:0; color:#111; background:#fff}
-    header{padding:24px 16px; border-bottom:1px solid #eee}
-    .wrap{max-width:1100px; margin:0 auto}
-    h1{font-size:28px; margin:0}
-    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; padding:16px}
-    .card{border:1px solid #e6e6e6; border-radius:10px; overflow:hidden; display:flex; flex-direction:column; background:#fafafa}
-    .card img{width:100%; height:180px; object-fit:cover; background:#ddd}
-    .card .pad{padding:12px}
-    .title{font-weight:700; font-size:18px; margin:0 0 4px}
-    .sub{color:#666; font-size:13px; margin:0 0 8px}
-    .lead{font-size:14px; color:#333; min-height:40px}
-    .meta{display:flex; justify-content:space-between; align-items:center; margin-top:8px}
-    .progress{height:6px; background:#e5e5e5; border-radius:999px; overflow:hidden}
-    .progress > span{display:block; height:100%}
-    a.btn{display:inline-block; padding:8px 10px; font-size:13px; border:1px solid #111; border-radius:8px; text-decoration:none; color:#111; background:#fff}
-  </style>
+  <link rel="canonical" href="https://ai-thinker-flux.lovable.app/books" />
+  <script>
+    // Redirect to React SPA route to avoid duplicate content
+    window.location.replace('/books');
+  </script>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>Tech for Humanity — Book Series</h1>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <div id="grid" class="grid" aria-live="polite"></div>
-  </main>
-
-  <!-- data -->
-  <script src="/books/books.js"></script>
-  <script>
-    const avgProgress = (chapters) => {
-      if (!chapters || !chapters.length) return 0;
-      const sum = chapters.reduce((a,c)=>a+(c.progress||0),0);
-      return Math.round(sum / chapters.length);
-    };
-
-    const grid = document.getElementById('grid');
-    window.T4H_BOOKS.forEach(b => {
-      const pct = avgProgress(b.chapters);
-      const card = document.createElement('article');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${b.cover}" alt="${b.title} cover" onerror="this.src='/assets/covers/placeholder.jpg'">
-        <div class="pad">
-          <h2 class="title">${b.title}</h2>
-          <p class="sub">${b.subtitle}</p>
-          <p class="lead">${b.lead}</p>
-          <div class="meta">
-            <div class="progress" style="width:55%">
-              <span style="width:${pct}%;"></span>
-            </div>
-            <a class="btn" href="/books/book.html?slug=${encodeURIComponent(b.slug)}">Open</a>
-          </div>
-        </div>`;
-      grid.appendChild(card);
-      // set progress color
-      const bar = card.querySelector('.progress > span');
-      bar.style.background = pct >= 90 ? '#16a34a' : pct >= 50 ? '#eab308' : '#ef4444';
-    });
-  </script>
+  <p>Redirecting to <a href="/books">books section</a>...</p>
 </body>
 </html>

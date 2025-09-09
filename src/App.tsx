@@ -13,8 +13,10 @@ import Tools from "./pages/Tools";
 import AdminExpand from "./pages/AdminExpand";
 import AddThinker from "./pages/AddThinker";
 import Favorites from "./pages/Favorites";
+import Auth from "./pages/Auth";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
+import AdminBooks from "./pages/AdminBooks";
 import Thinkers from "./pages/Thinkers";
 import Frameworks from "./pages/Frameworks";
 import Chat from "./pages/Chat";
@@ -55,10 +57,12 @@ const App = () => (
               <Route path="/admin/expand" element={<AdminExpand />} />
               <Route path="/add-thinker" element={<AddThinker />} />
               <Route path="/favorites" element={<Favorites />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/books/:slug" element={<BookDetail />} />
-        <Route path="/thinkers" element={<Thinkers />} />
-        <Route path="/frameworks" element={<Frameworks />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/books" element={<Books />} />
+              <Route path="/books/:slug" element={<BookDetail />} />
+              <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/thinkers" element={<Thinkers />} />
+              <Route path="/frameworks" element={<Frameworks />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/workfamily" element={<WorkFamily />} />
               <Route path="/calculators" element={<Calculators />} />

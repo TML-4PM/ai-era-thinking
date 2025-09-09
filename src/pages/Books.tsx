@@ -34,10 +34,10 @@ const Books = () => {
       <Helmet>
         <title>Tech for Humanity — Book Series</title>
         <meta name="description" content="Explore our comprehensive book series on AI, technology, and human-centered design. From WorkFamilyAI to Sovereign Systems." />
-        <link rel="canonical" href="https://lovable.dev/books" />
+        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/books" />
         <meta property="og:title" content="Tech for Humanity — Book Series" />
         <meta property="og:description" content="Explore our comprehensive book series on AI, technology, and human-centered design." />
-        <meta property="og:url" content="https://lovable.dev/books" />
+        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/books" />
         <meta name="twitter:title" content="Tech for Humanity — Book Series" />
         <meta name="twitter:description" content="Explore our comprehensive book series on AI, technology, and human-centered design." />
       </Helmet>
