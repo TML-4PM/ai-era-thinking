@@ -15140,6 +15140,57 @@ export type Database = {
         }
         Relationships: []
       }
+      media_assets: {
+        Row: {
+          attribution: string
+          created_at: string | null
+          creator: string | null
+          filename: string
+          id: string
+          license: string
+          license_url: string | null
+          metadata: Json | null
+          original_url: string
+          source_api: string
+          storage_path: string
+          tags: string[] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          attribution: string
+          created_at?: string | null
+          creator?: string | null
+          filename: string
+          id?: string
+          license: string
+          license_url?: string | null
+          metadata?: Json | null
+          original_url: string
+          source_api?: string
+          storage_path: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          attribution?: string
+          created_at?: string | null
+          creator?: string | null
+          filename?: string
+          id?: string
+          license?: string
+          license_url?: string | null
+          metadata?: Json | null
+          original_url?: string
+          source_api?: string
+          storage_path?: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       "merged geeks raci": {
         Row: {
           "Detailed Project Offering": string | null

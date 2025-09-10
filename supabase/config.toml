@@ -54,3 +54,6 @@ verify_jwt = false
 
 [functions.duo-chat]
 verify_jwt = false
+
+[functions.openverse-images]
+verify_jwt = false

@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,6 +15,7 @@ import { Plus, Edit, Trash2, Eye, Book, ArrowLeft, Save, X } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import ChapterManager from "@/components/ChapterManager";
+import { ImageSearchModal } from "@/components/ImageSearchModal";
 
 interface BookFormProps {
   book?: any;
@@ -29,6 +31,7 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
   const [status, setStatus] = useState(book?.status || 'draft');
   const [slug, setSlug] = useState(book?.slug || '');
   const [coverUrl, setCoverUrl] = useState(book?.cover_url || '');
+  const [showImageSearch, setShowImageSearch] = useState(false);
   
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -156,12 +159,21 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
             </Select>
           </div>
           <div>
-            <label className="text-sm font-medium mb-2 block">Cover URL</label>
-            <Input
-              value={coverUrl}
-              onChange={(e) => setCoverUrl(e.target.value)}
-              placeholder="Cover image URL (optional)"
-            />
+            <Label className="text-sm font-medium mb-2 block">Cover Image</Label>
+            <div className="flex gap-2">
+              <Input
+                value={coverUrl}
+                onChange={(e) => setCoverUrl(e.target.value)}
+                placeholder="Cover image URL (optional)"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowImageSearch(true)}
+              >
+                Search Free Images
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -178,6 +190,15 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
             Cancel
           </Button>
         </div>
+
+        <ImageSearchModal
+          open={showImageSearch}
+          onOpenChange={setShowImageSearch}
+          onImageSelected={(imageUrl, attribution) => {
+            setCoverUrl(imageUrl);
+            setShowImageSearch(false);
+          }}
+        />
       </CardContent>
     </Card>
   );
