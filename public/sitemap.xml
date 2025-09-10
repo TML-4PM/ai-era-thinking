@@ -1,142 +1,255 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Core Pages -->
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/</loc>
+    <loc>https://timeless-thinkers.lovable.app/</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/favorites</loc>
+    <loc>https://timeless-thinkers.lovable.app/books</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- A Series: Tech for Humanity -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/tech-for-humanity</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/add-thinker</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://timeless-thinkers.lovable.app/books/human-rights-digital-ethics</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/governance</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://timeless-thinkers.lovable.app/books/governance-institutions</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/education-learning-futures</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/health-human-systems</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/work-economy</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/law-policy-regulation</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/security-defence</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/equity-inclusion-justice</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/environment-sustainability</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/culture-society</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/cities-infrastructure</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/business-industry</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/innovation-foresight</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/energy-resources</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/philosophy-meaning</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- B: Entangled Time -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/entangled-time</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- C Series: The Thinking Engine -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/thinking-engine</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/tools</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://timeless-thinkers.lovable.app/books/roles-humans-machine</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/frameworks-patterns-action</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/thinkers-brains-shaped-brains</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/institutions-guardians-gatekeepers</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/technologies-nervous-system</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/doctrines-strategy-signal</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/disciplines-fields-pressure</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/cultures-ways-working</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/products-tangible-anchors</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/eras-time-canvas</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/principles-guardrails-values</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/organizations-winners-losers</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/environment-nonhuman-stakeholders</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/energy-forces-invisible-drivers</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/unstructured-wildcards</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- D: Quantum Logic Systems -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/quantum-logic-systems</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- E: The Regenerative Organization -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/books/regenerative-organization</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Other pages -->
+  <url>
+    <loc>https://timeless-thinkers.lovable.app/explore</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
-  
-  <!-- Era Detail Pages -->
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/era/on-prem</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/era/cloud-native</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/era/gen-ai</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/era/agentic-ai</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/era/bci</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Books -->
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/books</loc>
+    <loc>https://timeless-thinkers.lovable.app/thinkers</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/books/workfamilyai-system</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/books/sovereign-systems</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/books/neural-ennead</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/thinkers</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/frameworks</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/chat</loc>
-    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ai-thinker-flux.lovable.app/workfamily</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/calculators</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://timeless-thinkers.lovable.app/frameworks</loc>
+    <lastmod>2024-01-20T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-  </url>
-  
-  <!-- Resources -->
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/resources</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/resources/workshops</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/resources/case-studies</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  
-  <!-- Company -->
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/about</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/contact</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://ai-thinker-flux.lovable.app/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
   </url>
 </urlset>
