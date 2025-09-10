@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import NotFound from "./pages/NotFound";
 import EraDetail from "./pages/EraDetail";
@@ -31,6 +32,12 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import { FavoritesProvider } from "./context/FavoritesContext";
+import BookLayout from "./components/BookLayout";
+import BookOverview from "./pages/book/BookOverview";
+import BookChapters from "./pages/book/BookChapters";
+import BookLeadersLive from "./pages/book/BookLeadersLive";
+import BookAddGuru from "./pages/book/BookAddGuru";
+import BookResources from "./pages/book/BookResources";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -51,7 +58,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Books />} />
+              <Route path="/" element={<Home />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/era/:eraId" element={<EraDetail />} />
               <Route path="/governance" element={<Governance />} />
@@ -61,7 +68,13 @@ const App = () => (
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
-              <Route path="/books/:slug" element={<BookDetail />} />
+              <Route path="/books/:slug" element={<BookLayout />}>
+                <Route index element={<BookOverview />} />
+                <Route path="chapters" element={<BookChapters />} />
+                <Route path="leaders-live" element={<BookLeadersLive />} />
+                <Route path="add-guru" element={<BookAddGuru />} />
+                <Route path="resources" element={<BookResources />} />
+              </Route>
               <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/thinkers" element={<Thinkers />} />
