@@ -93,20 +93,11 @@ const Explore = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/books")}
                     className="flex items-center gap-2"
                   >
                     <Home className="w-4 h-4" />
                     Books
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate("/favorites")}
-                    className="flex items-center gap-2"
-                  >
-                    <Heart className="w-4 h-4" />
-                    Crowd Sourced thinkers
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -116,6 +107,15 @@ const Explore = () => {
                   >
                     <Plus className="w-4 h-4" />
                     Add your own guru
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/favorites")}
+                    className="flex items-center gap-2"
+                  >
+                    <Heart className="w-4 h-4" />
+                    Crowdsourced Thinkers
                   </Button>
                   <Button 
                     variant="ghost" 

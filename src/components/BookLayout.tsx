@@ -84,7 +84,7 @@ const BookLayout = () => {
                   <Link to="/books">
                     <Button variant="ghost" size="sm">
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      All Books
+                      Books
                     </Button>
                   </Link>
                 </nav>

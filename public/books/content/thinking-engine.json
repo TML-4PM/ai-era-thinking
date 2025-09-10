@@ -1,0 +1,99 @@
+{
+  "title": "The Thinking Engine Hub",
+  "subtitle": "Comprehensive Framework Analysis",
+  "description": "Exploring how thinkers' frameworks evolve and apply across different domains and contexts.",
+  "totalSections": 12,
+  "seededSections": 3,
+  "sections": [
+    {
+      "id": "roles",
+      "title": "Roles",
+      "slug": "roles-humans-in-machine",
+      "status": "seeded",
+      "lead": "How human roles evolve in AI-augmented systems",
+      "exemplarCount": 25,
+      "contentFile": "roles-humans-in-machine.json"
+    },
+    {
+      "id": "frameworks", 
+      "title": "Frameworks",
+      "slug": "frameworks",
+      "status": "seeded",
+      "lead": "Fundamental frameworks for understanding AI transformation", 
+      "exemplarCount": 32,
+      "contentFile": "frameworks.json"
+    },
+    {
+      "id": "thinkers",
+      "title": "Thinkers", 
+      "slug": "thinkers-brains-that-shaped-brains",
+      "status": "seeded",
+      "lead": "The minds that shaped our understanding of AI and cognition",
+      "exemplarCount": 45,
+      "contentFile": "thinkers-brains-that-shaped-brains.json"
+    },
+    {
+      "id": "institutions",
+      "title": "Institutions",
+      "slug": "thinking-engine-institutions",
+      "status": "scaffold", 
+      "lead": "Organizations and institutions driving AI development"
+    },
+    {
+      "id": "technologies",
+      "title": "Technologies",
+      "slug": "thinking-engine-technologies", 
+      "status": "scaffold",
+      "lead": "Core technologies enabling artificial intelligence"
+    },
+    {
+      "id": "doctrines",
+      "title": "Doctrines",
+      "slug": "thinking-engine-doctrines",
+      "status": "scaffold",
+      "lead": "Philosophical doctrines shaping AI development"
+    },
+    {
+      "id": "disciplines", 
+      "title": "Disciplines",
+      "slug": "thinking-engine-disciplines",
+      "status": "scaffold",
+      "lead": "Academic disciplines contributing to AI research"
+    },
+    {
+      "id": "cultures",
+      "title": "Cultures",
+      "slug": "thinking-engine-cultures",
+      "status": "scaffold", 
+      "lead": "Cultural perspectives on AI and human-machine interaction"
+    },
+    {
+      "id": "products",
+      "title": "Products",
+      "slug": "thinking-engine-products",
+      "status": "scaffold",
+      "lead": "AI products and applications transforming society"
+    },
+    {
+      "id": "eras",
+      "title": "Eras", 
+      "slug": "thinking-engine-eras",
+      "status": "scaffold",
+      "lead": "Historical eras in AI development and adoption"
+    },
+    {
+      "id": "principles",
+      "title": "Principles",
+      "slug": "thinking-engine-principles", 
+      "status": "scaffold",
+      "lead": "Guiding principles for AI development and deployment"
+    },
+    {
+      "id": "organizations",
+      "title": "Organizations",
+      "slug": "thinking-engine-organizations",
+      "status": "scaffold",
+      "lead": "Key organizations in the AI ecosystem"
+    }
+  ]
+}

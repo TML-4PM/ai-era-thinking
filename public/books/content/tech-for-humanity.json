@@ -1,0 +1,119 @@
+{
+  "title": "Tech for Humanity Hub",
+  "subtitle": "A Comprehensive 15-Volume Series",
+  "description": "Exploring AI transformation, digital sovereignty, and human-centered technology across 15 specialized volumes.",
+  "totalVolumes": 15,
+  "seededVolumes": 5,
+  "volumes": [
+    {
+      "id": "A1",
+      "title": "Ethics & Consent",
+      "slug": "tech-for-humanity-ethics-consent",
+      "status": "seeded",
+      "lead": "Exploring ethical frameworks and consent mechanisms in AI systems",
+      "exemplarCount": 12
+    },
+    {
+      "id": "A2", 
+      "title": "Governance & Policy",
+      "slug": "tech-for-humanity-governance-policy",
+      "status": "seeded",
+      "lead": "Policy frameworks for responsible AI governance",
+      "exemplarCount": 15
+    },
+    {
+      "id": "A3",
+      "title": "Education & Knowledge",
+      "slug": "tech-for-humanity-education-knowledge", 
+      "status": "seeded",
+      "lead": "Transforming education through AI-enhanced learning",
+      "exemplarCount": 18
+    },
+    {
+      "id": "A4",
+      "title": "Healthcare & Wellbeing",
+      "slug": "tech-for-humanity-healthcare-wellbeing",
+      "status": "seeded", 
+      "lead": "AI applications for health and human wellbeing",
+      "exemplarCount": 22
+    },
+    {
+      "id": "A5",
+      "title": "Climate & Environment", 
+      "slug": "tech-for-humanity-climate-environment",
+      "status": "seeded",
+      "lead": "Environmental solutions through AI and technology",
+      "exemplarCount": 14
+    },
+    {
+      "id": "A6",
+      "title": "Economic Systems",
+      "slug": "tech-for-humanity-economic-systems",
+      "status": "scaffold",
+      "lead": "Reimagining economic models in the AI age"
+    },
+    {
+      "id": "A7",
+      "title": "Social Justice",
+      "slug": "tech-for-humanity-social-justice", 
+      "status": "scaffold",
+      "lead": "Technology for equity and social justice"
+    },
+    {
+      "id": "A8",
+      "title": "Creative Expression",
+      "slug": "tech-for-humanity-creative-expression",
+      "status": "scaffold", 
+      "lead": "AI and human creativity collaboration"
+    },
+    {
+      "id": "A9",
+      "title": "Security & Privacy",
+      "slug": "tech-for-humanity-security-privacy",
+      "status": "scaffold",
+      "lead": "Protecting human rights in digital spaces"
+    },
+    {
+      "id": "A10",
+      "title": "Urban & Rural Development",
+      "slug": "tech-for-humanity-urban-rural",
+      "status": "scaffold",
+      "lead": "Smart communities and sustainable development"
+    },
+    {
+      "id": "A11",
+      "title": "Global Cooperation", 
+      "slug": "tech-for-humanity-global-cooperation",
+      "status": "scaffold",
+      "lead": "International frameworks for AI governance"
+    },
+    {
+      "id": "A12",
+      "title": "Future Work",
+      "slug": "tech-for-humanity-future-work",
+      "status": "scaffold",
+      "lead": "The evolution of work in an AI-driven world"
+    },
+    {
+      "id": "A13",
+      "title": "Digital Rights",
+      "slug": "tech-for-humanity-digital-rights", 
+      "status": "scaffold",
+      "lead": "Fundamental rights in the digital age"
+    },
+    {
+      "id": "A14",
+      "title": "Intergenerational Equity",
+      "slug": "tech-for-humanity-intergenerational",
+      "status": "scaffold",
+      "lead": "Building technology for future generations"
+    },
+    {
+      "id": "A15",
+      "title": "Human Flourishing",
+      "slug": "tech-for-humanity-human-flourishing",
+      "status": "scaffold", 
+      "lead": "Technology to enhance human potential and wellbeing"
+    }
+  ]
+}
