@@ -35,11 +35,22 @@ export interface UserContribution {
   created_at: string;
 }
 
-export interface ContentModel {
+export interface Section {
   id: string;
   title: string;
+  slug?: string;
+  status: 'seeded' | 'scaffold';
+  lead: string;
+  exemplarCount?: number;
+  contentFile?: string;
+}
+
+export interface ContentModel {
+  id?: string;
+  title: string;
   description: string;
-  clusters: Cluster[];
+  clusters?: Cluster[];
+  sections?: Section[]; // Hub content uses "sections" instead of "clusters"
   userContributions?: UserContribution[];
-  references: string[];
+  references?: string[];
 }

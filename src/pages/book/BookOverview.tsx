@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar } from "lucide-react";
 import { ContentLoader } from "@/components/content/ContentLoader";
 import { ClusterList } from "@/components/content/ClusterList";
+import { SectionList } from "@/components/content/SectionList";
 import { ContributionForm } from "@/components/content/ContributionForm";
 
 const BookOverview = () => {
@@ -134,7 +135,17 @@ const BookOverview = () => {
                   );
                 }
 
-                return <ClusterList clusters={content.clusters} bookSlug={book.slug} />;
+                // Handle different content structures  
+                if (content.sections) {
+                  // Hub content with sections
+                  return <SectionList sections={content.sections} bookSlug={book.slug} />;
+                } else if (content.clusters) {
+                  // Regular content with clusters
+                  return <ClusterList clusters={content.clusters} bookSlug={book.slug} />;
+                } else {
+                  // Fallback for unknown structure
+                  return <div>No structured content available yet.</div>;
+                }
               }}
             </ContentLoader>
           </section>
