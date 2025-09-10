@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -24,7 +25,15 @@ const BookOverview = () => {
   const averageProgress = calculateAverageProgress(book.chapters || []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <>
+      <Helmet>
+        <title>{book.title} - Overview | Tech for Humanity</title>
+        <meta name="description" content={`${book.lead} Explore structured content, era evolution, and collaborative insights.`} />
+        <meta name="keywords" content={`${book.title}, ${book.series_name}, book overview, structured content`} />
+        <link rel="canonical" href={`/books/${slug}`} />
+      </Helmet>
+      
+      <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="grid md:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="md:col-span-2 space-y-8">
@@ -125,7 +134,7 @@ const BookOverview = () => {
                   );
                 }
 
-                return <ClusterList clusters={content.clusters} />;
+                return <ClusterList clusters={content.clusters} bookSlug={book.slug} />;
               }}
             </ContentLoader>
           </section>
@@ -309,8 +318,9 @@ const BookOverview = () => {
             </Card>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,12 +8,14 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { ChevronDown, ChevronRight, FileText } from 'lucide-react';
 import { EraMapping } from './EraMapping';
 import { RelatedLinks } from './RelatedLinks';
+import { ContributionForm } from './ContributionForm';
 
 interface ExemplarCardProps {
   exemplar: Exemplar;
+  bookSlug: string;
 }
 
-export function ExemplarCard({ exemplar }: ExemplarCardProps) {
+export function ExemplarCard({ exemplar, bookSlug }: ExemplarCardProps) {
   const [showEraMapping, setShowEraMapping] = useState(false);
   const [showCaseStudies, setShowCaseStudies] = useState(false);
 
@@ -110,6 +112,14 @@ export function ExemplarCard({ exemplar }: ExemplarCardProps) {
           thinkers={exemplar.relatedThinkers}
           frameworks={exemplar.relatedFrameworks}
         />
+
+        {/* Per-Exemplar Contribution */}
+        <div className="border-t pt-4">
+          <ContributionForm 
+            bookSlug={bookSlug}
+            exemplarKey={exemplar.name}
+          />
+        </div>
       </CardContent>
     </Card>
   );

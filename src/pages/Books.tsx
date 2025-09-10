@@ -44,9 +44,10 @@ const Books: React.FC = () => {
 
   const collections = [
     { id: 'all', label: 'All Books', count: books?.length || 0 },
-    { id: 'Augmented Humanity (15)', label: 'Core Series (15)', count: books?.filter(b => b.collection?.includes('Augmented')).length || 0 },
-    { id: 'Mini-Series (3)', label: 'Mini-Series (3)', count: books?.filter(b => b.collection?.includes('Mini')).length || 0 },
-    { id: 'Standalone', label: 'Standalone', count: books?.filter(b => b.collection === 'Standalone').length || 0 }
+    { id: 'Suite Hub', label: 'Suite Hubs', count: books?.filter(b => b.collection === 'Suite Hub').length || 0 },
+    { id: 'A Series', label: 'Tech for Humanity', count: books?.filter(b => b.collection === 'A Series').length || 0 },
+    { id: 'C Series', label: 'Thinking Engine', count: books?.filter(b => b.collection === 'C Series').length || 0 },
+    { id: 'Single Volume', label: 'Single Volumes', count: books?.filter(b => b.collection === 'Single Volume').length || 0 }
   ];
 
   const filteredBooks = books?.filter(book => {
@@ -94,7 +95,7 @@ const Books: React.FC = () => {
           {/* Collection Filters */}
           <div className="mb-8">
             <Tabs value={selectedCollection} onValueChange={setSelectedCollection}>
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 {collections.map(collection => (
                   <TabsTrigger key={collection.id} value={collection.id} className="flex items-center gap-2">
                     {collection.label}

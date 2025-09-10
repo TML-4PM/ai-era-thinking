@@ -142,6 +142,18 @@ export function ContributionForm({ bookSlug, clusterId, exemplarKey }: Contribut
             />
           </div>
 
+          {/* Add per-exemplar contribution section */}
+          {exemplarKey && (
+            <div className="border-t pt-4">
+              <h4 className="font-medium text-sm mb-2">Contributing to: {exemplarKey}</h4>
+              <Input
+                type="hidden"
+                {...register('exemplar_key')}
+                value={exemplarKey}
+              />
+            </div>
+          )}
+
           {submissionType === 'exemplar' && (
             <div>
               <Label htmlFor="progress">Progress (%)</Label>
