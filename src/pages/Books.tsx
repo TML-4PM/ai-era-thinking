@@ -4,9 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Compass, BookOpen } from "lucide-react";
 
 const Books = () => {
+  const navigate = useNavigate();
   const { data: books, isLoading } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
@@ -42,11 +45,68 @@ const Books = () => {
         <meta name="twitter:description" content="Explore our comprehensive book series on AI, technology, and human-centered design." />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <header className="border-b border-border">
-          <div className="container mx-auto px-6 py-8">
-            <h1 className="text-4xl font-bold text-foreground">Tech for Humanity — Book Series</h1>
-            <p className="text-muted-foreground mt-2">Practical guides for human-centered technology</p>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
+        {/* Navigation Header */}
+        <div className="border-b bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3">
+                  <img 
+                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
+                    alt="Tech4Humanity logo" 
+                    className="h-12 w-12 rounded-lg object-contain" 
+                  />
+                  <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Tech4Humanity
+                  </span>
+                </div>
+                
+                <nav className="hidden md:flex items-center gap-4">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate("/explore")}
+                    className="flex items-center gap-2"
+                  >
+                    <Compass className="w-4 h-4" />
+                    Explore Thinkers
+                  </Button>
+                </nav>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <header className="border-b border-border/50 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm">
+          <div className="container mx-auto px-6 py-12">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <BookOpen className="w-12 h-12 text-primary" />
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Book Series
+                </h1>
+              </div>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+                Comprehensive guides for human-centered technology and AI integration
+              </p>
+              <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
+                <span>{books?.length || 0} books available</span>
+                <span>•</span>
+                <Button 
+                  variant="link" 
+                  size="sm" 
+                  onClick={() => navigate("/explore")}
+                  className="p-0 h-auto font-normal"
+                >
+                  Explore our thinkers →
+                </Button>
+              </div>
+            </div>
           </div>
         </header>
 
