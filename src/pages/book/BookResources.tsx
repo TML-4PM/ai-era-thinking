@@ -12,7 +12,12 @@ import {
   Wrench,
   Users,
   BookOpen,
-  Target
+  Target,
+  CheckCircle,
+  Clock,
+  Database,
+  Code,
+  Link
 } from "lucide-react";
 
 const BookResources = () => {
@@ -128,6 +133,36 @@ const BookResources = () => {
                   <Button size="sm" variant="outline">Download PDF</Button>
                 </CardContent>
               </Card>
+
+              {book.draft_url && (
+                <Card className="hover:shadow-md transition-shadow border-green-200">
+                  <CardContent className="p-4 text-center">
+                    <FileText className="w-8 h-8 text-green-600 mx-auto mb-3" />
+                    <h3 className="font-semibold text-sm mb-2">Latest Draft</h3>
+                    <p className="text-xs text-muted-foreground mb-3">
+                      Current working version
+                    </p>
+                    <Button 
+                      size="sm" 
+                      onClick={() => window.open(book.draft_url, '_blank')}
+                      className="bg-green-600 hover:bg-green-700"
+                    >
+                      View Draft
+                    </Button>
+                    {book.ready_flag ? (
+                      <div className="flex items-center justify-center gap-1 mt-2 text-xs text-green-600">
+                        <CheckCircle className="w-3 h-3" />
+                        Ready for review
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-1 mt-2 text-xs text-yellow-600">
+                        <Clock className="w-3 h-3" />
+                        Work in progress
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
 
               <Card className="hover:shadow-md transition-shadow">
                 <CardContent className="p-4 text-center">

@@ -9,6 +9,11 @@ export interface Book {
   series_name?: string;
   status?: string;
   progress?: number;
+  collection?: string;
+  owner?: string;
+  due_date?: string;
+  draft_url?: string;
+  ready_flag?: boolean;
 }
 
 export interface BookChapter {

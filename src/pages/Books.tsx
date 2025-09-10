@@ -1,171 +1,254 @@
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useBooks } from "@/hooks/useBooks";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar, User, FileText, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { useBooks } from "@/hooks/useBooks";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Compass, BookOpen } from "lucide-react";
 
-const Books = () => {
+const Books: React.FC = () => {
   const navigate = useNavigate();
   const { data: books, isLoading } = useBooks();
+  const [selectedCollection, setSelectedCollection] = useState<string>("all");
 
-  const calculateAverageProgress = (chapters: any[]) => {
+  const calculateAverageProgress = (chapters: any[]): number => {
     if (!chapters || chapters.length === 0) return 0;
-    const sum = chapters.reduce((acc, chapter) => acc + (chapter.progress || 0), 0);
-    return Math.round(sum / chapters.length);
+    const totalProgress = chapters.reduce((sum, chapter) => sum + (chapter.progress || 0), 0);
+    return Math.round(totalProgress / chapters.length);
   };
+
+  const getStatusColor = (status?: string) => {
+    switch (status) {
+      case 'in_progress': return 'bg-blue-500';
+      case 'draft': return 'bg-yellow-500';
+      case 'concept': return 'bg-gray-500';
+      case 'published': return 'bg-green-500';
+      default: return 'bg-gray-400';
+    }
+  };
+
+  const getStatusLabel = (status?: string) => {
+    switch (status) {
+      case 'in_progress': return 'In Progress';
+      case 'draft': return 'Draft';
+      case 'concept': return 'Concept';
+      case 'published': return 'Published';
+      default: return 'Unknown';
+    }
+  };
+
+  const collections = [
+    { id: 'all', label: 'All Books', count: books?.length || 0 },
+    { id: 'Augmented Humanity (15)', label: 'Core Series (15)', count: books?.filter(b => b.collection?.includes('Augmented')).length || 0 },
+    { id: 'Mini-Series (3)', label: 'Mini-Series (3)', count: books?.filter(b => b.collection?.includes('Mini')).length || 0 },
+    { id: 'Standalone', label: 'Standalone', count: books?.filter(b => b.collection === 'Standalone').length || 0 }
+  ];
+
+  const filteredBooks = books?.filter(book => {
+    if (selectedCollection === 'all') return true;
+    return book.collection === selectedCollection;
+  }) || [];
 
   return (
     <>
       <Helmet>
-        <title>Tech for Humanity — Book Series</title>
-        <meta name="description" content="Explore our comprehensive book series on AI, technology, and human-centered design. From WorkFamilyAI to Sovereign Systems." />
-        <link rel="canonical" href="https://ai-thinker-flux.lovable.app/books" />
-        <meta property="og:title" content="Tech for Humanity — Book Series" />
-        <meta property="og:description" content="Explore our comprehensive book series on AI, technology, and human-centered design." />
-        <meta property="og:url" content="https://ai-thinker-flux.lovable.app/books" />
-        <meta name="twitter:title" content="Tech for Humanity — Book Series" />
-        <meta name="twitter:description" content="Explore our comprehensive book series on AI, technology, and human-centered design." />
+        <title>Tech for Humanity Book Series | The Organ</title>
+        <meta name="description" content="Explore our comprehensive book series on AI transformation, digital sovereignty, and human-centered technology. 20 volumes covering augmented humanity, governance frameworks, and practical implementation guides." />
+        <meta name="keywords" content="AI transformation, digital sovereignty, tech for humanity, book series, augmented humanity" />
+        <link rel="canonical" href="/books" />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
-        {/* Navigation Header */}
-        <div className="border-b bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <img 
-                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
-                    alt="Tech4Humanity logo" 
-                    className="h-12 w-12 rounded-lg object-contain" 
-                  />
-                  <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    Tech4Humanity
-                  </span>
-                </div>
-                
-                <nav className="hidden md:flex items-center gap-4">
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate("/explore")}
-                    className="flex items-center gap-2"
-                  >
-                    <Compass className="w-4 h-4" />
-                    Explore Thinkers
-                  </Button>
-                </nav>
+      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        {/* Sticky Navigation */}
+        <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div 
+              className="flex items-center gap-2 cursor-pointer" 
+              onClick={() => navigate('/')}
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">O</span>
               </div>
-
-              <div className="flex items-center gap-2">
-                <ThemeToggle />
-              </div>
+              <span className="text-xl font-bold">The Organ</span>
             </div>
+            <ThemeToggle />
+          </div>
+        </nav>
+
+        <div className="container mx-auto px-4 py-8">
+          {/* Hero Section */}
+          <div className="text-center mb-12 space-y-4">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">
+              Tech for Humanity
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A comprehensive book series exploring AI transformation, digital sovereignty, and human-centered technology for the modern era.
+            </p>
+          </div>
+
+          {/* Collection Filters */}
+          <div className="mb-8">
+            <Tabs value={selectedCollection} onValueChange={setSelectedCollection}>
+              <TabsList className="grid w-full grid-cols-4">
+                {collections.map(collection => (
+                  <TabsTrigger key={collection.id} value={collection.id} className="flex items-center gap-2">
+                    {collection.label}
+                    <Badge variant="secondary" className="text-xs">
+                      {collection.count}
+                    </Badge>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              {collections.map(collection => (
+                <TabsContent key={collection.id} value={collection.id} className="mt-8">
+                  {isLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {Array.from({ length: 6 }).map((_, i) => (
+                        <Card key={i} className="h-96">
+                          <CardHeader>
+                            <Skeleton className="h-48 w-full" />
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <Skeleton className="h-4 w-3/4" />
+                            <Skeleton className="h-4 w-1/2" />
+                            <Skeleton className="h-8 w-full" />
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filteredBooks.map((book) => (
+                        <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
+                          <CardHeader className="p-0">
+                            <div className="relative aspect-[3/4] overflow-hidden rounded-t-lg">
+                              {book.cover && book.cover !== "/assets/covers/placeholder.jpg" ? (
+                                <img 
+                                  src={book.cover} 
+                                  alt={`${book.title} cover`}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  onError={(e) => {
+                                    e.currentTarget.src = "/placeholder.svg";
+                                  }}
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                                  <FileText className="w-16 h-16 text-primary/60" />
+                                </div>
+                              )}
+                              
+                              {/* Status and Ready Flag Badges */}
+                              <div className="absolute top-3 left-3 flex gap-2">
+                                <Badge className={`${getStatusColor(book.status)} text-white`}>
+                                  {getStatusLabel(book.status)}
+                                </Badge>
+                                {book.ready_flag && (
+                                  <Badge className="bg-green-500 text-white">
+                                    <CheckCircle className="w-3 h-3 mr-1" />
+                                    Ready
+                                  </Badge>
+                                )}
+                              </div>
+
+                              {/* Collection Badge */}
+                              <div className="absolute top-3 right-3">
+                                <Badge variant="secondary" className="text-xs">
+                                  {book.collection}
+                                </Badge>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          
+                          <CardContent className="p-6 space-y-4">
+                            <div>
+                              <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                                {book.title}
+                              </h3>
+                              {book.subtitle && (
+                                <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
+                              )}
+                              <p className="text-sm text-muted-foreground line-clamp-2">{book.lead}</p>
+                            </div>
+
+                            {/* Metadata */}
+                            <div className="space-y-2 text-xs text-muted-foreground">
+                              {book.owner && (
+                                <div className="flex items-center gap-1">
+                                  <User className="w-3 h-3" />
+                                  <span>Owner: {book.owner}</span>
+                                </div>
+                              )}
+                              {book.due_date && (
+                                <div className="flex items-center gap-1">
+                                  {new Date(book.due_date) < new Date() ? (
+                                    <AlertCircle className="w-3 h-3 text-red-500" />
+                                  ) : (
+                                    <Calendar className="w-3 h-3" />
+                                  )}
+                                  <span className={new Date(book.due_date) < new Date() ? "text-red-500" : ""}>
+                                    Due: {new Date(book.due_date).toLocaleDateString()}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Progress Bar */}
+                            {book.chapters && book.chapters.length > 0 && (
+                              <div className="space-y-2">
+                                <div className="flex justify-between text-sm">
+                                  <span>Progress</span>
+                                  <span>{calculateAverageProgress(book.chapters)}%</span>
+                                </div>
+                                <Progress 
+                                  value={calculateAverageProgress(book.chapters)} 
+                                  className="h-2"
+                                />
+                              </div>
+                            )}
+
+                            {/* Action Buttons */}
+                            <div className="flex gap-2">
+                              <Button 
+                                onClick={() => navigate(`/books/${book.slug}`)}
+                                className="flex-1"
+                              >
+                                Open Book
+                              </Button>
+                              {book.draft_url && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => window.open(book.draft_url, '_blank')}
+                                >
+                                  <FileText className="w-4 h-4" />
+                                </Button>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+
+                  {!isLoading && filteredBooks.length === 0 && (
+                    <div className="text-center py-12">
+                      <FileText className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground">
+                        No books found in this collection yet.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+              ))}
+            </Tabs>
           </div>
         </div>
-
-        <header className="border-b border-border/50 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm">
-          <div className="container mx-auto px-6 py-12">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <BookOpen className="w-12 h-12 text-primary" />
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  Book Series
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-                Comprehensive guides for human-centered technology and AI integration
-              </p>
-              <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
-                <span>{books?.length || 0} books available</span>
-                <span>•</span>
-                <Button 
-                  variant="link" 
-                  size="sm" 
-                  onClick={() => navigate("/explore")}
-                  className="p-0 h-auto font-normal"
-                >
-                  Explore our thinkers →
-                </Button>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main className="container mx-auto px-6 py-8">
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <Card key={i} className="animate-pulse">
-                  <div className="aspect-[3/4] bg-muted rounded-t-lg" />
-                  <CardContent className="p-6">
-                    <div className="h-6 bg-muted rounded mb-2" />
-                    <div className="h-4 bg-muted rounded w-2/3 mb-4" />
-                    <div className="h-3 bg-muted rounded mb-4" />
-                    <div className="flex justify-between items-center">
-                      <div className="h-3 bg-muted rounded w-1/3" />
-                      <div className="h-8 bg-muted rounded w-20" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {books?.map((book) => {
-                const averageProgress = calculateAverageProgress(book.chapters || []);
-                return (
-                  <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                    <div 
-                      className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-muted-foreground"
-                    >
-                      {book.cover ? (
-                        <img 
-                          src={book.cover} 
-                          alt={`${book.title} cover`}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = '/placeholder.svg';
-                          }}
-                        />
-                      ) : (
-                        <div className="text-center p-4">
-                          <div className="text-2xl font-bold">{book.title}</div>
-                          <div className="text-sm opacity-60">{book.subtitle}</div>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-1">{book.title}</h2>
-                      <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
-                      <p className="text-sm text-foreground mb-4 line-clamp-2">{book.lead}</p>
-                      
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="flex-1 mr-4">
-                          <Progress value={averageProgress} className="h-2" />
-                        </div>
-                        <span className="text-xs text-muted-foreground">{averageProgress}%</span>
-                      </div>
-                      
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs px-2 py-1 bg-secondary rounded-full">
-                          {book.status?.replace('_', ' ') || 'Draft'}
-                        </span>
-                        <Link to={`/books/${book.slug}`}>
-                          <Button size="sm">Open</Button>
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
-        </main>
       </div>
     </>
   );

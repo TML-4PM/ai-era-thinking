@@ -3,7 +3,7 @@ import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Clock, Users, Target } from "lucide-react";
+import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar } from "lucide-react";
 
 const BookOverview = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,6 +25,48 @@ const BookOverview = () => {
       <div className="grid md:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="md:col-span-2 space-y-8">
+          {/* Book Metadata */}
+          <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+            <div className="flex flex-wrap gap-4">
+              {book.collection && (
+                <div>
+                  <span className="text-sm font-medium text-muted-foreground">Collection:</span>
+                  <p className="text-sm">{book.collection}</p>
+                </div>
+              )}
+              {book.owner && (
+                <div>
+                  <span className="text-sm font-medium text-muted-foreground">Owner:</span>
+                  <p className="text-sm">{book.owner}</p>
+                </div>
+              )}
+              {book.due_date && (
+                <div>
+                  <span className="text-sm font-medium text-muted-foreground">Due Date:</span>
+                  <p className="text-sm">{new Date(book.due_date).toLocaleDateString()}</p>
+                </div>
+              )}
+              {book.ready_flag !== undefined && (
+                <div>
+                  <span className="text-sm font-medium text-muted-foreground">Status:</span>
+                  <p className="text-sm flex items-center gap-1">
+                    {book.ready_flag ? (
+                      <>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Ready for Review
+                      </>
+                    ) : (
+                      <>
+                        <Clock className="w-4 h-4 text-yellow-500" />
+                        In Development
+                      </>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Book Description */}
           <section>
             <h2 className="text-2xl font-bold mb-4">About This Book</h2>
@@ -176,6 +218,10 @@ const BookOverview = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
+                  <div className="text-sm text-muted-foreground mb-1">Collection</div>
+                  <Badge variant="secondary">{book.collection || book.series_name}</Badge>
+                </div>
+                <div>
                   <div className="text-sm text-muted-foreground mb-1">Series</div>
                   <Badge variant="secondary">{book.series_name}</Badge>
                 </div>
@@ -185,6 +231,42 @@ const BookOverview = () => {
                     {book.status?.replace('_', ' ') || 'Draft'}
                   </Badge>
                 </div>
+                {book.owner && (
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">Owner</div>
+                    <div className="flex items-center gap-1 text-sm">
+                      <User className="w-3 h-3" />
+                      {book.owner}
+                    </div>
+                  </div>
+                )}
+                {book.due_date && (
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">Due Date</div>
+                    <div className="flex items-center gap-1 text-sm">
+                      <Calendar className="w-3 h-3" />
+                      {new Date(book.due_date).toLocaleDateString()}
+                    </div>
+                  </div>
+                )}
+                {book.ready_flag !== undefined && (
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">Ready Status</div>
+                    <div className="flex items-center gap-1 text-sm">
+                      {book.ready_flag ? (
+                        <>
+                          <CheckCircle className="w-3 h-3 text-green-500" />
+                          Ready for Review
+                        </>
+                      ) : (
+                        <>
+                          <Clock className="w-3 h-3 text-yellow-500" />
+                          In Development
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 

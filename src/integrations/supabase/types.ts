@@ -4765,11 +4765,16 @@ export type Database = {
       }
       books: {
         Row: {
+          collection: string | null
           cover_url: string | null
           created_at: string
+          draft_url: string | null
+          due_date: string | null
           id: string
           lead_description: string | null
+          owner: string | null
           progress_percentage: number | null
+          ready_flag: boolean | null
           series_name: string | null
           slug: string
           status: string | null
@@ -4778,11 +4783,16 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          collection?: string | null
           cover_url?: string | null
           created_at?: string
+          draft_url?: string | null
+          due_date?: string | null
           id?: string
           lead_description?: string | null
+          owner?: string | null
           progress_percentage?: number | null
+          ready_flag?: boolean | null
           series_name?: string | null
           slug: string
           status?: string | null
@@ -4791,11 +4801,16 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          collection?: string | null
           cover_url?: string | null
           created_at?: string
+          draft_url?: string | null
+          due_date?: string | null
           id?: string
           lead_description?: string | null
+          owner?: string | null
           progress_percentage?: number | null
+          ready_flag?: boolean | null
           series_name?: string | null
           slug?: string
           status?: string | null

@@ -31,6 +31,11 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
   const [status, setStatus] = useState(book?.status || 'draft');
   const [slug, setSlug] = useState(book?.slug || '');
   const [coverUrl, setCoverUrl] = useState(book?.cover_url || '');
+  const [collection, setCollection] = useState(book?.collection || 'Tech for Humanity');
+  const [owner, setOwner] = useState(book?.owner || '');
+  const [dueDate, setDueDate] = useState(book?.due_date || '');
+  const [draftUrl, setDraftUrl] = useState(book?.draft_url || '');
+  const [readyFlag, setReadyFlag] = useState(book?.ready_flag || false);
   const [showImageSearch, setShowImageSearch] = useState(false);
   
   const { toast } = useToast();
@@ -58,7 +63,12 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
         series_name: seriesName,
         status,
         slug,
-        cover_url: coverUrl || null
+        cover_url: coverUrl || null,
+        collection,
+        owner: owner || null,
+        due_date: dueDate || null,
+        draft_url: draftUrl || null,
+        ready_flag: readyFlag
       };
 
       if (book) {
@@ -145,12 +155,27 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
             />
           </div>
           <div>
+            <label className="text-sm font-medium mb-2 block">Collection</label>
+            <Select value={collection} onValueChange={setCollection}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Augmented Humanity (15)">Augmented Humanity (15)</SelectItem>
+                <SelectItem value="Mini-Series (3)">Mini-Series (3)</SelectItem>
+                <SelectItem value="Standalone">Standalone</SelectItem>
+                <SelectItem value="Tech for Humanity">Tech for Humanity</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
             <label className="text-sm font-medium mb-2 block">Status</label>
             <Select value={status} onValueChange={setStatus}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="concept">Concept</SelectItem>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="in_progress">In Progress</SelectItem>
                 <SelectItem value="review">Review</SelectItem>
@@ -158,22 +183,63 @@ const BookForm = ({ book, onSave, onCancel }: BookFormProps) => {
               </SelectContent>
             </Select>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <Label className="text-sm font-medium mb-2 block">Cover Image</Label>
-            <div className="flex gap-2">
-              <Input
-                value={coverUrl}
-                onChange={(e) => setCoverUrl(e.target.value)}
-                placeholder="Cover image URL (optional)"
+            <label className="text-sm font-medium mb-2 block">Owner</label>
+            <Input
+              value={owner}
+              onChange={(e) => setOwner(e.target.value)}
+              placeholder="Book owner/author"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-2 block">Due Date</label>
+            <Input
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-2 block">Ready Flag</label>
+            <div className="flex items-center gap-2 pt-2">
+              <input
+                type="checkbox"
+                checked={readyFlag}
+                onChange={(e) => setReadyFlag(e.target.checked)}
+                className="rounded"
               />
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowImageSearch(true)}
-              >
-                Search Free Images
-              </Button>
+              <span className="text-sm">Ready for review</span>
             </div>
+          </div>
+        </div>
+
+        <div>
+          <label className="text-sm font-medium mb-2 block">Draft URL</label>
+          <Input
+            value={draftUrl}
+            onChange={(e) => setDraftUrl(e.target.value)}
+            placeholder="URL to draft document (optional)"
+          />
+        </div>
+
+        <div>
+          <Label className="text-sm font-medium mb-2 block">Cover Image</Label>
+          <div className="flex gap-2">
+            <Input
+              value={coverUrl}
+              onChange={(e) => setCoverUrl(e.target.value)}
+              placeholder="Cover image URL (optional)"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowImageSearch(true)}
+            >
+              Search Free Images
+            </Button>
           </div>
         </div>
 
@@ -459,6 +525,39 @@ const AdminBooks = () => {
                       </CardHeader>
                       <CardContent>
                         <p className="text-sm text-muted-foreground mb-4">{book.lead_description}</p>
+                        <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                          {book.collection && (
+                            <div>
+                              <span className="font-medium">Collection:</span>
+                              <p className="text-muted-foreground">{book.collection}</p>
+                            </div>
+                          )}
+                          {book.owner && (
+                            <div>
+                              <span className="font-medium">Owner:</span>
+                              <p className="text-muted-foreground">{book.owner}</p>
+                            </div>
+                          )}
+                          {book.due_date && (
+                            <div>
+                              <span className="font-medium">Due Date:</span>
+                              <p className="text-muted-foreground">{new Date(book.due_date).toLocaleDateString()}</p>
+                            </div>
+                          )}
+                          {book.draft_url && (
+                            <div>
+                              <span className="font-medium">Draft:</span>
+                              <a 
+                                href={book.draft_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-primary hover:underline text-muted-foreground"
+                              >
+                                View Draft →
+                              </a>
+                            </div>
+                          )}
+                        </div>
                         <div className="flex items-center gap-4 text-sm">
                           <Badge variant="secondary">{book.series_name}</Badge>
                           <Badge variant={book.status === 'published' ? 'default' : 'outline'}>
@@ -467,6 +566,11 @@ const AdminBooks = () => {
                           <Badge variant="outline">
                             {book.book_chapters?.length || 0} chapters
                           </Badge>
+                          {book.ready_flag && (
+                            <Badge className="bg-green-500 text-white">
+                              Ready
+                            </Badge>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
