@@ -57,3 +57,6 @@ verify_jwt = false
 
 [functions.openverse-images]
 verify_jwt = false
+
+[functions.generate-book-pdf]
+verify_jwt = false

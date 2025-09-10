@@ -19,6 +19,8 @@ import {
   Code,
   Link
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const BookResources = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -126,11 +128,48 @@ const BookResources = () => {
               <Card className="hover:shadow-md transition-shadow">
                 <CardContent className="p-4 text-center">
                   <Download className="w-8 h-8 text-primary mx-auto mb-3" />
-                  <h3 className="font-semibold text-sm mb-2">Chapter Summaries</h3>
+                  <h3 className="font-semibold text-sm mb-2">Export Options</h3>
                   <p className="text-xs text-muted-foreground mb-3">
-                    Quick reference guides for each chapter
+                    Generate HTML preview or PDF export
                   </p>
-                  <Button size="sm" variant="outline">Download PDF</Button>
+                  <div className="flex gap-2 justify-center">
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={async () => {
+                        try {
+                          const { data, error } = await supabase.functions.invoke('generate-book-pdf', {
+                            body: { bookSlug: book.slug, format: 'html' }
+                          });
+                          if (error) throw error;
+                          toast({
+                            title: "Export Available",
+                            description: "HTML export is ready for download.",
+                          });
+                        } catch (error) {
+                          toast({
+                            title: "Export Failed", 
+                            description: "Could not generate export. Please try again.",
+                            variant: "destructive"
+                          });
+                        }
+                      }}
+                    >
+                      HTML
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => {
+                        toast({
+                          title: "Coming Soon",
+                          description: "PDF export is not yet available.",
+                        });
+                      }}
+                    >
+                      PDF
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
 

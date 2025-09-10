@@ -58,9 +58,15 @@ serve(async (req) => {
         headers: {
           'User-Agent': 'Tech4Humanity-BookCovers/1.0 (https://tech4humanity.org)',
         },
+        signal: AbortSignal.timeout(10000), // 10 second timeout
       });
 
       if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('Rate limit exceeded - please wait a moment and try again');
+        } else if (response.status >= 500) {
+          throw new Error('Openverse API is temporarily unavailable');
+        }
         throw new Error(`Openverse API error: ${response.status}`);
       }
 
@@ -89,10 +95,27 @@ serve(async (req) => {
     } else if (action === 'download') {
       console.log('Downloading and storing image:', imageUrl);
 
-      // Download the image
-      const imageResponse = await fetch(imageUrl);
+      // Download the image with timeout and better error handling
+      const imageResponse = await fetch(imageUrl, {
+        signal: AbortSignal.timeout(30000), // 30 second timeout for downloads
+        headers: {
+          'User-Agent': 'Tech4Humanity-BookCovers/1.0 (https://tech4humanity.org)',
+        },
+      });
+      
       if (!imageResponse.ok) {
+        if (imageResponse.status === 404) {
+          throw new Error('Image not found - it may have been removed from the source');
+        } else if (imageResponse.status === 403) {
+          throw new Error('Access denied - image may have restricted permissions');
+        }
         throw new Error(`Failed to download image: ${imageResponse.status}`);
+      }
+
+      // Check content type
+      const contentType = imageResponse.headers.get('content-type');
+      if (!contentType?.startsWith('image/')) {
+        throw new Error('Downloaded file is not a valid image');
       }
 
       const imageBlob = await imageResponse.blob();
@@ -187,8 +210,32 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Error in openverse-images function:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
+    
+    // Provide more specific error messages
+    let errorMessage = 'An unexpected error occurred';
+    let statusCode = 500;
+    
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      errorMessage = 'Network error - please check your connection and try again';
+      statusCode = 503;
+    } else if (error.message.includes('Openverse API error')) {
+      errorMessage = 'Image search service is temporarily unavailable';
+      statusCode = 503;
+    } else if (error.message.includes('Failed to download image')) {
+      errorMessage = 'Could not download the selected image - it may no longer be available';
+      statusCode = 404;
+    } else if (error.message.includes('Failed to upload image')) {
+      errorMessage = 'Could not save the image to storage - please try again';
+      statusCode = 500;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    return new Response(JSON.stringify({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    }), {
+      status: statusCode,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
