@@ -1,0 +1,62 @@
+{
+  "id": "frameworks",
+  "title": "Frameworks: Patterns of Action",
+  "description": "Decision-making frameworks and strategic patterns that guide human and AI collaboration across different technological eras.",
+  "clusters": [
+    {
+      "id": "decision-loops",
+      "title": "Decision Loops", 
+      "description": "Cyclical frameworks for rapid decision-making in complex environments",
+      "exemplars": [
+        {
+          "name": "OODA Loop",
+          "type": "framework",
+          "eraMapping": {
+            "onPrem": "Military command structures with paper-based intelligence gathering",
+            "cloudNative": "Real-time data dashboards and collaborative decision platforms", 
+            "genAI": "AI-assisted pattern recognition and scenario generation",
+            "agenticAI": "Autonomous agents executing OODA cycles in milliseconds",
+            "bci": "Direct neural feedback loops bypassing conscious deliberation"
+          },
+          "caseStudies": [
+            "US Air Force fighter pilot training programs",
+            "Toyota Production System continuous improvement",
+            "Agile software development sprint cycles"
+          ],
+          "relatedThinkers": ["John Boyd", "W. Edwards Deming"],
+          "relatedFrameworks": ["Cynefin", "Design Thinking"]
+        }
+      ]
+    },
+    {
+      "id": "complexity-navigation",
+      "title": "Complexity Navigation",
+      "description": "Frameworks for understanding and operating in complex adaptive systems",
+      "exemplars": [
+        {
+          "name": "Cynefin Framework",
+          "type": "framework", 
+          "eraMapping": {
+            "onPrem": "Manual categorization of business problems into domains",
+            "cloudNative": "Dynamic system monitoring and automated escalation paths",
+            "genAI": "AI classification of problems with contextual recommendations",
+            "agenticAI": "Autonomous domain switching and response orchestration",
+            "bci": "Intuitive pattern recognition enhanced by direct neural interfaces"
+          },
+          "caseStudies": [
+            "IBM's crisis management protocols",
+            "NHS emergency response systems",
+            "Spotify's organizational design"
+          ],
+          "relatedThinkers": ["Dave Snowden", "Ralph Stacey"],
+          "relatedFrameworks": ["OODA Loop", "Systems Thinking"]
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Boyd, J. (1987). A Discourse on Winning and Losing",
+    "Snowden, D. & Boone, M. (2007). A Leader's Framework for Decision Making. Harvard Business Review",
+    "Kurtz, C.F. & Snowden, D.J. (2003). The new dynamics of strategy: Sense-making in a complex and complicated world"
+  ]
+}

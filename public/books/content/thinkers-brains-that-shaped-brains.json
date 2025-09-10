@@ -1,0 +1,62 @@
+{
+  "id": "thinkers-brains-that-shaped-brains",
+  "title": "Thinkers: Brains That Shaped Brains", 
+  "description": "Key intellectual figures whose ideas continue to influence how we think about human-AI collaboration and organizational intelligence.",
+  "clusters": [
+    {
+      "id": "decision-scientists",
+      "title": "Decision Scientists",
+      "description": "Thinkers who fundamentally changed how we understand human decision-making and cognitive processes",
+      "exemplars": [
+        {
+          "name": "Daniel Kahneman",
+          "type": "thinker",
+          "eraMapping": {
+            "onPrem": "Academic research on human cognitive biases in isolated laboratory settings",
+            "cloudNative": "Behavioral insights applied to user experience design and digital interfaces",
+            "genAI": "AI systems designed to complement rather than replicate human thinking patterns",
+            "agenticAI": "AI agents that understand and compensate for human cognitive limitations",
+            "bci": "Direct neural interfaces that can bypass or enhance natural cognitive processes"
+          },
+          "caseStudies": [
+            "Nudge units in government policy design",
+            "Behavioral economics in fintech applications",
+            "AI system design incorporating cognitive bias awareness"
+          ],
+          "relatedThinkers": ["Amos Tversky", "Richard Thaler", "Herbert Simon"],
+          "relatedFrameworks": ["Prospect Theory", "Nudge Theory", "Bounded Rationality"]
+        }
+      ]
+    },
+    {
+      "id": "systems-thinkers",
+      "title": "Systems Thinkers", 
+      "description": "Visionaries who understood organizations and technology as interconnected complex systems",
+      "exemplars": [
+        {
+          "name": "Peter Senge",
+          "type": "thinker",
+          "eraMapping": {
+            "onPrem": "Learning organization concepts applied to traditional hierarchical structures",
+            "cloudNative": "Distributed learning networks and knowledge sharing platforms",
+            "genAI": "AI-enhanced organizational learning and pattern recognition across systems",
+            "agenticAI": "Self-organizing AI systems that embody learning organization principles",
+            "bci": "Collective intelligence networks enabling direct knowledge transfer"
+          },
+          "caseStudies": [
+            "Toyota's learning organization transformation",
+            "Shell's scenario planning methodologies", 
+            "3M's innovation culture development"
+          ],
+          "relatedThinkers": ["Jay Forrester", "Russell Ackoff", "Donella Meadows"],
+          "relatedFrameworks": ["Systems Thinking", "Fifth Discipline", "Learning Organization"]
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Kahneman, D. (2011). Thinking, Fast and Slow",
+    "Senge, P. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization",
+    "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases"
+  ]
+}

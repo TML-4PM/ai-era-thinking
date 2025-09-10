@@ -4669,6 +4669,76 @@ export type Database = {
           },
         ]
       }
+      book_appendices: {
+        Row: {
+          book_id: string | null
+          content: Json | null
+          id: string
+          key: string
+          updated_at: string
+        }
+        Insert: {
+          book_id?: string | null
+          content?: Json | null
+          id?: string
+          key: string
+          updated_at?: string
+        }
+        Update: {
+          book_id?: string | null
+          content?: Json | null
+          id?: string
+          key?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_appendices_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      book_blockers: {
+        Row: {
+          book_id: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          resolved: boolean | null
+          severity: string | null
+          title: string
+        }
+        Insert: {
+          book_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          resolved?: boolean | null
+          severity?: string | null
+          title: string
+        }
+        Update: {
+          book_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          resolved?: boolean | null
+          severity?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_blockers_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       book_chapters: {
         Row: {
           book_id: string
@@ -4762,6 +4832,122 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      book_contributions: {
+        Row: {
+          book_id: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          status: string | null
+          thinker_profile_id: string | null
+        }
+        Insert: {
+          book_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          status?: string | null
+          thinker_profile_id?: string | null
+        }
+        Update: {
+          book_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          status?: string | null
+          thinker_profile_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_contributions_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_contributions_thinker_profile_id_fkey"
+            columns: ["thinker_profile_id"]
+            isOneToOne: false
+            referencedRelation: "thinker_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      book_leader_mappings: {
+        Row: {
+          book_id: string | null
+          created_at: string
+          id: string
+          priority: number | null
+          thinker_name: string
+        }
+        Insert: {
+          book_id?: string | null
+          created_at?: string
+          id?: string
+          priority?: number | null
+          thinker_name: string
+        }
+        Update: {
+          book_id?: string | null
+          created_at?: string
+          id?: string
+          priority?: number | null
+          thinker_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_leader_mappings_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      book_user_contributions: {
+        Row: {
+          author: string
+          book_slug: string
+          cluster_id: string | null
+          created_at: string
+          id: string
+          status: string
+          submission: string
+          submission_type: string
+          tags: string[] | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          author: string
+          book_slug: string
+          cluster_id?: string | null
+          created_at?: string
+          id?: string
+          status?: string
+          submission: string
+          submission_type?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          author?: string
+          book_slug?: string
+          cluster_id?: string | null
+          created_at?: string
+          id?: string
+          status?: string
+          submission?: string
+          submission_type?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       books: {
         Row: {
@@ -32885,6 +33071,10 @@ export type Database = {
         Returns: number
       }
       refresh_automation_analytics: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      refresh_book_appendices: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }

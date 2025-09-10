@@ -1,0 +1,62 @@
+{
+  "id": "roles-humans-in-machine", 
+  "title": "Roles: Humans in the Machine",
+  "description": "Evolving human roles and responsibilities in increasingly automated systems and AI-augmented organizations.",
+  "clusters": [
+    {
+      "id": "management-roles",
+      "title": "Management & Leadership",
+      "description": "How management and leadership roles transform in AI-integrated environments",
+      "exemplars": [
+        {
+          "name": "Project Manager",
+          "type": "role",
+          "eraMapping": {
+            "onPrem": "Manual scheduling, Excel tracking, email coordination with teams",
+            "cloudNative": "Digital project management tools, real-time collaboration, automated reporting",
+            "genAI": "AI-powered risk assessment, intelligent resource allocation, predictive timeline adjustments",
+            "agenticAI": "AI agents handling routine tasks, human focus on strategy and stakeholder relationships",
+            "bci": "Direct neural interfaces for instant team coordination and intuitive project sensing"
+          },
+          "caseStudies": [
+            "Microsoft's transition to AI-augmented project management",
+            "Construction industry adopting predictive project tools",
+            "Software development teams using AI pair programming"
+          ],
+          "relatedThinkers": ["Peter Drucker", "Mary Parker Follett"],
+          "relatedFrameworks": ["Agile", "PRINCE2", "Cynefin"]
+        }
+      ]
+    },
+    {
+      "id": "technical-roles", 
+      "title": "Technical & Engineering",
+      "description": "How technical roles evolve with increasing automation and AI capabilities",
+      "exemplars": [
+        {
+          "name": "Software Developer",
+          "type": "role",
+          "eraMapping": {
+            "onPrem": "Manual coding, local development environments, waterfall methodologies",
+            "cloudNative": "DevOps integration, microservices architecture, continuous deployment",
+            "genAI": "AI code generation, automated testing, intelligent debugging assistance", 
+            "agenticAI": "AI agents writing routine code, humans designing system architecture and user experiences",
+            "bci": "Direct neural programming interfaces, thought-to-code translation systems"
+          },
+          "caseStudies": [
+            "GitHub Copilot adoption in enterprise development",
+            "Netflix's evolution to cloud-native architecture",
+            "Tesla's over-the-air software update capabilities"
+          ],
+          "relatedThinkers": ["Kent Beck", "Martin Fowler"],
+          "relatedFrameworks": ["Agile", "DevOps", "Lean Startup"]
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Drucker, P. (1999). Management Challenges for the 21st Century",
+    "McAfee, A. & Brynjolfsson, E. (2017). Machine, Platform, Crowd: Harnessing Our Digital Future",
+    "Davenport, T.H. & Kirby, J. (2016). Only Humans Need Apply: Winners and Losers in the Age of Smart Machines"
+  ]
+}

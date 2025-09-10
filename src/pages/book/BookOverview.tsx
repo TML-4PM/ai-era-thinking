@@ -4,6 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar } from "lucide-react";
+import { ContentLoader } from "@/components/content/ContentLoader";
+import { ClusterList } from "@/components/content/ClusterList";
+import { ContributionForm } from "@/components/content/ContributionForm";
 
 const BookOverview = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -75,42 +78,62 @@ const BookOverview = () => {
             </div>
           </section>
 
-          {/* Key Topics */}
+          {/* Key Topics or Content Model */}
           <section>
-            <h2 className="text-2xl font-bold mb-4">What You'll Learn</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Target className="w-5 h-5 text-primary" />
-                    Core Concepts
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Fundamental frameworks and methodologies</li>
-                    <li>• Practical implementation strategies</li>
-                    <li>• Real-world case studies and examples</li>
-                  </ul>
-                </CardContent>
-              </Card>
+            <h2 className="text-2xl font-bold mb-4">Content & Frameworks</h2>
+            <ContentLoader bookSlug={book.slug}>
+              {({ content, loading, error }) => {
+                if (loading) {
+                  return <div className="text-center py-8">Loading content...</div>;
+                }
+                
+                if (error || !content) {
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Card>
+                        <CardHeader className="pb-3">
+                          <CardTitle className="flex items-center gap-2 text-lg">
+                            <Target className="w-5 h-5 text-primary" />
+                            Core Concepts
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <ul className="space-y-2 text-sm text-muted-foreground">
+                            <li>• Fundamental frameworks and methodologies</li>
+                            <li>• Practical implementation strategies</li>
+                            <li>• Real-world case studies and examples</li>
+                          </ul>
+                        </CardContent>
+                      </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Users className="w-5 h-5 text-primary" />
-                    Community Insights
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Expert thought leadership</li>
-                    <li>• Community-contributed frameworks</li>
-                    <li>• Interactive discussions and feedback</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+                      <Card>
+                        <CardHeader className="pb-3">
+                          <CardTitle className="flex items-center gap-2 text-lg">
+                            <Users className="w-5 h-5 text-primary" />
+                            Community Insights
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <ul className="space-y-2 text-sm text-muted-foreground">
+                            <li>• Expert thought leadership</li>
+                            <li>• Community-contributed frameworks</li>
+                            <li>• Interactive discussions and feedback</li>
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  );
+                }
+
+                return <ClusterList clusters={content.clusters} />;
+              }}
+            </ContentLoader>
+          </section>
+
+          {/* User Contribution Form */}
+          <section>
+            <h2 className="text-2xl font-bold mb-4">Contribute Your Insights</h2>
+            <ContributionForm bookSlug={book.slug} />
           </section>
 
           {/* Chapter Preview */}
