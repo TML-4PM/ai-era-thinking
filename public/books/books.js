@@ -1,4 +1,4 @@
-// 15-book catalogue. Rename, edit slugs, add chapters as you go.
+// 15-book catalogue for Tech for Humanity
 window.T4H_BOOKS = [
   {
     id: 1,
@@ -40,20 +40,20 @@ window.T4H_BOOKS = [
     ]
   },
   // Stub the remaining 12. Replace titles/slugs later.
-  { id: 4,  title: "Book 4",  subtitle: "Tech for Humanity", slug: "book-4",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 5,  title: "Book 5",  subtitle: "Tech for Humanity", slug: "book-5",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 6,  title: "Book 6",  subtitle: "Tech for Humanity", slug: "book-6",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 7,  title: "Book 7",  subtitle: "Tech for Humanity", slug: "book-7",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 8,  title: "Book 8",  subtitle: "Tech for Humanity", slug: "book-8",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 9,  title: "Book 9",  subtitle: "Tech for Humanity", slug: "book-9",  lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 10, title: "Book 10", subtitle: "Tech for Humanity", slug: "book-10", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 11, title: "Book 11", subtitle: "Tech for Humanity", slug: "book-11", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 12, title: "Book 12", subtitle: "Tech for Humanity", slug: "book-12", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 13, title: "Book 13", subtitle: "Tech for Humanity", slug: "book-13", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 14, title: "Book 14", subtitle: "Tech for Humanity", slug: "book-14", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
-  { id: 15, title: "Book 15", subtitle: "Tech for Humanity", slug: "book-15", lead: "Stub", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 4,  title: "Book 4",  subtitle: "Tech for Humanity", slug: "book-4",  lead: "Emerging technologies for sustainable development", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 5,  title: "Book 5",  subtitle: "Tech for Humanity", slug: "book-5",  lead: "Digital ethics and responsible innovation", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 6,  title: "Book 6",  subtitle: "Tech for Humanity", slug: "book-6",  lead: "Community-driven technology solutions", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 7,  title: "Book 7",  subtitle: "Tech for Humanity", slug: "book-7",  lead: "Inclusive design for accessible technology", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 8,  title: "Book 8",  subtitle: "Tech for Humanity", slug: "book-8",  lead: "Climate technology and environmental impact", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 9,  title: "Book 9",  subtitle: "Tech for Humanity", slug: "book-9",  lead: "Healthcare innovation and digital wellness", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 10, title: "Book 10", subtitle: "Tech for Humanity", slug: "book-10", lead: "Education technology and lifelong learning", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 11, title: "Book 11", subtitle: "Tech for Humanity", slug: "book-11", lead: "Financial inclusion and economic empowerment", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 12, title: "Book 12", subtitle: "Tech for Humanity", slug: "book-12", lead: "Privacy, security, and digital rights", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 13, title: "Book 13", subtitle: "Tech for Humanity", slug: "book-13", lead: "Global collaboration and technology governance", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 14, title: "Book 14", subtitle: "Tech for Humanity", slug: "book-14", lead: "Future of work and human-AI collaboration", cover: "/assets/covers/placeholder.jpg", chapters: [] },
+  { id: 15, title: "Book 15", subtitle: "Tech for Humanity", slug: "book-15", lead: "Building resilient technological ecosystems", cover: "/assets/covers/placeholder.jpg", chapters: [] },
 ];
 
-// helper
-window.findBookBySlug = (slug) =>
+// Helper function
+window.findBookBySlug = (slug) => 
   window.T4H_BOOKS.find(b => b.slug === slug);

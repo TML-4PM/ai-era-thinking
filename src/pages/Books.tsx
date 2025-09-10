@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -10,25 +9,11 @@ import { Compass, BookOpen } from "lucide-react";
 
 const Books = () => {
   const navigate = useNavigate();
-  const { data: books, isLoading } = useQuery({
-    queryKey: ["books"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("books")
-        .select(`
-          *,
-          book_chapters(*)
-        `)
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data;
-    }
-  });
+  const { data: books, isLoading } = useBooks();
 
   const calculateAverageProgress = (chapters: any[]) => {
     if (!chapters || chapters.length === 0) return 0;
-    const sum = chapters.reduce((acc, chapter) => acc + (chapter.progress_percentage || 0), 0);
+    const sum = chapters.reduce((acc, chapter) => acc + (chapter.progress || 0), 0);
     return Math.round(sum / chapters.length);
   };
 
@@ -131,19 +116,19 @@ const Books = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {books?.map((book) => {
-                const averageProgress = calculateAverageProgress(book.book_chapters);
+                const averageProgress = calculateAverageProgress(book.chapters || []);
                 return (
                   <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <div 
                       className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-muted-foreground"
                     >
-                      {book.cover_url ? (
+                      {book.cover ? (
                         <img 
-                          src={book.cover_url} 
+                          src={book.cover} 
                           alt={`${book.title} cover`}
                           className="w-full h-full object-cover"
                           onError={(e) => {
-                            e.currentTarget.src = '/assets/covers/placeholder.jpg';
+                            e.currentTarget.src = '/placeholder.svg';
                           }}
                         />
                       ) : (
@@ -157,7 +142,7 @@ const Books = () => {
                     <CardContent className="p-6">
                       <h2 className="text-xl font-bold mb-1">{book.title}</h2>
                       <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
-                      <p className="text-sm text-foreground mb-4 line-clamp-2">{book.lead_description}</p>
+                      <p className="text-sm text-foreground mb-4 line-clamp-2">{book.lead}</p>
                       
                       <div className="flex justify-between items-center mb-4">
                         <div className="flex-1 mr-4">
