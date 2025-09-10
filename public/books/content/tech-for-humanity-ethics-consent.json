@@ -1,0 +1,75 @@
+{
+  "id": "tech-for-humanity-ethics-consent",
+  "title": "Ethics & Consent",
+  "description": "Ethical frameworks, consent mechanisms, and human rights considerations in the development and deployment of AI and technological systems.",
+  "clusters": [
+    {
+      "id": "belmont-principles",
+      "title": "Belmont Principles",
+      "description": "Foundational ethical principles for research involving human subjects",
+      "exemplars": [
+        {
+          "name": "Respect for Persons",
+          "type": "Ethical Principle",
+          "eraMapping": {
+            "onPrem": "Traditional informed consent processes and institutional review boards",
+            "cloudNative": "Digital consent platforms and automated ethics review systems",
+            "genAI": "AI-assisted consent processes with dynamic risk assessment",
+            "agenticAI": "Autonomous ethical agents ensuring ongoing consent verification",
+            "bci": "Neural consent interfaces with direct cognitive agreement mechanisms"
+          },
+          "caseStudies": ["Medical Research Ethics", "Social Media Consent", "AI Training Data"],
+          "relatedThinkers": ["Tom Beauchamp", "James Childress"],
+          "relatedFrameworks": ["IRB Guidelines", "GDPR"],
+          "progress": 40,
+          "status": "seeded",
+          "notes": "Core principle established, implementation varies by era"
+        },
+        {
+          "name": "Beneficence",
+          "type": "Ethical Principle", 
+          "eraMapping": {
+            "onPrem": "Risk-benefit analysis in controlled environments",
+            "cloudNative": "Scalable benefit assessment across distributed systems",
+            "genAI": "AI-powered impact prediction and optimization",
+            "agenticAI": "Self-optimizing systems for maximum benefit",
+            "bci": "Direct neural benefit enhancement and risk mitigation"
+          },
+          "caseStudies": ["Clinical Trials", "AI Safety Research", "Tech Platform Design"],
+          "relatedThinkers": ["Peter Singer", "Derek Parfit"],
+          "relatedFrameworks": ["Utilitarian Ethics", "Effective Altruism"],
+          "progress": 35,
+          "status": "seeded"
+        }
+      ]
+    },
+    {
+      "id": "institutional-review",
+      "title": "Institutional Review Boards",
+      "description": "Governance structures for ethical oversight of research and development",
+      "exemplars": [
+        {
+          "name": "IRB Protocols",
+          "type": "Governance Framework",
+          "eraMapping": {
+            "onPrem": "Paper-based review processes with committee meetings",
+            "cloudNative": "Digital submission and review workflows",
+            "genAI": "AI-assisted protocol analysis and risk assessment",
+            "agenticAI": "Autonomous ethical review with human oversight",
+            "bci": "Neural ethics committees with enhanced decision-making"
+          },
+          "caseStudies": ["University Research", "Corporate R&D", "Government Studies"],
+          "relatedThinkers": ["Arthur Schafer", "Ezekiel Emanuel"],
+          "relatedFrameworks": ["Common Rule", "Declaration of Helsinki"],
+          "progress": 30,
+          "status": "seeded"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "The Belmont Report: Ethical Principles and Guidelines for the Protection of Human Subjects of Research",
+    "Beauchamp, T. L., & Childress, J. F. (2019). Principles of biomedical ethics",
+    "Emanuel, E. J., et al. (2000). What makes clinical research ethical?"
+  ]
+}

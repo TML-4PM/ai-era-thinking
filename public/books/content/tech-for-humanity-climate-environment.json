@@ -1,0 +1,58 @@
+{
+  "id": "tech-for-humanity-climate-environment",
+  "title": "Climate & Environment", 
+  "description": "Technology solutions for environmental sustainability and climate change while respecting planetary boundaries.",
+  "clusters": [
+    {
+      "id": "regenerative-agriculture",
+      "title": "Regenerative Agriculture",
+      "description": "Technology-enhanced farming practices that restore and improve ecosystem health",
+      "exemplars": [
+        {
+          "name": "Precision Agriculture Systems",
+          "type": "Agricultural Technology",
+          "eraMapping": {
+            "onPrem": "GPS-guided tractors and soil sensors",
+            "cloudNative": "IoT networks and cloud-based farm management",
+            "genAI": "AI-powered crop optimization and yield prediction",
+            "agenticAI": "Autonomous farming robots and ecosystem management",
+            "bci": "Human-plant neural communication and biofeedback systems"
+          },
+          "caseStudies": ["John Deere Operations Center", "Climate Corporation", "FarmLogs"],
+          "relatedThinkers": ["Joel Salatin", "Gabe Brown"],
+          "relatedFrameworks": ["Regenerative Agriculture", "Permaculture Design"],
+          "progress": 25,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "water-scarcity-ai",
+      "title": "Water Scarcity & AI", 
+      "description": "AI-driven solutions for water conservation and management",
+      "exemplars": [
+        {
+          "name": "Smart Water Management",
+          "type": "Water Technology",
+          "eraMapping": {
+            "onPrem": "Traditional water treatment and distribution systems",
+            "cloudNative": "Smart meters and cloud-based water analytics",
+            "genAI": "AI-powered leak detection and consumption optimization",
+            "agenticAI": "Autonomous water distribution and quality management",
+            "bci": "Neural interfaces for human-water system integration"
+          },
+          "caseStudies": ["Israel's Water Management", "Singapore NEWater", "Cape Town Water Crisis"],
+          "relatedThinkers": ["Peter Gleick", "Newsha Ajami"],
+          "relatedFrameworks": ["Integrated Water Resource Management", "Water-Energy Nexus"],
+          "progress": 25,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Hawken, P. (2017). Drawdown: The Most Comprehensive Plan Ever Proposed to Reverse Global Warming",
+    "Rockström, J., et al. (2009). A safe operating space for humanity",
+    "Steffen, W., et al. (2015). Planetary boundaries: Guiding human development on a changing planet"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "quantum-logic-systems",
+  "title": "Quantum Logic Systems / Quantum Life Sciences",
+  "description": "Quantum computation, quantum biology, and the intersection of quantum mechanics with living systems and computational logic.",
+  "clusters": [
+    {
+      "id": "quantum-computation",
+      "title": "Quantum Computation",
+      "description": "Quantum computing principles, algorithms, and applications",
+      "exemplars": [
+        {
+          "name": "Quantum Supremacy",
+          "type": "Computational Milestone",
+          "eraMapping": {
+            "onPrem": "Classical supercomputers and parallel processing",
+            "cloudNative": "Quantum cloud services and hybrid computing",
+            "genAI": "Quantum-enhanced AI training and inference",
+            "agenticAI": "Quantum-powered autonomous reasoning systems",
+            "bci": "Quantum-neural computational interfaces"
+          },
+          "caseStudies": ["Google Sycamore", "IBM Quantum", "D-Wave Systems"],
+          "relatedThinkers": ["John Preskill", "Peter Shor"],
+          "relatedFrameworks": ["Quantum Error Correction", "NISQ Era"],
+          "progress": 35,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "quantum-biology",
+      "title": "Quantum Biology",
+      "description": "Quantum effects in biological systems and living organisms",
+      "exemplars": [
+        {
+          "name": "Photosynthetic Quantum Coherence",
+          "type": "Biological Process",
+          "eraMapping": {
+            "onPrem": "Classical biochemical understanding",
+            "cloudNative": "Computational modeling of quantum biology",
+            "genAI": "AI-driven quantum biology research",
+            "agenticAI": "Autonomous quantum biology experimentation",
+            "bci": "Quantum-enhanced biological interfaces"
+          },
+          "caseStudies": ["Plant Light Harvesting", "Avian Navigation", "Enzyme Catalysis"],
+          "relatedThinkers": ["Seth Lloyd", "Johnjoe McFadden"],
+          "relatedFrameworks": ["Quantum Coherence", "Decoherence Theory"],
+          "progress": 30,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "quantum-medicine",
+      "title": "Quantum Medicine",
+      "description": "Quantum approaches to medical diagnosis, treatment, and understanding",
+      "exemplars": [
+        {
+          "name": "Quantum MRI Enhancement",
+          "type": "Medical Technology",
+          "eraMapping": {
+            "onPrem": "Classical MRI and imaging techniques",
+            "cloudNative": "Cloud-processed medical imaging",
+            "genAI": "AI-enhanced quantum imaging analysis",
+            "agenticAI": "Autonomous quantum diagnostic systems",
+            "bci": "Quantum-neural medical interfaces"
+          },
+          "caseStudies": ["Diamond NV Centers", "Quantum Sensors", "Molecular Imaging"],
+          "relatedThinkers": ["Ronald Walsworth", "Mikhail Lukin"],
+          "relatedFrameworks": ["Quantum Sensing", "Magnetic Resonance"],
+          "progress": 25,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Nielsen, M. A., & Chuang, I. L. (2010). Quantum Computation and Quantum Information",
+    "McFadden, J., & Al-Khalili, J. (2014). Life on the Edge: The Coming of Age of Quantum Biology",
+    "Preskill, J. (2018). Quantum Computing in the NISQ era and beyond"
+  ]
+}

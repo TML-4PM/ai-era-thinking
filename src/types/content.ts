@@ -13,6 +13,9 @@ export interface Exemplar {
   caseStudies: string[];
   relatedThinkers: string[];
   relatedFrameworks: string[];
+  progress?: number; // 0-100
+  status?: 'scaffold' | 'seeded' | 'complete';
+  notes?: string;
 }
 
 export interface Cluster {

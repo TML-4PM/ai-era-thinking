@@ -1,0 +1,81 @@
+{
+  "id": "regenerative-organization",
+  "title": "The Regenerative Organization",
+  "description": "Organizational transformation towards regenerative, sustainable, and adaptive systems that create positive impact.",
+  "clusters": [
+    {
+      "id": "strip-current-state",
+      "title": "Strip (Current State Analysis)",
+      "description": "Analyzing and understanding current organizational states and patterns",
+      "exemplars": [
+        {
+          "name": "Systems Thinking Assessment",
+          "type": "Analytical Framework",
+          "eraMapping": {
+            "onPrem": "Manual organizational audits and surveys",
+            "cloudNative": "Digital analytics and dashboard reporting",
+            "genAI": "AI-powered organizational pattern recognition",
+            "agenticAI": "Autonomous organizational health monitoring",
+            "bci": "Neural-organizational feedback systems"
+          },
+          "caseStudies": ["Toyota Production System", "Spotify Model", "Haier RenDanHeYi"],
+          "relatedThinkers": ["Peter Senge", "Donella Meadows"],
+          "relatedFrameworks": ["Fifth Discipline", "Systems Archetype"],
+          "progress": 35,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "map-ecosystem",
+      "title": "Map (Ecosystem Mapping)",
+      "description": "Mapping organizational ecosystems and stakeholder networks",
+      "exemplars": [
+        {
+          "name": "Stakeholder Network Analysis",
+          "type": "Mapping Methodology",
+          "eraMapping": {
+            "onPrem": "Manual stakeholder identification and mapping",
+            "cloudNative": "Digital collaboration and network analysis tools",
+            "genAI": "AI-enhanced relationship and influence mapping",
+            "agenticAI": "Dynamic, self-updating ecosystem maps",
+            "bci": "Neural-social network interfaces"
+          },
+          "caseStudies": ["Patagonia Ecosystem", "Interface Inc. Mission Zero", "Unilever Sustainable Living"],
+          "relatedThinkers": ["Kate Raworth", "John Elkington"],
+          "relatedFrameworks": ["Doughnut Economics", "Triple Bottom Line"],
+          "progress": 40,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "update-transformation",
+      "title": "Update (Transformation Paths)",
+      "description": "Pathways and methods for organizational transformation",
+      "exemplars": [
+        {
+          "name": "Regenerative Business Model",
+          "type": "Business Strategy",
+          "eraMapping": {
+            "onPrem": "Traditional linear business models",
+            "cloudNative": "Platform and network-based models",
+            "genAI": "AI-optimized regenerative systems",
+            "agenticAI": "Self-evolving regenerative organizations",
+            "bci": "Human-AI collaborative regenerative models"
+          },
+          "caseStudies": ["Patagonia", "Ben & Jerry's", "Ecover"],
+          "relatedThinkers": ["Paul Hawken", "Janine Benyus"],
+          "relatedFrameworks": ["Natural Capital", "Biomimicry"],
+          "progress": 40,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Hawken, P. (2017). Drawdown: The Most Comprehensive Plan Ever Proposed to Reverse Global Warming",
+    "Raworth, K. (2017). Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist",
+    "Senge, P. M. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization"
+  ]
+}

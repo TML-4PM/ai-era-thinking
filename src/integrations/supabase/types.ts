@@ -4912,8 +4912,12 @@ export type Database = {
           author: string
           book_slug: string
           cluster_id: string | null
+          content_status: string | null
           created_at: string
+          exemplar_key: string | null
           id: string
+          notes: string | null
+          progress: number | null
           status: string
           submission: string
           submission_type: string
@@ -4925,8 +4929,12 @@ export type Database = {
           author: string
           book_slug: string
           cluster_id?: string | null
+          content_status?: string | null
           created_at?: string
+          exemplar_key?: string | null
           id?: string
+          notes?: string | null
+          progress?: number | null
           status?: string
           submission: string
           submission_type?: string
@@ -4938,8 +4946,12 @@ export type Database = {
           author?: string
           book_slug?: string
           cluster_id?: string | null
+          content_status?: string | null
           created_at?: string
+          exemplar_key?: string | null
           id?: string
+          notes?: string | null
+          progress?: number | null
           status?: string
           submission?: string
           submission_type?: string

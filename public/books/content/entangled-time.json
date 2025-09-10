@@ -1,0 +1,81 @@
+{
+  "id": "entangled-time",
+  "title": "Entangled Time",
+  "description": "Foresight, narrative, and speculative exploration of technological evolution across past, present, and future systems.",
+  "clusters": [
+    {
+      "id": "past-systems",
+      "title": "Past Systems (Industrial, Information Age)",
+      "description": "Historical technological systems and their societal impacts",
+      "exemplars": [
+        {
+          "name": "Industrial Revolution",
+          "type": "Historical System",
+          "eraMapping": {
+            "onPrem": "Mechanization and factory systems",
+            "cloudNative": "Digital transformation of industrial processes",
+            "genAI": "AI-optimized manufacturing and supply chains",
+            "agenticAI": "Autonomous industrial ecosystems",
+            "bci": "Human-machine integrated production systems"
+          },
+          "caseStudies": ["Steam Power", "Assembly Lines", "Automation"],
+          "relatedThinkers": ["Karl Marx", "Joseph Schumpeter"],
+          "relatedFrameworks": ["Creative Destruction", "Labor Theory"],
+          "progress": 35,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "cloud-native-mobile",
+      "title": "Cloud Native & Mobile First",
+      "description": "The era of distributed computing and ubiquitous connectivity",
+      "exemplars": [
+        {
+          "name": "Mobile-First Design",
+          "type": "Design Philosophy",
+          "eraMapping": {
+            "onPrem": "Desktop-centric application design",
+            "cloudNative": "Responsive, mobile-first interfaces",
+            "genAI": "AI-adaptive interfaces for any device",
+            "agenticAI": "Contextually aware, proactive interfaces",
+            "bci": "Direct neural interface design"
+          },
+          "caseStudies": ["Instagram", "Uber", "WhatsApp"],
+          "relatedThinkers": ["Luke Wroblewski", "Ethan Marcotte"],
+          "relatedFrameworks": ["Progressive Web Apps", "Responsive Design"],
+          "progress": 35,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "generative-ai-era",
+      "title": "Generative AI Era",
+      "description": "The current transformation through large language models and generative systems",
+      "exemplars": [
+        {
+          "name": "Large Language Models",
+          "type": "Technology System",
+          "eraMapping": {
+            "onPrem": "Rule-based expert systems",
+            "cloudNative": "Cloud-hosted AI services",
+            "genAI": "Foundational models with emergent capabilities",
+            "agenticAI": "Self-improving, goal-oriented AI systems",
+            "bci": "Neural-AI hybrid intelligence"
+          },
+          "caseStudies": ["GPT Series", "ChatGPT Adoption", "AI Art Generation"],
+          "relatedThinkers": ["Ilya Sutskever", "Dario Amodei"],
+          "relatedFrameworks": ["Transformer Architecture", "RLHF"],
+          "progress": 35,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Brynjolfsson, E., & McAfee, A. (2014). The Second Machine Age",
+    "Harari, Y. N. (2016). Homo Deus: A Brief History of Tomorrow",
+    "Tegmark, M. (2017). Life 3.0: Being Human in the Age of Artificial Intelligence"
+  ]
+}

@@ -13,6 +13,7 @@ import { Loader2 } from 'lucide-react';
 interface ContributionFormProps {
   bookSlug: string;
   clusterId?: string;
+  exemplarKey?: string;
 }
 
 interface ContributionFormData {
@@ -20,9 +21,12 @@ interface ContributionFormData {
   submission: string;
   tags: string;
   submission_type: 'general' | 'exemplar' | 'case_study' | 'framework' | 'thinker';
+  exemplar_key?: string;
+  progress?: number;
+  notes?: string;
 }
 
-export function ContributionForm({ bookSlug, clusterId }: ContributionFormProps) {
+export function ContributionForm({ bookSlug, clusterId, exemplarKey }: ContributionFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { register, handleSubmit, reset, setValue, watch } = useForm<ContributionFormData>({
@@ -58,7 +62,10 @@ export function ContributionForm({ bookSlug, clusterId }: ContributionFormProps)
           author: data.author,
           submission: data.submission,
           tags,
-          submission_type: data.submission_type
+          submission_type: data.submission_type,
+          exemplar_key: data.exemplar_key,
+          progress: data.progress,
+          notes: data.notes
         });
 
       if (error) throw error;
@@ -134,6 +141,40 @@ export function ContributionForm({ bookSlug, clusterId }: ContributionFormProps)
               placeholder="AI, management, decision-making, strategy..."
             />
           </div>
+
+          {submissionType === 'exemplar' && (
+            <div>
+              <Label htmlFor="progress">Progress (%)</Label>
+              <Input
+                id="progress"
+                type="number"
+                min="0"
+                max="100"
+                {...register("progress", { valueAsNumber: true })}
+                placeholder="0-100"
+              />
+            </div>
+          )}
+
+          {submissionType === 'exemplar' && (
+            <div>
+              <Label htmlFor="notes">Notes</Label>
+              <Textarea
+                id="notes"
+                {...register("notes")}
+                placeholder="Additional notes or context..."
+                rows={3}
+              />
+            </div>
+          )}
+
+          {exemplarKey && (
+            <Input
+              type="hidden"
+              {...register("exemplar_key")}
+              value={exemplarKey}
+            />
+          )}
 
           <Button type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

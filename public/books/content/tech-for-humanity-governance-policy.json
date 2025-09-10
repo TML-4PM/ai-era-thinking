@@ -1,0 +1,58 @@
+{
+  "id": "tech-for-humanity-governance-policy",
+  "title": "Governance & Policy",
+  "description": "Policy frameworks and governance structures for responsible AI and technology oversight.",
+  "clusters": [
+    {
+      "id": "oecd-guidelines",
+      "title": "OECD AI Guidelines",
+      "description": "International guidelines for trustworthy AI development and deployment",
+      "exemplars": [
+        {
+          "name": "AI Principles",
+          "type": "Policy Framework",
+          "eraMapping": {
+            "onPrem": "National regulatory frameworks with limited coordination", 
+            "cloudNative": "Cross-border digital governance and international cooperation",
+            "genAI": "Adaptive governance for rapidly evolving AI capabilities",
+            "agenticAI": "Autonomous regulatory compliance and self-governance systems",
+            "bci": "Neural-governance interfaces and thought-based policy participation"
+          },
+          "caseStudies": ["EU AI Act", "Singapore Model AI Governance", "Canadian AIDA"],
+          "relatedThinkers": ["Cathy O'Neil", "Timnit Gebru"],
+          "relatedFrameworks": ["Algorithmic Accountability", "AI Ethics Guidelines"],
+          "progress": 35,
+          "status": "seeded"
+        }
+      ]
+    },
+    {
+      "id": "unesco-declarations",
+      "title": "UNESCO Declarations",
+      "description": "Global declarations on AI ethics and human-centered technology",
+      "exemplars": [
+        {
+          "name": "AI Ethics Recommendation",
+          "type": "International Declaration",
+          "eraMapping": {
+            "onPrem": "Traditional intergovernmental negotiations and treaties",
+            "cloudNative": "Digital diplomacy and virtual consensus building",
+            "genAI": "AI-assisted policy drafting and multilingual engagement",
+            "agenticAI": "Autonomous diplomatic agents and real-time consensus",
+            "bci": "Direct neural participation in global governance"
+          },
+          "caseStudies": ["UNESCO AI Ethics", "UN Global Digital Compact", "Partnership on AI"],
+          "relatedThinkers": ["Audrey Azoulay", "António Guterres"],
+          "relatedFrameworks": ["Human Rights Framework", "Sustainable Development Goals"],
+          "progress": 30,
+          "status": "seeded"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "OECD AI Principles (2019). Recommendation of the Council on Artificial Intelligence",
+    "UNESCO (2021). AI Ethics: Global Recommendation on the Ethics of Artificial Intelligence",
+    "Floridi, L. (2019). Translating the Ethics of AI into Practice"
+  ]
+}

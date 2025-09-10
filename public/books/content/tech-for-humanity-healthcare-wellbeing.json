@@ -1,0 +1,58 @@
+{
+  "id": "tech-for-humanity-healthcare-wellbeing", 
+  "title": "Healthcare & Human Wellbeing",
+  "description": "Technology applications in health and human flourishing, exploring ethical and effective implementation strategies.",
+  "clusters": [
+    {
+      "id": "learning-health-systems",
+      "title": "Learning Health Systems",
+      "description": "Health systems that continuously learn and improve from data and experience",
+      "exemplars": [
+        {
+          "name": "Continuous Learning Cycle",
+          "type": "Health System Design",
+          "eraMapping": {
+            "onPrem": "Manual data collection and periodic research studies",
+            "cloudNative": "Real-time health data integration and cloud analytics",
+            "genAI": "AI-powered pattern recognition and personalized insights",
+            "agenticAI": "Autonomous health optimization and predictive interventions",
+            "bci": "Neural health monitoring and direct biological feedback loops"
+          },
+          "caseStudies": ["Mayo Clinic", "NHS Digital", "Kaiser Permanente"],
+          "relatedThinkers": ["Eric Topol", "Regina Barzilay"],
+          "relatedFrameworks": ["Precision Medicine", "Population Health"],
+          "progress": 35,
+          "status": "seeded"
+        }
+      ]
+    },
+    {
+      "id": "digital-health-records",
+      "title": "Digital Health Records",
+      "description": "Comprehensive digital systems for health information management",
+      "exemplars": [
+        {
+          "name": "Interoperable EHR Systems",
+          "type": "Health Information System",
+          "eraMapping": {
+            "onPrem": "Isolated hospital systems with paper backup",
+            "cloudNative": "Cloud-based EHRs with API integration",
+            "genAI": "AI-enhanced clinical documentation and decision support",
+            "agenticAI": "Autonomous health record curation and care coordination",
+            "bci": "Neural interface for thought-based medical documentation"
+          },
+          "caseStudies": ["Epic Systems", "Cerner", "Apple Health Records"],
+          "relatedThinkers": ["Blackford Middleton", "John Mattison"],
+          "relatedFrameworks": ["HL7 FHIR", "SMART on FHIR"],
+          "progress": 30,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Topol, E. (2019). Deep Medicine: How Artificial Intelligence Can Make Healthcare Human Again",
+    "Shortliffe, E. H., & Cimino, J. J. (2013). Biomedical Informatics",
+    "Institute of Medicine (2013). Best Care at Lower Cost: The Path to Continuously Learning Health Care"
+  ]
+}

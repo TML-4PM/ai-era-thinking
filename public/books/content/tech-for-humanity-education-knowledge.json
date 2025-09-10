@@ -1,0 +1,58 @@
+{
+  "id": "tech-for-humanity-education-knowledge",
+  "title": "Education & Knowledge",
+  "description": "Transforming learning and knowledge systems with technology for lifelong learning and human development.",
+  "clusters": [
+    {
+      "id": "pedagogy-frameworks",
+      "title": "Pedagogy Frameworks",
+      "description": "Educational frameworks and teaching methodologies enhanced by technology",
+      "exemplars": [
+        {
+          "name": "Personalized Learning Systems",
+          "type": "Educational Framework",
+          "eraMapping": {
+            "onPrem": "Classroom-based individualized instruction",
+            "cloudNative": "Adaptive learning platforms and cloud-based content",
+            "genAI": "AI tutors and personalized curriculum generation",
+            "agenticAI": "Autonomous learning companions and adaptive pathways",
+            "bci": "Neural learning interfaces and direct knowledge transfer"
+          },
+          "caseStudies": ["Khan Academy", "Coursera", "Duolingo"],
+          "relatedThinkers": ["Sal Khan", "Sebastian Thrun"],
+          "relatedFrameworks": ["Mastery Learning", "Constructivist Pedagogy"],
+          "progress": 25,
+          "status": "scaffold"
+        }
+      ]
+    },
+    {
+      "id": "ai-classrooms", 
+      "title": "AI in Classrooms",
+      "description": "Integration of artificial intelligence in educational settings",
+      "exemplars": [
+        {
+          "name": "Intelligent Tutoring Systems",
+          "type": "Educational Technology",
+          "eraMapping": {
+            "onPrem": "Computer-assisted instruction on local machines",
+            "cloudNative": "Cloud-based intelligent tutoring with analytics",
+            "genAI": "Conversational AI tutors with natural language interaction",
+            "agenticAI": "Proactive learning agents that adapt to student needs",
+            "bci": "Neural feedback systems for optimal learning states"
+          },
+          "caseStudies": ["Carnegie Learning", "Knewton", "Century Tech"],
+          "relatedThinkers": ["John Anderson", "Kurt VanLehn"],
+          "relatedFrameworks": ["Cognitive Load Theory", "Zone of Proximal Development"],
+          "progress": 25,
+          "status": "scaffold"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Siemens, G. (2013). Learning Analytics: The Emergence of a Discipline",
+    "Clark, R. C., & Mayer, R. E. (2016). E-Learning and the Science of Instruction",
+    "Luckin, R. (2018). Machine Learning and Human Intelligence"
+  ]
+}
