@@ -1,31 +1,23 @@
 {
   "id": "thinkers-brains-that-shaped-brains",
   "title": "Thinkers: Brains That Shaped Brains", 
-  "description": "Key intellectual figures whose ideas continue to influence how we think about human-AI collaboration and organizational intelligence.",
+  "description": "Key intellectual figures whose ideas continue to influence how we think about human-AI collaboration and organizational intelligence - comprehensive analysis of 70 influential minds.",
   "clusters": [
     {
       "id": "decision-scientists",
       "title": "Decision Scientists",
       "description": "Thinkers who fundamentally changed how we understand human decision-making and cognitive processes",
       "exemplars": [
-        {
-          "name": "Daniel Kahneman",
-          "type": "thinker",
-          "eraMapping": {
-            "onPrem": "Academic research on human cognitive biases in isolated laboratory settings",
-            "cloudNative": "Behavioral insights applied to user experience design and digital interfaces",
-            "genAI": "AI systems designed to complement rather than replicate human thinking patterns",
-            "agenticAI": "AI agents that understand and compensate for human cognitive limitations",
-            "bci": "Direct neural interfaces that can bypass or enhance natural cognitive processes"
-          },
-          "caseStudies": [
-            "Nudge units in government policy design",
-            "Behavioral economics in fintech applications",
-            "AI system design incorporating cognitive bias awareness"
-          ],
-          "relatedThinkers": ["Amos Tversky", "Richard Thaler", "Herbert Simon"],
-          "relatedFrameworks": ["Prospect Theory", "Nudge Theory", "Bounded Rationality"]
-        }
+        {"name": "Daniel Kahneman", "type": "thinker", "eraMapping": {"onPrem": "Academic research on cognitive biases in labs", "cloudNative": "Behavioral insights in digital UX design", "genAI": "AI systems complementing human thinking patterns", "agenticAI": "AI agents compensating for cognitive limitations", "bci": "Neural interfaces bypassing cognitive biases"}, "caseStudies": ["Government nudge units", "Fintech behavioral economics", "AI bias-aware design"], "relatedThinkers": ["Amos Tversky", "Richard Thaler"], "relatedFrameworks": ["Prospect Theory", "Nudge Theory"]},
+        {"name": "Amos Tversky", "type": "thinker", "eraMapping": {"onPrem": "Experimental psychology research", "cloudNative": "User behavior analytics", "genAI": "AI decision support systems", "agenticAI": "Autonomous decision agents", "bci": "Enhanced decision-making interfaces"}, "caseStudies": ["Behavioral economics applications", "Decision support systems"], "relatedThinkers": ["Daniel Kahneman", "Richard Thaler"], "relatedFrameworks": ["Prospect Theory", "Behavioral Economics"]},
+        {"name": "Herbert Simon", "type": "thinker", "eraMapping": {"onPrem": "Administrative behavior studies", "cloudNative": "Organizational decision systems", "genAI": "AI satisficing algorithms", "agenticAI": "Bounded rationality in AI", "bci": "Cognitive architecture understanding"}, "caseStudies": ["Organizational design", "AI system architecture"], "relatedThinkers": ["James March", "Richard Cyert"], "relatedFrameworks": ["Bounded Rationality", "Satisficing"]},
+        {"name": "Richard Thaler", "type": "thinker", "eraMapping": {"onPrem": "Behavioral economics theory", "cloudNative": "Digital nudging platforms", "genAI": "AI behavioral interventions", "agenticAI": "Autonomous choice architecture", "bci": "Direct behavioral modification"}, "caseStudies": ["Nudge unit implementations", "Digital product design"], "relatedThinkers": ["Daniel Kahneman", "Cass Sunstein"], "relatedFrameworks": ["Nudge Theory", "Behavioral Economics"]},
+        {"name": "Gerd Gigerenzer", "type": "thinker", "eraMapping": {"onPrem": "Fast-and-frugal heuristics research", "cloudNative": "Algorithm transparency advocacy", "genAI": "Simple AI heuristics", "agenticAI": "Ecological rationality in AI", "bci": "Intuitive decision interfaces"}, "caseStudies": ["Medical decision making", "Risk communication"], "relatedThinkers": ["Daniel Kahneman", "Nassim Taleb"], "relatedFrameworks": ["Heuristics", "Ecological Rationality"]},
+        {"name": "Nassim Nicholas Taleb", "type": "thinker", "eraMapping": {"onPrem": "Risk management theory", "cloudNative": "Antifragile system design", "genAI": "AI robustness research", "agenticAI": "Antifragile AI systems", "bci": "Uncertainty-aware interfaces"}, "caseStudies": ["Financial risk management", "System resilience"], "relatedThinkers": ["Benoit Mandelbrot", "Daniel Kahneman"], "relatedFrameworks": ["Black Swan Theory", "Antifragility"]},
+        {"name": "Cass Sunstein", "type": "thinker", "eraMapping": {"onPrem": "Regulatory policy theory", "cloudNative": "Digital governance frameworks", "genAI": "AI governance and ethics", "agenticAI": "Algorithmic governance", "bci": "Neural rights and regulations"}, "caseStudies": ["Government behavioral insights", "Tech regulation"], "relatedThinkers": ["Richard Thaler", "Martha Nussbaum"], "relatedFrameworks": ["Nudge Theory", "Behavioral Law"]},
+        {"name": "Dan Ariely", "type": "thinker", "eraMapping": {"onPrem": "Behavioral economics experiments", "cloudNative": "Digital behavior analysis", "genAI": "AI irrationality modeling", "agenticAI": "Predictably irrational AI", "bci": "Behavioral prediction interfaces"}, "caseStudies": ["Product design psychology", "Digital marketing"], "relatedThinkers": ["Daniel Kahneman", "Richard Thaler"], "relatedFrameworks": ["Behavioral Economics", "Predictable Irrationality"]},
+        {"name": "Philip Tetlock", "type": "thinker", "eraMapping": {"onPrem": "Expert judgment research", "cloudNative": "Prediction market platforms", "genAI": "AI forecasting systems", "agenticAI": "Superforecasting AI", "bci": "Enhanced prediction abilities"}, "caseStudies": ["Political forecasting", "Prediction tournaments"], "relatedThinkers": ["Daniel Kahneman", "Robin Hanson"], "relatedFrameworks": ["Superforecasting", "Good Judgment"]},
+        {"name": "Sheena Iyengar", "type": "thinker", "eraMapping": {"onPrem": "Choice research", "cloudNative": "Digital choice architecture", "genAI": "AI choice optimization", "agenticAI": "Automated choice curation", "bci": "Preference sensing interfaces"}, "caseStudies": ["Product recommendation systems", "Menu design"], "relatedThinkers": ["Barry Schwartz", "Richard Thaler"], "relatedFrameworks": ["Choice Architecture", "Decision Making"]}
       ]
     },
     {
@@ -33,30 +25,80 @@
       "title": "Systems Thinkers", 
       "description": "Visionaries who understood organizations and technology as interconnected complex systems",
       "exemplars": [
-        {
-          "name": "Peter Senge",
-          "type": "thinker",
-          "eraMapping": {
-            "onPrem": "Learning organization concepts applied to traditional hierarchical structures",
-            "cloudNative": "Distributed learning networks and knowledge sharing platforms",
-            "genAI": "AI-enhanced organizational learning and pattern recognition across systems",
-            "agenticAI": "Self-organizing AI systems that embody learning organization principles",
-            "bci": "Collective intelligence networks enabling direct knowledge transfer"
-          },
-          "caseStudies": [
-            "Toyota's learning organization transformation",
-            "Shell's scenario planning methodologies", 
-            "3M's innovation culture development"
-          ],
-          "relatedThinkers": ["Jay Forrester", "Russell Ackoff", "Donella Meadows"],
-          "relatedFrameworks": ["Systems Thinking", "Fifth Discipline", "Learning Organization"]
-        }
+        {"name": "Peter Senge", "type": "thinker", "eraMapping": {"onPrem": "Learning organization concepts in hierarchies", "cloudNative": "Distributed learning networks", "genAI": "AI-enhanced organizational learning", "agenticAI": "Self-organizing learning systems", "bci": "Collective intelligence networks"}, "caseStudies": ["Toyota learning culture", "Shell scenario planning"], "relatedThinkers": ["Jay Forrester", "Russell Ackoff"], "relatedFrameworks": ["Systems Thinking", "Fifth Discipline"]},
+        {"name": "Russell Ackoff", "type": "thinker", "eraMapping": {"onPrem": "Systems synthesis approach", "cloudNative": "Holistic system design", "genAI": "AI systems synthesis", "agenticAI": "Self-synthesizing systems", "bci": "Holistic system understanding"}, "caseStudies": ["Corporate planning systems", "Urban planning"], "relatedThinkers": ["Peter Senge", "Jay Forrester"], "relatedFrameworks": ["Systems Synthesis", "Interactive Planning"]},
+        {"name": "Jay Forrester", "type": "thinker", "eraMapping": {"onPrem": "System dynamics modeling", "cloudNative": "Dynamic system simulations", "genAI": "AI system dynamics", "agenticAI": "Self-modeling systems", "bci": "Intuitive system dynamics"}, "caseStudies": ["Urban dynamics", "Industrial dynamics"], "relatedThinkers": ["Peter Senge", "Donella Meadows"], "relatedFrameworks": ["System Dynamics", "Feedback Loops"]},
+        {"name": "Donella Meadows", "type": "thinker", "eraMapping": {"onPrem": "Limits to Growth modeling", "cloudNative": "Sustainability system thinking", "genAI": "AI sustainability modeling", "agenticAI": "Self-sustaining systems", "bci": "Ecological system sensing"}, "caseStudies": ["Environmental policy", "Sustainability initiatives"], "relatedThinkers": ["Jay Forrester", "Peter Senge"], "relatedFrameworks": ["Systems Thinking", "Leverage Points"]},
+        {"name": "Ludwig von Bertalanffy", "type": "thinker", "eraMapping": {"onPrem": "General systems theory", "cloudNative": "Network systems theory", "genAI": "AI systems theory", "agenticAI": "Autonomous system evolution", "bci": "Biological system interfaces"}, "caseStudies": ["Interdisciplinary research", "Systems science"], "relatedThinkers": ["Norbert Wiener", "Kenneth Boulding"], "relatedFrameworks": ["General Systems Theory", "Holism"]},
+        {"name": "Norbert Wiener", "type": "thinker", "eraMapping": {"onPrem": "Cybernetics theory", "cloudNative": "Feedback control systems", "genAI": "AI cybernetic loops", "agenticAI": "Self-regulating AI systems", "bci": "Human-machine cybernetics"}, "caseStudies": ["Control systems", "Information theory"], "relatedThinkers": ["Claude Shannon", "John von Neumann"], "relatedFrameworks": ["Cybernetics", "Feedback Control"]},
+        {"name": "W. Ross Ashby", "type": "thinker", "eraMapping": {"onPrem": "Variety and regulation theory", "cloudNative": "Adaptive system design", "genAI": "AI adaptation mechanisms", "agenticAI": "Self-adapting systems", "bci": "Adaptive neural interfaces"}, "caseStudies": ["Adaptive control", "Homeostatic systems"], "relatedThinkers": ["Norbert Wiener", "Stafford Beer"], "relatedFrameworks": ["Law of Requisite Variety", "Cybernetics"]},
+        {"name": "Stafford Beer", "type": "thinker", "eraMapping": {"onPrem": "Viable System Model", "cloudNative": "Organizational cybernetics", "genAI": "AI organizational design", "agenticAI": "Self-organizing enterprises", "bci": "Organizational nervous systems"}, "caseStudies": ["Project Cybersyn", "Organizational design"], "relatedThinkers": ["W. Ross Ashby", "Norbert Wiener"], "relatedFrameworks": ["Viable System Model", "Management Cybernetics"]},
+        {"name": "Humberto Maturana", "type": "thinker", "eraMapping": {"onPrem": "Autopoiesis theory", "cloudNative": "Self-organizing systems", "genAI": "AI autopoietic systems", "agenticAI": "Self-creating AI", "bci": "Living system interfaces"}, "caseStudies": ["Biological systems", "Cognitive science"], "relatedThinkers": ["Francisco Varela", "Stafford Beer"], "relatedFrameworks": ["Autopoiesis", "Enactivism"]},
+        {"name": "Francisco Varela", "type": "thinker", "eraMapping": {"onPrem": "Enactive cognition theory", "cloudNative": "Embodied AI research", "genAI": "Enactive AI systems", "agenticAI": "Embodied autonomous agents", "bci": "Enactive neural interfaces"}, "caseStudies": ["Cognitive science", "Embodied AI"], "relatedThinkers": ["Humberto Maturana", "Andy Clark"], "relatedFrameworks": ["Enactivism", "Embodied Cognition"]}
+      ]
+    },
+    {
+      "id": "management-theorists",
+      "title": "Management Theorists",
+      "description": "Foundational thinkers who shaped modern management and organizational theory",
+      "exemplars": [
+        {"name": "Peter Drucker", "type": "thinker", "eraMapping": {"onPrem": "Management by objectives", "cloudNative": "Knowledge work optimization", "genAI": "AI-assisted management", "agenticAI": "Autonomous management systems", "bci": "Enhanced management intuition"}, "caseStudies": ["Corporate management evolution", "Knowledge work"], "relatedThinkers": ["Frederick Taylor", "Henri Fayol"], "relatedFrameworks": ["Management by Objectives", "Knowledge Work"]},
+        {"name": "W. Edwards Deming", "type": "thinker", "eraMapping": {"onPrem": "Quality management systems", "cloudNative": "Continuous improvement platforms", "genAI": "AI quality optimization", "agenticAI": "Self-improving quality systems", "bci": "Quality sensing interfaces"}, "caseStudies": ["Japanese quality revolution", "Toyota Production System"], "relatedThinkers": ["Joseph Juran", "Walter Shewhart"], "relatedFrameworks": ["Total Quality Management", "PDCA Cycle"]},
+        {"name": "Frederick Winslow Taylor", "type": "thinker", "eraMapping": {"onPrem": "Scientific management principles", "cloudNative": "Process optimization", "genAI": "AI work optimization", "agenticAI": "Autonomous work design", "bci": "Ergonomic neural interfaces"}, "caseStudies": ["Industrial efficiency", "Manufacturing systems"], "relatedThinkers": ["Henri Fayol", "Max Weber"], "relatedFrameworks": ["Scientific Management", "Time and Motion Studies"]},
+        {"name": "Henri Fayol", "type": "thinker", "eraMapping": {"onPrem": "Administrative management theory", "cloudNative": "Digital management systems", "genAI": "AI management principles", "agenticAI": "Self-managing organizations", "bci": "Administrative neural interfaces"}, "caseStudies": ["Management education", "Administrative systems"], "relatedThinkers": ["Frederick Taylor", "Max Weber"], "relatedFrameworks": ["Administrative Management", "Management Functions"]},
+        {"name": "Max Weber", "type": "thinker", "eraMapping": {"onPrem": "Bureaucratic organization theory", "cloudNative": "Digital bureaucracy", "genAI": "AI bureaucratic efficiency", "agenticAI": "Autonomous administrative systems", "bci": "Authority sensing interfaces"}, "caseStudies": ["Government administration", "Large organizations"], "relatedThinkers": ["Henri Fayol", "Chester Barnard"], "relatedFrameworks": ["Bureaucratic Theory", "Authority Types"]},
+        {"name": "Chester Barnard", "type": "thinker", "eraMapping": {"onPrem": "Cooperative system theory", "cloudNative": "Collaborative platforms", "genAI": "AI cooperation enhancement", "agenticAI": "Self-organizing cooperation", "bci": "Cooperative sensing networks"}, "caseStudies": ["Executive leadership", "Organizational cooperation"], "relatedThinkers": ["Mary Parker Follett", "Elton Mayo"], "relatedFrameworks": ["Cooperative Systems", "Executive Functions"]},
+        {"name": "Mary Parker Follett", "type": "thinker", "eraMapping": {"onPrem": "Power-with leadership philosophy", "cloudNative": "Collaborative leadership platforms", "genAI": "AI collaborative leadership", "agenticAI": "Distributed autonomous leadership", "bci": "Empathic leadership interfaces"}, "caseStudies": ["Democratic management", "Conflict resolution"], "relatedThinkers": ["Chester Barnard", "Kurt Lewin"], "relatedFrameworks": ["Collaborative Leadership", "Power Dynamics"]},
+        {"name": "Douglas McGregor", "type": "thinker", "eraMapping": {"onPrem": "Theory X and Y management", "cloudNative": "Employee engagement platforms", "genAI": "AI motivation analysis", "agenticAI": "Autonomous motivation systems", "bci": "Motivation sensing interfaces"}, "caseStudies": ["Human resource management", "Employee motivation"], "relatedThinkers": ["Abraham Maslow", "Frederick Herzberg"], "relatedFrameworks": ["Theory X and Y", "Human Relations"]},
+        {"name": "Abraham Maslow", "type": "thinker", "eraMapping": {"onPrem": "Hierarchy of needs theory", "cloudNative": "Personalized motivation systems", "genAI": "AI needs assessment", "agenticAI": "Autonomous need fulfillment", "bci": "Need sensing interfaces"}, "caseStudies": ["Employee motivation", "Personal development"], "relatedThinkers": ["Douglas McGregor", "Frederick Herzberg"], "relatedFrameworks": ["Hierarchy of Needs", "Self-Actualization"]},
+        {"name": "Kurt Lewin", "type": "thinker", "eraMapping": {"onPrem": "Field theory and group dynamics", "cloudNative": "Virtual team dynamics", "genAI": "AI group optimization", "agenticAI": "Self-optimizing teams", "bci": "Group dynamic sensing"}, "caseStudies": ["Change management", "Group dynamics"], "relatedThinkers": ["Mary Parker Follett", "Edgar Schein"], "relatedFrameworks": ["Field Theory", "Change Management"]}
+      ]
+    },
+    {
+      "id": "technology-pioneers",
+      "title": "Technology Pioneers",
+      "description": "Visionaries who laid the foundations for modern computing and AI",
+      "exemplars": [
+        {"name": "Alan Turing", "type": "thinker", "eraMapping": {"onPrem": "Theoretical computing foundations", "cloudNative": "Distributed computation", "genAI": "AI reasoning systems", "agenticAI": "Autonomous intelligent agents", "bci": "Machine consciousness interfaces"}, "caseStudies": ["Computer science foundations", "AI development"], "relatedThinkers": ["John von Neumann", "Claude Shannon"], "relatedFrameworks": ["Turing Machine", "Turing Test"]},
+        {"name": "John von Neumann", "type": "thinker", "eraMapping": {"onPrem": "Computer architecture design", "cloudNative": "Distributed architectures", "genAI": "Neural network architectures", "agenticAI": "Self-replicating systems", "bci": "Brain-computer architectures"}, "caseStudies": ["Computer development", "Game theory"], "relatedThinkers": ["Alan Turing", "Norbert Wiener"], "relatedFrameworks": ["Von Neumann Architecture", "Game Theory"]},
+        {"name": "Claude Shannon", "type": "thinker", "eraMapping": {"onPrem": "Information theory foundations", "cloudNative": "Network information theory", "genAI": "AI information processing", "agenticAI": "Autonomous information systems", "bci": "Neural information interfaces"}, "caseStudies": ["Digital communications", "Information systems"], "relatedThinkers": ["Alan Turing", "Norbert Wiener"], "relatedFrameworks": ["Information Theory", "Boolean Logic"]},
+        {"name": "Marvin Minsky", "type": "thinker", "eraMapping": {"onPrem": "AI laboratory research", "cloudNative": "Distributed AI research", "genAI": "Advanced AI systems", "agenticAI": "Society of mind agents", "bci": "Mind-machine integration"}, "caseStudies": ["MIT AI Lab", "AI research"], "relatedThinkers": ["John McCarthy", "Herbert Simon"], "relatedFrameworks": ["Society of Mind", "Artificial Intelligence"]},
+        {"name": "John McCarthy", "type": "thinker", "eraMapping": {"onPrem": "AI programming languages", "cloudNative": "Distributed AI platforms", "genAI": "AI reasoning systems", "agenticAI": "Autonomous reasoning agents", "bci": "Symbolic reasoning interfaces"}, "caseStudies": ["Lisp programming", "Stanford AI"], "relatedThinkers": ["Marvin Minsky", "Allen Newell"], "relatedFrameworks": ["Artificial Intelligence", "Lisp Programming"]},
+        {"name": "Douglas Engelbart", "type": "thinker", "eraMapping": {"onPrem": "Human-computer interaction", "cloudNative": "Collaborative computing", "genAI": "AI-human collaboration", "agenticAI": "Seamless human-AI interaction", "bci": "Direct neural interfaces"}, "caseStudies": ["Computer mouse invention", "Hypertext systems"], "relatedThinkers": ["Vannevar Bush", "J.C.R. Licklider"], "relatedFrameworks": ["Human-Computer Interaction", "Augmentation"]},
+        {"name": "J.C.R. Licklider", "type": "thinker", "eraMapping": {"onPrem": "Man-computer symbiosis", "cloudNative": "Network computing", "genAI": "Human-AI symbiosis", "agenticAI": "Symbiotic intelligence", "bci": "Symbiotic neural networks"}, "caseStudies": ["ARPANET development", "Interactive computing"], "relatedThinkers": ["Douglas Engelbart", "Vannevar Bush"], "relatedFrameworks": ["Man-Computer Symbiosis", "Interactive Computing"]},
+        {"name": "Vannevar Bush", "type": "thinker", "eraMapping": {"onPrem": "Memex conceptual design", "cloudNative": "Hypertext and web systems", "genAI": "AI knowledge organization", "agenticAI": "Autonomous knowledge systems", "bci": "Memory augmentation interfaces"}, "caseStudies": ["Hypertext concept", "Information organization"], "relatedThinkers": ["Douglas Engelbart", "Ted Nelson"], "relatedFrameworks": ["Memex", "Hypertext"]},
+        {"name": "Ted Nelson", "type": "thinker", "eraMapping": {"onPrem": "Hypertext vision", "cloudNative": "World Wide Web", "genAI": "AI content linking", "agenticAI": "Autonomous content organization", "bci": "Thought-based navigation"}, "caseStudies": ["Project Xanadu", "Hypertext systems"], "relatedThinkers": ["Vannevar Bush", "Tim Berners-Lee"], "relatedFrameworks": ["Hypertext", "Information Linking"]},
+        {"name": "Tim Berners-Lee", "type": "thinker", "eraMapping": {"onPrem": "World Wide Web creation", "cloudNative": "Semantic web vision", "genAI": "AI web understanding", "agenticAI": "Autonomous web agents", "bci": "Direct web interfaces"}, "caseStudies": ["World Wide Web", "Semantic web"], "relatedThinkers": ["Ted Nelson", "Vint Cerf"], "relatedFrameworks": ["World Wide Web", "Semantic Web"]}
+      ]
+    },
+    {
+      "id": "cognitive-scientists",
+      "title": "Cognitive Scientists",
+      "description": "Researchers who advanced our understanding of mind, consciousness, and cognition",
+      "exemplars": [
+        {"name": "George Miller", "type": "thinker", "eraMapping": {"onPrem": "Cognitive psychology research", "cloudNative": "Digital cognition studies", "genAI": "AI cognitive modeling", "agenticAI": "Artificial cognitive systems", "bci": "Cognitive enhancement interfaces"}, "caseStudies": ["Cognitive science foundations", "Memory research"], "relatedThinkers": ["Jerome Bruner", "Ulric Neisser"], "relatedFrameworks": ["Cognitive Psychology", "Information Processing"]},
+        {"name": "Jerome Bruner", "type": "thinker", "eraMapping": {"onPrem": "Cognitive development theory", "cloudNative": "Digital learning systems", "genAI": "AI learning models", "agenticAI": "Autonomous learning agents", "bci": "Enhanced learning interfaces"}, "caseStudies": ["Educational psychology", "Cognitive development"], "relatedThinkers": ["Jean Piaget", "Lev Vygotsky"], "relatedFrameworks": ["Cognitive Development", "Discovery Learning"]},
+        {"name": "Noam Chomsky", "type": "thinker", "eraMapping": {"onPrem": "Linguistic theory", "cloudNative": "Natural language processing", "genAI": "Large language models", "agenticAI": "Autonomous language agents", "bci": "Direct language interfaces"}, "caseStudies": ["Linguistics revolution", "Language processing"], "relatedThinkers": ["Steven Pinker", "George Miller"], "relatedFrameworks": ["Universal Grammar", "Generative Linguistics"]},
+        {"name": "Steven Pinker", "type": "thinker", "eraMapping": {"onPrem": "Language and mind research", "cloudNative": "Computational linguistics", "genAI": "AI language understanding", "agenticAI": "Natural language agents", "bci": "Thought-language interfaces"}, "caseStudies": ["Language acquisition", "Cognitive science"], "relatedThinkers": ["Noam Chomsky", "Daniel Kahneman"], "relatedFrameworks": ["Computational Theory of Mind", "Language Instinct"]},
+        {"name": "Andy Clark", "type": "thinker", "eraMapping": {"onPrem": "Extended mind theory", "cloudNative": "Digital mind extension", "genAI": "AI cognitive extension", "agenticAI": "Cognitive offloading to AI", "bci": "Extended neural cognition"}, "caseStudies": ["Cognitive extension", "Mind-technology integration"], "relatedThinkers": ["Francisco Varela", "David Chalmers"], "relatedFrameworks": ["Extended Mind", "Embodied Cognition"]},
+        {"name": "David Chalmers", "type": "thinker", "eraMapping": {"onPrem": "Consciousness studies", "cloudNative": "Digital consciousness research", "genAI": "AI consciousness questions", "agenticAI": "Conscious AI systems", "bci": "Consciousness interfaces"}, "caseStudies": ["Hard problem of consciousness", "Philosophy of mind"], "relatedThinkers": ["Andy Clark", "Daniel Dennett"], "relatedFrameworks": ["Hard Problem", "Consciousness Studies"]},
+        {"name": "Daniel Dennett", "type": "thinker", "eraMapping": {"onPrem": "Consciousness philosophy", "cloudNative": "Digital consciousness models", "genAI": "AI consciousness simulation", "agenticAI": "Emergent AI consciousness", "bci": "Consciousness integration"}, "caseStudies": ["Philosophy of mind", "Consciousness research"], "relatedThinkers": ["David Chalmers", "Douglas Hofstadter"], "relatedFrameworks": ["Multiple Drafts Model", "Consciousness Explained"]},
+        {"name": "Douglas Hofstadter", "type": "thinker", "eraMapping": {"onPrem": "Self-reference and consciousness", "cloudNative": "Recursive digital systems", "genAI": "AI self-awareness", "agenticAI": "Self-referential AI", "bci": "Recursive consciousness interfaces"}, "caseStudies": ["Cognitive science", "AI consciousness"], "relatedThinkers": ["Daniel Dennett", "Marvin Minsky"], "relatedFrameworks": ["Strange Loops", "Self-Reference"]},
+        {"name": "Antonio Damasio", "type": "thinker", "eraMapping": {"onPrem": "Emotion and decision research", "cloudNative": "Affective computing", "genAI": "AI emotional intelligence", "agenticAI": "Emotionally intelligent agents", "bci": "Emotion-cognition interfaces"}, "caseStudies": ["Neuroscience of decision making", "Emotional intelligence"], "relatedThinkers": ["Daniel Kahneman", "Joseph LeDoux"], "relatedFrameworks": ["Somatic Marker Hypothesis", "Emotional Brain"]},
+        {"name": "Joseph LeDoux", "type": "thinker", "eraMapping": {"onPrem": "Fear and memory research", "cloudNative": "Emotional AI systems", "genAI": "AI emotional modeling", "agenticAI": "Emotionally aware AI", "bci": "Emotion-memory interfaces"}, "caseStudies": ["Neuroscience of emotion", "Memory systems"], "relatedThinkers": ["Antonio Damasio", "Eric Kandel"], "relatedFrameworks": ["Emotional Brain", "Fear Conditioning"]}
       ]
     }
   ],
   "references": [
     "Kahneman, D. (2011). Thinking, Fast and Slow",
-    "Senge, P. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization",
-    "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases"
+    "Senge, P. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization", 
+    "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases",
+    "Simon, H. (1956). Rational Choice and the Structure of the Environment",
+    "Thaler, R. & Sunstein, C. (2008). Nudge: Improving Decisions About Health, Wealth, and Happiness",
+    "Drucker, P. (1999). Management Challenges for the 21st Century",
+    "Turing, A. (1950). Computing Machinery and Intelligence",
+    "Shannon, C. (1948). A Mathematical Theory of Communication",
+    "Wiener, N. (1948). Cybernetics: Or Control and Communication in the Animal and the Machine",
+    "Minsky, M. (1986). The Society of Mind"
   ]
 }

@@ -1,62 +1,87 @@
 {
   "id": "frameworks",
   "title": "Frameworks: Patterns of Action",
-  "description": "Decision-making frameworks and strategic patterns that guide human and AI collaboration across different technological eras.",
+  "description": "Decision-making frameworks and strategic patterns that guide human and AI collaboration across different technological eras - comprehensive analysis of 100 essential frameworks.",
   "clusters": [
     {
-      "id": "decision-loops",
-      "title": "Decision Loops", 
+      "id": "decision-frameworks",
+      "title": "Decision Loops & Cycles", 
       "description": "Cyclical frameworks for rapid decision-making in complex environments",
       "exemplars": [
-        {
-          "name": "OODA Loop",
-          "type": "framework",
-          "eraMapping": {
-            "onPrem": "Military command structures with paper-based intelligence gathering",
-            "cloudNative": "Real-time data dashboards and collaborative decision platforms", 
-            "genAI": "AI-assisted pattern recognition and scenario generation",
-            "agenticAI": "Autonomous agents executing OODA cycles in milliseconds",
-            "bci": "Direct neural feedback loops bypassing conscious deliberation"
-          },
-          "caseStudies": [
-            "US Air Force fighter pilot training programs",
-            "Toyota Production System continuous improvement",
-            "Agile software development sprint cycles"
-          ],
-          "relatedThinkers": ["John Boyd", "W. Edwards Deming"],
-          "relatedFrameworks": ["Cynefin", "Design Thinking"]
-        }
+        {"name": "OODA Loop", "type": "framework", "eraMapping": {"onPrem": "Military command with paper intelligence", "cloudNative": "Real-time dashboards, collaborative decisions", "genAI": "AI pattern recognition, scenario generation", "agenticAI": "Autonomous OODA cycles in milliseconds", "bci": "Neural feedback loops"}, "caseStudies": ["US Air Force training", "Toyota improvement", "Agile sprints"], "relatedThinkers": ["John Boyd", "W. Edwards Deming"], "relatedFrameworks": ["Cynefin", "Design Thinking"]},
+        {"name": "PDCA Cycle", "type": "framework", "eraMapping": {"onPrem": "Manual quality improvement cycles", "cloudNative": "Digital continuous improvement", "genAI": "AI-enhanced experimentation", "agenticAI": "Autonomous improvement cycles", "bci": "Intuitive quality sensing"}, "caseStudies": ["Toyota Production System", "Lean Startup", "Agile Retrospectives"], "relatedThinkers": ["Walter Shewhart", "W. Edwards Deming"], "relatedFrameworks": ["Lean", "Six Sigma", "Kaizen"]},
+        {"name": "Design Thinking", "type": "framework", "eraMapping": {"onPrem": "Workshop-based innovation", "cloudNative": "Digital collaboration tools", "genAI": "AI-assisted ideation", "agenticAI": "Autonomous design exploration", "bci": "Enhanced empathy and creativity"}, "caseStudies": ["IDEO methodology", "Stanford d.school", "IBM Design Thinking"], "relatedThinkers": ["Tim Brown", "David Kelley"], "relatedFrameworks": ["Human-Centered Design", "Lean UX"]},
+        {"name": "Double Diamond", "type": "framework", "eraMapping": {"onPrem": "Linear design process", "cloudNative": "Iterative design cycles", "genAI": "AI problem/solution discovery", "agenticAI": "Autonomous design exploration", "bci": "Intuitive design sensing"}, "caseStudies": ["UK Design Council", "Service design projects"], "relatedThinkers": ["British Design Council", "Marc Stickdorn"], "relatedFrameworks": ["Design Thinking", "Service Design"]},
+        {"name": "Lean Startup", "type": "framework", "eraMapping": {"onPrem": "Traditional business planning", "cloudNative": "Rapid digital experimentation", "genAI": "AI hypothesis testing", "agenticAI": "Autonomous experiment cycles", "bci": "Market intuition enhancement"}, "caseStudies": ["Dropbox MVP", "Airbnb growth", "Instagram pivot"], "relatedThinkers": ["Eric Ries", "Steve Blank"], "relatedFrameworks": ["Build-Measure-Learn", "Customer Development"]},
+        {"name": "Agile Methodology", "type": "framework", "eraMapping": {"onPrem": "Waterfall development", "cloudNative": "Iterative delivery", "genAI": "AI-assisted planning", "agenticAI": "Autonomous development cycles", "bci": "Team flow optimization"}, "caseStudies": ["Spotify model", "Netflix development", "Amazon teams"], "relatedThinkers": ["Kent Beck", "Martin Fowler"], "relatedFrameworks": ["Scrum", "Kanban", "SAFe"]},
+        {"name": "OKRs", "type": "framework", "eraMapping": {"onPrem": "Annual goal setting", "cloudNative": "Quarterly objectives", "genAI": "AI goal optimization", "agenticAI": "Dynamic objective adjustment", "bci": "Intuitive goal alignment"}, "caseStudies": ["Google OKRs", "Intel objectives", "Spotify goals"], "relatedThinkers": ["Andy Grove", "John Doerr"], "relatedFrameworks": ["Balanced Scorecard", "SMART Goals"]},
+        {"name": "Scrum Framework", "type": "framework", "eraMapping": {"onPrem": "Waterfall project management", "cloudNative": "Agile team coordination", "genAI": "AI sprint optimization", "agenticAI": "Self-organizing teams", "bci": "Team synchronization"}, "caseStudies": ["Salesforce development", "Microsoft teams"], "relatedThinkers": ["Ken Schwaber", "Jeff Sutherland"], "relatedFrameworks": ["Kanban", "SAFe", "LeSS"]},
+        {"name": "Kanban System", "type": "framework", "eraMapping": {"onPrem": "Physical card systems", "cloudNative": "Digital workflow boards", "genAI": "AI flow optimization", "agenticAI": "Self-balancing workflows", "bci": "Work flow intuition"}, "caseStudies": ["Toyota production", "Software development", "Service delivery"], "relatedThinkers": ["Taiichi Ohno", "David Anderson"], "relatedFrameworks": ["Lean", "Agile", "Theory of Constraints"]},
+        {"name": "Getting Things Done", "type": "framework", "eraMapping": {"onPrem": "Paper-based organization", "cloudNative": "Digital task management", "genAI": "AI task prioritization", "agenticAI": "Autonomous task execution", "bci": "Cognitive load optimization"}, "caseStudies": ["Personal productivity", "Team workflows"], "relatedThinkers": ["David Allen"], "relatedFrameworks": ["Time Management", "Productivity Systems"]},
+        {"name": "Cynefin Framework", "type": "framework", "eraMapping": {"onPrem": "Manual problem categorization", "cloudNative": "Dynamic system monitoring", "genAI": "AI problem classification", "agenticAI": "Autonomous domain switching", "bci": "Intuitive pattern recognition"}, "caseStudies": ["IBM crisis management", "NHS response systems"], "relatedThinkers": ["Dave Snowden", "Ralph Stacey"], "relatedFrameworks": ["OODA Loop", "Systems Thinking"]},
+        {"name": "Theory of Constraints", "type": "framework", "eraMapping": {"onPrem": "Manual bottleneck identification", "cloudNative": "System flow monitoring", "genAI": "AI constraint prediction", "agenticAI": "Self-optimizing systems", "bci": "System flow intuition"}, "caseStudies": ["Manufacturing optimization", "Software delivery"], "relatedThinkers": ["Eliyahu Goldratt"], "relatedFrameworks": ["Lean", "Six Sigma", "Systems Thinking"]},
+        {"name": "Systems Thinking", "type": "framework", "eraMapping": {"onPrem": "Linear cause-effect analysis", "cloudNative": "Network effect modeling", "genAI": "AI system dynamics", "agenticAI": "Self-aware systems", "bci": "Holistic system sensing"}, "caseStudies": ["MIT system dynamics", "Peter Senge applications"], "relatedThinkers": ["Peter Senge", "Donella Meadows"], "relatedFrameworks": ["Fifth Discipline", "Causal Loop Diagrams"]},
+        {"name": "Root Cause Analysis", "type": "framework", "eraMapping": {"onPrem": "Manual investigation", "cloudNative": "Digital forensics", "genAI": "AI pattern detection", "agenticAI": "Autonomous problem solving", "bci": "Causal intuition"}, "caseStudies": ["Toyota 5 Whys", "Medical error analysis"], "relatedThinkers": ["Sakichi Toyoda", "James Reason"], "relatedFrameworks": ["Fishbone Diagram", "Fault Tree Analysis"]},
+        {"name": "Six Sigma", "type": "framework", "eraMapping": {"onPrem": "Statistical process control", "cloudNative": "Digital quality systems", "genAI": "AI quality prediction", "agenticAI": "Self-improving quality", "bci": "Quality sensing"}, "caseStudies": ["Motorola development", "GE implementation"], "relatedThinkers": ["Bill Smith", "Jack Welch"], "relatedFrameworks": ["DMAIC", "Lean Six Sigma"]},
+        {"name": "Balanced Scorecard", "type": "framework", "eraMapping": {"onPrem": "Financial metrics focus", "cloudNative": "Integrated dashboards", "genAI": "AI performance prediction", "agenticAI": "Dynamic strategy adjustment", "bci": "Strategic intuition"}, "caseStudies": ["Kaplan and Norton cases", "Corporate implementations"], "relatedThinkers": ["Robert Kaplan", "David Norton"], "relatedFrameworks": ["Strategy Maps", "OKRs"]},
+        {"name": "Blue Ocean Strategy", "type": "framework", "eraMapping": {"onPrem": "Competitive analysis", "cloudNative": "Market data analytics", "genAI": "AI market opportunity", "agenticAI": "Autonomous market creation", "bci": "Market intuition"}, "caseStudies": ["Southwest Airlines", "Cirque du Soleil"], "relatedThinkers": ["W. Chan Kim", "Renée Mauborgne"], "relatedFrameworks": ["Strategy Canvas", "Value Innovation"]},
+        {"name": "Jobs to be Done", "type": "framework", "eraMapping": {"onPrem": "Feature-focused development", "cloudNative": "User journey mapping", "genAI": "AI job discovery", "agenticAI": "Autonomous job fulfillment", "bci": "Customer need sensing"}, "caseStudies": ["Netflix content strategy", "Airbnb experiences"], "relatedThinkers": ["Clayton Christensen", "Tony Ulwick"], "relatedFrameworks": ["Customer Development", "Design Thinking"]},
+        {"name": "Value Stream Mapping", "type": "framework", "eraMapping": {"onPrem": "Manual process documentation", "cloudNative": "Digital flow visualization", "genAI": "AI flow optimization", "agenticAI": "Self-optimizing streams", "bci": "Value flow intuition"}, "caseStudies": ["Toyota production", "Software delivery"], "relatedThinkers": ["Mike Rother", "John Shook"], "relatedFrameworks": ["Lean", "Process Mining"]},
+        {"name": "Hoshin Kanri", "type": "framework", "eraMapping": {"onPrem": "Annual planning cycles", "cloudNative": "Dynamic strategy deployment", "genAI": "AI strategy alignment", "agenticAI": "Autonomous goal cascading", "bci": "Strategic alignment sensing"}, "caseStudies": ["Toyota strategic planning", "Lean implementations"], "relatedThinkers": ["Yoji Akao"], "relatedFrameworks": ["Policy Deployment", "OKRs"]}
       ]
     },
     {
-      "id": "complexity-navigation",
-      "title": "Complexity Navigation",
-      "description": "Frameworks for understanding and operating in complex adaptive systems",
+      "id": "strategic-frameworks",
+      "title": "Strategic Planning & Analysis",
+      "description": "Frameworks for strategic thinking and competitive analysis",
       "exemplars": [
-        {
-          "name": "Cynefin Framework",
-          "type": "framework", 
-          "eraMapping": {
-            "onPrem": "Manual categorization of business problems into domains",
-            "cloudNative": "Dynamic system monitoring and automated escalation paths",
-            "genAI": "AI classification of problems with contextual recommendations",
-            "agenticAI": "Autonomous domain switching and response orchestration",
-            "bci": "Intuitive pattern recognition enhanced by direct neural interfaces"
-          },
-          "caseStudies": [
-            "IBM's crisis management protocols",
-            "NHS emergency response systems",
-            "Spotify's organizational design"
-          ],
-          "relatedThinkers": ["Dave Snowden", "Ralph Stacey"],
-          "relatedFrameworks": ["OODA Loop", "Systems Thinking"]
-        }
+        {"name": "SWOT Analysis", "type": "framework", "eraMapping": {"onPrem": "Static situational analysis", "cloudNative": "Dynamic competitive monitoring", "genAI": "AI SWOT generation", "agenticAI": "Continuous strategic assessment", "bci": "Strategic pattern recognition"}, "caseStudies": ["Strategic planning sessions", "Business school teaching"], "relatedThinkers": ["Albert Humphrey"], "relatedFrameworks": ["PEST Analysis", "Porter's Five Forces"]},
+        {"name": "Porter's Five Forces", "type": "framework", "eraMapping": {"onPrem": "Industry structure analysis", "cloudNative": "Real-time competitive intelligence", "genAI": "AI competitive dynamics", "agenticAI": "Autonomous competitive response", "bci": "Competitive intuition"}, "caseStudies": ["Industry analysis", "Strategic positioning"], "relatedThinkers": ["Michael Porter"], "relatedFrameworks": ["Value Chain", "Generic Strategies"]},
+        {"name": "BCG Growth-Share Matrix", "type": "framework", "eraMapping": {"onPrem": "Portfolio planning", "cloudNative": "Dynamic portfolio management", "genAI": "AI portfolio optimization", "agenticAI": "Self-balancing portfolios", "bci": "Portfolio intuition"}, "caseStudies": ["GE portfolio management", "Diversified companies"], "relatedThinkers": ["Bruce Henderson"], "relatedFrameworks": ["McKinsey 9-Box", "Ansoff Matrix"]},
+        {"name": "Ansoff Matrix", "type": "framework", "eraMapping": {"onPrem": "Growth strategy planning", "cloudNative": "Market expansion analysis", "genAI": "AI growth opportunities", "agenticAI": "Autonomous market entry", "bci": "Growth opportunity sensing"}, "caseStudies": ["Market expansion", "Product development"], "relatedThinkers": ["Igor Ansoff"], "relatedFrameworks": ["Growth Strategies", "Market Entry"]},
+        {"name": "McKinsey 7S Model", "type": "framework", "eraMapping": {"onPrem": "Organizational analysis", "cloudNative": "Dynamic org assessment", "genAI": "AI organizational optimization", "agenticAI": "Self-organizing systems", "bci": "Organizational sensing"}, "caseStudies": ["Organizational change", "McKinsey consulting"], "relatedThinkers": ["Tom Peters", "Robert Waterman"], "relatedFrameworks": ["Organizational Development", "Change Management"]},
+        {"name": "Value Chain Analysis", "type": "framework", "eraMapping": {"onPrem": "Linear value creation", "cloudNative": "Network value creation", "genAI": "AI value optimization", "agenticAI": "Self-optimizing value chains", "bci": "Value creation intuition"}, "caseStudies": ["Supply chain optimization", "Business model innovation"], "relatedThinkers": ["Michael Porter"], "relatedFrameworks": ["Business Model Canvas", "Value Networks"]},
+        {"name": "Business Model Canvas", "type": "framework", "eraMapping": {"onPrem": "Static business planning", "cloudNative": "Dynamic model iteration", "genAI": "AI model optimization", "agenticAI": "Self-evolving business models", "bci": "Business model intuition"}, "caseStudies": ["Startup planning", "Innovation workshops"], "relatedThinkers": ["Alexander Osterwalder"], "relatedFrameworks": ["Lean Canvas", "Value Proposition Canvas"]},
+        {"name": "Lean Canvas", "type": "framework", "eraMapping": {"onPrem": "Traditional business plans", "cloudNative": "Rapid experimentation", "genAI": "AI hypothesis testing", "agenticAI": "Autonomous business validation", "bci": "Market validation intuition"}, "caseStudies": ["Startup validation", "Innovation projects"], "relatedThinkers": ["Ash Maurya"], "relatedFrameworks": ["Business Model Canvas", "Lean Startup"]},
+        {"name": "PEST Analysis", "type": "framework", "eraMapping": {"onPrem": "Environmental scanning", "cloudNative": "Real-time trend monitoring", "genAI": "AI trend prediction", "agenticAI": "Autonomous environmental sensing", "bci": "Environmental intuition"}, "caseStudies": ["Strategic planning", "Risk assessment"], "relatedThinkers": ["Francis Aguilar"], "relatedFrameworks": ["SWOT Analysis", "Scenario Planning"]},
+        {"name": "Scenario Planning", "type": "framework", "eraMapping": {"onPrem": "Expert-driven scenarios", "cloudNative": "Data-driven futures", "genAI": "AI scenario generation", "agenticAI": "Continuous future sensing", "bci": "Future intuition"}, "caseStudies": ["Shell strategic planning", "Military planning"], "relatedThinkers": ["Pierre Wack", "Kees van der Heijden"], "relatedFrameworks": ["Strategic Planning", "Risk Management"]}
+      ]
+    },
+    {
+      "id": "operational-frameworks", 
+      "title": "Operations & Process Management",
+      "description": "Frameworks for operational excellence and process optimization",
+      "exemplars": [
+        {"name": "Lean Manufacturing", "type": "framework", "eraMapping": {"onPrem": "Toyota Production System", "cloudNative": "Digital lean practices", "genAI": "AI waste elimination", "agenticAI": "Self-optimizing production", "bci": "Production flow sensing"}, "caseStudies": ["Toyota success", "Manufacturing transformations"], "relatedThinkers": ["Taiichi Ohno", "Shigeo Shingo"], "relatedFrameworks": ["Just-in-Time", "Kaizen"]},
+        {"name": "Total Quality Management", "type": "framework", "eraMapping": {"onPrem": "Quality control systems", "cloudNative": "Digital quality management", "genAI": "AI quality prediction", "agenticAI": "Self-improving quality", "bci": "Quality sensing"}, "caseStudies": ["Japanese quality movement", "Baldrige Award winners"], "relatedThinkers": ["W. Edwards Deming", "Joseph Juran"], "relatedFrameworks": ["Six Sigma", "ISO 9001"]},
+        {"name": "Business Process Reengineering", "type": "framework", "eraMapping": {"onPrem": "Radical process redesign", "cloudNative": "Digital process transformation", "genAI": "AI process optimization", "agenticAI": "Self-redesigning processes", "bci": "Process flow intuition"}, "caseStudies": ["Hammer and Champy examples", "ERP implementations"], "relatedThinkers": ["Michael Hammer", "James Champy"], "relatedFrameworks": ["Process Improvement", "Change Management"]},
+        {"name": "Kaizen", "type": "framework", "eraMapping": {"onPrem": "Continuous improvement culture", "cloudNative": "Digital improvement tracking", "genAI": "AI improvement suggestions", "agenticAI": "Autonomous optimization", "bci": "Improvement intuition"}, "caseStudies": ["Toyota culture", "Lean implementations"], "relatedThinkers": ["Masaaki Imai"], "relatedFrameworks": ["Lean", "PDCA"]},
+        {"name": "5S Methodology", "type": "framework", "eraMapping": {"onPrem": "Workplace organization", "cloudNative": "Digital workspace optimization", "genAI": "AI organization suggestions", "agenticAI": "Self-organizing workspaces", "bci": "Workspace intuition"}, "caseStudies": ["Manufacturing implementations", "Office applications"], "relatedThinkers": ["Hiroyuki Hirano"], "relatedFrameworks": ["Lean", "Visual Management"]},
+        {"name": "ITIL", "type": "framework", "eraMapping": {"onPrem": "IT service management", "cloudNative": "Cloud service optimization", "genAI": "AI service intelligence", "agenticAI": "Self-managing services", "bci": "Service health intuition"}, "caseStudies": ["Enterprise IT", "Service providers"], "relatedThinkers": ["ITIL creators"], "relatedFrameworks": ["ITSM", "DevOps"]}
+      ]
+    },
+    {
+      "id": "innovation-frameworks",
+      "title": "Innovation & Creativity",
+      "description": "Frameworks for fostering innovation and managing creative processes",
+      "exemplars": [
+        {"name": "Stage-Gate Process", "type": "framework", "eraMapping": {"onPrem": "Linear innovation process", "cloudNative": "Agile innovation cycles", "genAI": "AI gate decisions", "agenticAI": "Autonomous innovation management", "bci": "Innovation intuition"}, "caseStudies": ["P&G innovation", "3M development"], "relatedThinkers": ["Robert Cooper"], "relatedFrameworks": ["Innovation Management", "Product Development"]},
+        {"name": "Open Innovation", "type": "framework", "eraMapping": {"onPrem": "Closed R&D", "cloudNative": "Collaborative innovation platforms", "genAI": "AI innovation matching", "agenticAI": "Autonomous collaboration", "bci": "Innovation network sensing"}, "caseStudies": ["P&G Connect+Develop", "IBM innovation jams"], "relatedThinkers": ["Henry Chesbrough"], "relatedFrameworks": ["Innovation Ecosystems", "Crowdsourcing"]},
+        {"name": "TRIZ Methodology", "type": "framework", "eraMapping": {"onPrem": "Systematic inventive thinking", "cloudNative": "Digital TRIZ tools", "genAI": "AI contradiction resolution", "agenticAI": "Autonomous invention", "bci": "Inventive intuition"}, "caseStudies": ["Samsung innovation", "Engineering problem solving"], "relatedThinkers": ["Genrich Altshuller"], "relatedFrameworks": ["Systematic Innovation", "Problem Solving"]},
+        {"name": "Disruptive Innovation", "type": "framework", "eraMapping": {"onPrem": "Sustaining innovation focus", "cloudNative": "Platform disruption", "genAI": "AI disruption prediction", "agenticAI": "Autonomous market disruption", "bci": "Disruption sensing"}, "caseStudies": ["Netflix vs Blockbuster", "Tesla vs automotive"], "relatedThinkers": ["Clayton Christensen"], "relatedFrameworks": ["Innovation Theory", "Market Entry"]}
       ]
     }
   ],
   "references": [
     "Boyd, J. (1987). A Discourse on Winning and Losing",
     "Snowden, D. & Boone, M. (2007). A Leader's Framework for Decision Making. Harvard Business Review",
-    "Kurtz, C.F. & Snowden, D.J. (2003). The new dynamics of strategy: Sense-making in a complex and complicated world"
+    "Kurtz, C.F. & Snowden, D.J. (2003). The new dynamics of strategy: Sense-making in a complex and complicated world",
+    "Ries, E. (2011). The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation",
+    "Porter, M. (1985). Competitive Advantage: Creating and Sustaining Superior Performance",
+    "Osterwalder, A. & Pigneur, Y. (2010). Business Model Generation",
+    "Kim, W.C. & Mauborgne, R. (2005). Blue Ocean Strategy",
+    "Christensen, C. (1997). The Innovator's Dilemma",
+    "Senge, P. (1990). The Fifth Discipline: The Art and Practice of the Learning Organization",
+    "Goldratt, E. (1984). The Goal: A Process of Ongoing Improvement"
   ]
 }

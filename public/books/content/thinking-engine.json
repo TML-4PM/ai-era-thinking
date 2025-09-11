@@ -2,17 +2,32 @@
   "title": "The Thinking Engine Hub",
   "subtitle": "Comprehensive Framework Analysis",
   "description": "Exploring how thinkers' frameworks evolve and apply across different domains and contexts.",
-  "totalSections": 12,
+  "totalSections": 15,
   "seededSections": 3,
   "sections": [
     {
-      "id": "roles",
-      "title": "Roles",
-      "slug": "roles-humans-in-machine",
-      "status": "seeded",
-      "lead": "How human roles evolve in AI-augmented systems",
-      "exemplarCount": 25,
-      "contentFile": "roles-humans-in-machine.json"
+      "id": "principles",
+      "title": "Principles",
+      "slug": "thinking-engine-principles", 
+      "status": "scaffold",
+      "lead": "Guiding principles for AI development and deployment",
+      "exemplarCount": 50
+    },
+    {
+      "id": "institutions",
+      "title": "Institutions",
+      "slug": "thinking-engine-institutions",
+      "status": "scaffold", 
+      "lead": "Organizations and institutions driving AI development",
+      "exemplarCount": 75
+    },
+    {
+      "id": "doctrines",
+      "title": "Doctrines",
+      "slug": "thinking-engine-doctrines",
+      "status": "scaffold",
+      "lead": "Philosophical doctrines shaping AI development",
+      "exemplarCount": 40
     },
     {
       "id": "frameworks", 
@@ -20,7 +35,7 @@
       "slug": "frameworks",
       "status": "seeded",
       "lead": "Fundamental frameworks for understanding AI transformation", 
-      "exemplarCount": 32,
+      "exemplarCount": 100,
       "contentFile": "frameworks.json"
     },
     {
@@ -29,71 +44,89 @@
       "slug": "thinkers-brains-that-shaped-brains",
       "status": "seeded",
       "lead": "The minds that shaped our understanding of AI and cognition",
-      "exemplarCount": 45,
+      "exemplarCount": 70,
       "contentFile": "thinkers-brains-that-shaped-brains.json"
-    },
-    {
-      "id": "institutions",
-      "title": "Institutions",
-      "slug": "thinking-engine-institutions",
-      "status": "scaffold", 
-      "lead": "Organizations and institutions driving AI development"
-    },
-    {
-      "id": "technologies",
-      "title": "Technologies",
-      "slug": "thinking-engine-technologies", 
-      "status": "scaffold",
-      "lead": "Core technologies enabling artificial intelligence"
-    },
-    {
-      "id": "doctrines",
-      "title": "Doctrines",
-      "slug": "thinking-engine-doctrines",
-      "status": "scaffold",
-      "lead": "Philosophical doctrines shaping AI development"
     },
     {
       "id": "disciplines", 
       "title": "Disciplines",
       "slug": "thinking-engine-disciplines",
       "status": "scaffold",
-      "lead": "Academic disciplines contributing to AI research"
+      "lead": "Academic disciplines contributing to AI research",
+      "exemplarCount": 60
     },
     {
-      "id": "cultures",
-      "title": "Cultures",
-      "slug": "thinking-engine-cultures",
-      "status": "scaffold", 
-      "lead": "Cultural perspectives on AI and human-machine interaction"
-    },
-    {
-      "id": "products",
-      "title": "Products",
-      "slug": "thinking-engine-products",
+      "id": "technologies",
+      "title": "Technologies",
+      "slug": "thinking-engine-technologies", 
       "status": "scaffold",
-      "lead": "AI products and applications transforming society"
-    },
-    {
-      "id": "eras",
-      "title": "Eras", 
-      "slug": "thinking-engine-eras",
-      "status": "scaffold",
-      "lead": "Historical eras in AI development and adoption"
-    },
-    {
-      "id": "principles",
-      "title": "Principles",
-      "slug": "thinking-engine-principles", 
-      "status": "scaffold",
-      "lead": "Guiding principles for AI development and deployment"
+      "lead": "Core technologies enabling artificial intelligence",
+      "exemplarCount": 85
     },
     {
       "id": "organizations",
       "title": "Organizations",
       "slug": "thinking-engine-organizations",
       "status": "scaffold",
-      "lead": "Key organizations in the AI ecosystem"
+      "lead": "Key organizations in the AI ecosystem",
+      "exemplarCount": 65
+    },
+    {
+      "id": "cultures",
+      "title": "Cultures",
+      "slug": "thinking-engine-cultures",
+      "status": "scaffold", 
+      "lead": "Cultural perspectives on AI and human-machine interaction",
+      "exemplarCount": 45
+    },
+    {
+      "id": "roles",
+      "title": "Roles",
+      "slug": "roles-humans-in-machine",
+      "status": "seeded",
+      "lead": "How human roles evolve in AI-augmented systems",
+      "exemplarCount": 132,
+      "contentFile": "roles-humans-in-machine.json"
+    },
+    {
+      "id": "products",
+      "title": "Products",
+      "slug": "thinking-engine-products",
+      "status": "scaffold",
+      "lead": "AI products and applications transforming society",
+      "exemplarCount": 55
+    },
+    {
+      "id": "eras",
+      "title": "Eras", 
+      "slug": "thinking-engine-eras",
+      "status": "scaffold",
+      "lead": "Historical eras in AI development and adoption",
+      "exemplarCount": 30
+    },
+    {
+      "id": "environment",
+      "title": "Environment",
+      "slug": "thinking-engine-environment",
+      "status": "scaffold",
+      "lead": "The non-human stakeholder perspective in AI systems",
+      "exemplarCount": 35
+    },
+    {
+      "id": "energy-forces",
+      "title": "Energy and Forces",
+      "slug": "thinking-engine-energy-forces",
+      "status": "scaffold",
+      "lead": "The underlying drivers and invisible forces in AI transformation",
+      "exemplarCount": 25
+    },
+    {
+      "id": "unstructured",
+      "title": "Unstructured",
+      "slug": "thinking-engine-unstructured",
+      "status": "scaffold",
+      "lead": "Wildcards and user-defined items in AI systems",
+      "exemplarCount": 20
     }
   ]
 }
