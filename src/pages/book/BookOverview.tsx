@@ -10,6 +10,7 @@ import { ContentLoader } from "@/components/content/ContentLoader";
 import { ClusterList } from "@/components/content/ClusterList";
 import { SectionList } from "@/components/content/SectionList";
 import { ContributionForm } from "@/components/content/ContributionForm";
+import { AuthorModeToggle } from "@/components/AuthorModeToggle";
 
 const BookOverview = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -301,12 +302,15 @@ const BookOverview = () => {
         {/* Sidebar */}
         <div className="md:col-span-1">
           <div className="sticky top-8 space-y-6">
+            {/* Author Mode Toggle */}
+            <AuthorModeToggle />
+            
             {/* Progress Card */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="w-5 h-5" />
-                  Reading Progress
+                  Writing Progress
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -317,20 +321,48 @@ const BookOverview = () => {
                   </div>
                   <Progress value={displayProgress} className="h-3" />
                   
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">
-                        {book.chapters?.length || 0}
-                      </div>
-                      <div className="text-xs text-muted-foreground">Chapters</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">
-                        {book.chapters?.filter(ch => ch.progress === 100).length || 0}
-                      </div>
-                      <div className="text-xs text-muted-foreground">Completed</div>
-                    </div>
-                  </div>
+                  <ContentLoader bookSlug={book.slug}>
+                    {({ content }) => {
+                      const totalExemplars = content?.sections?.reduce((total: number, section: any) => 
+                        total + (section.exemplarCount || 0), 0) || 
+                        content?.volumes?.reduce((total: number, volume: any) => 
+                          total + (volume.exemplarCount || 0), 0) || 0;
+                      
+                      const seededSections = content?.sections?.filter((s: any) => s.status === 'seeded').length || 
+                        content?.volumes?.filter((v: any) => v.status === 'seeded').length || 0;
+                      
+                      const totalSections = content?.sections?.length || content?.volumes?.length || 0;
+                      
+                      return (
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-2 gap-4 pt-4 border-t text-center">
+                            <div>
+                              <div className="text-2xl font-bold text-foreground">
+                                {totalSections}
+                              </div>
+                              <div className="text-xs text-muted-foreground">Sections</div>
+                            </div>
+                            <div>
+                              <div className="text-2xl font-bold text-foreground">
+                                {seededSections}
+                              </div>
+                              <div className="text-xs text-muted-foreground">Seeded</div>
+                            </div>
+                          </div>
+                          {totalExemplars > 0 && (
+                            <div className="grid grid-cols-1 gap-2 pt-2 border-t text-center">
+                              <div>
+                                <div className="text-lg font-bold text-foreground">
+                                  {totalExemplars}
+                                </div>
+                                <div className="text-xs text-muted-foreground">Total Exemplars</div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }}
+                  </ContentLoader>
                 </div>
               </CardContent>
             </Card>

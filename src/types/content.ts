@@ -16,6 +16,22 @@ export interface Exemplar {
   progress?: number; // 0-100
   status?: 'scaffold' | 'seeded' | 'complete';
   notes?: string;
+  // Standardized fields for all exemplars
+  coreFramework?: string;
+  originalInsight?: string;
+  aiEraShift?: string;
+  aiRelevance?: string;
+  crossEraEvolution?: string;
+  implementationTimeline?: {
+    phase1?: string;
+    phase2?: string;
+    phase3?: string;
+  };
+  authorStatements?: {
+    originalInsight?: string;
+    aiEraShift?: string;
+    aiRelevance?: string;
+  };
 }
 
 export interface Cluster {

@@ -97,16 +97,20 @@ export function SectionList({ sections, bookSlug }: SectionListProps) {
                 className="w-full"
               >
                 <FileText className="w-4 h-4 mr-2" />
-                Explore Content
+                Open Chapter
               </Button>
             )}
             
             {section.status === 'scaffold' && (
-              <div className="bg-muted/50 rounded-lg p-3 text-center">
-                <p className="text-xs text-muted-foreground">
-                  Content framework ready - awaiting development
-                </p>
-              </div>
+              <Button 
+                variant="secondary" 
+                size="sm"
+                onClick={() => navigate(`/books/${bookSlug}/sections/${section.id}`)}
+                className="w-full"
+              >
+                <Clock className="w-4 h-4 mr-2" />
+                Start Seeding
+              </Button>
             )}
           </CardContent>
         </Card>

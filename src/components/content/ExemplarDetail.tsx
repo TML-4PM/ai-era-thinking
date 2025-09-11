@@ -82,9 +82,9 @@ export function ExemplarDetail({ exemplar, bookSlug }: ExemplarDetailProps) {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  AI transcends human dual-process limitations by operating simultaneously 
-                  at both intuitive and analytical speeds, while potentially inheriting 
-                  human biases from training data
+                  {exemplar.coreFramework || 
+                    "AI transcends human dual-process limitations by operating simultaneously at both intuitive and analytical speeds, while potentially inheriting human biases from training data"
+                  }
                 </p>
               </CardContent>
             </Card>
@@ -98,19 +98,19 @@ export function ExemplarDetail({ exemplar, bookSlug }: ExemplarDetailProps) {
                   <div>
                     <h4 className="font-semibold">Original Insight</h4>
                     <p className="text-sm text-muted-foreground">
-                      Thinking, Fast and Slow
+                      {exemplar.authorStatements?.originalInsight || exemplar.originalInsight || "Thinking, Fast and Slow"}
                     </p>
                   </div>
                   <div>
                     <h4 className="font-semibold">AI-Era Shift</h4>
                     <p className="text-sm text-muted-foreground">
-                      Fast/slow dichotomy breaks when AI operates in parallel at both speeds.
+                      {exemplar.authorStatements?.aiEraShift || exemplar.aiEraShift || "Fast/slow dichotomy breaks when AI operates in parallel at both speeds."}
                     </p>
                   </div>
                   <div>
                     <h4 className="font-semibold">AI Relevance</h4>
                     <p className="text-sm text-muted-foreground">
-                      Critical for understanding cognitive biases in AI systems and designing human-AI collaboration
+                      {exemplar.authorStatements?.aiRelevance || exemplar.aiRelevance || "Critical for understanding cognitive biases in AI systems and designing human-AI collaboration"}
                     </p>
                   </div>
                 </div>
@@ -129,19 +129,19 @@ export function ExemplarDetail({ exemplar, bookSlug }: ExemplarDetailProps) {
                 <div>
                   <h4 className="font-semibold">Phase 1 (0-6 months)</h4>
                   <p className="text-sm text-muted-foreground">
-                    Audit AI systems for cognitive biases and implement detection systems
+                    {exemplar.implementationTimeline?.phase1 || "Audit AI systems for cognitive biases and implement detection systems"}
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold">Phase 2 (6-18 months)</h4>
                   <p className="text-sm text-muted-foreground">
-                    Design hybrid architectures with System 1/2 pathways and human oversight
+                    {exemplar.implementationTimeline?.phase2 || "Design hybrid architectures with System 1/2 pathways and human oversight"}
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold">Phase 3 (18+ months)</h4>
                   <p className="text-sm text-muted-foreground">
-                    Develop post-cognitive AI that transcends human limitations while preserving agency
+                    {exemplar.implementationTimeline?.phase3 || "Develop post-cognitive AI that transcends human limitations while preserving agency"}
                   </p>
                 </div>
               </div>
@@ -191,7 +191,10 @@ export function ExemplarDetail({ exemplar, bookSlug }: ExemplarDetailProps) {
               <p className="text-muted-foreground mb-4">
                 Deep profile available for interactive conversations
               </p>
-              <Button className="w-full">
+              <Button 
+                className="w-full"
+                onClick={() => window.location.href = `/chat?thinker=${encodeURIComponent(exemplar.name)}`}
+              >
                 Start Chat
               </Button>
             </CardContent>
@@ -207,7 +210,10 @@ export function ExemplarDetail({ exemplar, bookSlug }: ExemplarDetailProps) {
               <p className="text-muted-foreground mb-4">
                 Collaborate with the full team of experts
               </p>
-              <Button className="w-full">
+              <Button 
+                className="w-full"
+                onClick={() => window.location.href = `/chat?team=${encodeURIComponent(exemplar.name)}&teamChat=true`}
+              >
                 Join Team Discussion
               </Button>
             </CardContent>
