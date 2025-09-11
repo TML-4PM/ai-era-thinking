@@ -159,9 +159,9 @@ const Books: React.FC = () => {
 
                         {/* Collection Badge */}
                         <div className="absolute top-3 right-3">
-                          <Badge variant="secondary" className="text-xs">
-                            {book.collection}
-                          </Badge>
+          <Badge variant="secondary" className="text-xs">
+            {book.id === "A5" ? "seeded" : book.id === "A" || book.id === "C" ? "hub" : "scaffolded"}
+          </Badge>
                         </div>
                       </div>
                     </CardHeader>

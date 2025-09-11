@@ -525,7 +525,7 @@ const DEFAULT_BOOKS: Book[] = [
     subtitle: "STRIP-MAP-UPDATE Framework for Adaptive Systems",
     slug: "regenerative-organization", 
     lead: "A practical framework for building adaptive, regenerative organizational systems.",
-    cover: "/assets/covers/placeholder.jpg",
+    cover: "/assets/covers/regenerative-organization.jpg",
     series_name: "The Regenerative Organization",
     collection: "Single Volume",
     status: "concept",

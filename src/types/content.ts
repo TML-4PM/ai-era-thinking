@@ -51,6 +51,16 @@ export interface ContentModel {
   description: string;
   clusters?: Cluster[];
   sections?: Section[]; // Hub content uses "sections" instead of "clusters"
+  volumes?: Volume[]; // Tech for Humanity hub uses "volumes"
   userContributions?: UserContribution[];
   references?: string[];
+}
+
+export interface Volume {
+  id: string;
+  title: string;
+  slug?: string;
+  status: 'seeded' | 'scaffold';
+  lead: string;
+  exemplarCount?: number;
 }

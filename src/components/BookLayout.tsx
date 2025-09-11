@@ -197,6 +197,16 @@ const BookLayout = () => {
                   Resources
                 </Button>
               </Link>
+              <Link to="/thinkers">
+                <Button 
+                  variant={isActive('/thinkers') ? "default" : "ghost"} 
+                  size="sm"
+                  className="whitespace-nowrap"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  Crowdsourced Thinkers
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>

@@ -63,7 +63,7 @@ window.T4H_BOOKS = [
   ]},
 
   // E: The Regenerative Organization - Single book with 7 chapters  
-  { id: "E", title: "The Regenerative Organization", subtitle: "STRIP-MAP-UPDATE Framework for Adaptive Systems", slug: "regenerative-organization", lead: "A practical framework for building adaptive, regenerative organizational systems.", cover: "/assets/covers/placeholder.jpg", series_name: "The Regenerative Organization", chapters: [
+  { id: "E", title: "The Regenerative Organization", subtitle: "STRIP-MAP-UPDATE Framework for Adaptive Systems", slug: "regenerative-organization", lead: "A practical framework for building adaptive, regenerative organizational systems.", cover: "/assets/covers/regenerative-organization.jpg", series_name: "The Regenerative Organization", chapters: [
     { title: "STRIP – Identify Legacy Patterns", sections: ["Assessment", "Mapping", "Analysis"], progress: 0 },
     { title: "MAP – Systems and Flows", sections: ["Visualization", "Dependencies", "Constraints"], progress: 0 },
     { title: "UPDATE – Adaptive Cycles", sections: ["Iteration", "Feedback", "Evolution"], progress: 0 },

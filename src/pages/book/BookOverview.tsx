@@ -4,6 +4,7 @@ import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar } from "lucide-react";
 import { ContentLoader } from "@/components/content/ContentLoader";
 import { ClusterList } from "@/components/content/ClusterList";
@@ -23,7 +24,24 @@ const BookOverview = () => {
     return Math.round(sum / chapters.length);
   };
 
-  const averageProgress = calculateAverageProgress(book.chapters || []);
+  const calculateHubProgress = (content: any) => {
+    if (!content) return 0;
+    if (content.sections) {
+      const seeded = content.sections.filter((s: any) => s.status === 'seeded').length;
+      const total = content.sections.length;
+      return Math.round((seeded / total) * 100);
+    }
+    if (content.volumes) {
+      const seeded = content.volumes.filter((v: any) => v.status === 'seeded').length;
+      const total = content.volumes.length;
+      return Math.round((seeded / total) * 100);
+    }
+    return 0;
+  };
+
+  const averageProgress = book.collection === "Suite Hub" 
+    ? 0 // Will be calculated from content
+    : calculateAverageProgress(book.chapters || []);
 
   return (
     <>
@@ -35,6 +53,17 @@ const BookOverview = () => {
       </Helmet>
       
       <div className="max-w-6xl mx-auto px-4 py-8">
+        <ContentLoader bookSlug={book.slug}>
+          {({ content, loading, error }) => {
+            if (loading) {
+              return <div className="text-center py-8">Loading content...</div>;
+            }
+            
+            // Update progress for hub books based on content
+            const hubProgress = content ? calculateHubProgress(content) : 0;
+            const displayProgress = book.collection === "Suite Hub" ? hubProgress : averageProgress;
+
+            return (
       <div className="grid md:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="md:col-span-2 space-y-8">
@@ -97,6 +126,10 @@ const BookOverview = () => {
                   return <div className="text-center py-8">Loading content...</div>;
                 }
                 
+                // Update progress for hub books based on content
+                const hubProgress = content ? calculateHubProgress(content) : 0;
+                const displayProgress = book.collection === "Suite Hub" ? hubProgress : averageProgress;
+                
                 if (error || !content) {
                   return (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -137,8 +170,56 @@ const BookOverview = () => {
 
                 // Handle different content structures  
                 if (content.sections) {
-                  // Hub content with sections
+                  // Hub content with sections (Thinking Engine)
                   return <SectionList sections={content.sections} bookSlug={book.slug} />;
+                } else if (content.volumes) {
+                  // Hub content with volumes (Tech for Humanity)
+                  return (
+                    <div className="grid gap-6 md:grid-cols-2">
+                      {content.volumes.map((volume: any) => (
+                        <Card key={volume.id} className="hover:shadow-lg transition-all duration-300">
+                          <CardHeader className="pb-4">
+                            <div className="flex items-start justify-between">
+                              <CardTitle className="text-lg">{volume.title}</CardTitle>
+                              <Badge className={`${volume.status === 'seeded' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-white'} flex items-center gap-1`}>
+                                {volume.status === 'seeded' ? <CheckCircle className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
+                                {volume.status}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            <p className="text-muted-foreground text-sm leading-relaxed">
+                              {volume.lead}
+                            </p>
+                            {volume.exemplarCount && (
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Users className="w-4 h-4" />
+                                <span>{volume.exemplarCount} exemplars</span>
+                              </div>
+                            )}
+                            {volume.status === 'seeded' && volume.slug && (
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => window.location.href = `/books/${volume.slug}`}
+                                className="w-full"
+                              >
+                                <BookOpen className="w-4 h-4 mr-2" />
+                                Explore Volume
+                              </Button>
+                            )}
+                            {volume.status === 'scaffold' && (
+                              <div className="bg-muted/50 rounded-lg p-3 text-center">
+                                <p className="text-xs text-muted-foreground">
+                                  Volume framework ready - awaiting development
+                                </p>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  );
                 } else if (content.clusters) {
                   // Regular content with clusters
                   return <ClusterList clusters={content.clusters} bookSlug={book.slug} />;
@@ -232,9 +313,9 @@ const BookOverview = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Overall Progress</span>
-                    <span className="text-sm font-medium">{averageProgress}%</span>
+                    <span className="text-sm font-medium">{displayProgress}%</span>
                   </div>
-                  <Progress value={averageProgress} className="h-3" />
+                  <Progress value={displayProgress} className="h-3" />
                   
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t text-center">
                     <div>
@@ -330,6 +411,9 @@ const BookOverview = () => {
           </div>
         </div>
         </div>
+            );
+          }}
+        </ContentLoader>
       </div>
     </>
   );
