@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Book } from "@/types/books";
+import { useMaster4500BookProgress } from "./useMaster4500";
 
 // New 33-book catalog structure with 5 main series (A-E)
 const DEFAULT_BOOKS: Book[] = [
@@ -548,8 +549,10 @@ function safeCover(src?: string): string {
 }
 
 export function useBooks() {
+  const { data: thinkingEngineProgress } = useMaster4500BookProgress();
+
   return useQuery({
-    queryKey: ["books-merged"],
+    queryKey: ["books-merged", thinkingEngineProgress],
     queryFn: async () => {
       // Get books from window.T4H_BOOKS if available
       const staticBooks = typeof window !== "undefined" && Array.isArray(window.T4H_BOOKS) 
@@ -602,10 +605,21 @@ export function useBooks() {
         // Add static books that aren't already represented
         staticBooks.forEach(staticBook => {
           if (!usedSlugs.has(staticBook.slug)) {
-            mergedBooks.push({
+            let updatedBook = {
               ...staticBook,
               cover: safeCover(staticBook.cover)
-            });
+            };
+
+            // Update "The Thinking Engine" with database-driven progress
+            if (staticBook.slug === 'thinking-engine' && thinkingEngineProgress) {
+              updatedBook = {
+                ...updatedBook,
+                progress: thinkingEngineProgress.avgProgress,
+                status: thinkingEngineProgress.complete > 0 ? 'in_progress' : 'planning'
+              };
+            }
+
+            mergedBooks.push(updatedBook);
           }
         });
 

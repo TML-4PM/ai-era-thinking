@@ -1,26 +1,116 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ContentLoader } from '@/components/content/ContentLoader';
+import { ContentLoader as ContentLoaderNew } from '@/components/content/ContentLoaderNew';
 import { ExemplarCard } from '@/components/content/ExemplarCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Users, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useMaster4500Section, useMaster4500Progress } from '@/hooks/useMaster4500';
 
 export default function SectionContent() {
   const { bookSlug, sectionId } = useParams<{ bookSlug: string; sectionId: string }>();
   const navigate = useNavigate();
 
+  // Special handling for "The Thinking Engine" 
+  const isThinkingEngine = bookSlug === 'thinking-engine';
+  const { data: dbContent, isLoading: isDbLoading } = useMaster4500Section(sectionId || '');
+  const { data: sectionProgress } = useMaster4500Progress();
+
   if (!bookSlug || !sectionId) {
     return <Navigate to="/books" replace />;
+  }
+
+  // For "The Thinking Engine", render database content directly
+  if (isThinkingEngine) {
+    if (isDbLoading) {
+      return (
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate(`/books/${bookSlug}`)}
+              className="mb-6"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Hub
+            </Button>
+            
+            <div className="space-y-6">
+              <div className="h-8 bg-muted animate-pulse rounded" />
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="h-64 bg-muted animate-pulse rounded-lg" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const section = sectionProgress?.[sectionId];
+    const exemplarCount = dbContent?.length || 0;
+
+    return (
+      <>
+        <Helmet>
+          <title>{sectionId} - The Thinking Engine Hub</title>
+          <meta name="description" content={`Explore ${sectionId} content in The Thinking Engine Hub`} />
+        </Helmet>
+
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate(`/books/${bookSlug}`)}
+              className="mb-6"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Hub
+            </Button>
+
+            <div className="space-y-8">
+              <div className="text-center space-y-4">
+                <h1 className="text-4xl font-bold">{sectionId}</h1>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Database-driven content for {sectionId} exemplars
+                </p>
+                <div className="flex items-center justify-center gap-4">
+                  <Badge className={`${section?.status === 'complete' ? 'bg-green-500' : section?.status === 'seeded' ? 'bg-blue-500' : 'bg-yellow-500'} text-white flex items-center gap-1`}>
+                    <CheckCircle className="w-4 h-4" />
+                    {section?.status || 'scaffold'}
+                  </Badge>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Users className="w-4 h-4" />
+                    <span>{exemplarCount} exemplars</span>
+                  </div>
+                  {section?.avgProgress !== undefined && (
+                    <Badge variant="outline">
+                      {Math.round(section.avgProgress)}% complete
+                    </Badge>
+                  )}
+                </div>
+              </div>
+
+              <ContentLoaderNew 
+                bookSlug={bookSlug}
+                contentFile={`${sectionId}.json`}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <Helmet>
-        <title>{sectionId} - The Thinking Engine Hub</title>
-        <meta name="description" content={`Explore ${sectionId} content in The Thinking Engine Hub`} />
+        <title>{sectionId} - {bookSlug === 'thinking-engine' ? 'The Thinking Engine Hub' : 'Book Content'}</title>
+        <meta name="description" content={`Explore ${sectionId} content`} />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">

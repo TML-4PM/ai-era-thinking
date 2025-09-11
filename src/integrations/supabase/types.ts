@@ -15227,6 +15227,105 @@ export type Database = {
           },
         ]
       }
+      master_4500: {
+        Row: {
+          ai_era_shift: string | null
+          ai_relevance: string | null
+          author_ai_era_shift: string | null
+          author_ai_relevance: string | null
+          author_original_insight: string | null
+          book_slug: string
+          case_studies: string[] | null
+          core_framework: string | null
+          created_at: string
+          cross_era_evolution: string | null
+          description: string | null
+          era_agentic_ai: string | null
+          era_bci: string | null
+          era_cloud_native: string | null
+          era_gen_ai: string | null
+          era_on_prem: string | null
+          exemplar_type: string
+          id: string
+          implementation_phase1: string | null
+          implementation_phase2: string | null
+          implementation_phase3: string | null
+          notes: string | null
+          original_insight: string | null
+          progress: number | null
+          related_frameworks: string[] | null
+          related_thinkers: string[] | null
+          section_slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          ai_era_shift?: string | null
+          ai_relevance?: string | null
+          author_ai_era_shift?: string | null
+          author_ai_relevance?: string | null
+          author_original_insight?: string | null
+          book_slug?: string
+          case_studies?: string[] | null
+          core_framework?: string | null
+          created_at?: string
+          cross_era_evolution?: string | null
+          description?: string | null
+          era_agentic_ai?: string | null
+          era_bci?: string | null
+          era_cloud_native?: string | null
+          era_gen_ai?: string | null
+          era_on_prem?: string | null
+          exemplar_type: string
+          id?: string
+          implementation_phase1?: string | null
+          implementation_phase2?: string | null
+          implementation_phase3?: string | null
+          notes?: string | null
+          original_insight?: string | null
+          progress?: number | null
+          related_frameworks?: string[] | null
+          related_thinkers?: string[] | null
+          section_slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          ai_era_shift?: string | null
+          ai_relevance?: string | null
+          author_ai_era_shift?: string | null
+          author_ai_relevance?: string | null
+          author_original_insight?: string | null
+          book_slug?: string
+          case_studies?: string[] | null
+          core_framework?: string | null
+          created_at?: string
+          cross_era_evolution?: string | null
+          description?: string | null
+          era_agentic_ai?: string | null
+          era_bci?: string | null
+          era_cloud_native?: string | null
+          era_gen_ai?: string | null
+          era_on_prem?: string | null
+          exemplar_type?: string
+          id?: string
+          implementation_phase1?: string | null
+          implementation_phase2?: string | null
+          implementation_phase3?: string | null
+          notes?: string | null
+          original_insight?: string | null
+          progress?: number | null
+          related_frameworks?: string[] | null
+          related_thinkers?: string[] | null
+          section_slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       matrix_config: {
         Row: {
           created_at: string
@@ -31596,6 +31695,105 @@ export type Database = {
         }
         Relationships: []
       }
+      "4500 Master": {
+        Row: {
+          ai_era_shift: string | null
+          ai_relevance: string | null
+          author_ai_era_shift: string | null
+          author_ai_relevance: string | null
+          author_original_insight: string | null
+          book_slug: string | null
+          case_studies: string[] | null
+          core_framework: string | null
+          created_at: string | null
+          cross_era_evolution: string | null
+          description: string | null
+          era_agentic_ai: string | null
+          era_bci: string | null
+          era_cloud_native: string | null
+          era_gen_ai: string | null
+          era_on_prem: string | null
+          exemplar_type: string | null
+          id: string | null
+          implementation_phase1: string | null
+          implementation_phase2: string | null
+          implementation_phase3: string | null
+          notes: string | null
+          original_insight: string | null
+          progress: number | null
+          related_frameworks: string[] | null
+          related_thinkers: string[] | null
+          section_slug: string | null
+          status: Database["public"]["Enums"]["content_status"] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          ai_era_shift?: string | null
+          ai_relevance?: string | null
+          author_ai_era_shift?: string | null
+          author_ai_relevance?: string | null
+          author_original_insight?: string | null
+          book_slug?: string | null
+          case_studies?: string[] | null
+          core_framework?: string | null
+          created_at?: string | null
+          cross_era_evolution?: string | null
+          description?: string | null
+          era_agentic_ai?: string | null
+          era_bci?: string | null
+          era_cloud_native?: string | null
+          era_gen_ai?: string | null
+          era_on_prem?: string | null
+          exemplar_type?: string | null
+          id?: string | null
+          implementation_phase1?: string | null
+          implementation_phase2?: string | null
+          implementation_phase3?: string | null
+          notes?: string | null
+          original_insight?: string | null
+          progress?: number | null
+          related_frameworks?: string[] | null
+          related_thinkers?: string[] | null
+          section_slug?: string | null
+          status?: Database["public"]["Enums"]["content_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          ai_era_shift?: string | null
+          ai_relevance?: string | null
+          author_ai_era_shift?: string | null
+          author_ai_relevance?: string | null
+          author_original_insight?: string | null
+          book_slug?: string | null
+          case_studies?: string[] | null
+          core_framework?: string | null
+          created_at?: string | null
+          cross_era_evolution?: string | null
+          description?: string | null
+          era_agentic_ai?: string | null
+          era_bci?: string | null
+          era_cloud_native?: string | null
+          era_gen_ai?: string | null
+          era_on_prem?: string | null
+          exemplar_type?: string | null
+          id?: string | null
+          implementation_phase1?: string | null
+          implementation_phase2?: string | null
+          implementation_phase3?: string | null
+          notes?: string | null
+          original_insight?: string | null
+          progress?: number | null
+          related_frameworks?: string[] | null
+          related_thinkers?: string[] | null
+          section_slug?: string | null
+          status?: Database["public"]["Enums"]["content_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       "Agent reuse optimiser": {
         Row: {
           agent_code: string | null
@@ -33333,6 +33531,7 @@ export type Database = {
         | "edited"
         | "approved"
         | "published"
+      content_status: "scaffold" | "seeded" | "complete"
       ladder_tier: "bronze" | "silver" | "gold" | "platinum" | "elite"
       metric_type: "numeric" | "text" | "boolean" | "date"
       sales_stage:
@@ -33492,6 +33691,7 @@ export const Constants = {
         "approved",
         "published",
       ],
+      content_status: ["scaffold", "seeded", "complete"],
       ladder_tier: ["bronze", "silver", "gold", "platinum", "elite"],
       metric_type: ["numeric", "text", "boolean", "date"],
       sales_stage: [
