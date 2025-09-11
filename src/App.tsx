@@ -38,6 +38,7 @@ import BookChapters from "./pages/book/BookChapters";
 import BookLeadersLive from "./pages/book/BookLeadersLive";
 import BookAddGuru from "./pages/book/BookAddGuru";
 import BookResources from "./pages/book/BookResources";
+import SectionContent from "./pages/SectionContent";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
+              <Route path="/books/:bookSlug/sections/:sectionId" element={<SectionContent />} />
               <Route path="/books/:slug" element={<BookLayout />}>
                 <Route index element={<BookOverview />} />
                 <Route path="chapters" element={<BookChapters />} />

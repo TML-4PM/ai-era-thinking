@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FileText, Users, CheckCircle, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ContentLoader } from './ContentLoader';
+import { useState, useEffect } from 'react';
 
 interface SectionListProps {
   sections: Section[];
@@ -12,6 +14,34 @@ interface SectionListProps {
 
 export function SectionList({ sections, bookSlug }: SectionListProps) {
   const navigate = useNavigate();
+  const [sectionCounts, setSectionCounts] = useState<Record<string, number>>({});
+
+  // Load actual exemplar counts for seeded sections
+  useEffect(() => {
+    const loadCounts = async () => {
+      const counts: Record<string, number> = {};
+      
+      for (const section of sections) {
+        if (section.status === 'seeded' && section.contentFile) {
+          try {
+            const response = await fetch(`/books/content/${section.contentFile}`);
+            if (response.ok) {
+              const data = await response.json();
+              const exemplarCount = data.clusters?.reduce((total: number, cluster: any) => 
+                total + (cluster.exemplars?.length || 0), 0) || 0;
+              counts[section.id] = exemplarCount;
+            }
+          } catch (error) {
+            console.error(`Failed to load count for ${section.id}:`, error);
+          }
+        }
+      }
+      
+      setSectionCounts(counts);
+    };
+
+    loadCounts();
+  }, [sections]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -47,18 +77,23 @@ export function SectionList({ sections, bookSlug }: SectionListProps) {
               {section.lead}
             </p>
             
-            {section.exemplarCount && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Users className="w-4 h-4" />
-                <span>{section.exemplarCount} exemplars</span>
-              </div>
-            )}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Users className="w-4 h-4" />
+              <span>
+                {section.status === 'seeded' && sectionCounts[section.id] 
+                  ? `${sectionCounts[section.id]} exemplars`
+                  : section.exemplarCount 
+                    ? `${section.exemplarCount} exemplars`
+                    : 'Content framework ready'
+                }
+              </span>
+            </div>
             
-            {section.status === 'seeded' && section.slug && (
+            {section.status === 'seeded' && (
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => navigate(`/books/${section.slug}`)}
+                onClick={() => navigate(`/books/${bookSlug}/sections/${section.id}`)}
                 className="w-full"
               >
                 <FileText className="w-4 h-4 mr-2" />
