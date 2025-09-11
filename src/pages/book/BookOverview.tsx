@@ -1,21 +1,25 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar } from "lucide-react";
+import { BookOpen, Clock, Users, Target, CheckCircle, User, Calendar, Plus, ExternalLink } from "lucide-react";
 import { ContentLoader } from "@/components/content/ContentLoader";
 import { ClusterList } from "@/components/content/ClusterList";
 import { SectionList } from "@/components/content/SectionList";
 import { ContributionForm } from "@/components/content/ContributionForm";
 import { AuthorModeToggle } from "@/components/AuthorModeToggle";
+import { InsightInbox } from '@/components/author/InsightInbox';
+import { useAuthorMode } from '@/hooks/useAuthorMode';
 
-const BookOverview = () => {
-  const { slug } = useParams<{ slug: string }>();
+export default function BookOverview() {
+  const { slug: bookSlug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
-  const book = books?.find(book => book.slug === slug);
+  const { isAuthorMode } = useAuthorMode();
+  
+  const book = books?.find(book => book.slug === bookSlug);
 
   if (!book) return null;
 
@@ -46,15 +50,15 @@ const BookOverview = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{book.title} - Overview | Tech for Humanity</title>
-        <meta name="description" content={`${book.lead} Explore structured content, era evolution, and collaborative insights.`} />
-        <meta name="keywords" content={`${book.title}, ${book.series_name}, book overview, structured content`} />
-        <link rel="canonical" href={`/books/${slug}`} />
-      </Helmet>
+        <Helmet>
+          <title>{book.title} - Overview | Tech for Humanity</title>
+          <meta name="description" content={`${book.lead} Explore structured content, era evolution, and collaborative insights.`} />
+          <meta name="keywords" content={`${book.title}, ${book.series_name}, book overview, structured content`} />
+          <link rel="canonical" href={`/books/${bookSlug}`} />
+        </Helmet>
       
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <ContentLoader bookSlug={book.slug}>
+        <ContentLoader bookSlug={bookSlug}>
           {({ content, loading, error }) => {
             if (loading) {
               return <div className="text-center py-8">Loading content...</div>;
@@ -118,10 +122,25 @@ const BookOverview = () => {
             </div>
           </section>
 
-          {/* Key Topics or Content Model */}
+          {/* Quick Insight Form */}
+          {content.volumes && (
+            <div className="mb-8">
+              <ContentLoader bookSlug={bookSlug}>
+                {({ content: volumeContent }) => (
+                  <ContributionForm
+                    bookSlug={bookSlug}
+                    volumes={volumeContent?.volumes || []}
+                    isQuickInsight={true}
+                  />
+                )}
+              </ContentLoader>
+            </div>
+          )}
+
+          {/* Content & Frameworks */}
           <section>
             <h2 className="text-2xl font-bold mb-4">Content & Frameworks</h2>
-            <ContentLoader bookSlug={book.slug}>
+            <ContentLoader bookSlug={bookSlug}>
               {({ content, loading, error }) => {
                 if (loading) {
                   return <div className="text-center py-8">Loading content...</div>;
@@ -172,7 +191,7 @@ const BookOverview = () => {
                 // Handle different content structures  
                 if (content.sections) {
                   // Hub content with sections (Thinking Engine)
-                  return <SectionList sections={content.sections} bookSlug={book.slug} />;
+                  return <SectionList sections={content.sections} bookSlug={bookSlug} />;
                 } else if (content.volumes) {
                   // Hub content with volumes (Tech for Humanity)
                   return (
@@ -223,7 +242,7 @@ const BookOverview = () => {
                   );
                 } else if (content.clusters) {
                   // Regular content with clusters
-                  return <ClusterList clusters={content.clusters} bookSlug={book.slug} />;
+                  return <ClusterList clusters={content.clusters} bookSlug={bookSlug} />;
                 } else {
                   // Fallback for unknown structure
                   return <div>No structured content available yet.</div>;
@@ -233,10 +252,12 @@ const BookOverview = () => {
           </section>
 
           {/* User Contribution Form */}
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Contribute Your Insights</h2>
-            <ContributionForm bookSlug={book.slug} />
-          </section>
+          {!content.volumes && (
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Contribute Your Insights</h2>
+              <ContributionForm bookSlug={bookSlug} />
+            </section>
+          )}
 
           {/* Chapter Preview */}
           <section>

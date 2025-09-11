@@ -14,9 +14,10 @@ import type { EraMapping as EraMapType } from '@/types/content';
 interface Master4500ExemplarCardProps {
   exemplar: Master4500Record;
   bookSlug: string;
+  showContributionForm?: boolean;
 }
 
-export function Master4500ExemplarCard({ exemplar, bookSlug }: Master4500ExemplarCardProps) {
+export function Master4500ExemplarCard({ exemplar, bookSlug, showContributionForm = true }: Master4500ExemplarCardProps) {
   const [showEraMapping, setShowEraMapping] = useState(false);
   const [showCaseStudies, setShowCaseStudies] = useState(false);
   const [showImplementation, setShowImplementation] = useState(false);
@@ -181,12 +182,14 @@ export function Master4500ExemplarCard({ exemplar, bookSlug }: Master4500Exempla
         />
 
         {/* Per-Exemplar Contribution */}
-        <div className="border-t pt-4">
-          <ContributionForm 
-            bookSlug={bookSlug}
-            exemplarKey={exemplar.title}
-          />
-        </div>
+        {showContributionForm && (
+          <div className="border-t pt-4">
+            <ContributionForm 
+              bookSlug={bookSlug}
+              exemplarKey={exemplar.title}
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

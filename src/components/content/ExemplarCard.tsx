@@ -13,9 +13,10 @@ import { ContributionForm } from './ContributionForm';
 interface ExemplarCardProps {
   exemplar: Exemplar;
   bookSlug: string;
+  showContributionForm?: boolean;
 }
 
-export function ExemplarCard({ exemplar, bookSlug }: ExemplarCardProps) {
+export function ExemplarCard({ exemplar, bookSlug, showContributionForm = true }: ExemplarCardProps) {
   const [showEraMapping, setShowEraMapping] = useState(false);
   const [showCaseStudies, setShowCaseStudies] = useState(false);
 
@@ -114,12 +115,14 @@ export function ExemplarCard({ exemplar, bookSlug }: ExemplarCardProps) {
         />
 
         {/* Per-Exemplar Contribution */}
-        <div className="border-t pt-4">
-          <ContributionForm 
-            bookSlug={bookSlug}
-            exemplarKey={exemplar.name}
-          />
-        </div>
+        {showContributionForm && (
+          <div className="border-t pt-4">
+            <ContributionForm 
+              bookSlug={bookSlug}
+              exemplarKey={exemplar.name}
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

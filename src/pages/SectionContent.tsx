@@ -201,15 +201,16 @@ export default function SectionContent() {
                             </div>
                           </div>
 
-                          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            {exemplars.map((exemplar, index) => (
-                              <ExemplarCard 
-                                key={index} 
-                                exemplar={exemplar} 
-                                bookSlug={bookSlug} 
-                              />
-                            ))}
-                          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {exemplars.map((exemplar, index) => (
+              <ExemplarCard 
+                key={index} 
+                exemplar={exemplar} 
+                bookSlug={bookSlug}
+                showContributionForm={bookSlug !== 'tech-for-humanity'}
+              />
+            ))}
+          </div>
                         </div>
                       );
                     }}
