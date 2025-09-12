@@ -10,6 +10,20 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useMaster4500Section, useMaster4500Progress } from '@/hooks/useMaster4500';
 
+// Map section IDs to their corresponding JSON content files
+function getContentFileForSection(sectionId: string): string {
+  const sectionFileMap: Record<string, string> = {
+    'thinkers': 'thinkers-brains-that-shaped-brains.json',
+    'frameworks': 'frameworks.json',
+    'quantum-logic-systems': 'quantum-logic-systems.json',
+    'entangled-time': 'entangled-time.json',
+    'roles-humans-in-machine': 'roles-humans-in-machine.json',
+    // Add more mappings as needed
+  };
+  
+  return sectionFileMap[sectionId] || `${sectionId}.json`;
+}
+
 export default function SectionContent() {
   const { bookSlug, sectionId } = useParams<{ bookSlug: string; sectionId: string }>();
   const navigate = useNavigate();
@@ -97,7 +111,7 @@ export default function SectionContent() {
 
               <ContentLoaderNew 
                 bookSlug={bookSlug}
-                contentFile={`${sectionId}.json`}
+                contentFile={getContentFileForSection(sectionId)}
               />
             </div>
           </div>
