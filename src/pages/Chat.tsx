@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ArrowLeft, MessageCircle, Users } from "lucide-react";
+import { AllThinkersGrid } from "@/components/AllThinkersGrid";
 
 const Chat = () => {
   return (
@@ -44,8 +45,22 @@ const Chat = () => {
             </p>
           </div>
           
-          <div className="mt-12 p-8 bg-muted/20 rounded-lg text-center">
-            <p className="text-muted-foreground">Coming soon - AI-powered chat interface for personalized discussions with thinker personas.</p>
+          <div className="mt-12 space-y-8">
+            <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-lg p-6 border">
+              <div className="flex items-center gap-3 mb-4">
+                <MessageCircle className="w-6 h-6 text-primary" />
+                <h3 className="text-xl font-semibold">Chat with Thinkers</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Select any thinker below to start an AI-powered conversation. Each thinker has their own personality, expertise, and insights.
+              </p>
+              <div className="flex gap-2 text-sm text-muted-foreground">
+                <Users className="w-4 h-4" />
+                <span>Click on any thinker card → Open their modal → Go to "Chat" tab</span>
+              </div>
+            </div>
+            
+            <AllThinkersGrid />
           </div>
         </main>
       </div>

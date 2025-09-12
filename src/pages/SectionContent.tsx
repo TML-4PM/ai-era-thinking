@@ -9,6 +9,7 @@ import { ArrowLeft, Users, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useMaster4500Section, useMaster4500Progress } from '@/hooks/useMaster4500';
+import { AllThinkersGrid } from '@/components/AllThinkersGrid';
 
 // Map section IDs to their corresponding JSON content files
 function getContentFileForSection(sectionId: string): string {
@@ -109,10 +110,34 @@ export default function SectionContent() {
                 </div>
               </div>
 
-              <ContentLoaderNew 
-                bookSlug={bookSlug}
-                contentFile={getContentFileForSection(sectionId)}
-              />
+              {/* Special handling for thinkers section - show interactive All Thinkers Grid */}
+              {sectionId === 'thinkers' ? (
+                <div className="space-y-8">
+                  <div className="bg-card/50 backdrop-blur-sm rounded-lg border p-6">
+                    <h2 className="text-2xl font-bold mb-4">Interactive Thinkers Experience</h2>
+                    <p className="text-muted-foreground mb-6">
+                      Explore influential thinkers through interactive profiles, AI-powered chat, and team generation capabilities.
+                    </p>
+                    <AllThinkersGrid />
+                  </div>
+                  
+                  <div className="bg-muted/20 rounded-lg p-4">
+                    <h3 className="text-lg font-semibold mb-2">Database Content</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Additional exemplars from the database:
+                    </p>
+                    <ContentLoaderNew 
+                      bookSlug={bookSlug}
+                      contentFile={getContentFileForSection(sectionId)}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <ContentLoaderNew 
+                  bookSlug={bookSlug}
+                  contentFile={getContentFileForSection(sectionId)}
+                />
+              )}
             </div>
           </div>
         </div>
