@@ -55,6 +55,24 @@ export default function BookOverview() {
         <meta name="description" content={`${book.lead} Explore structured content, era evolution, and collaborative insights.`} />
         <meta name="keywords" content={`${book.title}, ${book.series_name}, book overview, structured content`} />
         <link rel="canonical" href={`/books/${bookSlug}`} />
+        
+        {/* Social sharing images for Tech4Humanity */}
+        {(bookSlug === 'tech-for-humanity' || book.series_name === 'Tech for Humanity') && (
+          <>
+            <meta property="og:title" content={`${book.title} - Tech for Humanity`} />
+            <meta property="og:description" content={book.lead} />
+            <meta property="og:type" content="website" />
+            <meta property="og:image" content="/assets/covers/tech-for-humanity-hub.jpg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:url" content={`/books/${bookSlug}`} />
+            
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={`${book.title} - Tech for Humanity`} />
+            <meta name="twitter:description" content={book.lead} />
+            <meta name="twitter:image" content="/assets/covers/tech-for-humanity-hub.jpg" />
+          </>
+        )}
       </Helmet>
     
       <div className="max-w-6xl mx-auto px-4 py-8">
