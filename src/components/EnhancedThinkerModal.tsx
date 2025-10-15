@@ -38,6 +38,7 @@ import { UserThinker } from "@/types/UserThinker";
 import { supabase } from "@/integrations/supabase/client";
 import { useThinkerResearch, useAutoSyncThinkerResearch } from "@/hooks/useThinkerResearch";
 import { ResearchPaperCard } from "@/components/research/ResearchPaperCard";
+import { ResearchPaperSkeletonList } from "@/components/research/ResearchPaperSkeleton";
 
 interface EnhancedThinkerModalProps {
   thinker: Thinker | (Thinker & { isUserCreated?: boolean; userThinkerData?: UserThinker }) | null;
@@ -1032,22 +1033,44 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
           <TabsContent value="research" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-brand" />
-                  Published Research
-                  {autoSyncMutation.isPending && (
-                    <Loader2 className="w-4 h-4 animate-spin ml-auto" />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <FileText className="w-5 h-5 text-brand" />
+                      Published Research
+                      {autoSyncMutation.isPending && (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      )}
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Papers authored or co-authored by {thinker.name}
+                    </p>
+                  </div>
+                  {researchPapers.length > 0 && !isLoadingResearch && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => autoSyncMutation.mutate(thinker.name)}
+                      disabled={autoSyncMutation.isPending}
+                    >
+                      {autoSyncMutation.isPending ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          <span className="hidden sm:inline">Syncing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-4 h-4 sm:mr-2" />
+                          <span className="hidden sm:inline">Refresh</span>
+                        </>
+                      )}
+                    </Button>
                   )}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Papers authored or co-authored by {thinker.name}
-                </p>
+                </div>
               </CardHeader>
               <CardContent>
                 {isLoadingResearch ? (
-                  <div className="flex items-center justify-center py-8">
-                    <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-                  </div>
+                  <ResearchPaperSkeletonList count={3} />
                 ) : researchPapers.length > 0 ? (
                   <div className="space-y-3">
                     {researchPapers.map((paper) => (
@@ -1059,24 +1082,26 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 space-y-4">
-                    <BookOpen className="w-12 h-12 mx-auto text-muted-foreground/50" />
-                    <div>
-                      <h3 className="font-medium">No Research Papers Found</h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        No research papers have been discovered for this thinker yet
+                  <div className="text-center py-8 sm:py-12 space-y-4">
+                    <BookOpen className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-muted-foreground/50" />
+                    <div className="space-y-2">
+                      <h3 className="font-medium text-base sm:text-lg">No Research Papers Found</h3>
+                      <p className="text-sm text-muted-foreground max-w-md mx-auto px-4">
+                        We haven't discovered any research papers for {thinker.name} yet. 
+                        Try auto-discovery to search the research database.
                       </p>
                     </div>
                     <Button
-                      variant="outline"
-                      size="sm"
+                      variant="default"
+                      size="default"
                       onClick={() => autoSyncMutation.mutate(thinker.name)}
                       disabled={autoSyncMutation.isPending}
+                      className="mt-2"
                     >
                       {autoSyncMutation.isPending ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Discovering...
+                          Discovering papers...
                         </>
                       ) : (
                         <>
