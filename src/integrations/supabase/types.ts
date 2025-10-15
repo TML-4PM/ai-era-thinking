@@ -3982,6 +3982,71 @@ export type Database = {
           },
         ]
       }
+      audio_signals: {
+        Row: {
+          audio_environment: string | null
+          background_noise_db: number | null
+          confidence_score: number | null
+          created_at: string
+          emotion_indicators: Json | null
+          id: string
+          pitch_hz: number | null
+          prosody_features: Json | null
+          session_id: string
+          signal_to_noise_ratio: number | null
+          speaking_rate_wpm: number | null
+          timestamp: string
+          transcription: string | null
+          vocal_stress_score: number | null
+          voice_energy: number | null
+          volume_db: number | null
+        }
+        Insert: {
+          audio_environment?: string | null
+          background_noise_db?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          emotion_indicators?: Json | null
+          id?: string
+          pitch_hz?: number | null
+          prosody_features?: Json | null
+          session_id: string
+          signal_to_noise_ratio?: number | null
+          speaking_rate_wpm?: number | null
+          timestamp: string
+          transcription?: string | null
+          vocal_stress_score?: number | null
+          voice_energy?: number | null
+          volume_db?: number | null
+        }
+        Update: {
+          audio_environment?: string | null
+          background_noise_db?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          emotion_indicators?: Json | null
+          id?: string
+          pitch_hz?: number | null
+          prosody_features?: Json | null
+          session_id?: string
+          signal_to_noise_ratio?: number | null
+          speaking_rate_wpm?: number | null
+          timestamp?: string
+          transcription?: string | null
+          vocal_stress_score?: number | null
+          voice_energy?: number | null
+          volume_db?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audio_signals_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "multimodal_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_insights: {
         Row: {
           audit_report_id: string | null
@@ -4374,6 +4439,1746 @@ export type Database = {
         }
         Relationships: []
       }
+      "BCI Snippet": {
+        Row: {
+          column_name: string | null
+          data_type: string | null
+        }
+        Insert: {
+          column_name?: string | null
+          data_type?: string | null
+        }
+        Update: {
+          column_name?: string | null
+          data_type?: string | null
+        }
+        Relationships: []
+      }
+      bci_actors: {
+        Row: {
+          actor_id: number
+          category: string | null
+          created_at: string | null
+          description: string | null
+          name: string
+        }
+        Insert: {
+          actor_id: number
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          name: string
+        }
+        Update: {
+          actor_id?: number
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
+      bci_clinical_trials: {
+        Row: {
+          completion_date: string | null
+          condition: string | null
+          created_at: string | null
+          enrollment: number | null
+          last_verified_utc: string | null
+          locations: string[] | null
+          nct_number: string | null
+          phase: string | null
+          primary_outcome: string | null
+          product_id: string | null
+          sponsor: string | null
+          start_date: string | null
+          status: string | null
+          supplier_id: string | null
+          title: string | null
+          trial_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          completion_date?: string | null
+          condition?: string | null
+          created_at?: string | null
+          enrollment?: number | null
+          last_verified_utc?: string | null
+          locations?: string[] | null
+          nct_number?: string | null
+          phase?: string | null
+          primary_outcome?: string | null
+          product_id?: string | null
+          sponsor?: string | null
+          start_date?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          title?: string | null
+          trial_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          completion_date?: string | null
+          condition?: string | null
+          created_at?: string | null
+          enrollment?: number | null
+          last_verified_utc?: string | null
+          locations?: string[] | null
+          nct_number?: string | null
+          phase?: string | null
+          primary_outcome?: string | null
+          product_id?: string | null
+          sponsor?: string | null
+          start_date?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          title?: string | null
+          trial_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_clinical_trials_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "bci_products_catalog"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "bci_clinical_trials_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_company: {
+        Row: {
+          certifications: Json | null
+          clinical_stage: string | null
+          compliance_certifications: string[] | null
+          confidence_score: number | null
+          country: string | null
+          created_at: string | null
+          devices_offered: Json | null
+          domain: string | null
+          employee_count: number | null
+          evidence: Json | null
+          fda_approvals: Json | null
+          founded_year: number | null
+          funding_stage: string | null
+          headquarters_location: string | null
+          hq_city: string | null
+          id: string
+          integration_apis: Json | null
+          market_cap: number | null
+          name: string
+          partnerships: Json | null
+          patents_count: number | null
+          pilot_readiness_score: number | null
+          primary_signal_focus: string | null
+          product_portfolio: Json | null
+          publications_count: number | null
+          regulatory_status: string | null
+          revenue_range: string | null
+          signal_types: string[] | null
+          size_range: string | null
+          source: string | null
+          sources: Json | null
+          status: string | null
+          target_use_cases: string[] | null
+          updated_at: string | null
+          validation_studies: Json | null
+        }
+        Insert: {
+          certifications?: Json | null
+          clinical_stage?: string | null
+          compliance_certifications?: string[] | null
+          confidence_score?: number | null
+          country?: string | null
+          created_at?: string | null
+          devices_offered?: Json | null
+          domain?: string | null
+          employee_count?: number | null
+          evidence?: Json | null
+          fda_approvals?: Json | null
+          founded_year?: number | null
+          funding_stage?: string | null
+          headquarters_location?: string | null
+          hq_city?: string | null
+          id?: string
+          integration_apis?: Json | null
+          market_cap?: number | null
+          name: string
+          partnerships?: Json | null
+          patents_count?: number | null
+          pilot_readiness_score?: number | null
+          primary_signal_focus?: string | null
+          product_portfolio?: Json | null
+          publications_count?: number | null
+          regulatory_status?: string | null
+          revenue_range?: string | null
+          signal_types?: string[] | null
+          size_range?: string | null
+          source?: string | null
+          sources?: Json | null
+          status?: string | null
+          target_use_cases?: string[] | null
+          updated_at?: string | null
+          validation_studies?: Json | null
+        }
+        Update: {
+          certifications?: Json | null
+          clinical_stage?: string | null
+          compliance_certifications?: string[] | null
+          confidence_score?: number | null
+          country?: string | null
+          created_at?: string | null
+          devices_offered?: Json | null
+          domain?: string | null
+          employee_count?: number | null
+          evidence?: Json | null
+          fda_approvals?: Json | null
+          founded_year?: number | null
+          funding_stage?: string | null
+          headquarters_location?: string | null
+          hq_city?: string | null
+          id?: string
+          integration_apis?: Json | null
+          market_cap?: number | null
+          name?: string
+          partnerships?: Json | null
+          patents_count?: number | null
+          pilot_readiness_score?: number | null
+          primary_signal_focus?: string | null
+          product_portfolio?: Json | null
+          publications_count?: number | null
+          regulatory_status?: string | null
+          revenue_range?: string | null
+          signal_types?: string[] | null
+          size_range?: string | null
+          source?: string | null
+          sources?: Json | null
+          status?: string | null
+          target_use_cases?: string[] | null
+          updated_at?: string | null
+          validation_studies?: Json | null
+        }
+        Relationships: []
+      }
+      bci_company_stage: {
+        Row: {
+          confidence_score: number | null
+          country: string | null
+          created_at: string | null
+          domain: string | null
+          evidence: Json | null
+          founded_year: number | null
+          hq_city: string | null
+          id: string
+          industry_mappings: string[] | null
+          lens_mappings: string[] | null
+          name: string
+          size_range: string | null
+          source_apis: string[] | null
+          status: string | null
+          sub_bucket_mappings: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          confidence_score?: number | null
+          country?: string | null
+          created_at?: string | null
+          domain?: string | null
+          evidence?: Json | null
+          founded_year?: number | null
+          hq_city?: string | null
+          id?: string
+          industry_mappings?: string[] | null
+          lens_mappings?: string[] | null
+          name: string
+          size_range?: string | null
+          source_apis?: string[] | null
+          status?: string | null
+          sub_bucket_mappings?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          confidence_score?: number | null
+          country?: string | null
+          created_at?: string | null
+          domain?: string | null
+          evidence?: Json | null
+          founded_year?: number | null
+          hq_city?: string | null
+          id?: string
+          industry_mappings?: string[] | null
+          lens_mappings?: string[] | null
+          name?: string
+          size_range?: string | null
+          source_apis?: string[] | null
+          status?: string | null
+          sub_bucket_mappings?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      bci_component_map: {
+        Row: {
+          category: string | null
+          component_name: string | null
+          criticality: string | null
+          primary_supplier: string | null
+          supplier_uid: string | null
+          used_in: string | null
+          used_uid: string | null
+        }
+        Insert: {
+          category?: string | null
+          component_name?: string | null
+          criticality?: string | null
+          primary_supplier?: string | null
+          supplier_uid?: string | null
+          used_in?: string | null
+          used_uid?: string | null
+        }
+        Update: {
+          category?: string | null
+          component_name?: string | null
+          criticality?: string | null
+          primary_supplier?: string | null
+          supplier_uid?: string | null
+          used_in?: string | null
+          used_uid?: string | null
+        }
+        Relationships: []
+      }
+      bci_component_supplier_map: {
+        Row: {
+          category: string | null
+          component_name: string
+          created_at: string | null
+          criticality: string | null
+          mapping_id: string
+          supplier_id: string
+          updated_at: string | null
+          used_by_id: string
+        }
+        Insert: {
+          category?: string | null
+          component_name: string
+          created_at?: string | null
+          criticality?: string | null
+          mapping_id: string
+          supplier_id: string
+          updated_at?: string | null
+          used_by_id: string
+        }
+        Update: {
+          category?: string | null
+          component_name?: string
+          created_at?: string | null
+          criticality?: string | null
+          mapping_id?: string
+          supplier_id?: string
+          updated_at?: string | null
+          used_by_id?: string
+        }
+        Relationships: []
+      }
+      bci_components_materials: {
+        Row: {
+          compatible_modalities: string[] | null
+          component_id: string
+          created_at: string | null
+          last_verified_utc: string | null
+          material: string | null
+          notes: string | null
+          supplier_id: string | null
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          compatible_modalities?: string[] | null
+          component_id: string
+          created_at?: string | null
+          last_verified_utc?: string | null
+          material?: string | null
+          notes?: string | null
+          supplier_id?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          compatible_modalities?: string[] | null
+          component_id?: string
+          created_at?: string | null
+          last_verified_utc?: string | null
+          material?: string | null
+          notes?: string | null
+          supplier_id?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_components_materials_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_contacts_enrichment: {
+        Row: {
+          consent_date: string | null
+          consent_obtained: boolean | null
+          contact_id: string
+          created_at: string | null
+          data_source: string | null
+          email: string | null
+          last_verified_utc: string | null
+          linkedin_url: string | null
+          name: string | null
+          phone: string | null
+          supplier_id: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          consent_date?: string | null
+          consent_obtained?: boolean | null
+          contact_id: string
+          created_at?: string | null
+          data_source?: string | null
+          email?: string | null
+          last_verified_utc?: string | null
+          linkedin_url?: string | null
+          name?: string | null
+          phone?: string | null
+          supplier_id?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          consent_date?: string | null
+          consent_obtained?: boolean | null
+          contact_id?: string
+          created_at?: string | null
+          data_source?: string | null
+          email?: string | null
+          last_verified_utc?: string | null
+          linkedin_url?: string | null
+          name?: string | null
+          phone?: string | null
+          supplier_id?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_contacts_enrichment_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_data_lineage: {
+        Row: {
+          data_snapshot: Json | null
+          ip_address: unknown | null
+          lineage_id: string
+          operation: string | null
+          performed_at: string | null
+          performed_by: string | null
+          reason: string | null
+          record_id: string
+          table_name: string
+        }
+        Insert: {
+          data_snapshot?: Json | null
+          ip_address?: unknown | null
+          lineage_id?: string
+          operation?: string | null
+          performed_at?: string | null
+          performed_by?: string | null
+          reason?: string | null
+          record_id: string
+          table_name: string
+        }
+        Update: {
+          data_snapshot?: Json | null
+          ip_address?: unknown | null
+          lineage_id?: string
+          operation?: string | null
+          performed_at?: string | null
+          performed_by?: string | null
+          reason?: string | null
+          record_id?: string
+          table_name?: string
+        }
+        Relationships: []
+      }
+      bci_ecosystem_master: {
+        Row: {
+          application_domain: string | null
+          category: string | null
+          company_id: string | null
+          component_name: string | null
+          consent_model: string | null
+          criticality: string | null
+          customer_uid: string | null
+          dependency_strength: string | null
+          ethics_compliance: string | null
+          interface_type: string | null
+          link_type: string | null
+          manufacturing_region: string | null
+          network_density: number | null
+          notes: string | null
+          primary_customers: string | null
+          product_id: string | null
+          rd_region: string | null
+          ref_id: string
+          region: string | null
+          regulatory_status: string | null
+          risk_score: number | null
+          sector: string | null
+          segment: string | null
+          shared_tech: string | null
+          subsegment: string | null
+          supplier_uid: string | null
+          value_chain_role: string | null
+          year_founded: number | null
+        }
+        Insert: {
+          application_domain?: string | null
+          category?: string | null
+          company_id?: string | null
+          component_name?: string | null
+          consent_model?: string | null
+          criticality?: string | null
+          customer_uid?: string | null
+          dependency_strength?: string | null
+          ethics_compliance?: string | null
+          interface_type?: string | null
+          link_type?: string | null
+          manufacturing_region?: string | null
+          network_density?: number | null
+          notes?: string | null
+          primary_customers?: string | null
+          product_id?: string | null
+          rd_region?: string | null
+          ref_id: string
+          region?: string | null
+          regulatory_status?: string | null
+          risk_score?: number | null
+          sector?: string | null
+          segment?: string | null
+          shared_tech?: string | null
+          subsegment?: string | null
+          supplier_uid?: string | null
+          value_chain_role?: string | null
+          year_founded?: number | null
+        }
+        Update: {
+          application_domain?: string | null
+          category?: string | null
+          company_id?: string | null
+          component_name?: string | null
+          consent_model?: string | null
+          criticality?: string | null
+          customer_uid?: string | null
+          dependency_strength?: string | null
+          ethics_compliance?: string | null
+          interface_type?: string | null
+          link_type?: string | null
+          manufacturing_region?: string | null
+          network_density?: number | null
+          notes?: string | null
+          primary_customers?: string | null
+          product_id?: string | null
+          rd_region?: string | null
+          ref_id?: string
+          region?: string | null
+          regulatory_status?: string | null
+          risk_score?: number | null
+          sector?: string | null
+          segment?: string | null
+          shared_tech?: string | null
+          subsegment?: string | null
+          supplier_uid?: string | null
+          value_chain_role?: string | null
+          year_founded?: number | null
+        }
+        Relationships: []
+      }
+      "bci_ecosystem_master.csv": {
+        Row: {
+          application_domain: string | null
+          company: string | null
+          consent_model: string | null
+          ethics_compliance: string | null
+          interface_type: string | null
+          manufacturing_region: string | null
+          notes: string | null
+          primary_customers: string | null
+          "R&D_region": string | null
+          region: string | null
+          regulatory_status: string | null
+          sector: string | null
+          segment: string | null
+          subsegment: string | null
+          uid: string | null
+          value_chain_role: string | null
+          year_founded: number | null
+        }
+        Insert: {
+          application_domain?: string | null
+          company?: string | null
+          consent_model?: string | null
+          ethics_compliance?: string | null
+          interface_type?: string | null
+          manufacturing_region?: string | null
+          notes?: string | null
+          primary_customers?: string | null
+          "R&D_region"?: string | null
+          region?: string | null
+          regulatory_status?: string | null
+          sector?: string | null
+          segment?: string | null
+          subsegment?: string | null
+          uid?: string | null
+          value_chain_role?: string | null
+          year_founded?: number | null
+        }
+        Update: {
+          application_domain?: string | null
+          company?: string | null
+          consent_model?: string | null
+          ethics_compliance?: string | null
+          interface_type?: string | null
+          manufacturing_region?: string | null
+          notes?: string | null
+          primary_customers?: string | null
+          "R&D_region"?: string | null
+          region?: string | null
+          regulatory_status?: string | null
+          sector?: string | null
+          segment?: string | null
+          subsegment?: string | null
+          uid?: string | null
+          value_chain_role?: string | null
+          year_founded?: number | null
+        }
+        Relationships: []
+      }
+      bci_industries: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          industry_id: number
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          industry_id: number
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          industry_id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      bci_investment_intelligence: {
+        Row: {
+          amount_usd: number | null
+          announcement_date: string | null
+          created_at: string | null
+          currency: string | null
+          data_source: string | null
+          investment_id: string
+          investors: string[] | null
+          last_verified_utc: string | null
+          lead_investor: string | null
+          notes: string | null
+          round_type: string | null
+          supplier_id: string | null
+          updated_at: string | null
+          valuation_usd: number | null
+        }
+        Insert: {
+          amount_usd?: number | null
+          announcement_date?: string | null
+          created_at?: string | null
+          currency?: string | null
+          data_source?: string | null
+          investment_id: string
+          investors?: string[] | null
+          last_verified_utc?: string | null
+          lead_investor?: string | null
+          notes?: string | null
+          round_type?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+          valuation_usd?: number | null
+        }
+        Update: {
+          amount_usd?: number | null
+          announcement_date?: string | null
+          created_at?: string | null
+          currency?: string | null
+          data_source?: string | null
+          investment_id?: string
+          investors?: string[] | null
+          last_verified_utc?: string | null
+          lead_investor?: string | null
+          notes?: string | null
+          round_type?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+          valuation_usd?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_investment_intelligence_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_lenses: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          lens_id: number
+          name: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          lens_id: number
+          name: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          lens_id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      bci_mapping: {
+        Row: {
+          company_id: string | null
+          created_at: string | null
+          evidence: Json | null
+          id: string
+          industry: string
+          lens: string
+          product_id: string | null
+          score: number | null
+          sub_bucket: string
+          updated_at: string | null
+        }
+        Insert: {
+          company_id?: string | null
+          created_at?: string | null
+          evidence?: Json | null
+          id?: string
+          industry: string
+          lens: string
+          product_id?: string | null
+          score?: number | null
+          sub_bucket: string
+          updated_at?: string | null
+        }
+        Update: {
+          company_id?: string | null
+          created_at?: string | null
+          evidence?: Json | null
+          id?: string
+          industry?: string
+          lens?: string
+          product_id?: string | null
+          score?: number | null
+          sub_bucket?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_mapping_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_company"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bci_mapping_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "bci_product"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bci_market_intelligence: {
+        Row: {
+          confidence: string | null
+          created_at: string | null
+          data_source: string | null
+          intel_id: string
+          last_verified_utc: string | null
+          metric_name: string | null
+          metric_unit: string | null
+          metric_value: number | null
+          notes: string | null
+          supplier_id: string | null
+          time_period: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          confidence?: string | null
+          created_at?: string | null
+          data_source?: string | null
+          intel_id: string
+          last_verified_utc?: string | null
+          metric_name?: string | null
+          metric_unit?: string | null
+          metric_value?: number | null
+          notes?: string | null
+          supplier_id?: string | null
+          time_period?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          confidence?: string | null
+          created_at?: string | null
+          data_source?: string | null
+          intel_id?: string
+          last_verified_utc?: string | null
+          metric_name?: string | null
+          metric_unit?: string | null
+          metric_value?: number | null
+          notes?: string | null
+          supplier_id?: string | null
+          time_period?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_market_intelligence_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_master_companies: {
+        Row: {
+          confidence: string | null
+          created_at: string | null
+          hq_country: string | null
+          last_verified_utc: string | null
+          modality: string | null
+          name: string
+          regions: string[] | null
+          regulatory_class: string | null
+          segment: string | null
+          source_url: string | null
+          subsegment: string | null
+          supplier_id: string
+          tags: string[] | null
+          updated_at: string | null
+          website: string | null
+        }
+        Insert: {
+          confidence?: string | null
+          created_at?: string | null
+          hq_country?: string | null
+          last_verified_utc?: string | null
+          modality?: string | null
+          name: string
+          regions?: string[] | null
+          regulatory_class?: string | null
+          segment?: string | null
+          source_url?: string | null
+          subsegment?: string | null
+          supplier_id: string
+          tags?: string[] | null
+          updated_at?: string | null
+          website?: string | null
+        }
+        Update: {
+          confidence?: string | null
+          created_at?: string | null
+          hq_country?: string | null
+          last_verified_utc?: string | null
+          modality?: string | null
+          name?: string
+          regions?: string[] | null
+          regulatory_class?: string | null
+          segment?: string | null
+          source_url?: string | null
+          subsegment?: string | null
+          supplier_id?: string
+          tags?: string[] | null
+          updated_at?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      bci_matrix: {
+        Row: {
+          child_data: boolean | null
+          company_count: number | null
+          coverage_score: number | null
+          created_at: string | null
+          dual_use: boolean | null
+          dual_use_flag: boolean | null
+          evidence_count: number | null
+          export_control: string | null
+          id: string
+          industry: string
+          intelligence_layers: Json | null
+          investment_flow: number | null
+          last_verified: string | null
+          lens: string
+          market_readiness: number | null
+          metrics: string | null
+          readiness: string | null
+          refs: string | null
+          regulatory_mappings: Json | null
+          reimbursement_code: string | null
+          reimbursement_codes: string[] | null
+          rights_sensitivity: string | null
+          risk: string | null
+          risk_score: number | null
+          risk_tier: string | null
+          security_level: string | null
+          standard_ref: string | null
+          standards_refs: string[] | null
+          sub_bucket: string
+          suppliers: string | null
+          trl: number | null
+          trl_level: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          child_data?: boolean | null
+          company_count?: number | null
+          coverage_score?: number | null
+          created_at?: string | null
+          dual_use?: boolean | null
+          dual_use_flag?: boolean | null
+          evidence_count?: number | null
+          export_control?: string | null
+          id?: string
+          industry: string
+          intelligence_layers?: Json | null
+          investment_flow?: number | null
+          last_verified?: string | null
+          lens: string
+          market_readiness?: number | null
+          metrics?: string | null
+          readiness?: string | null
+          refs?: string | null
+          regulatory_mappings?: Json | null
+          reimbursement_code?: string | null
+          reimbursement_codes?: string[] | null
+          rights_sensitivity?: string | null
+          risk?: string | null
+          risk_score?: number | null
+          risk_tier?: string | null
+          security_level?: string | null
+          standard_ref?: string | null
+          standards_refs?: string[] | null
+          sub_bucket: string
+          suppliers?: string | null
+          trl?: number | null
+          trl_level?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          child_data?: boolean | null
+          company_count?: number | null
+          coverage_score?: number | null
+          created_at?: string | null
+          dual_use?: boolean | null
+          dual_use_flag?: boolean | null
+          evidence_count?: number | null
+          export_control?: string | null
+          id?: string
+          industry?: string
+          intelligence_layers?: Json | null
+          investment_flow?: number | null
+          last_verified?: string | null
+          lens?: string
+          market_readiness?: number | null
+          metrics?: string | null
+          readiness?: string | null
+          refs?: string | null
+          regulatory_mappings?: Json | null
+          reimbursement_code?: string | null
+          reimbursement_codes?: string[] | null
+          rights_sensitivity?: string | null
+          risk?: string | null
+          risk_score?: number | null
+          risk_tier?: string | null
+          security_level?: string | null
+          standard_ref?: string | null
+          standards_refs?: string[] | null
+          sub_bucket?: string
+          suppliers?: string | null
+          trl?: number | null
+          trl_level?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      bci_modality_mapping: {
+        Row: {
+          created_at: string | null
+          example_suppliers: string[] | null
+          family: string | null
+          invasiveness: string | null
+          modality: string
+          modality_id: string
+          related_lens_ids: number[] | null
+          representative_use: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          example_suppliers?: string[] | null
+          family?: string | null
+          invasiveness?: string | null
+          modality: string
+          modality_id: string
+          related_lens_ids?: number[] | null
+          representative_use?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          example_suppliers?: string[] | null
+          family?: string | null
+          invasiveness?: string | null
+          modality?: string
+          modality_id?: string
+          related_lens_ids?: number[] | null
+          representative_use?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      bci_power250_gaps: {
+        Row: {
+          created_at: string | null
+          gap_description: string
+          id: string
+          modality: string
+          notes: string | null
+          priority: string | null
+          region: string
+          status: string | null
+          target_companies: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          gap_description: string
+          id?: string
+          modality: string
+          notes?: string | null
+          priority?: string | null
+          region: string
+          status?: string | null
+          target_companies?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          gap_description?: string
+          id?: string
+          modality?: string
+          notes?: string | null
+          priority?: string | null
+          region?: string
+          status?: string | null
+          target_companies?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      bci_power250_rankings: {
+        Row: {
+          approvals_score: number | null
+          citations_score: number | null
+          company_id: string
+          composite_score: number
+          coverage_reason: string | null
+          created_at: string | null
+          distributor_score: number | null
+          exhibitor_score: number | null
+          id: string
+          install_base_score: number | null
+          modality_set: string | null
+          rank: number
+          region_coverage: string | null
+          snapshot_date: string
+          trials_score: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          approvals_score?: number | null
+          citations_score?: number | null
+          company_id: string
+          composite_score: number
+          coverage_reason?: string | null
+          created_at?: string | null
+          distributor_score?: number | null
+          exhibitor_score?: number | null
+          id?: string
+          install_base_score?: number | null
+          modality_set?: string | null
+          rank: number
+          region_coverage?: string | null
+          snapshot_date?: string
+          trials_score?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          approvals_score?: number | null
+          citations_score?: number | null
+          company_id?: string
+          composite_score?: number
+          coverage_reason?: string | null
+          created_at?: string | null
+          distributor_score?: number | null
+          exhibitor_score?: number | null
+          id?: string
+          install_base_score?: number | null
+          modality_set?: string | null
+          rank?: number
+          region_coverage?: string | null
+          snapshot_date?: string
+          trials_score?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_power250_rankings_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_product: {
+        Row: {
+          company_id: string | null
+          created_at: string | null
+          form_factor: string | null
+          id: string
+          link: string | null
+          modality: string | null
+          product_name: string | null
+          regulatory_status: string | null
+          sources: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          company_id?: string | null
+          created_at?: string | null
+          form_factor?: string | null
+          id?: string
+          link?: string | null
+          modality?: string | null
+          product_name?: string | null
+          regulatory_status?: string | null
+          sources?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          company_id?: string | null
+          created_at?: string | null
+          form_factor?: string | null
+          id?: string
+          link?: string | null
+          modality?: string | null
+          product_name?: string | null
+          regulatory_status?: string | null
+          sources?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_product_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_company"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bci_products_catalog: {
+        Row: {
+          created_at: string | null
+          device_type: string | null
+          key_specs: Json | null
+          last_verified_utc: string | null
+          modality: string | null
+          name: string
+          product_id: string
+          regulatory_class: string | null
+          status: string | null
+          supplier_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          device_type?: string | null
+          key_specs?: Json | null
+          last_verified_utc?: string | null
+          modality?: string | null
+          name: string
+          product_id: string
+          regulatory_class?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          device_type?: string | null
+          key_specs?: Json | null
+          last_verified_utc?: string | null
+          modality?: string | null
+          name?: string
+          product_id?: string
+          regulatory_class?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_products_catalog_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_regulatory_compliance: {
+        Row: {
+          certification_number: string | null
+          certification_type: string | null
+          compliance_id: string
+          created_at: string | null
+          expiry_date: string | null
+          issue_date: string | null
+          last_verified_utc: string | null
+          notes: string | null
+          product_id: string | null
+          regulatory_body: string | null
+          scope: string | null
+          status: string | null
+          supplier_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          certification_number?: string | null
+          certification_type?: string | null
+          compliance_id: string
+          created_at?: string | null
+          expiry_date?: string | null
+          issue_date?: string | null
+          last_verified_utc?: string | null
+          notes?: string | null
+          product_id?: string | null
+          regulatory_body?: string | null
+          scope?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          certification_number?: string | null
+          certification_type?: string | null
+          compliance_id?: string
+          created_at?: string | null
+          expiry_date?: string | null
+          issue_date?: string | null
+          last_verified_utc?: string | null
+          notes?: string | null
+          product_id?: string | null
+          regulatory_body?: string | null
+          scope?: string | null
+          status?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_regulatory_compliance_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "bci_products_catalog"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "bci_regulatory_compliance_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_reimbursement: {
+        Row: {
+          applicable_industries: string[] | null
+          applicable_lenses: string[] | null
+          category: string
+          code: string
+          code_type: string
+          coverage_notes: string | null
+          created_at: string | null
+          currency: string | null
+          description: string
+          effective_date: string | null
+          expiry_date: string | null
+          id: string
+          reimbursement_amount: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          category: string
+          code: string
+          code_type: string
+          coverage_notes?: string | null
+          created_at?: string | null
+          currency?: string | null
+          description: string
+          effective_date?: string | null
+          expiry_date?: string | null
+          id?: string
+          reimbursement_amount?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          category?: string
+          code?: string
+          code_type?: string
+          coverage_notes?: string | null
+          created_at?: string | null
+          currency?: string | null
+          description?: string
+          effective_date?: string | null
+          expiry_date?: string | null
+          id?: string
+          reimbursement_amount?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      bci_research_publications: {
+        Row: {
+          abstract: string | null
+          authors: string[] | null
+          citation_count: number | null
+          created_at: string | null
+          doi: string | null
+          journal: string | null
+          last_verified_utc: string | null
+          pmid: string | null
+          product_id: string | null
+          publication_date: string | null
+          publication_id: string
+          supplier_id: string | null
+          tags: string[] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          abstract?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          created_at?: string | null
+          doi?: string | null
+          journal?: string | null
+          last_verified_utc?: string | null
+          pmid?: string | null
+          product_id?: string | null
+          publication_date?: string | null
+          publication_id: string
+          supplier_id?: string | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          abstract?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          created_at?: string | null
+          doi?: string | null
+          journal?: string | null
+          last_verified_utc?: string | null
+          pmid?: string | null
+          product_id?: string | null
+          publication_date?: string | null
+          publication_id?: string
+          supplier_id?: string | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_research_publications_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "bci_products_catalog"
+            referencedColumns: ["product_id"]
+          },
+          {
+            foreignKeyName: "bci_research_publications_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_standards: {
+        Row: {
+          applicable_industries: string[] | null
+          applicable_lenses: string[] | null
+          category: string
+          compliance_level: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          organization: string
+          publication_date: string | null
+          standard_code: string
+          standard_name: string
+          updated_at: string | null
+          url: string | null
+          version: string | null
+        }
+        Insert: {
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          category: string
+          compliance_level?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          organization: string
+          publication_date?: string | null
+          standard_code: string
+          standard_name: string
+          updated_at?: string | null
+          url?: string | null
+          version?: string | null
+        }
+        Update: {
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          category?: string
+          compliance_level?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          organization?: string
+          publication_date?: string | null
+          standard_code?: string
+          standard_name?: string
+          updated_at?: string | null
+          url?: string | null
+          version?: string | null
+        }
+        Relationships: []
+      }
+      bci_sub_buckets: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          lens_id: number | null
+          name: string
+          sub_bucket_id: number
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          lens_id?: number | null
+          name: string
+          sub_bucket_id: number
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          lens_id?: number | null
+          name?: string
+          sub_bucket_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_sub_buckets_lens_id_fkey"
+            columns: ["lens_id"]
+            isOneToOne: false
+            referencedRelation: "bci_lenses"
+            referencedColumns: ["lens_id"]
+          },
+        ]
+      }
+      bci_suppliers: {
+        Row: {
+          annual_revenue: number | null
+          applicable_industries: string[] | null
+          applicable_lenses: string[] | null
+          company_name: string
+          contact_info: Json | null
+          cost_tier: string | null
+          created_at: string | null
+          employee_count: number | null
+          founded_year: number | null
+          geographical_coverage: string[] | null
+          id: string
+          products_services: Json | null
+          publicly_traded: boolean | null
+          quality_certifications: string[] | null
+          reliability_score: number | null
+          specialization: string[] | null
+          supplier_type: string
+          updated_at: string | null
+          website: string | null
+        }
+        Insert: {
+          annual_revenue?: number | null
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          company_name: string
+          contact_info?: Json | null
+          cost_tier?: string | null
+          created_at?: string | null
+          employee_count?: number | null
+          founded_year?: number | null
+          geographical_coverage?: string[] | null
+          id?: string
+          products_services?: Json | null
+          publicly_traded?: boolean | null
+          quality_certifications?: string[] | null
+          reliability_score?: number | null
+          specialization?: string[] | null
+          supplier_type: string
+          updated_at?: string | null
+          website?: string | null
+        }
+        Update: {
+          annual_revenue?: number | null
+          applicable_industries?: string[] | null
+          applicable_lenses?: string[] | null
+          company_name?: string
+          contact_info?: Json | null
+          cost_tier?: string | null
+          created_at?: string | null
+          employee_count?: number | null
+          founded_year?: number | null
+          geographical_coverage?: string[] | null
+          id?: string
+          products_services?: Json | null
+          publicly_traded?: boolean | null
+          quality_certifications?: string[] | null
+          reliability_score?: number | null
+          specialization?: string[] | null
+          supplier_type?: string
+          updated_at?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      bci_supply_chain: {
+        Row: {
+          created_at: string | null
+          last_verified_utc: string | null
+          notes: string | null
+          partner_id: string | null
+          relationship_id: string
+          relationship_type: string | null
+          strength: string | null
+          supplier_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          last_verified_utc?: string | null
+          notes?: string | null
+          partner_id?: string | null
+          relationship_id: string
+          relationship_type?: string | null
+          strength?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          last_verified_utc?: string | null
+          notes?: string | null
+          partner_id?: string | null
+          relationship_id?: string
+          relationship_type?: string | null
+          strength?: string | null
+          supplier_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_supply_chain_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+          {
+            foreignKeyName: "bci_supply_chain_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
+      bci_supply_chain_links: {
+        Row: {
+          created_at: string | null
+          customer_id: string
+          dependency_strength: string | null
+          link_id: string
+          link_type: string | null
+          shared_tech: string | null
+          supplier_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_id: string
+          dependency_strength?: string | null
+          link_id: string
+          link_type?: string | null
+          shared_tech?: string | null
+          supplier_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_id?: string
+          dependency_strength?: string | null
+          link_id?: string
+          link_type?: string | null
+          shared_tech?: string | null
+          supplier_id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      "bci_supply_links.csv": {
+        Row: {
+          customer: string | null
+          customer_uid: string | null
+          dependency_strength: string | null
+          link_type: string | null
+          shared_tech: string | null
+          supplier: string | null
+          supplier_uid: string | null
+        }
+        Insert: {
+          customer?: string | null
+          customer_uid?: string | null
+          dependency_strength?: string | null
+          link_type?: string | null
+          shared_tech?: string | null
+          supplier?: string | null
+          supplier_uid?: string | null
+        }
+        Update: {
+          customer?: string | null
+          customer_uid?: string | null
+          dependency_strength?: string | null
+          link_type?: string | null
+          shared_tech?: string | null
+          supplier?: string | null
+          supplier_uid?: string | null
+        }
+        Relationships: []
+      }
+      bci_technology_stack: {
+        Row: {
+          created_at: string | null
+          last_verified_utc: string | null
+          layer: string | null
+          notes: string | null
+          stack_id: string
+          supplier_id: string | null
+          technology: string | null
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          last_verified_utc?: string | null
+          layer?: string | null
+          notes?: string | null
+          stack_id: string
+          supplier_id?: string | null
+          technology?: string | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          last_verified_utc?: string | null
+          layer?: string | null
+          notes?: string | null
+          stack_id?: string
+          supplier_id?: string | null
+          technology?: string | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_technology_stack_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
       bd_summaries: {
         Row: {
           created_at: string
@@ -4400,6 +6205,77 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      behavioral_signals: {
+        Row: {
+          backspace_frequency: number | null
+          click_precision: number | null
+          created_at: string
+          error_rate: number | null
+          focus_duration_seconds: number | null
+          id: string
+          idle_time_seconds: number | null
+          keystroke_dynamics: Json | null
+          mouse_acceleration: number | null
+          mouse_velocity: number | null
+          movement_patterns: Json | null
+          response_time_ms: number | null
+          session_id: string
+          task_completion_rate: number | null
+          task_switches_per_minute: number | null
+          timestamp: string
+          typing_accuracy: number | null
+          typing_speed_wpm: number | null
+        }
+        Insert: {
+          backspace_frequency?: number | null
+          click_precision?: number | null
+          created_at?: string
+          error_rate?: number | null
+          focus_duration_seconds?: number | null
+          id?: string
+          idle_time_seconds?: number | null
+          keystroke_dynamics?: Json | null
+          mouse_acceleration?: number | null
+          mouse_velocity?: number | null
+          movement_patterns?: Json | null
+          response_time_ms?: number | null
+          session_id: string
+          task_completion_rate?: number | null
+          task_switches_per_minute?: number | null
+          timestamp: string
+          typing_accuracy?: number | null
+          typing_speed_wpm?: number | null
+        }
+        Update: {
+          backspace_frequency?: number | null
+          click_precision?: number | null
+          created_at?: string
+          error_rate?: number | null
+          focus_duration_seconds?: number | null
+          id?: string
+          idle_time_seconds?: number | null
+          keystroke_dynamics?: Json | null
+          mouse_acceleration?: number | null
+          mouse_velocity?: number | null
+          movement_patterns?: Json | null
+          response_time_ms?: number | null
+          session_id?: string
+          task_completion_rate?: number | null
+          task_switches_per_minute?: number | null
+          timestamp?: string
+          typing_accuracy?: number | null
+          typing_speed_wpm?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "behavioral_signals_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "multimodal_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       beta_signups: {
         Row: {
@@ -7903,6 +9779,7 @@ export type Database = {
           email: string
           id: string
           inquiry_type: string | null
+          ip_address: string | null
           message: string
           name: string
           phone: string | null
@@ -7920,6 +9797,7 @@ export type Database = {
           email: string
           id?: string
           inquiry_type?: string | null
+          ip_address?: string | null
           message: string
           name: string
           phone?: string | null
@@ -7937,6 +9815,7 @@ export type Database = {
           email?: string
           id?: string
           inquiry_type?: string | null
+          ip_address?: string | null
           message?: string
           name?: string
           phone?: string | null
@@ -7971,6 +9850,74 @@ export type Database = {
           name?: string
         }
         Relationships: []
+      }
+      context_signals: {
+        Row: {
+          activity_confidence: number | null
+          air_quality_index: number | null
+          ambient_light_lux: number | null
+          ambient_temperature_c: number | null
+          approximate_location: Json | null
+          created_at: string
+          day_of_week: string | null
+          detected_activity: string | null
+          device_motion: Json | null
+          device_orientation: Json | null
+          humidity_percent: number | null
+          id: string
+          location_category: string | null
+          location_type: string | null
+          session_id: string
+          time_of_day: string | null
+          timestamp: string
+        }
+        Insert: {
+          activity_confidence?: number | null
+          air_quality_index?: number | null
+          ambient_light_lux?: number | null
+          ambient_temperature_c?: number | null
+          approximate_location?: Json | null
+          created_at?: string
+          day_of_week?: string | null
+          detected_activity?: string | null
+          device_motion?: Json | null
+          device_orientation?: Json | null
+          humidity_percent?: number | null
+          id?: string
+          location_category?: string | null
+          location_type?: string | null
+          session_id: string
+          time_of_day?: string | null
+          timestamp: string
+        }
+        Update: {
+          activity_confidence?: number | null
+          air_quality_index?: number | null
+          ambient_light_lux?: number | null
+          ambient_temperature_c?: number | null
+          approximate_location?: Json | null
+          created_at?: string
+          day_of_week?: string | null
+          detected_activity?: string | null
+          device_motion?: Json | null
+          device_orientation?: Json | null
+          humidity_percent?: number | null
+          id?: string
+          location_category?: string | null
+          location_type?: string | null
+          session_id?: string
+          time_of_day?: string | null
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "context_signals_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "multimodal_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       contracts: {
         Row: {
@@ -8031,6 +9978,68 @@ export type Database = {
           id?: string
           processed?: boolean | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      conversation_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          role: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          role: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversations: {
+        Row: {
+          context_summary: string | null
+          created_at: string | null
+          id: string
+          title: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          context_summary?: string | null
+          created_at?: string | null
+          id?: string
+          title: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          context_summary?: string | null
+          created_at?: string | null
+          id?: string
+          title?: string
+          updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -8676,6 +10685,60 @@ export type Database = {
         }
         Relationships: []
       }
+      crossmodal_correlation_rules: {
+        Row: {
+          accuracy_score: number | null
+          alert_threshold: number | null
+          conditions: Json
+          correlation_type: string
+          created_at: string
+          id: string
+          insight_generated: string | null
+          is_active: boolean | null
+          primary_modality: string
+          rule_description: string | null
+          rule_name: string
+          secondary_modalities: string[]
+          time_window_seconds: number | null
+          updated_at: string
+          validation_status: string | null
+        }
+        Insert: {
+          accuracy_score?: number | null
+          alert_threshold?: number | null
+          conditions: Json
+          correlation_type: string
+          created_at?: string
+          id?: string
+          insight_generated?: string | null
+          is_active?: boolean | null
+          primary_modality: string
+          rule_description?: string | null
+          rule_name: string
+          secondary_modalities: string[]
+          time_window_seconds?: number | null
+          updated_at?: string
+          validation_status?: string | null
+        }
+        Update: {
+          accuracy_score?: number | null
+          alert_threshold?: number | null
+          conditions?: Json
+          correlation_type?: string
+          created_at?: string
+          id?: string
+          insight_generated?: string | null
+          is_active?: boolean | null
+          primary_modality?: string
+          rule_description?: string | null
+          rule_name?: string
+          secondary_modalities?: string[]
+          time_window_seconds?: number | null
+          updated_at?: string
+          validation_status?: string | null
+        }
+        Relationships: []
+      }
       cultural_profiles: {
         Row: {
           analyzed_at: string | null
@@ -9270,6 +11333,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      data_retention_policies: {
+        Row: {
+          created_at: string
+          date_column: string
+          enabled: boolean
+          id: string
+          last_cleanup_at: string | null
+          records_deleted_last_run: number | null
+          retention_days: number
+          table_name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date_column: string
+          enabled?: boolean
+          id?: string
+          last_cleanup_at?: string | null
+          records_deleted_last_run?: number | null
+          retention_days: number
+          table_name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date_column?: string
+          enabled?: boolean
+          id?: string
+          last_cleanup_at?: string | null
+          records_deleted_last_run?: number | null
+          retention_days?: number
+          table_name?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       decision_nudge_responses: {
         Row: {
@@ -11217,6 +13316,45 @@ export type Database = {
           },
         ]
       }
+      events: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          event_date: string | null
+          event_type: string | null
+          id: string
+          image_url: string | null
+          location: string | null
+          registration_link: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          registration_link?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          registration_link?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       excess_capacity_marketplace: {
         Row: {
           agent_code: string
@@ -11457,6 +13595,93 @@ export type Database = {
           sync_status?: string
           table_name?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      external_learning_resources: {
+        Row: {
+          author_name: string | null
+          author_url: string | null
+          category: string
+          click_count: number | null
+          complements_courses: string[] | null
+          created_at: string | null
+          description: string | null
+          difficulty_level: string | null
+          estimated_hours: number | null
+          github_stars: number | null
+          id: string
+          is_active: boolean | null
+          is_interactive: boolean | null
+          last_updated: string | null
+          prerequisite_for: string[] | null
+          quality_score: number | null
+          related_certifications: string[] | null
+          requires_signup: boolean | null
+          resource_type: string | null
+          source_type: string
+          source_url: string
+          special_notes: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          view_count: number | null
+        }
+        Insert: {
+          author_name?: string | null
+          author_url?: string | null
+          category: string
+          click_count?: number | null
+          complements_courses?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          difficulty_level?: string | null
+          estimated_hours?: number | null
+          github_stars?: number | null
+          id?: string
+          is_active?: boolean | null
+          is_interactive?: boolean | null
+          last_updated?: string | null
+          prerequisite_for?: string[] | null
+          quality_score?: number | null
+          related_certifications?: string[] | null
+          requires_signup?: boolean | null
+          resource_type?: string | null
+          source_type: string
+          source_url: string
+          special_notes?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          view_count?: number | null
+        }
+        Update: {
+          author_name?: string | null
+          author_url?: string | null
+          category?: string
+          click_count?: number | null
+          complements_courses?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          difficulty_level?: string | null
+          estimated_hours?: number | null
+          github_stars?: number | null
+          id?: string
+          is_active?: boolean | null
+          is_interactive?: boolean | null
+          last_updated?: string | null
+          prerequisite_for?: string[] | null
+          quality_score?: number | null
+          related_certifications?: string[] | null
+          requires_signup?: boolean | null
+          resource_type?: string | null
+          source_type?: string
+          source_url?: string
+          special_notes?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          view_count?: number | null
         }
         Relationships: []
       }
@@ -15255,6 +17480,7 @@ export type Database = {
           progress: number | null
           related_frameworks: string[] | null
           related_thinkers: string[] | null
+          research_paper_ids: string[] | null
           section_slug: string
           status: Database["public"]["Enums"]["content_status"]
           title: string
@@ -15287,6 +17513,7 @@ export type Database = {
           progress?: number | null
           related_frameworks?: string[] | null
           related_thinkers?: string[] | null
+          research_paper_ids?: string[] | null
           section_slug: string
           status?: Database["public"]["Enums"]["content_status"]
           title: string
@@ -15319,6 +17546,7 @@ export type Database = {
           progress?: number | null
           related_frameworks?: string[] | null
           related_thinkers?: string[] | null
+          research_paper_ids?: string[] | null
           section_slug?: string
           status?: Database["public"]["Enums"]["content_status"]
           title?: string
@@ -16168,6 +18396,69 @@ export type Database = {
         }
         Relationships: []
       }
+      multimodal_sessions: {
+        Row: {
+          consent_document_id: string | null
+          consent_signed: boolean | null
+          created_at: string
+          data_retention_expires_at: string | null
+          duration_seconds: number | null
+          enabled_modalities: string[] | null
+          ended_at: string | null
+          environment: string | null
+          id: string
+          modality_quality_scores: Json | null
+          overall_quality_score: number | null
+          processing_errors: Json | null
+          processing_status: string | null
+          session_name: string
+          started_at: string
+          updated_at: string
+          use_case: string
+          user_id: string
+        }
+        Insert: {
+          consent_document_id?: string | null
+          consent_signed?: boolean | null
+          created_at?: string
+          data_retention_expires_at?: string | null
+          duration_seconds?: number | null
+          enabled_modalities?: string[] | null
+          ended_at?: string | null
+          environment?: string | null
+          id?: string
+          modality_quality_scores?: Json | null
+          overall_quality_score?: number | null
+          processing_errors?: Json | null
+          processing_status?: string | null
+          session_name: string
+          started_at?: string
+          updated_at?: string
+          use_case: string
+          user_id: string
+        }
+        Update: {
+          consent_document_id?: string | null
+          consent_signed?: boolean | null
+          created_at?: string
+          data_retention_expires_at?: string | null
+          duration_seconds?: number | null
+          enabled_modalities?: string[] | null
+          ended_at?: string | null
+          environment?: string | null
+          id?: string
+          modality_quality_scores?: Json | null
+          overall_quality_score?: number | null
+          processing_errors?: Json | null
+          processing_status?: string | null
+          session_name?: string
+          started_at?: string
+          updated_at?: string
+          use_case?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       myneuralsignal_channels: {
         Row: {
           channel_id: string
@@ -16490,6 +18781,7 @@ export type Database = {
       }
       neural_audit_logs: {
         Row: {
+          alternative_vendors: string[] | null
           consecutive_agree: number | null
           created_at: string
           decision_kind: string
@@ -16497,13 +18789,16 @@ export type Database = {
           id: string
           quality_score: number | null
           reason: string | null
+          signal_sources: Json | null
           stress_score: number | null
           tenant_id: string | null
           transaction_id: string | null
           user_id: string | null
+          vendor_confidence: number | null
           window_count: number | null
         }
         Insert: {
+          alternative_vendors?: string[] | null
           consecutive_agree?: number | null
           created_at?: string
           decision_kind: string
@@ -16511,13 +18806,16 @@ export type Database = {
           id?: string
           quality_score?: number | null
           reason?: string | null
+          signal_sources?: Json | null
           stress_score?: number | null
           tenant_id?: string | null
           transaction_id?: string | null
           user_id?: string | null
+          vendor_confidence?: number | null
           window_count?: number | null
         }
         Update: {
+          alternative_vendors?: string[] | null
           consecutive_agree?: number | null
           created_at?: string
           decision_kind?: string
@@ -16525,10 +18823,12 @@ export type Database = {
           id?: string
           quality_score?: number | null
           reason?: string | null
+          signal_sources?: Json | null
           stress_score?: number | null
           tenant_id?: string | null
           transaction_id?: string | null
           user_id?: string | null
+          vendor_confidence?: number | null
           window_count?: number | null
         }
         Relationships: []
@@ -18056,6 +20356,99 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_applications: {
+        Row: {
+          abn: string
+          application_number: string | null
+          capabilities: string
+          certifications: string | null
+          clearance_level: string | null
+          collaboration_model: string | null
+          company_name: string
+          company_size: string
+          contact_name: string
+          contact_title: string
+          created_at: string | null
+          email: string
+          gov_experience: string | null
+          government_panels: string[] | null
+          id: string
+          industry_sector: string
+          location: string
+          notes: string | null
+          partnership_type: string
+          phone: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          security_clearances: string[] | null
+          service_offerings: string[]
+          status: string | null
+          updated_at: string | null
+          website: string
+          why_partner: string
+        }
+        Insert: {
+          abn: string
+          application_number?: string | null
+          capabilities: string
+          certifications?: string | null
+          clearance_level?: string | null
+          collaboration_model?: string | null
+          company_name: string
+          company_size: string
+          contact_name: string
+          contact_title: string
+          created_at?: string | null
+          email: string
+          gov_experience?: string | null
+          government_panels?: string[] | null
+          id?: string
+          industry_sector: string
+          location: string
+          notes?: string | null
+          partnership_type: string
+          phone: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          security_clearances?: string[] | null
+          service_offerings: string[]
+          status?: string | null
+          updated_at?: string | null
+          website: string
+          why_partner: string
+        }
+        Update: {
+          abn?: string
+          application_number?: string | null
+          capabilities?: string
+          certifications?: string | null
+          clearance_level?: string | null
+          collaboration_model?: string | null
+          company_name?: string
+          company_size?: string
+          contact_name?: string
+          contact_title?: string
+          created_at?: string | null
+          email?: string
+          gov_experience?: string | null
+          government_panels?: string[] | null
+          id?: string
+          industry_sector?: string
+          location?: string
+          notes?: string | null
+          partnership_type?: string
+          phone?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          security_clearances?: string[] | null
+          service_offerings?: string[]
+          status?: string | null
+          updated_at?: string | null
+          website?: string
+          why_partner?: string
+        }
+        Relationships: []
+      }
       partner_bundles: {
         Row: {
           bundle_id: string
@@ -18739,6 +21132,33 @@ export type Database = {
         }
         Relationships: []
       }
+      pilot_metrics: {
+        Row: {
+          id: string
+          metadata: Json | null
+          metric_name: string
+          metric_value: number
+          pilot_id: string
+          timestamp: string | null
+        }
+        Insert: {
+          id?: string
+          metadata?: Json | null
+          metric_name: string
+          metric_value: number
+          pilot_id: string
+          timestamp?: string | null
+        }
+        Update: {
+          id?: string
+          metadata?: Json | null
+          metric_name?: string
+          metric_value?: number
+          pilot_id?: string
+          timestamp?: string | null
+        }
+        Relationships: []
+      }
       pilot_requests: {
         Row: {
           company_size: string | null
@@ -18775,6 +21195,42 @@ export type Database = {
           program_goals?: string | null
           target_roles?: string[] | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      pilot_sessions: {
+        Row: {
+          created_at: string | null
+          duration_minutes: number | null
+          events: Json | null
+          id: string
+          outcomes: Json | null
+          participant_id: string
+          pilot_id: string
+          session_date: string
+          signals_collected: Json
+        }
+        Insert: {
+          created_at?: string | null
+          duration_minutes?: number | null
+          events?: Json | null
+          id?: string
+          outcomes?: Json | null
+          participant_id: string
+          pilot_id: string
+          session_date: string
+          signals_collected: Json
+        }
+        Update: {
+          created_at?: string | null
+          duration_minutes?: number | null
+          events?: Json | null
+          id?: string
+          outcomes?: Json | null
+          participant_id?: string
+          pilot_id?: string
+          session_date?: string
+          signals_collected?: Json
         }
         Relationships: []
       }
@@ -19518,7 +21974,8 @@ export type Database = {
           job_title: string | null
           onboarding_completed: boolean | null
           preferences: Json | null
-          role: string | null
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
           subscription_status: string | null
           subscription_tier: string | null
           updated_at: string
@@ -19534,7 +21991,8 @@ export type Database = {
           job_title?: string | null
           onboarding_completed?: boolean | null
           preferences?: Json | null
-          role?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           subscription_status?: string | null
           subscription_tier?: string | null
           updated_at?: string
@@ -19550,7 +22008,8 @@ export type Database = {
           job_title?: string | null
           onboarding_completed?: boolean | null
           preferences?: Json | null
-          role?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           subscription_status?: string | null
           subscription_tier?: string | null
           updated_at?: string
@@ -20320,6 +22779,63 @@ export type Database = {
         }
         Relationships: []
       }
+      purchase_intents: {
+        Row: {
+          assigned_to: string | null
+          budget_range: string
+          company: string
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          solution: string
+          solution_id: string
+          status: string
+          team_size: string
+          timeline: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          budget_range: string
+          company: string
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          solution: string
+          solution_id: string
+          status?: string
+          team_size: string
+          timeline: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          budget_range?: string
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          solution?: string
+          solution_id?: string
+          status?: string
+          team_size?: string
+          timeline?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       quote_items: {
         Row: {
           created_at: string | null
@@ -20360,6 +22876,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      rate_limit_logs: {
+        Row: {
+          blocked: boolean
+          created_at: string
+          endpoint: string
+          id: string
+          ip: string
+          requests_count: number
+          timestamp: number
+          user_id: string | null
+        }
+        Insert: {
+          blocked?: boolean
+          created_at?: string
+          endpoint: string
+          id?: string
+          ip: string
+          requests_count?: number
+          timestamp: number
+          user_id?: string | null
+        }
+        Update: {
+          blocked?: boolean
+          created_at?: string
+          endpoint?: string
+          id?: string
+          ip?: string
+          requests_count?: number
+          timestamp?: number
+          user_id?: string | null
+        }
+        Relationships: []
       }
       reel_assets: {
         Row: {
@@ -20483,6 +23032,60 @@ export type Database = {
           },
         ]
       }
+      reports: {
+        Row: {
+          asset_type: string | null
+          cadence: string | null
+          category: string | null
+          full_text: string | null
+          id: string
+          industry_sector: string | null
+          lifecycle_stage: string | null
+          link: string | null
+          project: string | null
+          run_date: string | null
+          source: string | null
+          summary: string | null
+          tags: string[] | null
+          title: string
+          value_lens: string | null
+        }
+        Insert: {
+          asset_type?: string | null
+          cadence?: string | null
+          category?: string | null
+          full_text?: string | null
+          id?: string
+          industry_sector?: string | null
+          lifecycle_stage?: string | null
+          link?: string | null
+          project?: string | null
+          run_date?: string | null
+          source?: string | null
+          summary?: string | null
+          tags?: string[] | null
+          title: string
+          value_lens?: string | null
+        }
+        Update: {
+          asset_type?: string | null
+          cadence?: string | null
+          category?: string | null
+          full_text?: string | null
+          id?: string
+          industry_sector?: string | null
+          lifecycle_stage?: string | null
+          link?: string | null
+          project?: string | null
+          run_date?: string | null
+          source?: string | null
+          summary?: string | null
+          tags?: string[] | null
+          title?: string
+          value_lens?: string | null
+        }
+        Relationships: []
+      }
       requirements: {
         Row: {
           created_at: string | null
@@ -20528,6 +23131,131 @@ export type Database = {
           submission_deadline?: string | null
           title?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      research_links: {
+        Row: {
+          company_id: string | null
+          confidence: number | null
+          created_at: string
+          id: string
+          paper_id: string | null
+          signal_type: string | null
+        }
+        Insert: {
+          company_id?: string | null
+          confidence?: number | null
+          created_at?: string
+          id?: string
+          paper_id?: string | null
+          signal_type?: string | null
+        }
+        Update: {
+          company_id?: string | null
+          confidence?: number | null
+          created_at?: string
+          id?: string
+          paper_id?: string | null
+          signal_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_links_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_company"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "research_links_paper_id_fkey"
+            columns: ["paper_id"]
+            isOneToOne: false
+            referencedRelation: "research_papers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      research_papers: {
+        Row: {
+          abstract: string | null
+          authors: string[] | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          published_at: string | null
+          source_id: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          abstract?: string | null
+          authors?: string[] | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          published_at?: string | null
+          source_id?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          abstract?: string | null
+          authors?: string[] | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          published_at?: string | null
+          source_id?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_papers_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "research_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      research_sources: {
+        Row: {
+          base_url: string
+          created_at: string
+          id: string
+          is_active: boolean
+          last_sync_at: string | null
+          name: string
+          source_type: string
+          updated_at: string
+        }
+        Insert: {
+          base_url: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          name: string
+          source_type?: string
+          updated_at?: string
+        }
+        Update: {
+          base_url?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          name?: string
+          source_type?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -20590,6 +23318,35 @@ export type Database = {
           role?: string | null
         }
         Relationships: []
+      }
+      resource_bookmarks: {
+        Row: {
+          created_at: string
+          id: string
+          resource_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          resource_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          resource_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_bookmarks_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "external_learning_resources"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       resource_downloads: {
         Row: {
@@ -22308,13 +25065,6 @@ export type Database = {
             foreignKeyName: "roi_team_members_team_id_fkey"
             columns: ["team_id"]
             isOneToOne: false
-            referencedRelation: "roi_team_summaries"
-            referencedColumns: ["team_id"]
-          },
-          {
-            foreignKeyName: "roi_team_members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
             referencedRelation: "roi_teams"
             referencedColumns: ["id"]
           },
@@ -23482,6 +26232,56 @@ export type Database = {
         }
         Relationships: []
       }
+      rule_executions: {
+        Row: {
+          conditions_met: Json
+          created_at: string | null
+          execution_time_ms: number
+          id: string
+          input_data: Json
+          output_actions: Json
+          reasoning_chain: string
+          rule_id: string
+          rule_version: string
+          session_id: string | null
+          timestamp: string | null
+        }
+        Insert: {
+          conditions_met: Json
+          created_at?: string | null
+          execution_time_ms: number
+          id?: string
+          input_data: Json
+          output_actions: Json
+          reasoning_chain: string
+          rule_id: string
+          rule_version: string
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Update: {
+          conditions_met?: Json
+          created_at?: string | null
+          execution_time_ms?: number
+          id?: string
+          input_data?: Json
+          output_actions?: Json
+          reasoning_chain?: string
+          rule_id?: string
+          rule_version?: string
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rule_executions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "wearable_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       salary_estimates: {
         Row: {
           annual_salary: number | null
@@ -24041,6 +26841,75 @@ export type Database = {
         }
         Relationships: []
       }
+      security_definer_view_audit: {
+        Row: {
+          created_at: string | null
+          id: string
+          justification: string
+          mitigations_applied: string[] | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          security_risk_level: string | null
+          updated_at: string | null
+          view_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          justification: string
+          mitigations_applied?: string[] | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          security_risk_level?: string | null
+          updated_at?: string | null
+          view_name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          justification?: string
+          mitigations_applied?: string[] | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          security_risk_level?: string | null
+          updated_at?: string | null
+          view_name?: string
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          ip_address: string | null
+          severity: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: string | null
+          severity: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          severity?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       service_catalog_master: {
         Row: {
           A: string | null
@@ -24323,6 +27192,176 @@ export type Database = {
           tenant_id?: string | null
           updated_at?: string
           version_number?: number
+        }
+        Relationships: []
+      }
+      signal_company_mapping: {
+        Row: {
+          accuracy_metrics: Json | null
+          api_access_type: string | null
+          clinical_validation: boolean | null
+          company_id: string
+          confidence_score: number | null
+          cost_range: string | null
+          created_at: string | null
+          detection_method: string | null
+          device_requirements: Json | null
+          evidence_sources: Json | null
+          id: string
+          integration_complexity: string | null
+          last_verified: string | null
+          regulatory_cleared: string[] | null
+          sdk_available: boolean | null
+          signal_technology: string | null
+          signal_type: string
+          updated_at: string | null
+          use_cases: string[] | null
+        }
+        Insert: {
+          accuracy_metrics?: Json | null
+          api_access_type?: string | null
+          clinical_validation?: boolean | null
+          company_id: string
+          confidence_score?: number | null
+          cost_range?: string | null
+          created_at?: string | null
+          detection_method?: string | null
+          device_requirements?: Json | null
+          evidence_sources?: Json | null
+          id?: string
+          integration_complexity?: string | null
+          last_verified?: string | null
+          regulatory_cleared?: string[] | null
+          sdk_available?: boolean | null
+          signal_technology?: string | null
+          signal_type: string
+          updated_at?: string | null
+          use_cases?: string[] | null
+        }
+        Update: {
+          accuracy_metrics?: Json | null
+          api_access_type?: string | null
+          clinical_validation?: boolean | null
+          company_id?: string
+          confidence_score?: number | null
+          cost_range?: string | null
+          created_at?: string | null
+          detection_method?: string | null
+          device_requirements?: Json | null
+          evidence_sources?: Json | null
+          id?: string
+          integration_complexity?: string | null
+          last_verified?: string | null
+          regulatory_cleared?: string[] | null
+          sdk_available?: boolean | null
+          signal_technology?: string | null
+          signal_type?: string
+          updated_at?: string | null
+          use_cases?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "signal_company_mapping_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_company"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      signal_modalities: {
+        Row: {
+          consent_required: boolean | null
+          created_at: string
+          data_format: string
+          description: string
+          id: string
+          is_active: boolean | null
+          min_quality_score: number | null
+          modality_category: string
+          modality_name: string
+          privacy_level: string
+          quality_metrics: Json | null
+          retention_period_days: number | null
+          sampling_rate_hz: number | null
+          supported_sensors: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          consent_required?: boolean | null
+          created_at?: string
+          data_format: string
+          description: string
+          id?: string
+          is_active?: boolean | null
+          min_quality_score?: number | null
+          modality_category: string
+          modality_name: string
+          privacy_level?: string
+          quality_metrics?: Json | null
+          retention_period_days?: number | null
+          sampling_rate_hz?: number | null
+          supported_sensors?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          consent_required?: boolean | null
+          created_at?: string
+          data_format?: string
+          description?: string
+          id?: string
+          is_active?: boolean | null
+          min_quality_score?: number | null
+          modality_category?: string
+          modality_name?: string
+          privacy_level?: string
+          quality_metrics?: Json | null
+          retention_period_days?: number | null
+          sampling_rate_hz?: number | null
+          supported_sensors?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_assets: {
+        Row: {
+          asset_type: string
+          created_at: string | null
+          dimensions: string | null
+          file_size: number | null
+          id: string
+          is_active: boolean | null
+          mime_type: string | null
+          name: string
+          updated_at: string | null
+          url: string
+          usage_notes: string | null
+        }
+        Insert: {
+          asset_type: string
+          created_at?: string | null
+          dimensions?: string | null
+          file_size?: number | null
+          id?: string
+          is_active?: boolean | null
+          mime_type?: string | null
+          name: string
+          updated_at?: string | null
+          url: string
+          usage_notes?: string | null
+        }
+        Update: {
+          asset_type?: string
+          created_at?: string | null
+          dimensions?: string | null
+          file_size?: number | null
+          id?: string
+          is_active?: boolean | null
+          mime_type?: string | null
+          name?: string
+          updated_at?: string | null
+          url?: string
+          usage_notes?: string | null
         }
         Relationships: []
       }
@@ -26336,13 +29375,6 @@ export type Database = {
             foreignKeyName: "team_invitations_team_id_fkey"
             columns: ["team_id"]
             isOneToOne: false
-            referencedRelation: "roi_team_summaries"
-            referencedColumns: ["team_id"]
-          },
-          {
-            foreignKeyName: "team_invitations_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
             referencedRelation: "roi_teams"
             referencedColumns: ["id"]
           },
@@ -26945,24 +29977,10 @@ export type Database = {
             referencedColumns: ["member_code"]
           },
           {
-            foreignKeyName: "fk_team_member_to_neural_member"
-            columns: ["member_code"]
-            isOneToOne: false
-            referencedRelation: "neural_ennead_members_overview"
-            referencedColumns: ["member_code"]
-          },
-          {
             foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
             columns: ["member_code"]
             isOneToOne: false
             referencedRelation: "neural_ennead_members"
-            referencedColumns: ["member_code"]
-          },
-          {
-            foreignKeyName: "thinker_alignment_team_members_member_code_fkey"
-            columns: ["member_code"]
-            isOneToOne: false
-            referencedRelation: "neural_ennead_members_overview"
             referencedColumns: ["member_code"]
           },
           {
@@ -27115,13 +30133,6 @@ export type Database = {
             columns: ["member_code"]
             isOneToOne: false
             referencedRelation: "neural_ennead_members"
-            referencedColumns: ["member_code"]
-          },
-          {
-            foreignKeyName: "thinker_member_alignment_member_code_fkey"
-            columns: ["member_code"]
-            isOneToOne: false
-            referencedRelation: "neural_ennead_members_overview"
             referencedColumns: ["member_code"]
           },
         ]
@@ -28218,6 +31229,65 @@ export type Database = {
           },
         ]
       }
+      unified_signal_quality: {
+        Row: {
+          audio_quality: number | null
+          bci_quality: number | null
+          behavioral_quality: number | null
+          completeness_score: number | null
+          context_quality: number | null
+          created_at: string
+          id: string
+          latency_ms: number | null
+          overall_quality: number | null
+          quality_issues: Json | null
+          session_id: string
+          sync_quality: number | null
+          timestamp: string
+          vision_quality: number | null
+        }
+        Insert: {
+          audio_quality?: number | null
+          bci_quality?: number | null
+          behavioral_quality?: number | null
+          completeness_score?: number | null
+          context_quality?: number | null
+          created_at?: string
+          id?: string
+          latency_ms?: number | null
+          overall_quality?: number | null
+          quality_issues?: Json | null
+          session_id: string
+          sync_quality?: number | null
+          timestamp: string
+          vision_quality?: number | null
+        }
+        Update: {
+          audio_quality?: number | null
+          bci_quality?: number | null
+          behavioral_quality?: number | null
+          completeness_score?: number | null
+          context_quality?: number | null
+          created_at?: string
+          id?: string
+          latency_ms?: number | null
+          overall_quality?: number | null
+          quality_issues?: Json | null
+          session_id?: string
+          sync_quality?: number | null
+          timestamp?: string
+          vision_quality?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unified_signal_quality_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "multimodal_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       universal_assessment_responses: {
         Row: {
           ai_readiness_score: number | null
@@ -28565,6 +31635,96 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_data_export_requests: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          expires_at: string | null
+          export_format: string
+          export_url: string | null
+          file_size_bytes: number | null
+          id: string
+          requested_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          expires_at?: string | null
+          export_format?: string
+          export_url?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          requested_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          expires_at?: string | null
+          export_format?: string
+          export_url?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          requested_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_deletion_requests: {
+        Row: {
+          cancelled_at: string | null
+          completed_at: string | null
+          created_at: string
+          deletion_data: Json | null
+          id: string
+          ip_address: string | null
+          reason: string | null
+          requested_at: string
+          scheduled_deletion_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancelled_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          deletion_data?: Json | null
+          id?: string
+          ip_address?: string | null
+          reason?: string | null
+          requested_at?: string
+          scheduled_deletion_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancelled_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          deletion_data?: Json | null
+          id?: string
+          ip_address?: string | null
+          reason?: string | null
+          requested_at?: string
+          scheduled_deletion_at?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_interaction_analytics: {
         Row: {
@@ -29668,16 +32828,20 @@ export type Database = {
           average_rating: number | null
           category: string | null
           challenge_description: string | null
+          character_profiles: Json | null
           compliance_score: number | null
           content: string
+          content_warning: string | null
           created_at: string
           cultural_background: string | null
           department: string | null
           description: string | null
           difficulty_level: string | null
+          discussion_questions: string[] | null
           engagement_metrics: Json | null
           engagement_score: number | null
           estimated_reading_time: number | null
+          ethical_implications: string | null
           excerpt: string
           external_api_id: string | null
           featured: boolean | null
@@ -29697,8 +32861,10 @@ export type Database = {
           persona_name: string | null
           persona_role: string | null
           read_time: number
+          related_technologies: string[] | null
           risk_factors: string[] | null
           scenario_context: string | null
+          scenario_year: number | null
           sentiment: string | null
           seo_description: string | null
           slug: string
@@ -29719,16 +32885,20 @@ export type Database = {
           average_rating?: number | null
           category?: string | null
           challenge_description?: string | null
+          character_profiles?: Json | null
           compliance_score?: number | null
           content: string
+          content_warning?: string | null
           created_at?: string
           cultural_background?: string | null
           department?: string | null
           description?: string | null
           difficulty_level?: string | null
+          discussion_questions?: string[] | null
           engagement_metrics?: Json | null
           engagement_score?: number | null
           estimated_reading_time?: number | null
+          ethical_implications?: string | null
           excerpt: string
           external_api_id?: string | null
           featured?: boolean | null
@@ -29748,8 +32918,10 @@ export type Database = {
           persona_name?: string | null
           persona_role?: string | null
           read_time?: number
+          related_technologies?: string[] | null
           risk_factors?: string[] | null
           scenario_context?: string | null
+          scenario_year?: number | null
           sentiment?: string | null
           seo_description?: string | null
           slug: string
@@ -29770,16 +32942,20 @@ export type Database = {
           average_rating?: number | null
           category?: string | null
           challenge_description?: string | null
+          character_profiles?: Json | null
           compliance_score?: number | null
           content?: string
+          content_warning?: string | null
           created_at?: string
           cultural_background?: string | null
           department?: string | null
           description?: string | null
           difficulty_level?: string | null
+          discussion_questions?: string[] | null
           engagement_metrics?: Json | null
           engagement_score?: number | null
           estimated_reading_time?: number | null
+          ethical_implications?: string | null
           excerpt?: string
           external_api_id?: string | null
           featured?: boolean | null
@@ -29799,8 +32975,10 @@ export type Database = {
           persona_name?: string | null
           persona_role?: string | null
           read_time?: number
+          related_technologies?: string[] | null
           risk_factors?: string[] | null
           scenario_context?: string | null
+          scenario_year?: number | null
           sentiment?: string | null
           seo_description?: string | null
           slug?: string
@@ -29915,6 +33093,71 @@ export type Database = {
         }
         Relationships: []
       }
+      vision_signals: {
+        Row: {
+          blink_detected: boolean | null
+          created_at: string
+          emotion_scores: Json | null
+          facial_action_units: Json | null
+          facial_landmarks: Json | null
+          fixation_duration_ms: number | null
+          gaze_x: number | null
+          gaze_y: number | null
+          head_pose: Json | null
+          id: string
+          lighting_quality: string | null
+          pupil_diameter_mm: number | null
+          saccade_velocity: number | null
+          session_id: string
+          timestamp: string
+          tracking_confidence: number | null
+        }
+        Insert: {
+          blink_detected?: boolean | null
+          created_at?: string
+          emotion_scores?: Json | null
+          facial_action_units?: Json | null
+          facial_landmarks?: Json | null
+          fixation_duration_ms?: number | null
+          gaze_x?: number | null
+          gaze_y?: number | null
+          head_pose?: Json | null
+          id?: string
+          lighting_quality?: string | null
+          pupil_diameter_mm?: number | null
+          saccade_velocity?: number | null
+          session_id: string
+          timestamp: string
+          tracking_confidence?: number | null
+        }
+        Update: {
+          blink_detected?: boolean | null
+          created_at?: string
+          emotion_scores?: Json | null
+          facial_action_units?: Json | null
+          facial_landmarks?: Json | null
+          fixation_duration_ms?: number | null
+          gaze_x?: number | null
+          gaze_y?: number | null
+          head_pose?: Json | null
+          id?: string
+          lighting_quality?: string | null
+          pupil_diameter_mm?: number | null
+          saccade_velocity?: number | null
+          session_id?: string
+          timestamp?: string
+          tracking_confidence?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vision_signals_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "multimodal_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       visitor_assessments: {
         Row: {
           assessment_data: Json
@@ -29999,6 +33242,267 @@ export type Database = {
           entity_type?: string | null
           min_qty?: number | null
           start_date?: string | null
+        }
+        Relationships: []
+      }
+      wearable_developer_tiers: {
+        Row: {
+          created_at: string | null
+          features: Json | null
+          id: string
+          included_events: number
+          is_active: boolean | null
+          monthly_fee: number
+          name: string
+          overage_per_1k: number
+          support_level: string
+          tenant_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          included_events: number
+          is_active?: boolean | null
+          monthly_fee: number
+          name: string
+          overage_per_1k: number
+          support_level: string
+          tenant_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          included_events?: number
+          is_active?: boolean | null
+          monthly_fee?: number
+          name?: string
+          overage_per_1k?: number
+          support_level?: string
+          tenant_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_developer_tiers_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wearable_routing_configs: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          graph_id: string
+          id: string
+          is_active: boolean | null
+          name: string
+          policies: Json
+          routes: Json
+          tenant_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          graph_id: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          policies?: Json
+          routes: Json
+          tenant_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          graph_id?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          policies?: Json
+          routes?: Json
+          tenant_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_routing_configs_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wearable_sample_apps: {
+        Row: {
+          app_name: string
+          category: string
+          contact_email: string
+          created_at: string | null
+          data_practices: Json
+          description: string
+          icon: string | null
+          id: string
+          pricing: Json
+          privacy_mode: string | null
+          publisher: string
+          regions: string[]
+          required_capabilities: Json
+          reviewed_at: string | null
+          reviewer_id: string | null
+          status: string | null
+          submitted_at: string | null
+          tenant_id: string | null
+          updated_at: string | null
+          use_cases: string[]
+        }
+        Insert: {
+          app_name: string
+          category: string
+          contact_email: string
+          created_at?: string | null
+          data_practices?: Json
+          description: string
+          icon?: string | null
+          id?: string
+          pricing?: Json
+          privacy_mode?: string | null
+          publisher: string
+          regions?: string[]
+          required_capabilities?: Json
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          status?: string | null
+          submitted_at?: string | null
+          tenant_id?: string | null
+          updated_at?: string | null
+          use_cases?: string[]
+        }
+        Update: {
+          app_name?: string
+          category?: string
+          contact_email?: string
+          created_at?: string | null
+          data_practices?: Json
+          description?: string
+          icon?: string | null
+          id?: string
+          pricing?: Json
+          privacy_mode?: string | null
+          publisher?: string
+          regions?: string[]
+          required_capabilities?: Json
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          status?: string | null
+          submitted_at?: string | null
+          tenant_id?: string | null
+          updated_at?: string | null
+          use_cases?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_sample_apps_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wearable_sessions: {
+        Row: {
+          app_id: string
+          consent_refs: string[] | null
+          created_at: string | null
+          device_capabilities: Json
+          device_id: string
+          device_model: string
+          device_vendor: string
+          ended_at: string | null
+          id: string
+          is_active: boolean | null
+          privacy_mode: string
+          session_id: string
+          started_at: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          app_id: string
+          consent_refs?: string[] | null
+          created_at?: string | null
+          device_capabilities?: Json
+          device_id: string
+          device_model: string
+          device_vendor: string
+          ended_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          privacy_mode?: string
+          session_id: string
+          started_at?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          app_id?: string
+          consent_refs?: string[] | null
+          created_at?: string | null
+          device_capabilities?: Json
+          device_id?: string
+          device_model?: string
+          device_vendor?: string
+          ended_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          privacy_mode?: string
+          session_id?: string
+          started_at?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wearable_stream_events: {
+        Row: {
+          created_at: string | null
+          event_type: string
+          id: string
+          metadata: Json | null
+          session_id: string
+          storage_path: string | null
+          timestamp: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          session_id: string
+          storage_path?: string | null
+          timestamp: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          session_id?: string
+          storage_path?: string | null
+          timestamp?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -30194,6 +33698,156 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      work_package_quote_requests: {
+        Row: {
+          additional_info: string | null
+          admin_notes: string | null
+          auth_method: string | null
+          best_time_to_contact: string | null
+          budget_range: string | null
+          challenge_description: string | null
+          cloud_environment: string | null
+          company_name: string
+          company_size: string | null
+          compliance_requirements: string | null
+          created_at: string | null
+          current_state_description: string | null
+          data_classification: string | null
+          decision_makers: string | null
+          departments_involved: string[] | null
+          email: string
+          estimated_quote_value: number | null
+          existing_systems: string[] | null
+          expected_roi_timeline: string | null
+          follow_up_date: string | null
+          has_multiple_locations: boolean | null
+          id: string
+          implementation_team_size: number | null
+          industry: string | null
+          integration_requirements: string | null
+          internal_champion: string | null
+          ip_address: string | null
+          job_title: string | null
+          known_constraints: string | null
+          name: string
+          number_of_users: number | null
+          org_maturity_level: string | null
+          phone: string | null
+          preferred_contact_method: string | null
+          preferred_timeline: string | null
+          previous_experience: boolean | null
+          previous_experience_details: string | null
+          pricing_tier_interest: string | null
+          primary_kpis: string[] | null
+          primary_location: string | null
+          quoted_at: string | null
+          referral_source: string | null
+          status: Database["public"]["Enums"]["quote_request_status"] | null
+          success_criteria: string | null
+          updated_at: string | null
+          work_package_id: string
+          work_package_name: string
+        }
+        Insert: {
+          additional_info?: string | null
+          admin_notes?: string | null
+          auth_method?: string | null
+          best_time_to_contact?: string | null
+          budget_range?: string | null
+          challenge_description?: string | null
+          cloud_environment?: string | null
+          company_name: string
+          company_size?: string | null
+          compliance_requirements?: string | null
+          created_at?: string | null
+          current_state_description?: string | null
+          data_classification?: string | null
+          decision_makers?: string | null
+          departments_involved?: string[] | null
+          email: string
+          estimated_quote_value?: number | null
+          existing_systems?: string[] | null
+          expected_roi_timeline?: string | null
+          follow_up_date?: string | null
+          has_multiple_locations?: boolean | null
+          id?: string
+          implementation_team_size?: number | null
+          industry?: string | null
+          integration_requirements?: string | null
+          internal_champion?: string | null
+          ip_address?: string | null
+          job_title?: string | null
+          known_constraints?: string | null
+          name: string
+          number_of_users?: number | null
+          org_maturity_level?: string | null
+          phone?: string | null
+          preferred_contact_method?: string | null
+          preferred_timeline?: string | null
+          previous_experience?: boolean | null
+          previous_experience_details?: string | null
+          pricing_tier_interest?: string | null
+          primary_kpis?: string[] | null
+          primary_location?: string | null
+          quoted_at?: string | null
+          referral_source?: string | null
+          status?: Database["public"]["Enums"]["quote_request_status"] | null
+          success_criteria?: string | null
+          updated_at?: string | null
+          work_package_id: string
+          work_package_name: string
+        }
+        Update: {
+          additional_info?: string | null
+          admin_notes?: string | null
+          auth_method?: string | null
+          best_time_to_contact?: string | null
+          budget_range?: string | null
+          challenge_description?: string | null
+          cloud_environment?: string | null
+          company_name?: string
+          company_size?: string | null
+          compliance_requirements?: string | null
+          created_at?: string | null
+          current_state_description?: string | null
+          data_classification?: string | null
+          decision_makers?: string | null
+          departments_involved?: string[] | null
+          email?: string
+          estimated_quote_value?: number | null
+          existing_systems?: string[] | null
+          expected_roi_timeline?: string | null
+          follow_up_date?: string | null
+          has_multiple_locations?: boolean | null
+          id?: string
+          implementation_team_size?: number | null
+          industry?: string | null
+          integration_requirements?: string | null
+          internal_champion?: string | null
+          ip_address?: string | null
+          job_title?: string | null
+          known_constraints?: string | null
+          name?: string
+          number_of_users?: number | null
+          org_maturity_level?: string | null
+          phone?: string | null
+          preferred_contact_method?: string | null
+          preferred_timeline?: string | null
+          previous_experience?: boolean | null
+          previous_experience_details?: string | null
+          pricing_tier_interest?: string | null
+          primary_kpis?: string[] | null
+          primary_location?: string | null
+          quoted_at?: string | null
+          referral_source?: string | null
+          status?: Database["public"]["Enums"]["quote_request_status"] | null
+          success_criteria?: string | null
+          updated_at?: string | null
+          work_package_id?: string
+          work_package_name?: string
+        }
+        Relationships: []
       }
       work_packages: {
         Row: {
@@ -31194,28 +34848,28 @@ export type Database = {
           api_endpoint: string | null
           aps_hourly_rate: string | null
           attrition_risk_score: number | null
-          augmented_delivery_cost: number | null
+          augmented_delivery_cost: string | null
           auth_method: string | null
-          automated_delivery_cost: number | null
+          automated_delivery_cost: string | null
           availability_calendar: string | null
           average_feedback_rating: number | null
           awards_received: string | null
           backup_available: boolean | null
-          base_agent_cost: number | null
+          base_agent_cost: string | null
           break_even_months: number | null
           bundle_pairings: string | null
           career_interest_tags: string | null
           certification_count: string | null
           certifications: string | null
           certifications_expiry: string | null
-          change_overlay_cost: number | null
+          change_overlay_cost: string | null
           clearance_required: string | null
           cluster_id: number | null
           cognitive_aptitude_score: number | null
           "Common Agent": string | null
           complexity_score: number | null
           compliance_gap_flag: boolean | null
-          compliance_margin: number | null
+          compliance_margin: string | null
           compliance_ready_tags: string | null
           compliance_requirements: string | null
           consultant_hourly_rate: string | null
@@ -31232,10 +34886,10 @@ export type Database = {
           domain: string | null
           domain_experience_years: string | null
           domain_maturity_level: number | null
-          domain_trust_score: number | null
+          domain_trust_score: string | null
           event_log_id: string | null
           field_of_study: string | null
-          final_cost: number | null
+          final_cost: string | null
           fit_for_defence: string | null
           fit_for_partner_solutions: string | null
           function: string | null
@@ -31245,12 +34899,12 @@ export type Database = {
           highlight_quote: string | null
           human_cost_equiv: string | null
           human_delivery_cost: string | null
-          human_effort_hours: number | null
+          human_effort_hours: string | null
           incident_count: string | null
           Industry: string | null
           industry_fit: string | null
           innovation_contribution_count: string | null
-          innovation_fit_index: string | null
+          innovation_fit_index: number | null
           input_rate: number | null
           input_source: string | null
           input_type: string | null
@@ -31262,7 +34916,7 @@ export type Database = {
           last_project_end_date: string | null
           last_training_date: string | null
           last_updated: string | null
-          linkedin_endorsements_count: string | null
+          linkedin_endorsements_count: number | null
           location: string | null
           margin_history: Json | null
           margin_pct: number | null
@@ -31274,41 +34928,41 @@ export type Database = {
           next_available_date: string | null
           on_time_pct: number | null
           "onet_skill_importance_<id>": number | null
-          "onet_work_style_<id>": number | null
+          "onet_work_style_<id>": string | null
           output_rate: number | null
           output_type: string | null
           overall_match_score: number | null
           performance_flag: string | null
           performance_index: number | null
           persona: string | null
-          personality_a: string | null
+          personality_a: number | null
           personality_c: number | null
-          personality_e: number | null
-          personality_n: string | null
-          personality_o: number | null
+          personality_e: string | null
+          personality_n: number | null
+          personality_o: string | null
           preferred_partners: string | null
           pricing_model: string | null
           Problem: string | null
           project_bundle: string | null
           project_count: number | null
           project_success_rate: number | null
-          proposal_strength_score: number | null
+          proposal_strength_score: string | null
           quality_error_rate: number | null
           recommended_configuration: string | null
           region_unemployment_rate: number | null
           regulatory_compliance_index: string | null
           relocation_willingness: string | null
           remote_capable: boolean | null
-          residual_capacity_pct: number | null
+          residual_capacity_pct: string | null
           reuse_profile_type: string | null
           rft_keywords_matched: string | null
           risk_rating: string | null
           ROI: string | null
           role_group: string | null
-          role_substitution_rating: number | null
+          role_substitution_rating: string | null
           scaling_equivalence: string | null
           schedule_flexibility: string | null
-          security_vulnerability_rating: number | null
+          security_vulnerability_rating: string | null
           "Setup Cost": string | null
           sfia_category: string | null
           sfia_level: string | null
@@ -31321,9 +34975,9 @@ export type Database = {
           strategic_mobility_indicator: string | null
           summary_bio: string | null
           supplier_category: string | null
-          task_alignment_score: number | null
+          task_alignment_score: string | null
           task_cluster_tags: string | null
-          task_coverage_pct: number | null
+          task_coverage_pct: string | null
           task_criticality_score: number | null
           "Tech Stack": string | null
           tech_maturity_level: string | null
@@ -31332,12 +34986,12 @@ export type Database = {
           timezone: string | null
           total_years_experience: number | null
           training_status: string | null
-          travel_availability_pct: number | null
+          travel_availability_pct: string | null
           user_context: string | null
           utilization_history: Json | null
           utilization_pct: number | null
           utilization_target_pct: number | null
-          value_to_cost_ratio: number | null
+          value_to_cost_ratio: string | null
           values_alignment_score: number | null
           vendor_reliability_rating: number | null
           work_style_flags: string | null
@@ -31352,28 +35006,28 @@ export type Database = {
           api_endpoint?: string | null
           aps_hourly_rate?: string | null
           attrition_risk_score?: number | null
-          augmented_delivery_cost?: number | null
+          augmented_delivery_cost?: string | null
           auth_method?: string | null
-          automated_delivery_cost?: number | null
+          automated_delivery_cost?: string | null
           availability_calendar?: string | null
           average_feedback_rating?: number | null
           awards_received?: string | null
           backup_available?: boolean | null
-          base_agent_cost?: number | null
+          base_agent_cost?: string | null
           break_even_months?: number | null
           bundle_pairings?: string | null
           career_interest_tags?: string | null
           certification_count?: string | null
           certifications?: string | null
           certifications_expiry?: string | null
-          change_overlay_cost?: number | null
+          change_overlay_cost?: string | null
           clearance_required?: string | null
           cluster_id?: number | null
           cognitive_aptitude_score?: number | null
           "Common Agent"?: string | null
           complexity_score?: number | null
           compliance_gap_flag?: boolean | null
-          compliance_margin?: number | null
+          compliance_margin?: string | null
           compliance_ready_tags?: string | null
           compliance_requirements?: string | null
           consultant_hourly_rate?: string | null
@@ -31390,10 +35044,10 @@ export type Database = {
           domain?: string | null
           domain_experience_years?: string | null
           domain_maturity_level?: number | null
-          domain_trust_score?: number | null
+          domain_trust_score?: string | null
           event_log_id?: string | null
           field_of_study?: string | null
-          final_cost?: number | null
+          final_cost?: string | null
           fit_for_defence?: string | null
           fit_for_partner_solutions?: string | null
           function?: string | null
@@ -31403,12 +35057,12 @@ export type Database = {
           highlight_quote?: string | null
           human_cost_equiv?: string | null
           human_delivery_cost?: string | null
-          human_effort_hours?: number | null
+          human_effort_hours?: string | null
           incident_count?: string | null
           Industry?: string | null
           industry_fit?: string | null
           innovation_contribution_count?: string | null
-          innovation_fit_index?: string | null
+          innovation_fit_index?: number | null
           input_rate?: number | null
           input_source?: string | null
           input_type?: string | null
@@ -31420,7 +35074,7 @@ export type Database = {
           last_project_end_date?: string | null
           last_training_date?: string | null
           last_updated?: string | null
-          linkedin_endorsements_count?: string | null
+          linkedin_endorsements_count?: number | null
           location?: string | null
           margin_history?: Json | null
           margin_pct?: number | null
@@ -31432,41 +35086,41 @@ export type Database = {
           next_available_date?: string | null
           on_time_pct?: number | null
           "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: number | null
+          "onet_work_style_<id>"?: string | null
           output_rate?: number | null
           output_type?: string | null
           overall_match_score?: number | null
           performance_flag?: string | null
           performance_index?: number | null
           persona?: string | null
-          personality_a?: string | null
+          personality_a?: number | null
           personality_c?: number | null
-          personality_e?: number | null
-          personality_n?: string | null
-          personality_o?: number | null
+          personality_e?: string | null
+          personality_n?: number | null
+          personality_o?: string | null
           preferred_partners?: string | null
           pricing_model?: string | null
           Problem?: string | null
           project_bundle?: string | null
           project_count?: number | null
           project_success_rate?: number | null
-          proposal_strength_score?: number | null
+          proposal_strength_score?: string | null
           quality_error_rate?: number | null
           recommended_configuration?: string | null
           region_unemployment_rate?: number | null
           regulatory_compliance_index?: string | null
           relocation_willingness?: string | null
           remote_capable?: boolean | null
-          residual_capacity_pct?: number | null
+          residual_capacity_pct?: string | null
           reuse_profile_type?: string | null
           rft_keywords_matched?: string | null
           risk_rating?: string | null
           ROI?: string | null
           role_group?: string | null
-          role_substitution_rating?: number | null
+          role_substitution_rating?: string | null
           scaling_equivalence?: string | null
           schedule_flexibility?: string | null
-          security_vulnerability_rating?: number | null
+          security_vulnerability_rating?: string | null
           "Setup Cost"?: string | null
           sfia_category?: string | null
           sfia_level?: string | null
@@ -31479,9 +35133,9 @@ export type Database = {
           strategic_mobility_indicator?: string | null
           summary_bio?: string | null
           supplier_category?: string | null
-          task_alignment_score?: number | null
+          task_alignment_score?: string | null
           task_cluster_tags?: string | null
-          task_coverage_pct?: number | null
+          task_coverage_pct?: string | null
           task_criticality_score?: number | null
           "Tech Stack"?: string | null
           tech_maturity_level?: string | null
@@ -31490,12 +35144,12 @@ export type Database = {
           timezone?: string | null
           total_years_experience?: number | null
           training_status?: string | null
-          travel_availability_pct?: number | null
+          travel_availability_pct?: string | null
           user_context?: string | null
           utilization_history?: Json | null
           utilization_pct?: number | null
           utilization_target_pct?: number | null
-          value_to_cost_ratio?: number | null
+          value_to_cost_ratio?: string | null
           values_alignment_score?: number | null
           vendor_reliability_rating?: number | null
           work_style_flags?: string | null
@@ -31510,28 +35164,28 @@ export type Database = {
           api_endpoint?: string | null
           aps_hourly_rate?: string | null
           attrition_risk_score?: number | null
-          augmented_delivery_cost?: number | null
+          augmented_delivery_cost?: string | null
           auth_method?: string | null
-          automated_delivery_cost?: number | null
+          automated_delivery_cost?: string | null
           availability_calendar?: string | null
           average_feedback_rating?: number | null
           awards_received?: string | null
           backup_available?: boolean | null
-          base_agent_cost?: number | null
+          base_agent_cost?: string | null
           break_even_months?: number | null
           bundle_pairings?: string | null
           career_interest_tags?: string | null
           certification_count?: string | null
           certifications?: string | null
           certifications_expiry?: string | null
-          change_overlay_cost?: number | null
+          change_overlay_cost?: string | null
           clearance_required?: string | null
           cluster_id?: number | null
           cognitive_aptitude_score?: number | null
           "Common Agent"?: string | null
           complexity_score?: number | null
           compliance_gap_flag?: boolean | null
-          compliance_margin?: number | null
+          compliance_margin?: string | null
           compliance_ready_tags?: string | null
           compliance_requirements?: string | null
           consultant_hourly_rate?: string | null
@@ -31548,10 +35202,10 @@ export type Database = {
           domain?: string | null
           domain_experience_years?: string | null
           domain_maturity_level?: number | null
-          domain_trust_score?: number | null
+          domain_trust_score?: string | null
           event_log_id?: string | null
           field_of_study?: string | null
-          final_cost?: number | null
+          final_cost?: string | null
           fit_for_defence?: string | null
           fit_for_partner_solutions?: string | null
           function?: string | null
@@ -31561,12 +35215,12 @@ export type Database = {
           highlight_quote?: string | null
           human_cost_equiv?: string | null
           human_delivery_cost?: string | null
-          human_effort_hours?: number | null
+          human_effort_hours?: string | null
           incident_count?: string | null
           Industry?: string | null
           industry_fit?: string | null
           innovation_contribution_count?: string | null
-          innovation_fit_index?: string | null
+          innovation_fit_index?: number | null
           input_rate?: number | null
           input_source?: string | null
           input_type?: string | null
@@ -31578,7 +35232,7 @@ export type Database = {
           last_project_end_date?: string | null
           last_training_date?: string | null
           last_updated?: string | null
-          linkedin_endorsements_count?: string | null
+          linkedin_endorsements_count?: number | null
           location?: string | null
           margin_history?: Json | null
           margin_pct?: number | null
@@ -31590,41 +35244,41 @@ export type Database = {
           next_available_date?: string | null
           on_time_pct?: number | null
           "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: number | null
+          "onet_work_style_<id>"?: string | null
           output_rate?: number | null
           output_type?: string | null
           overall_match_score?: number | null
           performance_flag?: string | null
           performance_index?: number | null
           persona?: string | null
-          personality_a?: string | null
+          personality_a?: number | null
           personality_c?: number | null
-          personality_e?: number | null
-          personality_n?: string | null
-          personality_o?: number | null
+          personality_e?: string | null
+          personality_n?: number | null
+          personality_o?: string | null
           preferred_partners?: string | null
           pricing_model?: string | null
           Problem?: string | null
           project_bundle?: string | null
           project_count?: number | null
           project_success_rate?: number | null
-          proposal_strength_score?: number | null
+          proposal_strength_score?: string | null
           quality_error_rate?: number | null
           recommended_configuration?: string | null
           region_unemployment_rate?: number | null
           regulatory_compliance_index?: string | null
           relocation_willingness?: string | null
           remote_capable?: boolean | null
-          residual_capacity_pct?: number | null
+          residual_capacity_pct?: string | null
           reuse_profile_type?: string | null
           rft_keywords_matched?: string | null
           risk_rating?: string | null
           ROI?: string | null
           role_group?: string | null
-          role_substitution_rating?: number | null
+          role_substitution_rating?: string | null
           scaling_equivalence?: string | null
           schedule_flexibility?: string | null
-          security_vulnerability_rating?: number | null
+          security_vulnerability_rating?: string | null
           "Setup Cost"?: string | null
           sfia_category?: string | null
           sfia_level?: string | null
@@ -31637,9 +35291,9 @@ export type Database = {
           strategic_mobility_indicator?: string | null
           summary_bio?: string | null
           supplier_category?: string | null
-          task_alignment_score?: number | null
+          task_alignment_score?: string | null
           task_cluster_tags?: string | null
-          task_coverage_pct?: number | null
+          task_coverage_pct?: string | null
           task_criticality_score?: number | null
           "Tech Stack"?: string | null
           tech_maturity_level?: string | null
@@ -31648,12 +35302,12 @@ export type Database = {
           timezone?: string | null
           total_years_experience?: number | null
           training_status?: string | null
-          travel_availability_pct?: number | null
+          travel_availability_pct?: string | null
           user_context?: string | null
           utilization_history?: Json | null
           utilization_pct?: number | null
           utilization_target_pct?: number | null
-          value_to_cost_ratio?: number | null
+          value_to_cost_ratio?: string | null
           values_alignment_score?: number | null
           vendor_reliability_rating?: number | null
           work_style_flags?: string | null
@@ -31866,26 +35520,24 @@ export type Database = {
         }
         Relationships: []
       }
+      annual_reports: {
+        Row: {
+          note: string | null
+          status: string | null
+        }
+        Relationships: []
+      }
       app_event_daily_counts: {
         Row: {
-          count: number | null
-          day: string | null
-          event_type: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Augmented first roles": {
         Row: {
-          function: string | null
-          why_augmented_first: string | null
-        }
-        Insert: {
-          function?: string | null
-          why_augmented_first?: string | null
-        }
-        Update: {
-          function?: string | null
-          why_augmented_first?: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
@@ -31903,132 +35555,110 @@ export type Database = {
         }
         Relationships: []
       }
+      bci_matrix_analytics: {
+        Row: {
+          active_cells: number | null
+          avg_companies_per_cell: number | null
+          avg_coverage_score: number | null
+          child_data_cells: number | null
+          dual_use_cells: number | null
+          high_risk_cells: number | null
+          industry_list: string[] | null
+          lens_list: string[] | null
+          total_cells: number | null
+          total_industries: number | null
+          total_lenses: number | null
+          total_sub_buckets: number | null
+        }
+        Relationships: []
+      }
+      bci_power250_coverage_summary: {
+        Row: {
+          avg_composite_score: number | null
+          company_count: number | null
+          modality: string | null
+          top_companies: string[] | null
+        }
+        Relationships: []
+      }
+      bci_power250_regional_coverage: {
+        Row: {
+          avg_composite_score: number | null
+          company_count: number | null
+          region: string | null
+          top_companies: string[] | null
+        }
+        Relationships: []
+      }
+      bci_power250_top_performers: {
+        Row: {
+          approvals_score: number | null
+          company_id: string | null
+          composite_score: number | null
+          coverage_reason: string | null
+          install_base_score: number | null
+          modality_set: string | null
+          name: string | null
+          rank: number | null
+          region_coverage: string | null
+          trials_score: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bci_power250_rankings_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "bci_master_companies"
+            referencedColumns: ["supplier_id"]
+          },
+        ]
+      }
       calculator_analytics: {
         Row: {
-          all_selected_services: string[] | null
-          avg_revenue: number | null
-          avg_users: number | null
-          industry: string | null
-          industry_distribution: Json | null
-          session_count: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       consent_analytics: {
         Row: {
-          active_consents: number | null
-          denied_consents: number | null
-          expired_consents: number | null
-          pending_consents: number | null
-          total_consents: number | null
-          unique_templates: number | null
-          unique_users: number | null
-          withdrawn_consents: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       consent_category_analytics: {
         Row: {
-          active_consents: number | null
-          avg_privacy_impact: number | null
-          category_name: string | null
-          total_consents: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       consent_registry_category_summary: {
         Row: {
-          avg_complexity: number | null
-          category: string | null
-          high_complexity_count: number | null
-          total: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       consent_registry_combined: {
         Row: {
-          age_of_subject: string | null
-          agent_required: string | null
-          applicable_age_range: string | null
-          automated_processing: string | null
-          awareness_level: string | null
-          can_revoke_text: string | null
-          category: string | null
-          collected_by: string | null
-          complexity_band: string | null
-          complexity_score: number | null
-          consent_expiry: string | null
-          consent_giver: string | null
-          consent_id: string | null
-          consent_language_complexity: string | null
-          consent_log_id: string | null
-          consent_mechanism: string | null
-          consent_method_traceable: string | null
-          consent_name: string | null
-          consent_scope: string | null
-          consent_trigger: string | null
-          consent_type: string | null
-          consent_update_required: string | null
-          data_captured: string | null
-          data_controller: string | null
-          data_retention_estimate: string | null
-          data_retention_policy: string | null
-          data_type: string | null
-          data_usage: string | null
-          disputed_rights: string | null
-          example_data_collectors: string | null
-          flags_count: number | null
-          frequency: string | null
-          guardian_involvement: string | null
-          impact_on_opportunities: string | null
-          inference_based: string | null
-          insights_derived: string | null
-          jurisdictional_threshold: string | null
-          legal_owner: string | null
-          life_domain: string | null
-          life_stage: string | null
-          linked_services: string | null
-          linked_systems: string | null
-          linked_systems_count: number | null
-          minor_involvement: string | null
-          ownership_notes: string | null
-          policy_sources: string | null
-          profiling_applied: string | null
-          profiling_risk: string | null
-          registry_code: string | null
-          retention_period: string | null
-          revocation_available: string | null
-          revocation_method: string | null
-          risk_level: string | null
-          risk_of_misuse: string | null
-          risk_rating: string | null
-          sensitivity: string | null
-          shared_with: string | null
-          shared_with_third_parties: string | null
-          source: string | null
+          note: string | null
           status: string | null
-          subject_age: string | null
-          used_for_decision_making: string | null
-          visibility_to_subject: string | null
-          vulnerability_flag: string | null
         }
         Relationships: []
       }
       consent_registry_life_stage_summary: {
         Row: {
-          avg_complexity: number | null
-          high_complexity_count: number | null
-          life_stage: string | null
-          total: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       consent_registry_type_summary: {
         Row: {
-          avg_complexity: number | null
-          consent_type: string | null
-          high_complexity_count: number | null
-          total: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
@@ -32070,31 +35700,15 @@ export type Database = {
       }
       "CV overlay": {
         Row: {
-          agent_code: string | null
-          cv_overlay_required: boolean | null
-          function: string | null
-          overlay_reason: string | null
-          overlay_suggested_roles: string | null
-          persona: string | null
-          sfia_level: string | null
+          note: string | null
+          status: string | null
         }
-        Insert: {
-          agent_code?: string | null
-          cv_overlay_required?: boolean | null
-          function?: string | null
-          overlay_reason?: string | null
-          overlay_suggested_roles?: string | null
-          persona?: string | null
-          sfia_level?: string | null
-        }
-        Update: {
-          agent_code?: string | null
-          cv_overlay_required?: boolean | null
-          function?: string | null
-          overlay_reason?: string | null
-          overlay_suggested_roles?: string | null
-          persona?: string | null
-          sfia_level?: string | null
+        Relationships: []
+      }
+      daily_reports: {
+        Row: {
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
@@ -32205,455 +35819,87 @@ export type Database = {
       }
       "Function Metrics": {
         Row: {
-          agent_count: number | null
-          avg_agent_price: number | null
-          avg_auto_cost: number | null
-          avg_human_cost: number | null
-          cost_savings_pct: number | null
-          coverage_pct: number | null
-          function_value_score: number | null
-          job_function: string | null
-          price_rank_pct: number | null
-        }
-        Insert: {
-          agent_count?: number | null
-          avg_agent_price?: number | null
-          avg_auto_cost?: number | null
-          avg_human_cost?: number | null
-          cost_savings_pct?: number | null
-          coverage_pct?: number | null
-          function_value_score?: number | null
-          job_function?: string | null
-          price_rank_pct?: number | null
-        }
-        Update: {
-          agent_count?: number | null
-          avg_agent_price?: number | null
-          avg_auto_cost?: number | null
-          avg_human_cost?: number | null
-          cost_savings_pct?: number | null
-          coverage_pct?: number | null
-          function_value_score?: number | null
-          job_function?: string | null
-          price_rank_pct?: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "G2U Full Catalogue": {
         Row: {
-          A: string | null
-          Active: boolean | null
-          "Allow Multi-Currency": boolean | null
-          Billable: boolean | null
-          "Billing Frequency": string | null
-          "Bundle Name": string | null
-          C: string | null
-          Category: string | null
-          "Cost to Company (AUD)": number | null
-          "Currency Code": string | null
-          Description: string | null
-          "Early Payment Discount": string | null
-          "Exchange Rate to AUD": number | null
-          "GL Account": string | null
-          I: string | null
-          "Is Agentic AI": boolean | null
-          "Is Consulting": boolean | null
-          "Is Premium": boolean | null
-          "Is Recurring": boolean | null
-          "Lead Time (Days)": number | null
-          "Max Qty": string | null
-          "Min Contract Term (Months)": string | null
-          "Min Qty": number | null
-          "Partner Price": string | null
-          "Payment Terms": string | null
-          Phase: string | null
-          "Phase Code": string | null
-          "Price (AUD)": string | null
-          "Price Raw": string | null
-          "Price Unit": string | null
-          "Price Value": number | null
-          "Profit Margin Target (%)": number | null
-          R: string | null
-          "Retail Price": number | null
-          "Seasonal Discount": string | null
-          "Service Duration": string | null
-          "Service Level Tier": string | null
-          SKU: string | null
-          "SKU Grouping": string | null
-          "SOW Code": string | null
-          Subcategory: string | null
-          "Subscription Billing Cycle": string | null
-          "Supplier Code": string | null
-          "Supplier Name": string | null
-          "Supplier SKU": string | null
-          "Tax Category": string | null
-          "Unit of Measure": string | null
-          "Volume Discount": string | null
-          "Warranty Terms": string | null
-          "White Label Price": number | null
-          "Wholesale Price": number | null
-        }
-        Insert: {
-          A?: string | null
-          Active?: boolean | null
-          "Allow Multi-Currency"?: boolean | null
-          Billable?: boolean | null
-          "Billing Frequency"?: string | null
-          "Bundle Name"?: string | null
-          C?: string | null
-          Category?: string | null
-          "Cost to Company (AUD)"?: number | null
-          "Currency Code"?: string | null
-          Description?: string | null
-          "Early Payment Discount"?: string | null
-          "Exchange Rate to AUD"?: number | null
-          "GL Account"?: string | null
-          I?: string | null
-          "Is Agentic AI"?: boolean | null
-          "Is Consulting"?: boolean | null
-          "Is Premium"?: boolean | null
-          "Is Recurring"?: boolean | null
-          "Lead Time (Days)"?: number | null
-          "Max Qty"?: string | null
-          "Min Contract Term (Months)"?: string | null
-          "Min Qty"?: number | null
-          "Partner Price"?: string | null
-          "Payment Terms"?: string | null
-          Phase?: string | null
-          "Phase Code"?: string | null
-          "Price (AUD)"?: string | null
-          "Price Raw"?: string | null
-          "Price Unit"?: string | null
-          "Price Value"?: number | null
-          "Profit Margin Target (%)"?: number | null
-          R?: string | null
-          "Retail Price"?: number | null
-          "Seasonal Discount"?: string | null
-          "Service Duration"?: string | null
-          "Service Level Tier"?: string | null
-          SKU?: string | null
-          "SKU Grouping"?: string | null
-          "SOW Code"?: string | null
-          Subcategory?: string | null
-          "Subscription Billing Cycle"?: string | null
-          "Supplier Code"?: string | null
-          "Supplier Name"?: string | null
-          "Supplier SKU"?: string | null
-          "Tax Category"?: string | null
-          "Unit of Measure"?: string | null
-          "Volume Discount"?: string | null
-          "Warranty Terms"?: string | null
-          "White Label Price"?: number | null
-          "Wholesale Price"?: number | null
-        }
-        Update: {
-          A?: string | null
-          Active?: boolean | null
-          "Allow Multi-Currency"?: boolean | null
-          Billable?: boolean | null
-          "Billing Frequency"?: string | null
-          "Bundle Name"?: string | null
-          C?: string | null
-          Category?: string | null
-          "Cost to Company (AUD)"?: number | null
-          "Currency Code"?: string | null
-          Description?: string | null
-          "Early Payment Discount"?: string | null
-          "Exchange Rate to AUD"?: number | null
-          "GL Account"?: string | null
-          I?: string | null
-          "Is Agentic AI"?: boolean | null
-          "Is Consulting"?: boolean | null
-          "Is Premium"?: boolean | null
-          "Is Recurring"?: boolean | null
-          "Lead Time (Days)"?: number | null
-          "Max Qty"?: string | null
-          "Min Contract Term (Months)"?: string | null
-          "Min Qty"?: number | null
-          "Partner Price"?: string | null
-          "Payment Terms"?: string | null
-          Phase?: string | null
-          "Phase Code"?: string | null
-          "Price (AUD)"?: string | null
-          "Price Raw"?: string | null
-          "Price Unit"?: string | null
-          "Price Value"?: number | null
-          "Profit Margin Target (%)"?: number | null
-          R?: string | null
-          "Retail Price"?: number | null
-          "Seasonal Discount"?: string | null
-          "Service Duration"?: string | null
-          "Service Level Tier"?: string | null
-          SKU?: string | null
-          "SKU Grouping"?: string | null
-          "SOW Code"?: string | null
-          Subcategory?: string | null
-          "Subscription Billing Cycle"?: string | null
-          "Supplier Code"?: string | null
-          "Supplier Name"?: string | null
-          "Supplier SKU"?: string | null
-          "Tax Category"?: string | null
-          "Unit of Measure"?: string | null
-          "Volume Discount"?: string | null
-          "Warranty Terms"?: string | null
-          "White Label Price"?: number | null
-          "Wholesale Price"?: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Generate proposal assets": {
         Row: {
-          agent_code: string | null
-          cost: number | null
-          cv_overlay_required: boolean | null
-          delivery_model: string | null
-          function: string | null
-          role: string | null
-          sfia_level: string | null
-          task_coverage_pct: number | null
+          note: string | null
+          status: string | null
         }
-        Insert: {
-          agent_code?: string | null
-          cost?: number | null
-          cv_overlay_required?: boolean | null
-          delivery_model?: string | null
-          function?: string | null
-          role?: string | null
-          sfia_level?: string | null
-          task_coverage_pct?: number | null
-        }
-        Update: {
-          agent_code?: string | null
-          cost?: number | null
-          cv_overlay_required?: boolean | null
-          delivery_model?: string | null
-          function?: string | null
-          role?: string | null
-          sfia_level?: string | null
-          task_coverage_pct?: number | null
+        Relationships: []
+      }
+      monthly_reports: {
+        Row: {
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       neural_ennead_members_overview: {
         Row: {
-          canonical_keywords: string[] | null
-          created_at: string | null
-          description: string | null
-          display_name: string | null
-          exemplar_roles: string[] | null
-          member_code: string | null
-          primary_family: string | null
-          secondary_family: string | null
-          short_label: string | null
-          tertiary_family: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Nuix overlay": {
         Row: {
-          agent_code: string | null
-          delivery_model: string | null
-          final_cost: number | null
-          fit_for_partner_solutions: string | null
-          function: string | null
-          partner_match_confidence: number | null
-          persona: string | null
-          preferred_partners: string | null
-          sfia_level: string | null
-          summary_bio: string | null
-          task_coverage_pct: number | null
-        }
-        Insert: {
-          agent_code?: string | null
-          delivery_model?: string | null
-          final_cost?: number | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          partner_match_confidence?: number | null
-          persona?: string | null
-          preferred_partners?: string | null
-          sfia_level?: string | null
-          summary_bio?: string | null
-          task_coverage_pct?: number | null
-        }
-        Update: {
-          agent_code?: string | null
-          delivery_model?: string | null
-          final_cost?: number | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          partner_match_confidence?: number | null
-          persona?: string | null
-          preferred_partners?: string | null
-          sfia_level?: string | null
-          summary_bio?: string | null
-          task_coverage_pct?: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Org change agents": {
         Row: {
-          agent_code: string | null
-          aps_band: string | null
-          aps_role: string | null
-          complexity: string | null
-          match_percentage: string | null
-          required_skills: string | null
-          required_tasks: string | null
-        }
-        Insert: {
-          agent_code?: string | null
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          match_percentage?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
-        }
-        Update: {
-          agent_code?: string | null
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          match_percentage?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       partner_ecosystem_view: {
         Row: {
-          avg_deal_size: number | null
-          certifications: string | null
-          description: string | null
-          joint_win_count: number | null
-          logo_url: string | null
-          partner_name: string | null
-          partner_tier: string | null
-          partner_type: string | null
-          source_table: string | null
-        }
-        Insert: {
-          avg_deal_size?: number | null
-          certifications?: string | null
-          description?: string | null
-          joint_win_count?: number | null
-          logo_url?: string | null
-          partner_name?: string | null
-          partner_tier?: string | null
-          partner_type?: string | null
-          source_table?: never
-        }
-        Update: {
-          avg_deal_size?: number | null
-          certifications?: string | null
-          description?: string | null
-          joint_win_count?: number | null
-          logo_url?: string | null
-          partner_name?: string | null
-          partner_tier?: string | null
-          partner_type?: string | null
-          source_table?: never
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "PMO match": {
         Row: {
-          agent_code: string | null
-          aps_band: string | null
-          aps_role: string | null
-          complexity: string | null
-          match_percentage: string | null
-          required_skills: string | null
-          required_tasks: string | null
+          note: string | null
+          status: string | null
         }
-        Insert: {
-          agent_code?: string | null
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          match_percentage?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
-        }
-        Update: {
-          agent_code?: string | null
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          match_percentage?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
+        Relationships: []
+      }
+      quarterly_reports: {
+        Row: {
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "RFT Metrics Final": {
         Row: {
-          "Current Value": string | null
-          Data_Source: string | null
-          Default_Weight: number | null
-          Dimension: string | null
-          Labor_Model: string | null
-          Metric: string | null
-          Reason: string | null
-          Weight_Gov_Federal: number | null
-          Weight_Gov_State: number | null
-          Weight_Nonprofit: number | null
-          Weight_Private_Enterprise: number | null
-          Weight_SMB: number | null
-          WhyItMatters: string | null
-        }
-        Insert: {
-          "Current Value"?: string | null
-          Data_Source?: string | null
-          Default_Weight?: number | null
-          Dimension?: string | null
-          Labor_Model?: string | null
-          Metric?: string | null
-          Reason?: string | null
-          Weight_Gov_Federal?: number | null
-          Weight_Gov_State?: number | null
-          Weight_Nonprofit?: number | null
-          Weight_Private_Enterprise?: number | null
-          Weight_SMB?: number | null
-          WhyItMatters?: string | null
-        }
-        Update: {
-          "Current Value"?: string | null
-          Data_Source?: string | null
-          Default_Weight?: number | null
-          Dimension?: string | null
-          Labor_Model?: string | null
-          Metric?: string | null
-          Reason?: string | null
-          Weight_Gov_Federal?: number | null
-          Weight_Gov_State?: number | null
-          Weight_Nonprofit?: number | null
-          Weight_Private_Enterprise?: number | null
-          Weight_SMB?: number | null
-          WhyItMatters?: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       roi_team_summaries: {
         Row: {
-          assessments_count: number | null
-          organization_id: string | null
-          roi_percentage: number | null
-          team_id: string | null
-          team_name: string | null
-          total_annual_cost: number | null
-          total_estimated_savings: number | null
+          note: string | null
+          status: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "roi_teams_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "roi_organizations"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       role_instance: {
         Row: {
@@ -32674,114 +35920,52 @@ export type Database = {
       }
       rpt_combined: {
         Row: {
-          category: string | null
-          created_at: string | null
-          description: string | null
-          frequency: string | null
-          id: string | null
-          name: string | null
-          slack_message: string | null
-          source_type: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       scan_combined: {
         Row: {
-          category: string | null
-          created_at: string | null
-          description: string | null
-          frequency: string | null
-          id: string | null
-          name: string | null
-          source_type: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Skills Metrics": {
         Row: {
-          agent_count: number | null
-          associated_functions: string | null
-          avg_agent_price: number | null
-          avg_auto_cost: number | null
-          avg_human_cost: number | null
-          avg_popularity_score: string | null
-          avg_trust_score: number | null
-          cost_ratio_agent_to_auto: number | null
-          cost_savings_pct: number | null
-          coverage_pct: number | null
-          function_count: number | null
-          skill: string | null
-          skill_value_score: number | null
-        }
-        Insert: {
-          agent_count?: number | null
-          associated_functions?: string | null
-          avg_agent_price?: number | null
-          avg_auto_cost?: number | null
-          avg_human_cost?: number | null
-          avg_popularity_score?: string | null
-          avg_trust_score?: number | null
-          cost_ratio_agent_to_auto?: number | null
-          cost_savings_pct?: number | null
-          coverage_pct?: number | null
-          function_count?: number | null
-          skill?: string | null
-          skill_value_score?: number | null
-        }
-        Update: {
-          agent_count?: number | null
-          associated_functions?: string | null
-          avg_agent_price?: number | null
-          avg_auto_cost?: number | null
-          avg_human_cost?: number | null
-          avg_popularity_score?: string | null
-          avg_trust_score?: number | null
-          cost_ratio_agent_to_auto?: number | null
-          cost_savings_pct?: number | null
-          coverage_pct?: number | null
-          function_count?: number | null
-          skill?: string | null
-          skill_value_score?: number | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       "Skills Roles Tasks": {
         Row: {
-          aps_band: string | null
-          aps_role: string | null
-          complexity: string | null
-          required_skills: string | null
-          required_tasks: string | null
-        }
-        Insert: {
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
-        }
-        Update: {
-          aps_band?: string | null
-          aps_role?: string | null
-          complexity?: string | null
-          required_skills?: string | null
-          required_tasks?: string | null
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
       user_consent_analytics: {
         Row: {
-          active_consents: number | null
-          first_consent_date: string | null
-          last_activity_date: string | null
-          pending_consents: number | null
-          total_consents: number | null
-          user_id: string | null
+          note: string | null
+          status: string | null
+        }
+        Relationships: []
+      }
+      weekly_reports: {
+        Row: {
+          note: string | null
+          status: string | null
         }
         Relationships: []
       }
     }
     Functions: {
+      anonymize_user_data: {
+        Args: { p_user_id: string }
+        Returns: Json
+      }
       binary_quantize: {
         Args: { "": string } | { "": unknown }
         Returns: unknown
@@ -32799,44 +35983,9 @@ export type Database = {
         }
         Returns: string
       }
-      calculate_excess_capacity_value: {
+      can_access_analytics_views: {
         Args: Record<PropertyKey, never>
-        Returns: {
-          annual_revenue_opportunity: number
-          potential_weekly_revenue: number
-          top_available_functions: string[]
-          total_excess_hours: number
-        }[]
-      }
-      calculate_performance_metrics: {
-        Args: { consultant_uuid: string; end_date: string; start_date: string }
-        Returns: {
-          activity_count: number
-          avg_cycle_days: number
-          avg_deal_size: number
-          total_opps: number
-          total_value: number
-          win_rate: number
-          won_opps: number
-          won_value: number
-        }[]
-      }
-      calculate_total_hourly_cost: {
-        Args: {
-          p_country_code: string
-          p_has_certifications?: boolean
-          p_has_security_clearance?: boolean
-          p_sfia_level: number
-          p_skills?: string[]
-          p_target_currency?: string
-        }
-        Returns: {
-          base_rate_local: number
-          base_rate_usd: number
-          cost_breakdown: Json
-          purchasing_power_equivalent: number
-          total_cost_usd: number
-        }[]
+        Returns: boolean
       }
       check_migration_tables: {
         Args: Record<PropertyKey, never>
@@ -32847,7 +35996,19 @@ export type Database = {
           table_name: string
         }[]
       }
-      create_weekly_project_review_reminders: {
+      cleanup_old_rate_limit_logs: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      cleanup_old_security_events: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      delete_bci_contact_data: {
+        Args: { contact_email: string }
+        Returns: boolean
+      }
+      delete_expired_wearable_data: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
@@ -32859,32 +36020,17 @@ export type Database = {
         Args: { scope: string }
         Returns: undefined
       }
-      exec_sql: {
-        Args: { sql: string }
-        Returns: undefined
-      }
-      generate_agent_variation: {
-        Args: {
-          cost_multiplier?: number
-          delivery_model_param: string
-          parent_agent_code_param: string
-          sfia_level_param?: string
-          variation_name_param: string
-        }
-        Returns: Json
-      }
-      generate_function_cluster_bundles: {
+      execute_data_retention_cleanup: {
         Args: Record<PropertyKey, never>
         Returns: {
-          agent_codes: string[]
-          cluster_name: string
-          estimated_cost: number
-          synergy_score: number
+          execution_time_ms: number
+          records_deleted: number
+          table_name: string
         }[]
       }
-      generate_market_insights: {
+      generate_application_number: {
         Args: Record<PropertyKey, never>
-        Returns: number
+        Returns: string
       }
       generate_partner_slug: {
         Args: { name: string }
@@ -32894,34 +36040,9 @@ export type Database = {
         Args: { p_schema_name: string }
         Returns: Json
       }
-      get_agent_variations_count: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          augmented_count: number
-          automated_count: number
-          human_count: number
-          total_count: number
-          unique_parent_agents: number
-        }[]
-      }
-      get_agent_with_variations: {
-        Args: { agent_code_param: string }
-        Returns: {
-          agent_details: Json
-          variations: Json
-        }[]
-      }
-      get_ecosystem_overview: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          avg_deal_size: number
-          certified_partners: number
-          enterprise_partners: number
-          strategic_partners: number
-          total_joint_wins: number
-          total_partners: number
-          total_value: number
-        }[]
+      get_bci_contact_data: {
+        Args: { contact_email: string }
+        Returns: Json
       }
       get_expiring_certifications: {
         Args: { user_id: string }
@@ -32953,30 +36074,9 @@ export type Database = {
           Value_Delivered: string
         }[]
       }
-      get_merged_ecosystem_partner: {
-        Args: { entity_name_param: string }
-        Returns: {
-          avg_deal_size: number
-          category: string
-          certifications: string
-          description: string
-          entity_name: string
-          joint_win_count: number
-          logo_url: string
-          partner_tier: string
-        }[]
-      }
       get_primary_tenant_for_user: {
         Args: { user_id: string }
         Returns: string
-      }
-      get_stage_recommendations: {
-        Args: { current_revenue: number }
-        Returns: {
-          recommended_adjustments: Json
-          stage_description: string
-          stage_name: string
-        }[]
       }
       get_tenant_for_host: {
         Args: { p_host: string }
@@ -33017,6 +36117,10 @@ export type Database = {
       get_user_organization_ids: {
         Args: Record<PropertyKey, never>
         Returns: string[]
+      }
+      get_user_role: {
+        Args: { p_user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"]
       }
       get_work_packages_global_audit: {
         Args: Record<PropertyKey, never>
@@ -33211,6 +36315,14 @@ export type Database = {
           up_count: number
         }[]
       }
+      increment_resource_clicks: {
+        Args: { resource_id: string }
+        Returns: undefined
+      }
+      increment_resource_views: {
+        Args: { resource_id: string }
+        Returns: undefined
+      }
       initialize_user_training_progress: {
         Args: { p_user_id: string }
         Returns: undefined
@@ -33219,7 +36331,7 @@ export type Database = {
         Args: { email: string }
         Returns: boolean
       }
-      is_license_valid: {
+      is_org_admin_safe: {
         Args: { org_id: string }
         Returns: boolean
       }
@@ -33249,7 +36361,7 @@ export type Database = {
       }
       l2_normalize: {
         Args: { "": string } | { "": unknown } | { "": unknown }
-        Returns: string
+        Returns: unknown
       }
       migrate_partner_data: {
         Args: Record<PropertyKey, never>
@@ -33264,10 +36376,6 @@ export type Database = {
           success: boolean
         }[]
       }
-      next_monday_9am: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
       normalize_host: {
         Args: { host_input: string }
         Returns: string
@@ -33276,13 +36384,9 @@ export type Database = {
         Args: { msg: string }
         Returns: undefined
       }
-      populate_excess_capacity_marketplace: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      refresh_automation_analytics: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
+      process_user_deletion: {
+        Args: { p_user_id: string }
+        Returns: Json
       }
       refresh_book_appendices: {
         Args: Record<PropertyKey, never>
@@ -33313,20 +36417,35 @@ export type Database = {
           metadata: Json
         }[]
       }
-      save_compensation_with_stage: {
+      search_bci_matrix: {
         Args: {
-          p_compensation_data: Json
-          p_compensation_results: Json
-          p_current_revenue: number
-          p_session_name?: string
-          p_total_compensation: number
-          p_user_id: string
+          p_dual_use_only?: boolean
+          p_export_controlled_only?: boolean
+          p_industry?: string
+          p_lens?: string
+          p_limit?: number
+          p_min_companies?: number
+          p_min_readiness?: number
+          p_min_trl?: number
+          p_offset?: number
+          p_sub_bucket?: string
         }
-        Returns: string
-      }
-      seed_actual_projects: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
+        Returns: {
+          company_count: number
+          dual_use_flag: boolean
+          evidence_count: number
+          export_control: boolean
+          id: string
+          industry: string
+          intelligence_layers: Json
+          investment_flow: number
+          lens: string
+          market_readiness: number
+          risk_score: number
+          security_level: string
+          sub_bucket: string
+          trl_level: number
+        }[]
       }
       set_work_package_active: {
         Args: { p_active: boolean; p_id: string }
@@ -33442,14 +36561,6 @@ export type Database = {
         Args: { "": unknown[] }
         Returns: number
       }
-      sync_ses_conversations_status: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          last_sync_date: string
-          sync_needed: boolean
-          total_records: number
-        }[]
-      }
       track_tyre_by_serial: {
         Args: { tyre_serial_param: string }
         Returns: {
@@ -33463,10 +36574,6 @@ export type Database = {
           tyre_id: string
           tyre_serial: string
         }[]
-      }
-      update_comment_like_count: {
-        Args: { comment_id: string }
-        Returns: undefined
       }
       update_vignette_featured_status: {
         Args: Record<PropertyKey, never>
@@ -33512,7 +36619,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "analyst" | "executive"
       assignment_status: "pending" | "in_progress" | "completed" | "overdue"
       calculation_stage:
         | "draft"
@@ -33534,6 +36641,13 @@ export type Database = {
       content_status: "scaffold" | "seeded" | "complete"
       ladder_tier: "bronze" | "silver" | "gold" | "platinum" | "elite"
       metric_type: "numeric" | "text" | "boolean" | "date"
+      quote_request_status:
+        | "new"
+        | "in_review"
+        | "quoted"
+        | "won"
+        | "lost"
+        | "cancelled"
       sales_stage:
         | "lead"
         | "qualification"
@@ -33670,7 +36784,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "analyst", "executive"],
       assignment_status: ["pending", "in_progress", "completed", "overdue"],
       calculation_stage: [
         "draft",
@@ -33694,6 +36808,14 @@ export const Constants = {
       content_status: ["scaffold", "seeded", "complete"],
       ladder_tier: ["bronze", "silver", "gold", "platinum", "elite"],
       metric_type: ["numeric", "text", "boolean", "date"],
+      quote_request_status: [
+        "new",
+        "in_review",
+        "quoted",
+        "won",
+        "lost",
+        "cancelled",
+      ],
       sales_stage: [
         "lead",
         "qualification",

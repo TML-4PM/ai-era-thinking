@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Brain, Lightbulb, Quote, Sparkles } from "lucide-react";
+import { BookOpen, Brain, Lightbulb, Quote, Sparkles, ExternalLink } from "lucide-react";
 import { ExpandedThinker, getExpandedThinker } from "@/data/expanded-thinkers";
 import { Thinker } from "@/data/thinkers";
 import { cn } from "@/lib/utils";
@@ -125,14 +125,25 @@ export const ThinkerCard: React.FC<ThinkerCardProps> = ({
               </div>
             )}
             
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="w-full btn-enhanced"
-              onClick={() => onExplore?.(thinker.name)}
-            >
-              Explore Deep Profile
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="flex-1 btn-enhanced"
+                onClick={() => onExplore?.(thinker.name)}
+              >
+                Explore Deep Profile
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="flex items-center gap-1"
+                onClick={() => window.open(`https://the-neural-research-hub.lovable.app/thinkers?search=${encodeURIComponent(thinker.name)}`, '_blank')}
+              >
+                <ExternalLink className="h-3 w-3" />
+                Research
+              </Button>
+            </div>
           </div>
         )}
       </CardContent>
