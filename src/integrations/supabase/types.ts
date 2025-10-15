@@ -30225,10 +30225,13 @@ export type Database = {
           created_at: string
           cross_era_relevance: Json
           id: string
+          last_research_sync: string | null
           lobe: string | null
           metadata: Json | null
           practical_applications: Json
+          publication_count: number | null
           related_thinkers: string[]
+          research_paper_ids: string[] | null
           thinker_name: string
           updated_at: string
           usage_prompts: Json
@@ -30240,10 +30243,13 @@ export type Database = {
           created_at?: string
           cross_era_relevance?: Json
           id?: string
+          last_research_sync?: string | null
           lobe?: string | null
           metadata?: Json | null
           practical_applications?: Json
+          publication_count?: number | null
           related_thinkers?: string[]
+          research_paper_ids?: string[] | null
           thinker_name: string
           updated_at?: string
           usage_prompts?: Json
@@ -30255,10 +30261,13 @@ export type Database = {
           created_at?: string
           cross_era_relevance?: Json
           id?: string
+          last_research_sync?: string | null
           lobe?: string | null
           metadata?: Json | null
           practical_applications?: Json
+          publication_count?: number | null
           related_thinkers?: string[]
+          research_paper_ids?: string[] | null
           thinker_name?: string
           updated_at?: string
           usage_prompts?: Json

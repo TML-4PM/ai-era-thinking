@@ -7,6 +7,7 @@ import { ExpandedThinker, getExpandedThinker } from "@/data/expanded-thinkers";
 import { Thinker } from "@/data/thinkers";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { useThinkerResearchStats } from "@/hooks/useThinkerResearch";
 
 interface ThinkerCardProps {
   thinker: Thinker;
@@ -22,6 +23,9 @@ export const ThinkerCard: React.FC<ThinkerCardProps> = ({
   const expanded = getExpandedThinker(thinker.name);
   const hasExpanded = !!expanded;
   const [hasDeepProfile, setHasDeepProfile] = useState<boolean | null>(null);
+  
+  // Fetch research stats for the thinker
+  const { data: researchStats } = useThinkerResearchStats(thinker.name);
 
   // Check for DB profile existence with session cache
   useEffect(() => {
@@ -84,6 +88,12 @@ export const ThinkerCard: React.FC<ThinkerCardProps> = ({
               <Badge className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0">
                 <Sparkles className="w-3 h-3 mr-1" />
                 Deep profile
+              </Badge>
+            )}
+            {researchStats && researchStats.paperCount > 0 && (
+              <Badge variant="outline" className="text-xs">
+                <BookOpen className="w-3 h-3 mr-1" />
+                {researchStats.paperCount} paper{researchStats.paperCount > 1 ? 's' : ''}
               </Badge>
             )}
             <Badge variant="secondary" className="flex items-center gap-1">

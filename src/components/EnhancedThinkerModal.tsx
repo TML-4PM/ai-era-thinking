@@ -23,7 +23,8 @@ import {
   Plus,
   Loader2,
   Heart,
-  HeartOff
+  HeartOff,
+  FileText
 } from "lucide-react";
 import { Thinker } from "@/data/thinkers";
 import { getExpandedThinker } from "@/data/expanded-thinkers";
@@ -35,6 +36,8 @@ import { userThinkerService } from "@/services/UserThinkerService";
 import { useToast } from "@/hooks/use-toast";
 import { UserThinker } from "@/types/UserThinker";
 import { supabase } from "@/integrations/supabase/client";
+import { useThinkerResearch, useAutoSyncThinkerResearch } from "@/hooks/useThinkerResearch";
+import { ResearchPaperCard } from "@/components/research/ResearchPaperCard";
 
 interface EnhancedThinkerModalProps {
   thinker: Thinker | (Thinker & { isUserCreated?: boolean; userThinkerData?: UserThinker }) | null;
@@ -66,6 +69,10 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
   const expandedThinker = getExpandedThinker(thinker.name);
   const isUserCreated = 'isUserCreated' in thinker && thinker.isUserCreated;
   const userThinkerData = 'userThinkerData' in thinker ? thinker.userThinkerData : null;
+
+  // Fetch research papers for this thinker
+  const { data: researchPapers = [], isLoading: isLoadingResearch } = useThinkerResearch(thinker.name);
+  const autoSyncMutation = useAutoSyncThinkerResearch();
 
   useEffect(() => {
     const loadEnhancedData = async () => {
@@ -401,7 +408,7 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-          <TabsList className="grid w-full grid-cols-6 h-auto">
+          <TabsList className="grid w-full grid-cols-7 h-auto">
             <TabsTrigger value="overview" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <BookOpen className="w-3 h-3" />
               <span className="hidden sm:inline">Overview</span>
@@ -422,6 +429,15 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
                 <span className="hidden sm:inline">Team Chat</span>
               </TabsTrigger>
             )}
+            <TabsTrigger value="research" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
+              <FileText className="w-3 h-3" />
+              <span className="hidden sm:inline">Research</span>
+              {researchPapers.length > 0 && (
+                <Badge variant="secondary" className="ml-1 text-xs px-1 py-0">
+                  {researchPapers.length}
+                </Badge>
+              )}
+            </TabsTrigger>
             <TabsTrigger value="applications" className="flex items-center gap-1 px-2 py-2 text-xs whitespace-nowrap">
               <Zap className="w-3 h-3" />
               <span className="hidden sm:inline">Author statements</span>
@@ -1011,6 +1027,68 @@ export const EnhancedThinkerModal: React.FC<EnhancedThinkerModalProps> = ({
                 )}
               </>
             )}
+          </TabsContent>
+
+          <TabsContent value="research" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-brand" />
+                  Published Research
+                  {autoSyncMutation.isPending && (
+                    <Loader2 className="w-4 h-4 animate-spin ml-auto" />
+                  )}
+                </CardTitle>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Papers authored or co-authored by {thinker.name}
+                </p>
+              </CardHeader>
+              <CardContent>
+                {isLoadingResearch ? (
+                  <div className="flex items-center justify-center py-8">
+                    <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+                  </div>
+                ) : researchPapers.length > 0 ? (
+                  <div className="space-y-3">
+                    {researchPapers.map((paper) => (
+                      <ResearchPaperCard
+                        key={paper.id}
+                        paper={paper}
+                        showBookLinks={true}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 space-y-4">
+                    <BookOpen className="w-12 h-12 mx-auto text-muted-foreground/50" />
+                    <div>
+                      <h3 className="font-medium">No Research Papers Found</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        No research papers have been discovered for this thinker yet
+                      </p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => autoSyncMutation.mutate(thinker.name)}
+                      disabled={autoSyncMutation.isPending}
+                    >
+                      {autoSyncMutation.isPending ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Discovering...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          Auto-discover Papers
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="bio" className="space-y-4">

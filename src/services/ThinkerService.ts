@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { EXPANDED_THINKERS, type ExpandedThinker } from "@/data/expanded-thinkers";
 import { THINKERS, type Thinker } from "@/data/thinkers";
 import { UserThinker } from "@/types/UserThinker";
+import { ThinkerResearchService } from "./ThinkerResearchService";
 
 export interface ThinkerProfile {
   id: string;
@@ -163,6 +164,10 @@ export class ThinkerService {
         return { success: false, error: error.message };
       }
 
+      // Auto-sync research papers after successful profile generation
+      console.log('🔄 Auto-syncing research for', thinkerName);
+      await ThinkerResearchService.syncThinkerProfile(thinkerName);
+
       return { success: true };
     } catch (err) {
       console.error('Profile generation failed:', err);
@@ -254,6 +259,10 @@ export class ThinkerService {
           console.error('Error updating profile with expansions:', updateError);
           return { success: false, error: 'Failed to save expansions' };
         }
+        
+        // Auto-sync research after framework expansions
+        console.log('🔄 Auto-syncing research after framework expansion for', thinkerName);
+        await ThinkerResearchService.syncThinkerProfile(thinkerName);
       }
 
       return { success: true, expansions: data?.expansions };
