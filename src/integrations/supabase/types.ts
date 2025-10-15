@@ -6783,6 +6783,53 @@ export type Database = {
           },
         ]
       }
+      book_research_links: {
+        Row: {
+          book_slug: string
+          context_note: string | null
+          created_at: string | null
+          exemplar_id: string | null
+          id: string
+          link_type: string | null
+          relevance_score: number | null
+          research_paper_id: string | null
+          section_slug: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          book_slug: string
+          context_note?: string | null
+          created_at?: string | null
+          exemplar_id?: string | null
+          id?: string
+          link_type?: string | null
+          relevance_score?: number | null
+          research_paper_id?: string | null
+          section_slug?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          book_slug?: string
+          context_note?: string | null
+          created_at?: string | null
+          exemplar_id?: string | null
+          id?: string
+          link_type?: string | null
+          relevance_score?: number | null
+          research_paper_id?: string | null
+          section_slug?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_research_links_research_paper_id_fkey"
+            columns: ["research_paper_id"]
+            isOneToOne: false
+            referencedRelation: "research_papers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       book_user_contributions: {
         Row: {
           author: string
@@ -23180,9 +23227,13 @@ export type Database = {
         Row: {
           abstract: string | null
           authors: string[] | null
+          book_exemplar_ids: string[] | null
+          book_sections: string[] | null
           created_at: string
           id: string
+          last_book_sync: string | null
           metadata: Json | null
+          practical_applications: string | null
           published_at: string | null
           source_id: string | null
           tags: string[] | null
@@ -23193,9 +23244,13 @@ export type Database = {
         Insert: {
           abstract?: string | null
           authors?: string[] | null
+          book_exemplar_ids?: string[] | null
+          book_sections?: string[] | null
           created_at?: string
           id?: string
+          last_book_sync?: string | null
           metadata?: Json | null
+          practical_applications?: string | null
           published_at?: string | null
           source_id?: string | null
           tags?: string[] | null
@@ -23206,9 +23261,13 @@ export type Database = {
         Update: {
           abstract?: string | null
           authors?: string[] | null
+          book_exemplar_ids?: string[] | null
+          book_sections?: string[] | null
           created_at?: string
           id?: string
+          last_book_sync?: string | null
           metadata?: Json | null
+          practical_applications?: string | null
           published_at?: string | null
           source_id?: string | null
           tags?: string[] | null

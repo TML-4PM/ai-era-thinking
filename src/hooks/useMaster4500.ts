@@ -30,6 +30,7 @@ export interface Master4500Record {
   related_frameworks?: string[];
   case_studies?: string[];
   notes?: string;
+  research_paper_ids?: string[];
   created_at: string;
   updated_at: string;
 }
