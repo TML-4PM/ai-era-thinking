@@ -9,6 +9,8 @@ import { Master4500Record } from '@/hooks/useMaster4500';
 import { EraMapping } from './EraMapping';
 import { RelatedLinks } from './RelatedLinks';
 import { ContributionForm } from './ContributionForm';
+import { ResearchAutoSync } from '@/components/research/ResearchAutoSync';
+import { ResearchBadge } from '@/components/research/ResearchBadge';
 import type { EraMapping as EraMapType } from '@/types/content';
 
 interface Master4500ExemplarCardProps {
@@ -66,6 +68,9 @@ export function Master4500ExemplarCard({ exemplar, bookSlug, showContributionFor
             <Badge className={getStatusColor(exemplar.status)}>
               {exemplar.status}
             </Badge>
+            {exemplar.research_paper_ids && (
+              <ResearchBadge count={exemplar.research_paper_ids.length} />
+            )}
           </div>
           
           {exemplar.description && (
@@ -174,6 +179,12 @@ export function Master4500ExemplarCard({ exemplar, bookSlug, showContributionFor
             </CollapsibleContent>
           </Collapsible>
         )}
+
+        {/* Research Auto-Discovery */}
+        <ResearchAutoSync 
+          exemplarId={exemplar.id}
+          exemplarTitle={exemplar.title}
+        />
 
         {/* Related Content */}
         <RelatedLinks 
