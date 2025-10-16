@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useParams, Link, useLocation, Outlet } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
+import { UPCOMING_BOOKS } from "@/data/upcoming-books";
+import { ComingSoonBookPage } from "@/components/ComingSoonBookPage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -21,6 +23,9 @@ const BookLayout = () => {
   const location = useLocation();
   const { data: books } = useBooks();
   const book = books?.find(book => book.slug === slug);
+  
+  // Check for upcoming books if not found in database
+  const upcomingBook = !book ? UPCOMING_BOOKS.find(b => b.slug === slug) : null;
 
   const calculateAverageProgress = (chapters: any[]) => {
     if (!chapters || chapters.length === 0) return 0;
@@ -35,6 +40,12 @@ const BookLayout = () => {
     return location.pathname.startsWith(path) && path !== `/books/${slug}`;
   };
 
+  // Show coming soon page if book is upcoming
+  if (upcomingBook) {
+    return <ComingSoonBookPage book={upcomingBook} />;
+  }
+
+  // Only show 404 if book is not found in either active or upcoming lists
   if (!book) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
