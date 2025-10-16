@@ -71,8 +71,8 @@ const BookLayout = () => {
               <div className="flex items-center gap-6">
                 <Link to="/" className="flex items-center gap-3">
                   <img 
-                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
-                    alt="Tech4Humanity logo" 
+                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp" 
+                    alt="AHC droid head logo"
                     className="h-12 w-12 rounded-lg object-contain" 
                   />
                   <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">

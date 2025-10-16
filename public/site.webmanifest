@@ -1,0 +1,19 @@
+{
+  "name": "Leaders Live Forever",
+  "short_name": "Leaders Live",
+  "icons": [
+    {
+      "src": "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ],
+  "theme_color": "#4f46e5",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
