@@ -11212,6 +11212,27 @@ export type Database = {
         }
         Relationships: []
       }
+      cv_master: {
+        Row: {
+          cv_text: string
+          id: string
+          last_updated: string | null
+          user_id: string | null
+        }
+        Insert: {
+          cv_text: string
+          id?: string
+          last_updated?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          cv_text?: string
+          id?: string
+          last_updated?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       cv_metric_definitions: {
         Row: {
           category: string | null
@@ -16279,6 +16300,48 @@ export type Database = {
           total_cost?: number
           updated_at?: string
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      job_descriptions: {
+        Row: {
+          company: string | null
+          cover_note: string | null
+          generated_cv: string | null
+          id: string
+          jd_text: string | null
+          parsed_at: string | null
+          parsed_keywords: string[] | null
+          region: string | null
+          role_title: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          company?: string | null
+          cover_note?: string | null
+          generated_cv?: string | null
+          id?: string
+          jd_text?: string | null
+          parsed_at?: string | null
+          parsed_keywords?: string[] | null
+          region?: string | null
+          role_title?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          company?: string | null
+          cover_note?: string | null
+          generated_cv?: string | null
+          id?: string
+          jd_text?: string | null
+          parsed_at?: string | null
+          parsed_keywords?: string[] | null
+          region?: string | null
+          role_title?: string | null
+          status?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -27877,6 +27940,42 @@ export type Database = {
         }
         Relationships: []
       }
+      skills_master: {
+        Row: {
+          group_name: string | null
+          id: string
+          last_updated: string | null
+          proof: string | null
+          skill_name: string
+          source: string | null
+          strength: number | null
+          trend: string | null
+          user_id: string | null
+        }
+        Insert: {
+          group_name?: string | null
+          id?: string
+          last_updated?: string | null
+          proof?: string | null
+          skill_name: string
+          source?: string | null
+          strength?: number | null
+          trend?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          group_name?: string | null
+          id?: string
+          last_updated?: string | null
+          proof?: string | null
+          skill_name?: string
+          source?: string | null
+          strength?: number | null
+          trend?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       slack_report_log: {
         Row: {
           id: string
@@ -35270,6 +35369,19 @@ export type Database = {
         Row: {
           note: string | null
           status: string | null
+        }
+        Relationships: []
+      }
+      skills_ranked: {
+        Row: {
+          frequency_score: number | null
+          group_name: string | null
+          jd_hits: number | null
+          skill_name: string | null
+          strength: number | null
+          trend: string | null
+          user_hits: number | null
+          user_id: string | null
         }
         Relationships: []
       }
