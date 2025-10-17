@@ -72,10 +72,7 @@ export const AdminExpandPage: React.FC = () => {
   const generateAllProfiles = async () => {
     const thinkersWithoutProfiles = enhancedThinkers.filter(t => !t.hasDeepProfile);
     if (thinkersWithoutProfiles.length === 0) {
-      toast({
-        title: "All Complete",
-        description: "All thinkers already have deep profiles",
-      });
+      addToLog("✓ All thinkers already have profiles - skipping phase");
       return;
     }
 
@@ -143,10 +140,7 @@ export const AdminExpandPage: React.FC = () => {
   const generateAllTeams = async () => {
     const thinkersWithoutTeams = enhancedThinkers.filter(t => !t.hasTeam);
     if (thinkersWithoutTeams.length === 0) {
-      toast({
-        title: "All Complete",
-        description: "All thinkers already have dream teams",
-      });
+      addToLog("✓ All thinkers already have teams - skipping phase");
       return;
     }
 
@@ -221,11 +215,7 @@ export const AdminExpandPage: React.FC = () => {
   const generateAllExpansions = async () => {
     const thinkersWithProfiles = enhancedThinkers.filter(t => t.hasDeepProfile);
     if (thinkersWithProfiles.length === 0) {
-      toast({
-        title: "No Profiles Found",
-        description: "Generate profiles first before creating expansions",
-        variant: "destructive"
-      });
+      addToLog("✓ No profiles available for expansions - skipping phase");
       return;
     }
 
