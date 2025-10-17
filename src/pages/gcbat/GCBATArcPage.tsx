@@ -46,7 +46,14 @@ export default function GCBATArcPage() {
   });
 
   if (!book || !arc) {
-    return <div>Arc not found</div>;
+    return (
+      <>
+        <Helmet>
+          <title>Arc Not Found</title>
+        </Helmet>
+        <div>Arc not found</div>
+      </>
+    );
   }
 
   const avgProgress = chapters?.length 
