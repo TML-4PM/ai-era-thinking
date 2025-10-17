@@ -15,7 +15,7 @@ export const FutureVolumesCard: React.FC<FutureVolumesCardProps> = ({ className 
   
   // Get 3 random upcoming books for preview
   const previewBooks = UPCOMING_BOOKS.slice(0, 3);
-  const totalUpcoming = 12; // Total planned volumes
+  const totalUpcoming = 12; // Total planned books
 
   return (
     <Card className={`group relative overflow-hidden border-2 border-dashed border-primary/30 hover:border-primary/60 transition-all duration-300 ${className}`}>
@@ -27,11 +27,11 @@ export const FutureVolumesCard: React.FC<FutureVolumesCardProps> = ({ className 
           <Sparkles className="w-8 h-8 text-primary-foreground" />
         </div>
         <Badge className="mx-auto mb-2 bg-gradient-to-r from-primary to-secondary text-primary-foreground">
-          {totalUpcoming}+ Volumes in Planning
+          {totalUpcoming}+ Books in Planning
         </Badge>
-        <h3 className="text-2xl font-bold">Future Volumes</h3>
+        <h3 className="text-2xl font-bold">Future Books</h3>
         <p className="text-sm text-muted-foreground mt-2">
-          Expanding the collection with additional volumes across multiple domains
+          Expanding the collection with additional books across multiple domains
         </p>
       </CardHeader>
       
@@ -61,13 +61,13 @@ export const FutureVolumesCard: React.FC<FutureVolumesCardProps> = ({ className 
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <span>Explore Future Volumes</span>
+            <span>Explore Future Books</span>
             <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
           </Button>
         </div>
 
         <p className="text-xs text-center text-muted-foreground pt-2">
-          New volumes are being planned and will be announced throughout 2025-2026
+          New books are being planned and will be announced throughout 2025-2026
         </p>
       </CardContent>
     </Card>

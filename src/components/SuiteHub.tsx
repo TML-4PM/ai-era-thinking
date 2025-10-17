@@ -28,7 +28,7 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
           <div className="flex items-center justify-center mb-4">
             <Book className="h-8 w-8 text-primary mr-3" />
             <Badge variant="secondary" className="text-sm">
-              {volumes.length} Volume Collection
+              {volumes.length}-Part Collection
             </Badge>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between mb-2">
                   <Badge variant="outline" className="text-xs">
-                    Vol. {index + 1}
+                    Part {index + 1}
                   </Badge>
                   <Badge 
                     variant={
@@ -123,7 +123,7 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
           <div className="bg-card rounded-lg p-8 border">
             <h3 className="text-xl font-semibold mb-4">Explore the Complete {suiteBook.title} Collection</h3>
             <p className="text-muted-foreground mb-6">
-              Each volume builds on the others to create a comprehensive exploration of {suiteBook.series_name?.toLowerCase()}.
+              Each section builds on the others to create a comprehensive exploration of {suiteBook.series_name?.toLowerCase()}.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button onClick={() => navigate('/books')} variant="outline">

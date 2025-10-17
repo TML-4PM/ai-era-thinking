@@ -11,7 +11,7 @@ const DEFAULT_BOOKS: Book[] = [
     title: "Tech for Humanity",
     subtitle: "Complete Collection",
     slug: "tech-for-humanity",
-    lead: "A comprehensive 15-volume exploration of technology's role in human flourishing.",
+    lead: "A comprehensive 15-part exploration of technology's role in human flourishing.",
     cover: "/assets/covers/tech-for-humanity-hub.jpg",
     series_name: "Tech for Humanity",
     collection: "Suite Hub",
@@ -25,7 +25,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A1",
     title: "Ethics & Consent",
-    subtitle: "Tech for Humanity Vol. 1",
+    subtitle: "Tech for Humanity Part 1",
     slug: "tech-for-humanity-ethics-consent",
     lead: "Foundational principles for ethical technology development and digital rights.",
     cover: "/assets/covers/tech-for-humanity-ethics-consent.jpg",
@@ -42,7 +42,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A2",
     title: "Governance & Policy", 
-    subtitle: "Tech for Humanity Vol. 2",
+    subtitle: "Tech for Humanity Part 2",
     slug: "tech-for-humanity-governance-policy",
     lead: "How institutions adapt to govern emerging technologies effectively.",
     cover: "/assets/covers/placeholder.jpg",
@@ -56,7 +56,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A3",
     title: "Education & Knowledge",
-    subtitle: "Tech for Humanity Vol. 3", 
+    subtitle: "Tech for Humanity Part 3", 
     slug: "tech-for-humanity-education-knowledge",
     lead: "Transforming education through technology for lifelong learning.",
     cover: "/assets/covers/placeholder.jpg",
@@ -70,7 +70,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A4",
     title: "Healthcare & Wellbeing",
-    subtitle: "Tech for Humanity Vol. 4",
+    subtitle: "Tech for Humanity Part 4",
     slug: "tech-for-humanity-healthcare-wellbeing",
     lead: "Technology's role in healthcare, wellness, and human systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -84,7 +84,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A5",
     title: "Work and Economy",
-    subtitle: "Tech for Humanity Vol. 5",
+    subtitle: "Tech for Humanity Part 5",
     slug: "workfamilyai",
     lead: "The future of work and economic systems in a technological age.",
     cover: "/assets/covers/workfamilyai.jpg",
@@ -104,7 +104,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A6",
     title: "Law, Policy, and Regulation", 
-    subtitle: "Tech for Humanity Vol. 6",
+    subtitle: "Tech for Humanity Part 6",
     slug: "law-policy-regulation",
     lead: "Legal frameworks and policy approaches for emerging technologies.",
     cover: "/assets/covers/placeholder.jpg",
@@ -118,7 +118,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A7", 
     title: "Security and Defence",
-    subtitle: "Tech for Humanity Vol. 7",
+    subtitle: "Tech for Humanity Part 7",
     slug: "security-defence",
     lead: "Technology's role in security, defense, and conflict resolution.",
     cover: "/assets/covers/placeholder.jpg",
@@ -132,7 +132,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A8",
     title: "Equity, Inclusion, and Justice",
-    subtitle: "Tech for Humanity Vol. 8", 
+    subtitle: "Tech for Humanity Part 8", 
     slug: "equity-inclusion-justice",
     lead: "Using technology to advance equity, inclusion, and social justice.",
     cover: "/assets/covers/placeholder.jpg",
@@ -146,7 +146,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A9",
     title: "Climate & Environment",
-    subtitle: "Tech for Humanity Vol. 9",
+    subtitle: "Tech for Humanity Part 9",
     slug: "tech-for-humanity-climate-environment",
     lead: "Technology solutions for environmental challenges and sustainability.",
     cover: "/assets/covers/placeholder.jpg",
@@ -160,7 +160,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A10",
     title: "Culture and Society",
-    subtitle: "Tech for Humanity Vol. 10",
+    subtitle: "Tech for Humanity Part 10",
     slug: "culture-society",
     lead: "Technology's impact on culture, social structures, and human relationships.",
     cover: "/assets/covers/placeholder.jpg",
@@ -174,7 +174,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A11", 
     title: "Cities and Infrastructure",
-    subtitle: "Tech for Humanity Vol. 11",
+    subtitle: "Tech for Humanity Part 11",
     slug: "cities-infrastructure",
     lead: "Smart cities, infrastructure, and urban technology systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -188,7 +188,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A12",
     title: "Business and Industry", 
-    subtitle: "Tech for Humanity Vol. 12",
+    subtitle: "Tech for Humanity Part 12",
     slug: "business-industry",
     lead: "Technology transformation in business and industrial sectors.",
     cover: "/assets/covers/placeholder.jpg",
@@ -202,7 +202,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A13",
     title: "Innovation and Foresight",
-    subtitle: "Tech for Humanity Vol. 13",
+    subtitle: "Tech for Humanity Part 13",
     slug: "innovation-foresight",
     lead: "Innovation systems and strategic foresight for emerging technologies.",
     cover: "/assets/covers/placeholder.jpg",
@@ -216,7 +216,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A14",
     title: "Energy and Resources",
-    subtitle: "Tech for Humanity Vol. 14",
+    subtitle: "Tech for Humanity Part 14",
     slug: "energy-resources",
     lead: "Technology solutions for energy systems and resource management.",
     cover: "/assets/covers/placeholder.jpg",
@@ -230,7 +230,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "A15",
     title: "Philosophy and Meaning",
-    subtitle: "Tech for Humanity Vol. 15",
+    subtitle: "Tech for Humanity Part 15",
     slug: "philosophy-meaning",
     lead: "Philosophical implications of technology and questions of meaning.",
     cover: "/assets/covers/placeholder.jpg",
@@ -251,7 +251,7 @@ const DEFAULT_BOOKS: Book[] = [
     lead: "A comprehensive guide to time-aware planning across families, teams, and cities.",
     cover: "/assets/covers/time-tree.jpg",
     series_name: "Entangled Time",
-    collection: "Single Volume",
+    collection: "Single Book",
     status: "in_progress",
     owner: "TBA",
     due_date: "2026-01-15", 
@@ -273,7 +273,7 @@ const DEFAULT_BOOKS: Book[] = [
     title: "The Thinking Engine",
     subtitle: "Complete Collection",
     slug: "thinking-engine",
-    lead: "A 15-volume exploration of cognitive systems, decision-making, and intelligent design.",
+    lead: "A 15-part exploration of cognitive systems, decision-making, and intelligent design.",
     cover: "/assets/covers/thinking-engine-hub.jpg",
     series_name: "The Thinking Engine", 
     collection: "Suite Hub",
@@ -287,7 +287,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C1",
     title: "Roles: Humans in the Machine",
-    subtitle: "The Thinking Engine Vol. 1",
+    subtitle: "The Thinking Engine Part 1",
     slug: "roles-humans-in-machine",
     lead: "How human roles evolve in increasingly automated systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -301,7 +301,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C2",
     title: "Frameworks: Patterns of Action", 
-    subtitle: "The Thinking Engine Vol. 2",
+    subtitle: "The Thinking Engine Part 2",
     slug: "frameworks",
     lead: "Decision-making frameworks and action patterns for complex systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -315,7 +315,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C3",
     title: "Thinkers: Brains That Shaped Brains",
-    subtitle: "The Thinking Engine Vol. 3",
+    subtitle: "The Thinking Engine Part 3",
     slug: "thinkers-brains-that-shaped-brains",
     lead: "Influential minds who shaped our understanding of intelligence and decision-making.",
     cover: "/assets/covers/placeholder.jpg",
@@ -329,7 +329,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C4",
     title: "Institutions: Guardians & Gatekeepers",
-    subtitle: "The Thinking Engine Vol. 4",
+    subtitle: "The Thinking Engine Part 4",
     slug: "institutions-guardians-gatekeepers",
     lead: "How institutions shape and are shaped by technological systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -343,7 +343,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C5",
     title: "Technologies: The New Nervous System",
-    subtitle: "The Thinking Engine Vol. 5",
+    subtitle: "The Thinking Engine Part 5",
     slug: "technologies-nervous-system",
     lead: "How technology functions as society's nervous system.",
     cover: "/assets/covers/placeholder.jpg",
@@ -357,7 +357,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C6",
     title: "Doctrines: Strategy Under Signal",
-    subtitle: "The Thinking Engine Vol. 6",
+    subtitle: "The Thinking Engine Part 6",
     slug: "doctrines-strategy-signal",
     lead: "Strategic doctrines for operating in high-signal environments.",
     cover: "/assets/covers/placeholder.jpg",
@@ -371,7 +371,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C7",
     title: "Disciplines: Fields Under Pressure",
-    subtitle: "The Thinking Engine Vol. 7",
+    subtitle: "The Thinking Engine Part 7",
     slug: "disciplines-fields-pressure",
     lead: "How academic and professional disciplines adapt to technological pressure.",
     cover: "/assets/covers/placeholder.jpg",
@@ -385,7 +385,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C8",
     title: "Cultures: Ways of Working",
-    subtitle: "The Thinking Engine Vol. 8",
+    subtitle: "The Thinking Engine Part 8",
     slug: "cultures-ways-working", 
     lead: "Organizational cultures and their relationship to technological adoption.",
     cover: "/assets/covers/placeholder.jpg",
@@ -399,7 +399,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C9", 
     title: "Products: Tangible Anchors",
-    subtitle: "The Thinking Engine Vol. 9",
+    subtitle: "The Thinking Engine Part 9",
     slug: "products-tangible-anchors",
     lead: "How products serve as anchors for abstract technological concepts.",
     cover: "/assets/covers/placeholder.jpg",
@@ -413,7 +413,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C10",
     title: "Eras: Time as Canvas",
-    subtitle: "The Thinking Engine Vol. 10",
+    subtitle: "The Thinking Engine Part 10",
     slug: "eras-time-canvas",
     lead: "Historical eras and temporal patterns in technological development.",
     cover: "/assets/covers/placeholder.jpg",
@@ -427,7 +427,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C11",
     title: "Principles: Guardrails & Values",
-    subtitle: "The Thinking Engine Vol. 11",
+    subtitle: "The Thinking Engine Part 11",
     slug: "principles-guardrails-values",
     lead: "Core principles and values that guide technological development.",
     cover: "/assets/covers/placeholder.jpg",
@@ -441,7 +441,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C12", 
     title: "Organizations: Winners & Losers",
-    subtitle: "The Thinking Engine Vol. 12",
+    subtitle: "The Thinking Engine Part 12",
     slug: "organizations-winners-losers",
     lead: "Organizational dynamics in technological transformation.",
     cover: "/assets/covers/placeholder.jpg",
@@ -455,7 +455,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C13",
     title: "Environment: Non-human Stakeholders",
-    subtitle: "The Thinking Engine Vol. 13",
+    subtitle: "The Thinking Engine Part 13",
     slug: "environment-nonhuman-stakeholders",
     lead: "The role of non-human stakeholders in technological systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -469,7 +469,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C14",
     title: "Energy & Forces: Invisible Drivers", 
-    subtitle: "The Thinking Engine Vol. 14",
+    subtitle: "The Thinking Engine Part 14",
     slug: "energy-forces-invisible-drivers",
     lead: "Invisible forces and energy systems that drive technological change.",
     cover: "/assets/covers/placeholder.jpg",
@@ -483,7 +483,7 @@ const DEFAULT_BOOKS: Book[] = [
   {
     id: "C15",
     title: "Unstructured: Wildcards",
-    subtitle: "The Thinking Engine Vol. 15", 
+    subtitle: "The Thinking Engine Part 15", 
     slug: "unstructured-wildcards",
     lead: "Unstructured elements and wildcard scenarios in complex systems.",
     cover: "/assets/covers/placeholder.jpg",
@@ -595,17 +595,25 @@ export function useBooks() {
         // Merge: Supabase books take priority, static books fill gaps
         const mergedBooks: Book[] = [];
         const usedSlugs = new Set<string>();
+        
+        // Create staticMap for quick lookups
+        const staticMap = new Map(staticBooks.map(b => [b.slug, b]));
 
-        // Add Supabase books first
+        // Add Supabase books first with fallback to static data
         if (supabaseBooks) {
           supabaseBooks.forEach(book => {
+            const staticRef = staticMap.get(book.slug);
+            const supaCover = (book.cover_url || '').trim();
+            const looksPlaceholder = !supaCover || supaCover.includes('placeholder');
+            const finalCover = !looksPlaceholder && supaCover ? supaCover : (staticRef?.cover || supaCover);
+            
             mergedBooks.push({
               id: book.id,
               slug: book.slug,
               title: book.title,
-              subtitle: book.subtitle,
-              lead: book.lead_description || "",
-              cover: safeCover(book.cover_url),
+              subtitle: book.subtitle || staticRef?.subtitle,
+              lead: (book.lead_description?.trim() || staticRef?.lead || ""),
+              cover: safeCover(finalCover),
               series_name: book.series_name,
               collection: book.collection,
               status: book.status,

@@ -15,13 +15,13 @@ export const UPCOMING_BOOKS: UpcomingBook[] = [
     slug: "tech-for-humanity",
     title: "Tech for Humanity",
     subtitle: "Complete Collection",
-    lead: "A comprehensive 15-volume exploration of technology's role in human flourishing across ethics, governance, healthcare, education, and environmental stewardship.",
+    lead: "A comprehensive 15-part exploration of technology's role in human flourishing across ethics, governance, healthcare, education, and environmental stewardship.",
     cover: "/assets/covers/tech-for-humanity-hub.jpg",
     series_name: "Tech for Humanity",
     status: "coming_soon",
     expectedDate: "2025 Q2",
     teaserPoints: [
-      "15 interconnected volumes exploring AI ethics, digital rights, and regenerative systems",
+      "15 interconnected parts exploring AI ethics, digital rights, and regenerative systems",
       "Community-driven insights from diverse perspectives and domains",
       "Practical frameworks for aligning technology with human values"
     ]

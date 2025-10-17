@@ -237,13 +237,13 @@ export default function BookOverview() {
                                       className="w-full"
                                     >
                                       <BookOpen className="w-4 h-4 mr-2" />
-                                      Explore Volume
+                                      Explore Section
                                     </Button>
                                   )}
                                   {volume.status === 'scaffold' && (
                                     <div className="bg-muted/50 rounded-lg p-3 text-center">
                                       <p className="text-xs text-muted-foreground">
-                                        Volume framework ready - awaiting development
+                                        Section framework ready - awaiting development
                                       </p>
                                     </div>
                                   )}

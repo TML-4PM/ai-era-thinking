@@ -180,7 +180,7 @@ const BookResources = () => {
         <ContentLoader bookSlug={slug!}>
           {({ content }) => {
             const volumes = content?.volumes || [];
-            const seededVolumes = volumes.filter(v => v.status === 'seeded');
+            const seededSections = volumes.filter(v => v.status === 'seeded');
 
             return (
               <section className="mb-12">
@@ -188,15 +188,15 @@ const BookResources = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <BookOpen className="w-5 h-5" />
-                      Seeded Chapters
+                      Seeded Sections
                     </CardTitle>
                     <CardDescription>
-                      {seededVolumes.length} chapters with complete content available
+                      {seededSections.length} sections with complete content available
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="grid gap-4 md:grid-cols-2">
-                      {seededVolumes.map((volume) => (
+                      {seededSections.map((volume) => (
                         <a 
                           key={volume.id}
                           href={`/books/${slug}/sections/${volume.slug}`}
@@ -393,7 +393,7 @@ const BookResources = () => {
                 <h3 className="font-semibold mb-3">Related Books</h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• Explore other books in the {book.series_name} series</li>
-                  <li>• Cross-reference concepts across different volumes</li>
+                  <li>• Cross-reference concepts across different books</li>
                   <li>• Build comprehensive understanding</li>
                 </ul>
               </div>

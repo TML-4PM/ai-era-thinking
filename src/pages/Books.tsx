@@ -64,13 +64,13 @@ const Books: React.FC = () => {
     premierSlugs
   );
   
-  // Core Volumes - Essential explorations
+  // Core Books - Essential explorations
   const coreBooks = sortByOrder(
     books?.filter(book => coreSlugs.includes(book.slug)) || [],
     coreSlugs
   );
   
-  // Development Volumes - Everything else
+  // Development Books - Everything else
   const developmentBooks = books?.filter(book => 
     !premierSlugs.includes(book.slug) && 
     !coreSlugs.includes(book.slug)
@@ -327,7 +327,7 @@ const Books: React.FC = () => {
           {!isLoading && coreBooks.length > 0 && (
             <div className="mb-16">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">Core Volumes</h2>
+                <h2 className="text-3xl font-bold mb-2">Core Books</h2>
                 <p className="text-muted-foreground">
                   Essential explorations of emerging topics
                 </p>
@@ -472,7 +472,7 @@ const Books: React.FC = () => {
           {!isLoading && developmentBooks.length > 0 && (
             <div className="mb-16">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">Development Volumes</h2>
+                <h2 className="text-3xl font-bold mb-2">In Development</h2>
                 <p className="text-muted-foreground">
                   Works in active development and expansion
                 </p>

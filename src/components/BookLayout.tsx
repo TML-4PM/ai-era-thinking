@@ -253,7 +253,7 @@ const BookLayout = () => {
                         className="whitespace-nowrap"
                       >
                         <FileText className="w-4 h-4 mr-2" />
-                        {book.collection === "Suite Hub" ? "Volumes" : "Chapters"}
+                        {book.collection === "Suite Hub" ? "Sections" : "Chapters"}
                       </Button>
                     </Link>
                   )}
