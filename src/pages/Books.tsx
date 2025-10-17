@@ -75,6 +75,8 @@ const Books: React.FC = () => {
       case 'tech-for-humanity':
         return 'Seeded 5/15 volumes • Ethics & Consent, Governance & Policy, Education & Knowledge, Healthcare & Wellbeing, Climate & Environment';
       case 'entangled-time':
+        return 'Temporal intelligence exploration • Foresight, narrative, and speculative futures';
+      case 'eras-time-canvas':
         return '3 clusters seeded • Past Systems, Cloud Native & Mobile First, Generative AI Era';
       case 'thinking-engine':
         return 'Sections seeded • Roles, Frameworks, Thinkers';
