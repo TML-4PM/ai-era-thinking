@@ -267,6 +267,84 @@ const DEFAULT_BOOKS: Book[] = [
     ]
   },
 
+  // B2: Living Stack - Cognitive Reef Architecture
+  {
+    id: "B2",
+    title: "Living Stack",
+    subtitle: "A Cognitive Reef Architecture for Signal-Driven Systems",
+    slug: "living-stack",
+    lead: "A 10,000-word thesis documenting the Living Stack ecosystem—where tasks are treated as signals, roles mutate in real-time, and recovery mechanisms ensure continuity across human-machine collaboration.",
+    cover: "/assets/covers/placeholder.jpg",
+    series_name: "Living Stack",
+    collection: "Single Book",
+    status: "draft",
+    owner: "TBA",
+    due_date: "2026-03-01",
+    ready_flag: false,
+    chapters: [
+      { 
+        title: "Introduction: The Coordination Problem", 
+        sections: ["Task vs Intent", "Nature as Blueprint", "Cognitive Orchestration"], 
+        progress: 15, 
+        chapter_order: 1 
+      },
+      { 
+        title: "Literature & System Review", 
+        sections: ["Biological Analogies", "Cognitive Theory", "Current Systems"], 
+        progress: 10, 
+        chapter_order: 2 
+      },
+      { 
+        title: "Conceptual Foundation", 
+        sections: ["Cognitive Reef Model", "Key Principles", "Natural Mappings"], 
+        progress: 20, 
+        chapter_order: 3 
+      },
+      { 
+        title: "Existing Components", 
+        sections: ["RATPAK", "NEUROPAK", "HoloOrg", "MyNeuralSignal", "ConsentX"], 
+        progress: 25, 
+        chapter_order: 4 
+      },
+      { 
+        title: "Novel Contributions", 
+        sections: ["Task-as-Signal", "Recovery Tokens", "Role Mutation", "Drift Detection"], 
+        progress: 5, 
+        chapter_order: 5 
+      },
+      { 
+        title: "Integration Architecture", 
+        sections: ["Layer Mapping", "Internal Flows", "External Connections"], 
+        progress: 0, 
+        chapter_order: 6 
+      },
+      { 
+        title: "Monetisable Applications", 
+        sections: ["Consulting", "AI Services", "Coaching", "Enterprise", "SaaS", "ROI Metrics"], 
+        progress: 0, 
+        chapter_order: 7 
+      },
+      { 
+        title: "Partner Ecosystem", 
+        sections: ["BCI Hardware", "AI Providers", "UI/UX Partners", "Data Platforms"], 
+        progress: 0, 
+        chapter_order: 8 
+      },
+      { 
+        title: "Implementation Roadmap", 
+        sections: ["Current Build", "MVP Ecosystem", "Phased Rollout", "R&D Goals"], 
+        progress: 0, 
+        chapter_order: 9 
+      },
+      { 
+        title: "Conclusion", 
+        sections: ["Novelty Restatement", "Implications", "Deployment Path"], 
+        progress: 0, 
+        chapter_order: 10 
+      }
+    ]
+  },
+
   // C: The Thinking Engine - Suite Hub 
   {
     id: "C",
@@ -283,7 +361,7 @@ const DEFAULT_BOOKS: Book[] = [
     chapters: []
   },
 
-  // C1-C15: The Thinking Engine Volumes
+  // C1-C15: The Thinking Engine Volumes (Reordered per 15-Book Series PDF)
   {
     id: "C1",
     title: "Roles: Humans in the Machine",
@@ -296,7 +374,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA", 
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Leaders", sections: ["CEO", "CIO", "CTO", "CFO"], progress: 0, chapter_order: 1 },
+      { title: "Strategists", sections: ["Enterprise Architect", "Portfolio Manager", "Innovation Lead"], progress: 0, chapter_order: 2 },
+      { title: "Planners", sections: ["Project Manager", "Product Owner", "Scrum Master"], progress: 0, chapter_order: 3 },
+      { title: "Analysts", sections: ["Business Analyst", "Data Analyst", "Change Analyst"], progress: 0, chapter_order: 4 },
+      { title: "Builders", sections: ["Developers", "Engineers", "Cloud Architects"], progress: 0, chapter_order: 5 },
+      { title: "Guardians", sections: ["CISO", "Auditor", "Risk Manager"], progress: 0, chapter_order: 6 },
+      { title: "Operators", sections: ["Service Desk", "SRE", "Ops Manager"], progress: 0, chapter_order: 7 },
+      { title: "People & Culture", sections: ["HR", "L&D", "Coaches"], progress: 0, chapter_order: 8 },
+      { title: "Market-facing", sections: ["Sales", "Marketing", "CX", "Support"], progress: 0, chapter_order: 9 },
+      { title: "Civic & Citizen Roles", sections: ["Policymakers", "Regulators", "Patients"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C2",
@@ -310,7 +399,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Decision Loops", sections: ["OODA", "Cynefin", "S-Curve"], progress: 0, chapter_order: 1 },
+      { title: "Change & Adoption", sections: ["Kotter", "ADKAR", "Diffusion"], progress: 0, chapter_order: 2 },
+      { title: "Service & Ops", sections: ["ITIL", "SIAM", "COBIT"], progress: 0, chapter_order: 3 },
+      { title: "Architecture & Governance", sections: ["TOGAF", "IT4IT", "ISO 38500"], progress: 0, chapter_order: 4 },
+      { title: "Quality & Improvement", sections: ["Lean", "Six Sigma", "TQM"], progress: 0, chapter_order: 5 },
+      { title: "Strategy Tools", sections: ["Porter", "BCG", "Ansoff"], progress: 0, chapter_order: 6 },
+      { title: "Innovation Lenses", sections: ["Blue Ocean", "Disruption", "Horizon"], progress: 0, chapter_order: 7 },
+      { title: "Ethics & Accountability", sections: ["Belmont", "FAT ML", "OECD AI"], progress: 0, chapter_order: 8 },
+      { title: "Systems & Ecology", sections: ["Panarchy", "Resilience", "Viable Systems"], progress: 0, chapter_order: 9 },
+      { title: "Learning & Adaptation", sections: ["Learning Health System", "Continuous Learning"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C3",
@@ -324,7 +424,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Behavioural Economics", sections: ["Kahneman", "Tversky", "Thaler", "Sunstein"], progress: 0, chapter_order: 1 },
+      { title: "Complexity & Risk", sections: ["Taleb", "Holland", "Bar-Yam"], progress: 0, chapter_order: 2 },
+      { title: "Cybernetics & Systems", sections: ["Wiener", "Ashby", "Beer"], progress: 0, chapter_order: 3 },
+      { title: "Feminist & Posthuman", sections: ["Haraway", "Braidotti", "Butler"], progress: 0, chapter_order: 4 },
+      { title: "Commons & Governance", sections: ["Ostrom", "Rawls", "Sen"], progress: 0, chapter_order: 5 },
+      { title: "Ecology & Environment", sections: ["Meadows", "Bateson", "Lovelock"], progress: 0, chapter_order: 6 },
+      { title: "Philosophy of Tech", sections: ["Heidegger", "Latour", "Foucault"], progress: 0, chapter_order: 7 },
+      { title: "Optimists", sections: ["Kurzweil", "Musk", "Tegmark"], progress: 0, chapter_order: 8 },
+      { title: "Skeptics", sections: ["Zuboff", "Carr", "Lanier"], progress: 0, chapter_order: 9 },
+      { title: "Bridge Builders", sections: ["Modern", "Interdisciplinary", "Voices"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C4",
@@ -338,7 +449,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft", 
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Universities", sections: ["Academia", "Research", "Teaching"], progress: 0, chapter_order: 1 },
+      { title: "Standards Bodies", sections: ["ISO", "IEEE", "W3C"], progress: 0, chapter_order: 2 },
+      { title: "Think Tanks", sections: ["Policy", "Research", "Advocacy"], progress: 0, chapter_order: 3 },
+      { title: "Professional Bodies", sections: ["Ethics", "Certification", "Regulation"], progress: 0, chapter_order: 4 },
+      { title: "Regulatory Agencies", sections: ["Government", "Oversight", "Enforcement"], progress: 0, chapter_order: 5 },
+      { title: "Industry Consortia", sections: ["Collaboration", "Innovation", "Standards"], progress: 0, chapter_order: 6 },
+      { title: "NGOs & Advocacy", sections: ["Rights", "Environment", "Ethics"], progress: 0, chapter_order: 7 },
+      { title: "Media & Publishing", sections: ["Journalism", "Books", "Communication"], progress: 0, chapter_order: 8 },
+      { title: "Foundations", sections: ["Funding", "Research", "Impact"], progress: 0, chapter_order: 9 },
+      { title: "International Bodies", sections: ["UN", "EU", "Global"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C5",
@@ -352,7 +474,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Cloud & Compute", sections: ["IaaS", "PaaS", "SaaS"], progress: 0, chapter_order: 1 },
+      { title: "Data & AI", sections: ["ML", "Neural Nets", "LLMs"], progress: 0, chapter_order: 2 },
+      { title: "Connectivity", sections: ["5G", "IoT", "Edge"], progress: 0, chapter_order: 3 },
+      { title: "Interfaces", sections: ["VR", "AR", "BCI"], progress: 0, chapter_order: 4 },
+      { title: "Blockchain & Crypto", sections: ["Distributed", "Trust", "Tokens"], progress: 0, chapter_order: 5 },
+      { title: "Robotics & Automation", sections: ["Physical", "Software", "Hybrid"], progress: 0, chapter_order: 6 },
+      { title: "Sensing & Monitoring", sections: ["Sensors", "Analytics", "Alerts"], progress: 0, chapter_order: 7 },
+      { title: "Synthetic Biology", sections: ["Gene", "Cell", "Organism"], progress: 0, chapter_order: 8 },
+      { title: "Quantum Computing", sections: ["Hardware", "Algorithms", "Applications"], progress: 0, chapter_order: 9 },
+      { title: "Nanotechnology", sections: ["Materials", "Medicine", "Manufacturing"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C6",
@@ -366,7 +499,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Wardley Mapping", sections: ["Evolution", "Landscape", "Movement"], progress: 0, chapter_order: 1 },
+      { title: "Agile Doctrine", sections: ["Principles", "Practices", "Culture"], progress: 0, chapter_order: 2 },
+      { title: "DevOps Philosophy", sections: ["CI/CD", "Culture", "Tools"], progress: 0, chapter_order: 3 },
+      { title: "Design Thinking", sections: ["Empathy", "Prototype", "Test"], progress: 0, chapter_order: 4 },
+      { title: "Lean Startup", sections: ["Build", "Measure", "Learn"], progress: 0, chapter_order: 5 },
+      { title: "Open Source", sections: ["Community", "Licensing", "Governance"], progress: 0, chapter_order: 6 },
+      { title: "Privacy by Design", sections: ["Principles", "Implementation", "Compliance"], progress: 0, chapter_order: 7 },
+      { title: "Security First", sections: ["Zero Trust", "Defense", "Response"], progress: 0, chapter_order: 8 },
+      { title: "Sustainability", sections: ["Green IT", "Circular", "Impact"], progress: 0, chapter_order: 9 },
+      { title: "Responsible AI", sections: ["Ethics", "Fairness", "Transparency"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C7",
@@ -380,13 +524,24 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Computer Science", sections: ["Theory", "Systems", "AI"], progress: 0, chapter_order: 1 },
+      { title: "Data Science", sections: ["Statistics", "ML", "Visualization"], progress: 0, chapter_order: 2 },
+      { title: "Cognitive Science", sections: ["Mind", "Brain", "Behavior"], progress: 0, chapter_order: 3 },
+      { title: "Neuroscience", sections: ["Neural", "Cognitive", "Computational"], progress: 0, chapter_order: 4 },
+      { title: "Psychology", sections: ["Human Factors", "Behavioral", "Social"], progress: 0, chapter_order: 5 },
+      { title: "Sociology", sections: ["Social Networks", "Culture", "Change"], progress: 0, chapter_order: 6 },
+      { title: "Economics", sections: ["Behavioral", "Digital", "Platform"], progress: 0, chapter_order: 7 },
+      { title: "Ethics & Philosophy", sections: ["Applied", "Tech", "Policy"], progress: 0, chapter_order: 8 },
+      { title: "Law", sections: ["Cyber", "IP", "Privacy"], progress: 0, chapter_order: 9 },
+      { title: "Systems Thinking", sections: ["Complexity", "Emergence", "Feedback"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C8",
     title: "Cultures: Ways of Working",
     subtitle: "The Thinking Engine Part 8",
-    slug: "cultures-ways-working", 
+    slug: "cultures-ways-working",
     lead: "Organizational cultures and their relationship to technological adoption.",
     cover: "/assets/covers/placeholder.jpg",
     series_name: "The Thinking Engine",
@@ -394,7 +549,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Startup Culture", sections: ["Speed", "Risk", "Innovation"], progress: 0, chapter_order: 1 },
+      { title: "Enterprise Culture", sections: ["Scale", "Process", "Stability"], progress: 0, chapter_order: 2 },
+      { title: "Academic Culture", sections: ["Rigor", "Peer Review", "Publishing"], progress: 0, chapter_order: 3 },
+      { title: "Government Culture", sections: ["Policy", "Public Service", "Accountability"], progress: 0, chapter_order: 4 },
+      { title: "Military Culture", sections: ["Command", "Mission", "Discipline"], progress: 0, chapter_order: 5 },
+      { title: "Healthcare Culture", sections: ["Care", "Evidence", "Safety"], progress: 0, chapter_order: 6 },
+      { title: "Creative Culture", sections: ["Experimentation", "Expression", "Iteration"], progress: 0, chapter_order: 7 },
+      { title: "Open Source Culture", sections: ["Collaboration", "Transparency", "Community"], progress: 0, chapter_order: 8 },
+      { title: "Indigenous Cultures", sections: ["Traditional", "Holistic", "Collective"], progress: 0, chapter_order: 9 },
+      { title: "Emerging Cultures", sections: ["Remote", "Gig", "DAO"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C9", 
@@ -408,7 +574,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "AI Assistants", sections: ["ChatGPT", "Claude", "Gemini"], progress: 0, chapter_order: 1 },
+      { title: "Development Tools", sections: ["GitHub", "VS Code", "Docker"], progress: 0, chapter_order: 2 },
+      { title: "Collaboration Platforms", sections: ["Slack", "Teams", "Notion"], progress: 0, chapter_order: 3 },
+      { title: "Cloud Services", sections: ["AWS", "Azure", "GCP"], progress: 0, chapter_order: 4 },
+      { title: "Consumer Devices", sections: ["iPhone", "Wearables", "Smart Home"], progress: 0, chapter_order: 5 },
+      { title: "Enterprise Software", sections: ["Salesforce", "SAP", "Oracle"], progress: 0, chapter_order: 6 },
+      { title: "Data Platforms", sections: ["Snowflake", "Databricks", "Tableau"], progress: 0, chapter_order: 7 },
+      { title: "Security Products", sections: ["Firewalls", "Zero Trust", "SIEM"], progress: 0, chapter_order: 8 },
+      { title: "Emerging Tech", sections: ["BCI", "AR/VR", "Quantum"], progress: 0, chapter_order: 9 },
+      { title: "Open Source Tools", sections: ["Linux", "Kubernetes", "TensorFlow"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C10",
@@ -422,7 +599,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Pre-Digital Era", sections: ["Analog", "Mechanical", "Industrial"], progress: 0, chapter_order: 1 },
+      { title: "Mainframe Era", sections: ["Centralized", "Batch", "Enterprise"], progress: 0, chapter_order: 2 },
+      { title: "PC Era", sections: ["Personal", "Desktop", "Productivity"], progress: 0, chapter_order: 3 },
+      { title: "Internet Era", sections: ["Connected", "Web", "Email"], progress: 0, chapter_order: 4 },
+      { title: "Mobile Era", sections: ["Smartphones", "Apps", "Always On"], progress: 0, chapter_order: 5 },
+      { title: "Cloud Era", sections: ["On-Demand", "Scalable", "Services"], progress: 0, chapter_order: 6 },
+      { title: "Social Era", sections: ["Networks", "Content", "Influence"], progress: 0, chapter_order: 7 },
+      { title: "Data Era", sections: ["Big Data", "Analytics", "Insights"], progress: 0, chapter_order: 8 },
+      { title: "AI Era", sections: ["Machine Learning", "Generative", "Autonomous"], progress: 0, chapter_order: 9 },
+      { title: "Future Eras", sections: ["Quantum", "BCI", "Singularity"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C11",
@@ -436,7 +624,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Human Dignity", sections: ["Respect", "Autonomy", "Rights"], progress: 0, chapter_order: 1 },
+      { title: "Fairness & Justice", sections: ["Equity", "Bias", "Access"], progress: 0, chapter_order: 2 },
+      { title: "Transparency", sections: ["Explainability", "Accountability", "Openness"], progress: 0, chapter_order: 3 },
+      { title: "Privacy", sections: ["Data Protection", "Consent", "Control"], progress: 0, chapter_order: 4 },
+      { title: "Safety & Security", sections: ["Risk Management", "Resilience", "Protection"], progress: 0, chapter_order: 5 },
+      { title: "Sustainability", sections: ["Environment", "Long-term", "Regenerative"], progress: 0, chapter_order: 6 },
+      { title: "Inclusivity", sections: ["Diversity", "Accessibility", "Participation"], progress: 0, chapter_order: 7 },
+      { title: "Beneficence", sections: ["Do Good", "Help", "Improve"], progress: 0, chapter_order: 8 },
+      { title: "Non-Maleficence", sections: ["Do No Harm", "Minimize Risk", "Prevent"], progress: 0, chapter_order: 9 },
+      { title: "Democratic Values", sections: ["Participation", "Representation", "Accountability"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C12", 
@@ -450,7 +649,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Tech Giants", sections: ["Google", "Microsoft", "Amazon", "Apple"], progress: 0, chapter_order: 1 },
+      { title: "AI Labs", sections: ["OpenAI", "Anthropic", "DeepMind"], progress: 0, chapter_order: 2 },
+      { title: "Legacy Enterprises", sections: ["Banks", "Telcos", "Manufacturers"], progress: 0, chapter_order: 3 },
+      { title: "Unicorn Startups", sections: ["Stripe", "Airbnb", "SpaceX"], progress: 0, chapter_order: 4 },
+      { title: "Research Institutions", sections: ["MIT", "Stanford", "CERN"], progress: 0, chapter_order: 5 },
+      { title: "Government Agencies", sections: ["DARPA", "NASA", "NIST"], progress: 0, chapter_order: 6 },
+      { title: "NGOs & Foundations", sections: ["Gates", "Mozilla", "EFF"], progress: 0, chapter_order: 7 },
+      { title: "Failed Companies", sections: ["Kodak", "Blockbuster", "Nokia"], progress: 0, chapter_order: 8 },
+      { title: "Emerging Players", sections: ["Web3", "BCI", "Quantum"], progress: 0, chapter_order: 9 },
+      { title: "Hidden Champions", sections: ["Bosch", "SAP", "ASML"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C13",
@@ -464,7 +674,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Biosphere", sections: ["Ecosystems", "Biodiversity", "Climate"], progress: 0, chapter_order: 1 },
+      { title: "Animals", sections: ["Wildlife", "Domesticated", "Rights"], progress: 0, chapter_order: 2 },
+      { title: "Plants & Forests", sections: ["Carbon Sinks", "Biodiversity", "Resources"], progress: 0, chapter_order: 3 },
+      { title: "Water Systems", sections: ["Oceans", "Rivers", "Aquifers"], progress: 0, chapter_order: 4 },
+      { title: "Atmosphere", sections: ["Air Quality", "Climate", "Ozone"], progress: 0, chapter_order: 5 },
+      { title: "Soil & Land", sections: ["Agriculture", "Degradation", "Restoration"], progress: 0, chapter_order: 6 },
+      { title: "Minerals & Resources", sections: ["Extraction", "Depletion", "Recycling"], progress: 0, chapter_order: 7 },
+      { title: "Future Generations", sections: ["Intergenerational", "Legacy", "Stewardship"], progress: 0, chapter_order: 8 },
+      { title: "AI Agents", sections: ["Autonomy", "Rights", "Coexistence"], progress: 0, chapter_order: 9 },
+      { title: "Planetary Boundaries", sections: ["Limits", "Thresholds", "Tipping Points"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C14",
@@ -478,7 +699,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Capital Flows", sections: ["VC", "Markets", "Investment"], progress: 0, chapter_order: 1 },
+      { title: "Power Dynamics", sections: ["Control", "Influence", "Leverage"], progress: 0, chapter_order: 2 },
+      { title: "Network Effects", sections: ["Metcalfe", "Winner-take-all", "Lock-in"], progress: 0, chapter_order: 3 },
+      { title: "Attention Economy", sections: ["Engagement", "Addiction", "Manipulation"], progress: 0, chapter_order: 4 },
+      { title: "Data Gravity", sections: ["Accumulation", "Centralization", "Value"], progress: 0, chapter_order: 5 },
+      { title: "Technical Debt", sections: ["Legacy", "Maintenance", "Refactoring"], progress: 0, chapter_order: 6 },
+      { title: "Regulatory Pressure", sections: ["Compliance", "Enforcement", "Lobbying"], progress: 0, chapter_order: 7 },
+      { title: "Social Movements", sections: ["Activism", "Protest", "Change"], progress: 0, chapter_order: 8 },
+      { title: "Cultural Zeitgeist", sections: ["Trends", "Memes", "Narratives"], progress: 0, chapter_order: 9 },
+      { title: "Existential Risks", sections: ["AI Safety", "Climate", "Catastrophe"], progress: 0, chapter_order: 10 }
+    ]
   },
   {
     id: "C15",
@@ -492,7 +724,18 @@ const DEFAULT_BOOKS: Book[] = [
     status: "draft",
     owner: "TBA",
     ready_flag: false,
-    chapters: []
+    chapters: [
+      { title: "Black Swans", sections: ["Rare Events", "High Impact", "Unpredictable"], progress: 0, chapter_order: 1 },
+      { title: "Emergent Behaviors", sections: ["Complexity", "Surprise", "Adaptation"], progress: 0, chapter_order: 2 },
+      { title: "Paradigm Shifts", sections: ["Revolutionary", "Disruptive", "Transformative"], progress: 0, chapter_order: 3 },
+      { title: "Serendipity", sections: ["Accidents", "Discovery", "Luck"], progress: 0, chapter_order: 4 },
+      { title: "Human Error", sections: ["Mistakes", "Failures", "Learning"], progress: 0, chapter_order: 5 },
+      { title: "Unintended Consequences", sections: ["Side Effects", "Ripple Effects", "Cascades"], progress: 0, chapter_order: 6 },
+      { title: "Edge Cases", sections: ["Outliers", "Exceptions", "Anomalies"], progress: 0, chapter_order: 7 },
+      { title: "Unknown Unknowns", sections: ["Rumsfeld", "Blindspots", "Discovery"], progress: 0, chapter_order: 8 },
+      { title: "Hybrid Forms", sections: ["Combinations", "Fusions", "Novel"], progress: 0, chapter_order: 9 },
+      { title: "User-Defined", sections: ["Custom", "Personalized", "Wildcard"], progress: 0, chapter_order: 10 }
+    ]
   },
 
   // D: Quantum Logic Systems - Single book with chapters

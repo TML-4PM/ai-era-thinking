@@ -47,7 +47,7 @@ const Books: React.FC = () => {
 
   // Three-tier organization
   const premierSlugs = ['tech-for-humanity', 'thinking-engine', 'gcbat-vignettes'];
-  const coreSlugs = ['workfamilyai', 'sovereign-systems', 'entangled-time'];
+  const coreSlugs = ['workfamilyai', 'sovereign-systems', 'entangled-time', 'living-stack'];
   
   // Sort books by predefined order
   const sortByOrder = (bookList: any[], order: string[]) => {
@@ -60,20 +60,27 @@ const Books: React.FC = () => {
 
   // Premier Collection - Top tier foundational works
   const premierBooks = sortByOrder(
-    books?.filter(book => premierSlugs.includes(book.slug)) || [],
+    books?.filter(book => 
+      premierSlugs.includes(book.slug) && 
+      !book.collection?.includes("Series")
+    ) || [],
     premierSlugs
   );
   
   // Core Books - Essential explorations
   const coreBooks = sortByOrder(
-    books?.filter(book => coreSlugs.includes(book.slug)) || [],
+    books?.filter(book => 
+      coreSlugs.includes(book.slug) && 
+      !book.collection?.includes("Series")
+    ) || [],
     coreSlugs
   );
   
-  // Development Books - Everything else
+  // Development Books - Everything else (exclude Part books)
   const developmentBooks = books?.filter(book => 
     !premierSlugs.includes(book.slug) && 
-    !coreSlugs.includes(book.slug)
+    !coreSlugs.includes(book.slug) &&
+    !book.collection?.includes("Series")
   ) || [];
   
   // Check if a book slug is "coming soon" (in UPCOMING_BOOKS but not in DB)
@@ -95,6 +102,8 @@ const Books: React.FC = () => {
         return 'Digital sovereignty exploration • Identity, autonomy, and control in the digital age';
       case 'entangled-time':
         return 'Temporal intelligence exploration • Foresight, narrative, and speculative futures';
+      case 'living-stack':
+        return 'Cognitive reef architecture • Signal-driven, role-adaptive human-machine systems';
       case 'eras-time-canvas':
         return '3 clusters seeded • Past Systems, Cloud Native & Mobile First, Generative AI Era';
       case 'quantum-logic-systems':

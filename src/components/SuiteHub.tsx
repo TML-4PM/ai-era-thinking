@@ -62,6 +62,14 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
               key={volume.id}
               className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] border-l-4 border-l-primary/20 hover:border-l-primary"
               onClick={() => handleVolumeClick(volume.slug)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleVolumeClick(volume.slug);
+                }
+              }}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between mb-2">

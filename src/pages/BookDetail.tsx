@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, BookOpen, Clock, Users } from "lucide-react";
 import { isPlaceholderParam } from "@/lib/route-guards";
+import { SuiteHub } from "@/components/SuiteHub";
 
 const BookDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -40,6 +41,16 @@ const BookDetail = () => {
   }
 
   const averageProgress = calculateAverageProgress(book.chapters || []);
+
+  // If this is a Suite Hub, render SuiteHub component instead
+  if (book.collection === "Suite Hub") {
+    const childParts = books?.filter(b => 
+      b.series_name === book.series_name && 
+      b.slug !== book.slug
+    ) || [];
+    
+    return <SuiteHub suiteBook={book} volumes={childParts} />;
+  }
 
   return (
     <>
