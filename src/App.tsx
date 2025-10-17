@@ -40,6 +40,10 @@ import BookLeadersLive from "./pages/book/BookLeadersLive";
 import BookAddGuru from "./pages/book/BookAddGuru";
 import BookResources from "./pages/book/BookResources";
 import SectionContent from "./pages/SectionContent";
+import GCBATLanding from "./pages/gcbat/GCBATLanding";
+import GCBATCharactersPage from "./pages/gcbat/GCBATCharactersPage";
+import GCBATMatrixPage from "./pages/gcbat/GCBATMatrixPage";
+import GCBATArcPage from "./pages/gcbat/GCBATArcPage";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -71,6 +75,14 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
               <Route path="/books/:bookSlug/sections/:sectionId" element={<SectionContent />} />
+              
+              {/* GCBAT Vignettes specific routes */}
+              <Route path="/books/gcbat-vignettes" element={<GCBATLanding />} />
+              <Route path="/books/gcbat-vignettes/characters" element={<GCBATCharactersPage />} />
+              <Route path="/books/gcbat-vignettes/matrix" element={<GCBATMatrixPage />} />
+              <Route path="/books/gcbat-vignettes/arc/:arcNumber" element={<GCBATArcPage />} />
+              
+              {/* General book routes */}
               <Route path="/books/:slug" element={<BookLayout />}>
                 <Route index element={<BookOverview />} />
                 <Route path="chapters" element={<BookChapters />} />

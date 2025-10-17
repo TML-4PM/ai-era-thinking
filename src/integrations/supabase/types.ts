@@ -2489,6 +2489,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_conversations: {
+        Row: {
+          context: Json | null
+          created_at: string | null
+          id: string
+          messages: Json
+          session_id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string | null
+          id?: string
+          messages?: Json
+          session_id: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string | null
+          id?: string
+          messages?: Json
+          session_id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       ai_leads: {
         Row: {
           company: string | null
@@ -2519,6 +2549,51 @@ export type Database = {
           name?: string | null
           source?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      ai_recommendations: {
+        Row: {
+          accepted: boolean | null
+          confidence_score: number | null
+          created_at: string | null
+          dismissed_at: string | null
+          id: string
+          item_id: string
+          item_title: string
+          reasoning: string | null
+          recommendation_type: string
+          source: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          accepted?: boolean | null
+          confidence_score?: number | null
+          created_at?: string | null
+          dismissed_at?: string | null
+          id?: string
+          item_id: string
+          item_title: string
+          reasoning?: string | null
+          recommendation_type: string
+          source?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          accepted?: boolean | null
+          confidence_score?: number | null
+          created_at?: string | null
+          dismissed_at?: string | null
+          id?: string
+          item_id?: string
+          item_title?: string
+          reasoning?: string | null
+          recommendation_type?: string
+          source?: string | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -3292,6 +3367,42 @@ export type Database = {
           domain?: string
           id?: string
           is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      analytics_aggregates: {
+        Row: {
+          created_at: string | null
+          dimension_key: string | null
+          dimension_value: string | null
+          id: string
+          metric_name: string
+          metric_value: number
+          period_end: string
+          period_start: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          dimension_key?: string | null
+          dimension_value?: string | null
+          id?: string
+          metric_name: string
+          metric_value: number
+          period_end: string
+          period_start: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          dimension_key?: string | null
+          dimension_value?: string | null
+          id?: string
+          metric_name?: string
+          metric_value?: number
+          period_end?: string
+          period_start?: string
           updated_at?: string | null
         }
         Relationships: []
@@ -4093,6 +4204,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          details: Json | null
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          is_suspicious: boolean | null
+          resource_id: string | null
+          resource_type: string
+          severity: string | null
+          user_agent: string | null
+          user_email: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          is_suspicious?: boolean | null
+          resource_id?: string | null
+          resource_type: string
+          severity?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          is_suspicious?: boolean | null
+          resource_id?: string | null
+          resource_type?: string
+          severity?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
       }
       audit_progress: {
         Row: {
@@ -14006,6 +14165,36 @@ export type Database = {
           },
         ]
       }
+      feature_usage: {
+        Row: {
+          created_at: string | null
+          feature_name: string
+          first_used_at: string | null
+          id: string
+          last_used_at: string | null
+          usage_count: number | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          feature_name: string
+          first_used_at?: string | null
+          id?: string
+          last_used_at?: string | null
+          usage_count?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          feature_name?: string
+          first_used_at?: string | null
+          id?: string
+          last_used_at?: string | null
+          usage_count?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       featureflags: {
         Row: {
           created_at: string | null
@@ -14540,6 +14729,89 @@ export type Database = {
           price_per_hour?: number | null
           pricing_tier?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      gcbat_character_appearances: {
+        Row: {
+          appearance_type: string | null
+          character_id: string
+          created_at: string | null
+          id: string
+          narrative_role: string | null
+          story_chapter_id: string
+        }
+        Insert: {
+          appearance_type?: string | null
+          character_id: string
+          created_at?: string | null
+          id?: string
+          narrative_role?: string | null
+          story_chapter_id: string
+        }
+        Update: {
+          appearance_type?: string | null
+          character_id?: string
+          created_at?: string | null
+          id?: string
+          narrative_role?: string | null
+          story_chapter_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gcbat_character_appearances_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "gcbat_characters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gcbat_characters: {
+        Row: {
+          appearance: string | null
+          background: string | null
+          character_arc: string | null
+          created_at: string | null
+          gcbat_unit_alignment: string | null
+          id: string
+          name: string
+          portrait_url: string | null
+          relationships: Json | null
+          role: string
+          slug: string
+          updated_at: string | null
+          voice_style: string | null
+        }
+        Insert: {
+          appearance?: string | null
+          background?: string | null
+          character_arc?: string | null
+          created_at?: string | null
+          gcbat_unit_alignment?: string | null
+          id?: string
+          name: string
+          portrait_url?: string | null
+          relationships?: Json | null
+          role: string
+          slug: string
+          updated_at?: string | null
+          voice_style?: string | null
+        }
+        Update: {
+          appearance?: string | null
+          background?: string | null
+          character_arc?: string | null
+          created_at?: string | null
+          gcbat_unit_alignment?: string | null
+          id?: string
+          name?: string
+          portrait_url?: string | null
+          relationships?: Json | null
+          role?: string
+          slug?: string
+          updated_at?: string | null
+          voice_style?: string | null
         }
         Relationships: []
       }
@@ -21336,64 +21608,88 @@ export type Database = {
       }
       platform_audit_results: {
         Row: {
+          asset_issues: number | null
           audit_date: string
+          audit_duration: number | null
           audit_status: string
+          audit_type: string | null
           average_load_time: number
           base_url: string
           business_critical_issues: number
+          console_errors: number | null
           created_at: string
           detailed_results: Json | null
           error_log: Json | null
+          git_commit: string | null
           health_score: number
           id: string
+          image_issues: number | null
           mobile_compatibility_score: number
           platform_name: string
+          playwright_results: Json | null
           recommendations: Json | null
           routes_failing: number
           routes_over_5s: number
           routes_working: number
           total_routes: number
           updated_at: string
+          visual_score: number | null
         }
         Insert: {
+          asset_issues?: number | null
           audit_date?: string
+          audit_duration?: number | null
           audit_status?: string
+          audit_type?: string | null
           average_load_time?: number
           base_url: string
           business_critical_issues?: number
+          console_errors?: number | null
           created_at?: string
           detailed_results?: Json | null
           error_log?: Json | null
+          git_commit?: string | null
           health_score?: number
           id?: string
+          image_issues?: number | null
           mobile_compatibility_score?: number
           platform_name?: string
+          playwright_results?: Json | null
           recommendations?: Json | null
           routes_failing?: number
           routes_over_5s?: number
           routes_working?: number
           total_routes?: number
           updated_at?: string
+          visual_score?: number | null
         }
         Update: {
+          asset_issues?: number | null
           audit_date?: string
+          audit_duration?: number | null
           audit_status?: string
+          audit_type?: string | null
           average_load_time?: number
           base_url?: string
           business_critical_issues?: number
+          console_errors?: number | null
           created_at?: string
           detailed_results?: Json | null
           error_log?: Json | null
+          git_commit?: string | null
           health_score?: number
           id?: string
+          image_issues?: number | null
           mobile_compatibility_score?: number
           platform_name?: string
+          playwright_results?: Json | null
           recommendations?: Json | null
           routes_failing?: number
           routes_over_5s?: number
           routes_working?: number
           total_routes?: number
           updated_at?: string
+          visual_score?: number | null
         }
         Relationships: []
       }
@@ -25185,13 +25481,6 @@ export type Database = {
             foreignKeyName: "role_aps_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_aps_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25214,13 +25503,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_autoscore_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: true
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_autoscore_role_code_fkey"
             columns: ["role_code"]
@@ -25269,13 +25551,6 @@ export type Database = {
             foreignKeyName: "role_certification_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_certification_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25298,13 +25573,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_clearance_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_clearance_role_code_fkey"
             columns: ["role_code"]
@@ -25413,13 +25681,6 @@ export type Database = {
             foreignKeyName: "role_education_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_education_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25442,13 +25703,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_experience_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_experience_role_code_fkey"
             columns: ["role_code"]
@@ -25479,13 +25733,6 @@ export type Database = {
             foreignKeyName: "role_hardskill_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_hardskill_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25508,13 +25755,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_industry_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_industry_role_code_fkey"
             columns: ["role_code"]
@@ -25601,13 +25841,6 @@ export type Database = {
             foreignKeyName: "role_language_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_language_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25661,13 +25894,6 @@ export type Database = {
             foreignKeyName: "role_orgsize_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_orgsize_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25690,13 +25916,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_process_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_process_role_code_fkey"
             columns: ["role_code"]
@@ -25727,13 +25946,6 @@ export type Database = {
             foreignKeyName: "role_region_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_region_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25756,13 +25968,6 @@ export type Database = {
           role_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_salaryband_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_salaryband_role_code_fkey"
             columns: ["role_code"]
@@ -25793,13 +25998,6 @@ export type Database = {
             foreignKeyName: "role_sector_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_sector_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25822,13 +26020,6 @@ export type Database = {
           skill_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_skill_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_skill_role_code_fkey"
             columns: ["role_code"]
@@ -25859,13 +26050,6 @@ export type Database = {
             foreignKeyName: "role_softskill_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_softskill_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -25888,13 +26072,6 @@ export type Database = {
           task_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_task_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_task_role_code_fkey"
             columns: ["role_code"]
@@ -25952,13 +26129,6 @@ export type Database = {
             foreignKeyName: "role_technology_role_code_fkey"
             columns: ["role_code"]
             isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
-          {
-            foreignKeyName: "role_technology_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
             referencedRelation: "role_master"
             referencedColumns: ["role_code"]
           },
@@ -26011,13 +26181,6 @@ export type Database = {
           workpattern_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "role_workpattern_role_code_fkey"
-            columns: ["role_code"]
-            isOneToOne: false
-            referencedRelation: "role_instance"
-            referencedColumns: ["role_code"]
-          },
           {
             foreignKeyName: "role_workpattern_role_code_fkey"
             columns: ["role_code"]
@@ -28278,6 +28441,60 @@ export type Database = {
           processed?: boolean | null
           project_requests?: number | null
           utilization_pct?: number
+        }
+        Relationships: []
+      }
+      stories: {
+        Row: {
+          consent_contact: boolean | null
+          consent_publish: boolean | null
+          created_at: string | null
+          email: string
+          id: string
+          image_url: string | null
+          is_anonymous: boolean | null
+          location: string | null
+          name: string
+          phone: string | null
+          status: string | null
+          story_content: string
+          story_title: string
+          story_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          consent_contact?: boolean | null
+          consent_publish?: boolean | null
+          created_at?: string | null
+          email: string
+          id?: string
+          image_url?: string | null
+          is_anonymous?: boolean | null
+          location?: string | null
+          name: string
+          phone?: string | null
+          status?: string | null
+          story_content: string
+          story_title: string
+          story_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          consent_contact?: boolean | null
+          consent_publish?: boolean | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          image_url?: string | null
+          is_anonymous?: boolean | null
+          location?: string | null
+          name?: string
+          phone?: string | null
+          status?: string | null
+          story_content?: string
+          story_title?: string
+          story_type?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -31830,6 +32047,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_journey_events: {
+        Row: {
+          created_at: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          page_path: string | null
+          referrer: string | null
+          session_id: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          page_path?: string | null
+          referrer?: string | null
+          session_id: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          page_path?: string | null
+          referrer?: string | null
+          session_id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_journey_profiles: {
         Row: {
           assessment_profile: Json
@@ -33283,6 +33533,36 @@ export type Database = {
         }
         Relationships: []
       }
+      voice_interactions: {
+        Row: {
+          action_taken: string | null
+          audio_duration_ms: number | null
+          created_at: string | null
+          id: string
+          intent: string | null
+          transcript: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action_taken?: string | null
+          audio_duration_ms?: number | null
+          created_at?: string | null
+          id?: string
+          intent?: string | null
+          transcript?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action_taken?: string | null
+          audio_duration_ms?: number | null
+          created_at?: string | null
+          id?: string
+          intent?: string | null
+          transcript?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       volumediscounts: {
         Row: {
           discount_id: string
@@ -34430,993 +34710,6 @@ export type Database = {
       }
     }
     Views: {
-      "10,000 agents": {
-        Row: {
-          action_type: string | null
-          "Agent Code": string | null
-          agent_code: string | null
-          aligned_roles: string | null
-          api_endpoint: string | null
-          aps_hourly_rate: string | null
-          attrition_risk_score: number | null
-          augmented_delivery_cost: string | null
-          auth_method: string | null
-          automated_delivery_cost: string | null
-          availability_calendar: string | null
-          average_feedback_rating: number | null
-          awards_received: string | null
-          backup_available: boolean | null
-          base_agent_cost: string | null
-          break_even_months: number | null
-          bundle_pairings: string | null
-          career_interest_tags: string | null
-          certification_count: string | null
-          certifications: string | null
-          certifications_expiry: string | null
-          change_overlay_cost: string | null
-          clearance_required: string | null
-          cluster_id: number | null
-          cognitive_aptitude_score: number | null
-          "Common Agent": string | null
-          complexity_score: number | null
-          compliance_gap_flag: boolean | null
-          compliance_margin: string | null
-          compliance_ready_tags: string | null
-          compliance_requirements: string | null
-          consultant_hourly_rate: string | null
-          contractor_hourly_rate: string | null
-          core_skills: string | null
-          cost_effectiveness_index: number | null
-          cross_functional_role_count: number | null
-          customer_csatscore: number | null
-          customer_nps: string | null
-          delivery_category: string | null
-          delivery_type: string | null
-          demographic_diversity_attributes: string | null
-          disc_profile: string | null
-          domain: string | null
-          domain_experience_years: string | null
-          domain_maturity_level: number | null
-          domain_trust_score: string | null
-          event_log_id: string | null
-          field_of_study: string | null
-          final_cost: string | null
-          fit_for_defence: string | null
-          fit_for_partner_solutions: string | null
-          function: string | null
-          github_reputation_score: number | null
-          growth_potential_score: number | null
-          highest_education_level: string | null
-          highlight_quote: string | null
-          human_cost_equiv: string | null
-          human_delivery_cost: string | null
-          human_effort_hours: string | null
-          incident_count: string | null
-          Industry: string | null
-          industry_fit: string | null
-          innovation_contribution_count: string | null
-          innovation_fit_index: number | null
-          input_rate: number | null
-          input_source: string | null
-          input_type: string | null
-          integration_status: string | null
-          job_title_matches: string | null
-          knowledge_domains: string | null
-          language_proficiencies: string | null
-          last_performance_review_date: string | null
-          last_project_end_date: string | null
-          last_training_date: string | null
-          last_updated: string | null
-          linkedin_endorsements_count: number | null
-          location: string | null
-          margin_history: Json | null
-          margin_pct: number | null
-          market_salary_benchmark: number | null
-          markup_model: string | null
-          max_parallel_roles: string | null
-          micro_role_fragments: string | null
-          "Monthly Cost": string | null
-          next_available_date: string | null
-          on_time_pct: number | null
-          "onet_skill_importance_<id>": number | null
-          "onet_work_style_<id>": string | null
-          output_rate: number | null
-          output_type: string | null
-          overall_match_score: number | null
-          performance_flag: string | null
-          performance_index: number | null
-          persona: string | null
-          personality_a: number | null
-          personality_c: number | null
-          personality_e: string | null
-          personality_n: number | null
-          personality_o: string | null
-          preferred_partners: string | null
-          pricing_model: string | null
-          Problem: string | null
-          project_bundle: string | null
-          project_count: number | null
-          project_success_rate: number | null
-          proposal_strength_score: string | null
-          quality_error_rate: number | null
-          recommended_configuration: string | null
-          region_unemployment_rate: number | null
-          regulatory_compliance_index: string | null
-          relocation_willingness: string | null
-          remote_capable: boolean | null
-          residual_capacity_pct: string | null
-          reuse_profile_type: string | null
-          rft_keywords_matched: string | null
-          risk_rating: string | null
-          ROI: string | null
-          role_group: string | null
-          role_substitution_rating: string | null
-          scaling_equivalence: string | null
-          schedule_flexibility: string | null
-          security_vulnerability_rating: string | null
-          "Setup Cost": string | null
-          sfia_category: string | null
-          sfia_level: string | null
-          SFIA_level: number | null
-          skill_breadth_index: number | null
-          "skill_proficiency_<skill>": number | null
-          sla_compliance_history: Json | null
-          sla_hours: number | null
-          standard_skill_tags: string | null
-          strategic_mobility_indicator: string | null
-          summary_bio: string | null
-          supplier_category: string | null
-          task_alignment_score: string | null
-          task_cluster_tags: string | null
-          task_coverage_pct: string | null
-          task_criticality_score: number | null
-          "Tech Stack": string | null
-          tech_maturity_level: string | null
-          tech_stack: string | null
-          timestamp: string | null
-          timezone: string | null
-          total_years_experience: number | null
-          training_status: string | null
-          travel_availability_pct: string | null
-          user_context: string | null
-          utilization_history: Json | null
-          utilization_pct: number | null
-          utilization_target_pct: number | null
-          value_to_cost_ratio: string | null
-          values_alignment_score: number | null
-          vendor_reliability_rating: number | null
-          work_style_flags: string | null
-          workforce_risk_index: number | null
-          years_in_domain: string | null
-        }
-        Insert: {
-          action_type?: string | null
-          "Agent Code"?: string | null
-          agent_code?: string | null
-          aligned_roles?: string | null
-          api_endpoint?: string | null
-          aps_hourly_rate?: string | null
-          attrition_risk_score?: number | null
-          augmented_delivery_cost?: string | null
-          auth_method?: string | null
-          automated_delivery_cost?: string | null
-          availability_calendar?: string | null
-          average_feedback_rating?: number | null
-          awards_received?: string | null
-          backup_available?: boolean | null
-          base_agent_cost?: string | null
-          break_even_months?: number | null
-          bundle_pairings?: string | null
-          career_interest_tags?: string | null
-          certification_count?: string | null
-          certifications?: string | null
-          certifications_expiry?: string | null
-          change_overlay_cost?: string | null
-          clearance_required?: string | null
-          cluster_id?: number | null
-          cognitive_aptitude_score?: number | null
-          "Common Agent"?: string | null
-          complexity_score?: number | null
-          compliance_gap_flag?: boolean | null
-          compliance_margin?: string | null
-          compliance_ready_tags?: string | null
-          compliance_requirements?: string | null
-          consultant_hourly_rate?: string | null
-          contractor_hourly_rate?: string | null
-          core_skills?: string | null
-          cost_effectiveness_index?: number | null
-          cross_functional_role_count?: number | null
-          customer_csatscore?: number | null
-          customer_nps?: string | null
-          delivery_category?: string | null
-          delivery_type?: string | null
-          demographic_diversity_attributes?: string | null
-          disc_profile?: string | null
-          domain?: string | null
-          domain_experience_years?: string | null
-          domain_maturity_level?: number | null
-          domain_trust_score?: string | null
-          event_log_id?: string | null
-          field_of_study?: string | null
-          final_cost?: string | null
-          fit_for_defence?: string | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          github_reputation_score?: number | null
-          growth_potential_score?: number | null
-          highest_education_level?: string | null
-          highlight_quote?: string | null
-          human_cost_equiv?: string | null
-          human_delivery_cost?: string | null
-          human_effort_hours?: string | null
-          incident_count?: string | null
-          Industry?: string | null
-          industry_fit?: string | null
-          innovation_contribution_count?: string | null
-          innovation_fit_index?: number | null
-          input_rate?: number | null
-          input_source?: string | null
-          input_type?: string | null
-          integration_status?: string | null
-          job_title_matches?: string | null
-          knowledge_domains?: string | null
-          language_proficiencies?: string | null
-          last_performance_review_date?: string | null
-          last_project_end_date?: string | null
-          last_training_date?: string | null
-          last_updated?: string | null
-          linkedin_endorsements_count?: number | null
-          location?: string | null
-          margin_history?: Json | null
-          margin_pct?: number | null
-          market_salary_benchmark?: number | null
-          markup_model?: string | null
-          max_parallel_roles?: string | null
-          micro_role_fragments?: string | null
-          "Monthly Cost"?: string | null
-          next_available_date?: string | null
-          on_time_pct?: number | null
-          "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: string | null
-          output_rate?: number | null
-          output_type?: string | null
-          overall_match_score?: number | null
-          performance_flag?: string | null
-          performance_index?: number | null
-          persona?: string | null
-          personality_a?: number | null
-          personality_c?: number | null
-          personality_e?: string | null
-          personality_n?: number | null
-          personality_o?: string | null
-          preferred_partners?: string | null
-          pricing_model?: string | null
-          Problem?: string | null
-          project_bundle?: string | null
-          project_count?: number | null
-          project_success_rate?: number | null
-          proposal_strength_score?: string | null
-          quality_error_rate?: number | null
-          recommended_configuration?: string | null
-          region_unemployment_rate?: number | null
-          regulatory_compliance_index?: string | null
-          relocation_willingness?: string | null
-          remote_capable?: boolean | null
-          residual_capacity_pct?: string | null
-          reuse_profile_type?: string | null
-          rft_keywords_matched?: string | null
-          risk_rating?: string | null
-          ROI?: string | null
-          role_group?: string | null
-          role_substitution_rating?: string | null
-          scaling_equivalence?: string | null
-          schedule_flexibility?: string | null
-          security_vulnerability_rating?: string | null
-          "Setup Cost"?: string | null
-          sfia_category?: string | null
-          sfia_level?: string | null
-          SFIA_level?: number | null
-          skill_breadth_index?: number | null
-          "skill_proficiency_<skill>"?: number | null
-          sla_compliance_history?: Json | null
-          sla_hours?: number | null
-          standard_skill_tags?: string | null
-          strategic_mobility_indicator?: string | null
-          summary_bio?: string | null
-          supplier_category?: string | null
-          task_alignment_score?: string | null
-          task_cluster_tags?: string | null
-          task_coverage_pct?: string | null
-          task_criticality_score?: number | null
-          "Tech Stack"?: string | null
-          tech_maturity_level?: string | null
-          tech_stack?: string | null
-          timestamp?: string | null
-          timezone?: string | null
-          total_years_experience?: number | null
-          training_status?: string | null
-          travel_availability_pct?: string | null
-          user_context?: string | null
-          utilization_history?: Json | null
-          utilization_pct?: number | null
-          utilization_target_pct?: number | null
-          value_to_cost_ratio?: string | null
-          values_alignment_score?: number | null
-          vendor_reliability_rating?: number | null
-          work_style_flags?: string | null
-          workforce_risk_index?: number | null
-          years_in_domain?: string | null
-        }
-        Update: {
-          action_type?: string | null
-          "Agent Code"?: string | null
-          agent_code?: string | null
-          aligned_roles?: string | null
-          api_endpoint?: string | null
-          aps_hourly_rate?: string | null
-          attrition_risk_score?: number | null
-          augmented_delivery_cost?: string | null
-          auth_method?: string | null
-          automated_delivery_cost?: string | null
-          availability_calendar?: string | null
-          average_feedback_rating?: number | null
-          awards_received?: string | null
-          backup_available?: boolean | null
-          base_agent_cost?: string | null
-          break_even_months?: number | null
-          bundle_pairings?: string | null
-          career_interest_tags?: string | null
-          certification_count?: string | null
-          certifications?: string | null
-          certifications_expiry?: string | null
-          change_overlay_cost?: string | null
-          clearance_required?: string | null
-          cluster_id?: number | null
-          cognitive_aptitude_score?: number | null
-          "Common Agent"?: string | null
-          complexity_score?: number | null
-          compliance_gap_flag?: boolean | null
-          compliance_margin?: string | null
-          compliance_ready_tags?: string | null
-          compliance_requirements?: string | null
-          consultant_hourly_rate?: string | null
-          contractor_hourly_rate?: string | null
-          core_skills?: string | null
-          cost_effectiveness_index?: number | null
-          cross_functional_role_count?: number | null
-          customer_csatscore?: number | null
-          customer_nps?: string | null
-          delivery_category?: string | null
-          delivery_type?: string | null
-          demographic_diversity_attributes?: string | null
-          disc_profile?: string | null
-          domain?: string | null
-          domain_experience_years?: string | null
-          domain_maturity_level?: number | null
-          domain_trust_score?: string | null
-          event_log_id?: string | null
-          field_of_study?: string | null
-          final_cost?: string | null
-          fit_for_defence?: string | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          github_reputation_score?: number | null
-          growth_potential_score?: number | null
-          highest_education_level?: string | null
-          highlight_quote?: string | null
-          human_cost_equiv?: string | null
-          human_delivery_cost?: string | null
-          human_effort_hours?: string | null
-          incident_count?: string | null
-          Industry?: string | null
-          industry_fit?: string | null
-          innovation_contribution_count?: string | null
-          innovation_fit_index?: number | null
-          input_rate?: number | null
-          input_source?: string | null
-          input_type?: string | null
-          integration_status?: string | null
-          job_title_matches?: string | null
-          knowledge_domains?: string | null
-          language_proficiencies?: string | null
-          last_performance_review_date?: string | null
-          last_project_end_date?: string | null
-          last_training_date?: string | null
-          last_updated?: string | null
-          linkedin_endorsements_count?: number | null
-          location?: string | null
-          margin_history?: Json | null
-          margin_pct?: number | null
-          market_salary_benchmark?: number | null
-          markup_model?: string | null
-          max_parallel_roles?: string | null
-          micro_role_fragments?: string | null
-          "Monthly Cost"?: string | null
-          next_available_date?: string | null
-          on_time_pct?: number | null
-          "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: string | null
-          output_rate?: number | null
-          output_type?: string | null
-          overall_match_score?: number | null
-          performance_flag?: string | null
-          performance_index?: number | null
-          persona?: string | null
-          personality_a?: number | null
-          personality_c?: number | null
-          personality_e?: string | null
-          personality_n?: number | null
-          personality_o?: string | null
-          preferred_partners?: string | null
-          pricing_model?: string | null
-          Problem?: string | null
-          project_bundle?: string | null
-          project_count?: number | null
-          project_success_rate?: number | null
-          proposal_strength_score?: string | null
-          quality_error_rate?: number | null
-          recommended_configuration?: string | null
-          region_unemployment_rate?: number | null
-          regulatory_compliance_index?: string | null
-          relocation_willingness?: string | null
-          remote_capable?: boolean | null
-          residual_capacity_pct?: string | null
-          reuse_profile_type?: string | null
-          rft_keywords_matched?: string | null
-          risk_rating?: string | null
-          ROI?: string | null
-          role_group?: string | null
-          role_substitution_rating?: string | null
-          scaling_equivalence?: string | null
-          schedule_flexibility?: string | null
-          security_vulnerability_rating?: string | null
-          "Setup Cost"?: string | null
-          sfia_category?: string | null
-          sfia_level?: string | null
-          SFIA_level?: number | null
-          skill_breadth_index?: number | null
-          "skill_proficiency_<skill>"?: number | null
-          sla_compliance_history?: Json | null
-          sla_hours?: number | null
-          standard_skill_tags?: string | null
-          strategic_mobility_indicator?: string | null
-          summary_bio?: string | null
-          supplier_category?: string | null
-          task_alignment_score?: string | null
-          task_cluster_tags?: string | null
-          task_coverage_pct?: string | null
-          task_criticality_score?: number | null
-          "Tech Stack"?: string | null
-          tech_maturity_level?: string | null
-          tech_stack?: string | null
-          timestamp?: string | null
-          timezone?: string | null
-          total_years_experience?: number | null
-          training_status?: string | null
-          travel_availability_pct?: string | null
-          user_context?: string | null
-          utilization_history?: Json | null
-          utilization_pct?: number | null
-          utilization_target_pct?: number | null
-          value_to_cost_ratio?: string | null
-          values_alignment_score?: number | null
-          vendor_reliability_rating?: number | null
-          work_style_flags?: string | null
-          workforce_risk_index?: number | null
-          years_in_domain?: string | null
-        }
-        Relationships: []
-      }
-      "10000 bigint": {
-        Row: {
-          action_type: string | null
-          "Agent Code": string | null
-          agent_code: string | null
-          aligned_roles: string | null
-          api_endpoint: string | null
-          aps_hourly_rate: string | null
-          attrition_risk_score: number | null
-          augmented_delivery_cost: string | null
-          auth_method: string | null
-          automated_delivery_cost: string | null
-          availability_calendar: string | null
-          average_feedback_rating: number | null
-          awards_received: string | null
-          backup_available: boolean | null
-          base_agent_cost: string | null
-          break_even_months: number | null
-          bundle_pairings: string | null
-          career_interest_tags: string | null
-          certification_count: string | null
-          certifications: string | null
-          certifications_expiry: string | null
-          change_overlay_cost: string | null
-          clearance_required: string | null
-          cluster_id: number | null
-          cognitive_aptitude_score: number | null
-          "Common Agent": string | null
-          complexity_score: number | null
-          compliance_gap_flag: boolean | null
-          compliance_margin: string | null
-          compliance_ready_tags: string | null
-          compliance_requirements: string | null
-          consultant_hourly_rate: string | null
-          contractor_hourly_rate: string | null
-          core_skills: string | null
-          cost_effectiveness_index: number | null
-          cross_functional_role_count: number | null
-          customer_csatscore: number | null
-          customer_nps: string | null
-          delivery_category: string | null
-          delivery_type: string | null
-          demographic_diversity_attributes: string | null
-          disc_profile: string | null
-          domain: string | null
-          domain_experience_years: string | null
-          domain_maturity_level: number | null
-          domain_trust_score: string | null
-          event_log_id: string | null
-          field_of_study: string | null
-          final_cost: string | null
-          fit_for_defence: string | null
-          fit_for_partner_solutions: string | null
-          function: string | null
-          github_reputation_score: number | null
-          growth_potential_score: number | null
-          highest_education_level: string | null
-          highlight_quote: string | null
-          human_cost_equiv: string | null
-          human_delivery_cost: string | null
-          human_effort_hours: string | null
-          incident_count: string | null
-          Industry: string | null
-          industry_fit: string | null
-          innovation_contribution_count: string | null
-          innovation_fit_index: number | null
-          input_rate: number | null
-          input_source: string | null
-          input_type: string | null
-          integration_status: string | null
-          job_title_matches: string | null
-          knowledge_domains: string | null
-          language_proficiencies: string | null
-          last_performance_review_date: string | null
-          last_project_end_date: string | null
-          last_training_date: string | null
-          last_updated: string | null
-          linkedin_endorsements_count: number | null
-          location: string | null
-          margin_history: Json | null
-          margin_pct: number | null
-          market_salary_benchmark: number | null
-          markup_model: string | null
-          max_parallel_roles: string | null
-          micro_role_fragments: string | null
-          "Monthly Cost": string | null
-          next_available_date: string | null
-          on_time_pct: number | null
-          "onet_skill_importance_<id>": number | null
-          "onet_work_style_<id>": string | null
-          output_rate: number | null
-          output_type: string | null
-          overall_match_score: number | null
-          performance_flag: string | null
-          performance_index: number | null
-          persona: string | null
-          personality_a: number | null
-          personality_c: number | null
-          personality_e: string | null
-          personality_n: number | null
-          personality_o: string | null
-          preferred_partners: string | null
-          pricing_model: string | null
-          Problem: string | null
-          project_bundle: string | null
-          project_count: number | null
-          project_success_rate: number | null
-          proposal_strength_score: string | null
-          quality_error_rate: number | null
-          recommended_configuration: string | null
-          region_unemployment_rate: number | null
-          regulatory_compliance_index: string | null
-          relocation_willingness: string | null
-          remote_capable: boolean | null
-          residual_capacity_pct: string | null
-          reuse_profile_type: string | null
-          rft_keywords_matched: string | null
-          risk_rating: string | null
-          ROI: string | null
-          role_group: string | null
-          role_substitution_rating: string | null
-          scaling_equivalence: string | null
-          schedule_flexibility: string | null
-          security_vulnerability_rating: string | null
-          "Setup Cost": string | null
-          sfia_category: string | null
-          sfia_level: string | null
-          SFIA_level: number | null
-          skill_breadth_index: number | null
-          "skill_proficiency_<skill>": number | null
-          sla_compliance_history: Json | null
-          sla_hours: number | null
-          standard_skill_tags: string | null
-          strategic_mobility_indicator: string | null
-          summary_bio: string | null
-          supplier_category: string | null
-          task_alignment_score: string | null
-          task_cluster_tags: string | null
-          task_coverage_pct: string | null
-          task_criticality_score: number | null
-          "Tech Stack": string | null
-          tech_maturity_level: string | null
-          tech_stack: string | null
-          timestamp: string | null
-          timezone: string | null
-          total_years_experience: number | null
-          training_status: string | null
-          travel_availability_pct: string | null
-          user_context: string | null
-          utilization_history: Json | null
-          utilization_pct: number | null
-          utilization_target_pct: number | null
-          value_to_cost_ratio: string | null
-          values_alignment_score: number | null
-          vendor_reliability_rating: number | null
-          work_style_flags: string | null
-          workforce_risk_index: number | null
-          years_in_domain: string | null
-        }
-        Insert: {
-          action_type?: string | null
-          "Agent Code"?: string | null
-          agent_code?: string | null
-          aligned_roles?: string | null
-          api_endpoint?: string | null
-          aps_hourly_rate?: string | null
-          attrition_risk_score?: number | null
-          augmented_delivery_cost?: string | null
-          auth_method?: string | null
-          automated_delivery_cost?: string | null
-          availability_calendar?: string | null
-          average_feedback_rating?: number | null
-          awards_received?: string | null
-          backup_available?: boolean | null
-          base_agent_cost?: string | null
-          break_even_months?: number | null
-          bundle_pairings?: string | null
-          career_interest_tags?: string | null
-          certification_count?: string | null
-          certifications?: string | null
-          certifications_expiry?: string | null
-          change_overlay_cost?: string | null
-          clearance_required?: string | null
-          cluster_id?: number | null
-          cognitive_aptitude_score?: number | null
-          "Common Agent"?: string | null
-          complexity_score?: number | null
-          compliance_gap_flag?: boolean | null
-          compliance_margin?: string | null
-          compliance_ready_tags?: string | null
-          compliance_requirements?: string | null
-          consultant_hourly_rate?: string | null
-          contractor_hourly_rate?: string | null
-          core_skills?: string | null
-          cost_effectiveness_index?: number | null
-          cross_functional_role_count?: number | null
-          customer_csatscore?: number | null
-          customer_nps?: string | null
-          delivery_category?: string | null
-          delivery_type?: string | null
-          demographic_diversity_attributes?: string | null
-          disc_profile?: string | null
-          domain?: string | null
-          domain_experience_years?: string | null
-          domain_maturity_level?: number | null
-          domain_trust_score?: string | null
-          event_log_id?: string | null
-          field_of_study?: string | null
-          final_cost?: string | null
-          fit_for_defence?: string | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          github_reputation_score?: number | null
-          growth_potential_score?: number | null
-          highest_education_level?: string | null
-          highlight_quote?: string | null
-          human_cost_equiv?: string | null
-          human_delivery_cost?: string | null
-          human_effort_hours?: string | null
-          incident_count?: string | null
-          Industry?: string | null
-          industry_fit?: string | null
-          innovation_contribution_count?: string | null
-          innovation_fit_index?: number | null
-          input_rate?: number | null
-          input_source?: string | null
-          input_type?: string | null
-          integration_status?: string | null
-          job_title_matches?: string | null
-          knowledge_domains?: string | null
-          language_proficiencies?: string | null
-          last_performance_review_date?: string | null
-          last_project_end_date?: string | null
-          last_training_date?: string | null
-          last_updated?: string | null
-          linkedin_endorsements_count?: number | null
-          location?: string | null
-          margin_history?: Json | null
-          margin_pct?: number | null
-          market_salary_benchmark?: number | null
-          markup_model?: string | null
-          max_parallel_roles?: string | null
-          micro_role_fragments?: string | null
-          "Monthly Cost"?: string | null
-          next_available_date?: string | null
-          on_time_pct?: number | null
-          "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: string | null
-          output_rate?: number | null
-          output_type?: string | null
-          overall_match_score?: number | null
-          performance_flag?: string | null
-          performance_index?: number | null
-          persona?: string | null
-          personality_a?: number | null
-          personality_c?: number | null
-          personality_e?: string | null
-          personality_n?: number | null
-          personality_o?: string | null
-          preferred_partners?: string | null
-          pricing_model?: string | null
-          Problem?: string | null
-          project_bundle?: string | null
-          project_count?: number | null
-          project_success_rate?: number | null
-          proposal_strength_score?: string | null
-          quality_error_rate?: number | null
-          recommended_configuration?: string | null
-          region_unemployment_rate?: number | null
-          regulatory_compliance_index?: string | null
-          relocation_willingness?: string | null
-          remote_capable?: boolean | null
-          residual_capacity_pct?: string | null
-          reuse_profile_type?: string | null
-          rft_keywords_matched?: string | null
-          risk_rating?: string | null
-          ROI?: string | null
-          role_group?: string | null
-          role_substitution_rating?: string | null
-          scaling_equivalence?: string | null
-          schedule_flexibility?: string | null
-          security_vulnerability_rating?: string | null
-          "Setup Cost"?: string | null
-          sfia_category?: string | null
-          sfia_level?: string | null
-          SFIA_level?: number | null
-          skill_breadth_index?: number | null
-          "skill_proficiency_<skill>"?: number | null
-          sla_compliance_history?: Json | null
-          sla_hours?: number | null
-          standard_skill_tags?: string | null
-          strategic_mobility_indicator?: string | null
-          summary_bio?: string | null
-          supplier_category?: string | null
-          task_alignment_score?: string | null
-          task_cluster_tags?: string | null
-          task_coverage_pct?: string | null
-          task_criticality_score?: number | null
-          "Tech Stack"?: string | null
-          tech_maturity_level?: string | null
-          tech_stack?: string | null
-          timestamp?: string | null
-          timezone?: string | null
-          total_years_experience?: number | null
-          training_status?: string | null
-          travel_availability_pct?: string | null
-          user_context?: string | null
-          utilization_history?: Json | null
-          utilization_pct?: number | null
-          utilization_target_pct?: number | null
-          value_to_cost_ratio?: string | null
-          values_alignment_score?: number | null
-          vendor_reliability_rating?: number | null
-          work_style_flags?: string | null
-          workforce_risk_index?: number | null
-          years_in_domain?: string | null
-        }
-        Update: {
-          action_type?: string | null
-          "Agent Code"?: string | null
-          agent_code?: string | null
-          aligned_roles?: string | null
-          api_endpoint?: string | null
-          aps_hourly_rate?: string | null
-          attrition_risk_score?: number | null
-          augmented_delivery_cost?: string | null
-          auth_method?: string | null
-          automated_delivery_cost?: string | null
-          availability_calendar?: string | null
-          average_feedback_rating?: number | null
-          awards_received?: string | null
-          backup_available?: boolean | null
-          base_agent_cost?: string | null
-          break_even_months?: number | null
-          bundle_pairings?: string | null
-          career_interest_tags?: string | null
-          certification_count?: string | null
-          certifications?: string | null
-          certifications_expiry?: string | null
-          change_overlay_cost?: string | null
-          clearance_required?: string | null
-          cluster_id?: number | null
-          cognitive_aptitude_score?: number | null
-          "Common Agent"?: string | null
-          complexity_score?: number | null
-          compliance_gap_flag?: boolean | null
-          compliance_margin?: string | null
-          compliance_ready_tags?: string | null
-          compliance_requirements?: string | null
-          consultant_hourly_rate?: string | null
-          contractor_hourly_rate?: string | null
-          core_skills?: string | null
-          cost_effectiveness_index?: number | null
-          cross_functional_role_count?: number | null
-          customer_csatscore?: number | null
-          customer_nps?: string | null
-          delivery_category?: string | null
-          delivery_type?: string | null
-          demographic_diversity_attributes?: string | null
-          disc_profile?: string | null
-          domain?: string | null
-          domain_experience_years?: string | null
-          domain_maturity_level?: number | null
-          domain_trust_score?: string | null
-          event_log_id?: string | null
-          field_of_study?: string | null
-          final_cost?: string | null
-          fit_for_defence?: string | null
-          fit_for_partner_solutions?: string | null
-          function?: string | null
-          github_reputation_score?: number | null
-          growth_potential_score?: number | null
-          highest_education_level?: string | null
-          highlight_quote?: string | null
-          human_cost_equiv?: string | null
-          human_delivery_cost?: string | null
-          human_effort_hours?: string | null
-          incident_count?: string | null
-          Industry?: string | null
-          industry_fit?: string | null
-          innovation_contribution_count?: string | null
-          innovation_fit_index?: number | null
-          input_rate?: number | null
-          input_source?: string | null
-          input_type?: string | null
-          integration_status?: string | null
-          job_title_matches?: string | null
-          knowledge_domains?: string | null
-          language_proficiencies?: string | null
-          last_performance_review_date?: string | null
-          last_project_end_date?: string | null
-          last_training_date?: string | null
-          last_updated?: string | null
-          linkedin_endorsements_count?: number | null
-          location?: string | null
-          margin_history?: Json | null
-          margin_pct?: number | null
-          market_salary_benchmark?: number | null
-          markup_model?: string | null
-          max_parallel_roles?: string | null
-          micro_role_fragments?: string | null
-          "Monthly Cost"?: string | null
-          next_available_date?: string | null
-          on_time_pct?: number | null
-          "onet_skill_importance_<id>"?: number | null
-          "onet_work_style_<id>"?: string | null
-          output_rate?: number | null
-          output_type?: string | null
-          overall_match_score?: number | null
-          performance_flag?: string | null
-          performance_index?: number | null
-          persona?: string | null
-          personality_a?: number | null
-          personality_c?: number | null
-          personality_e?: string | null
-          personality_n?: number | null
-          personality_o?: string | null
-          preferred_partners?: string | null
-          pricing_model?: string | null
-          Problem?: string | null
-          project_bundle?: string | null
-          project_count?: number | null
-          project_success_rate?: number | null
-          proposal_strength_score?: string | null
-          quality_error_rate?: number | null
-          recommended_configuration?: string | null
-          region_unemployment_rate?: number | null
-          regulatory_compliance_index?: string | null
-          relocation_willingness?: string | null
-          remote_capable?: boolean | null
-          residual_capacity_pct?: string | null
-          reuse_profile_type?: string | null
-          rft_keywords_matched?: string | null
-          risk_rating?: string | null
-          ROI?: string | null
-          role_group?: string | null
-          role_substitution_rating?: string | null
-          scaling_equivalence?: string | null
-          schedule_flexibility?: string | null
-          security_vulnerability_rating?: string | null
-          "Setup Cost"?: string | null
-          sfia_category?: string | null
-          sfia_level?: string | null
-          SFIA_level?: number | null
-          skill_breadth_index?: number | null
-          "skill_proficiency_<skill>"?: number | null
-          sla_compliance_history?: Json | null
-          sla_hours?: number | null
-          standard_skill_tags?: string | null
-          strategic_mobility_indicator?: string | null
-          summary_bio?: string | null
-          supplier_category?: string | null
-          task_alignment_score?: string | null
-          task_cluster_tags?: string | null
-          task_coverage_pct?: string | null
-          task_criticality_score?: number | null
-          "Tech Stack"?: string | null
-          tech_maturity_level?: string | null
-          tech_stack?: string | null
-          timestamp?: string | null
-          timezone?: string | null
-          total_years_experience?: number | null
-          training_status?: string | null
-          travel_availability_pct?: string | null
-          user_context?: string | null
-          utilization_history?: Json | null
-          utilization_pct?: number | null
-          utilization_target_pct?: number | null
-          value_to_cost_ratio?: string | null
-          values_alignment_score?: number | null
-          vendor_reliability_rating?: number | null
-          work_style_flags?: string | null
-          workforce_risk_index?: number | null
-          years_in_domain?: string | null
-        }
-        Relationships: []
-      }
-      "40k variations": {
-        Row: {
-          Agent_ID: string | null
-          Cloud: string | null
-          Estimated_Cost: string | null
-          Estimated_Price: string | null
-          Estimated_Profit: string | null
-          Integration_Pattern: string | null
-          Variation_ID: string | null
-          Variation_Name: string | null
-        }
-        Insert: {
-          Agent_ID?: string | null
-          Cloud?: string | null
-          Estimated_Cost?: string | null
-          Estimated_Price?: string | null
-          Estimated_Profit?: string | null
-          Integration_Pattern?: string | null
-          Variation_ID?: string | null
-          Variation_Name?: string | null
-        }
-        Update: {
-          Agent_ID?: string | null
-          Cloud?: string | null
-          Estimated_Cost?: string | null
-          Estimated_Price?: string | null
-          Estimated_Profit?: string | null
-          Integration_Pattern?: string | null
-          Variation_ID?: string | null
-          Variation_Name?: string | null
-        }
-        Relationships: []
-      }
       "4500 Master": {
         Row: {
           ai_era_shift: string | null
@@ -35609,34 +34902,17 @@ export type Database = {
         }
         Relationships: []
       }
-      automation_analytics: {
+      bci_access_log: {
         Row: {
-          active_initiatives: number | null
-          avg_actual_roi: number | null
-          avg_effort_score: number | null
-          avg_impact_score: number | null
-          avg_roi_estimate: number | null
-          completed_initiatives: number | null
-          month: string | null
-          total_assessments: number | null
-          total_initiatives: number | null
-        }
-        Relationships: []
-      }
-      bci_matrix_analytics: {
-        Row: {
-          active_cells: number | null
-          avg_companies_per_cell: number | null
-          avg_coverage_score: number | null
-          child_data_cells: number | null
-          dual_use_cells: number | null
-          high_risk_cells: number | null
-          industry_list: string[] | null
-          lens_list: string[] | null
-          total_cells: number | null
-          total_industries: number | null
-          total_lenses: number | null
-          total_sub_buckets: number | null
+          action: string | null
+          created_at: string | null
+          details: Json | null
+          event_type: string | null
+          id: string | null
+          resource_id: string | null
+          resource_type: string | null
+          severity: string | null
+          user_email: string | null
         }
         Relationships: []
       }
@@ -35969,23 +35245,6 @@ export type Database = {
         }
         Relationships: []
       }
-      role_instance: {
-        Row: {
-          aps_level: string | null
-          automation_score: number | null
-          band_code: string | null
-          currency: string | null
-          description: string | null
-          industry_code: string | null
-          instance_id: number | null
-          org_size_code: string | null
-          role_code: string | null
-          role_name: string | null
-          salary_max: number | null
-          salary_min: number | null
-        }
-        Relationships: []
-      }
       rpt_combined: {
         Row: {
           note: string | null
@@ -36011,6 +35270,20 @@ export type Database = {
         Row: {
           note: string | null
           status: string | null
+        }
+        Relationships: []
+      }
+      suspicious_audit_activity: {
+        Row: {
+          action: string | null
+          created_at: string | null
+          details: Json | null
+          event_type: string | null
+          id: string | null
+          resource_id: string | null
+          resource_type: string | null
+          severity: string | null
+          user_email: string | null
         }
         Relationships: []
       }
@@ -36063,6 +35336,10 @@ export type Database = {
           is_nullable: boolean
           table_name: string
         }[]
+      }
+      cleanup_old_audit_logs: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
       cleanup_old_rate_limit_logs: {
         Args: Record<PropertyKey, never>
@@ -36430,6 +35707,17 @@ export type Database = {
       l2_normalize: {
         Args: { "": string } | { "": unknown } | { "": unknown }
         Returns: unknown
+      }
+      log_audit_event: {
+        Args: {
+          p_action?: string
+          p_details?: Json
+          p_event_type: string
+          p_resource_id?: string
+          p_resource_type: string
+          p_severity?: string
+        }
+        Returns: string
       }
       migrate_partner_data: {
         Args: Record<PropertyKey, never>
