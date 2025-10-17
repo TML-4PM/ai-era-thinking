@@ -25549,6 +25549,60 @@ export type Database = {
           },
         ]
       }
+      role_asset_inventory: {
+        Row: {
+          access_level: string
+          asset_category: string
+          asset_name: string
+          asset_slug: string
+          asset_type: string | null
+          created_at: string | null
+          database_table: string | null
+          file_path: string | null
+          id: string
+          last_updated: string | null
+          maturity_stage: string | null
+          metadata: Json | null
+          role_name: string
+          role_slug: string
+          status: string
+        }
+        Insert: {
+          access_level?: string
+          asset_category: string
+          asset_name: string
+          asset_slug: string
+          asset_type?: string | null
+          created_at?: string | null
+          database_table?: string | null
+          file_path?: string | null
+          id?: string
+          last_updated?: string | null
+          maturity_stage?: string | null
+          metadata?: Json | null
+          role_name: string
+          role_slug: string
+          status?: string
+        }
+        Update: {
+          access_level?: string
+          asset_category?: string
+          asset_name?: string
+          asset_slug?: string
+          asset_type?: string | null
+          created_at?: string | null
+          database_table?: string | null
+          file_path?: string | null
+          id?: string
+          last_updated?: string | null
+          maturity_stage?: string | null
+          metadata?: Json | null
+          role_name?: string
+          role_slug?: string
+          status?: string
+        }
+        Relationships: []
+      }
       role_autoscore: {
         Row: {
           automation_score: number | null
@@ -29216,6 +29270,48 @@ export type Database = {
           name?: string
           price?: number
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean | null
+          created_at: string
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          tier: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          status: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
