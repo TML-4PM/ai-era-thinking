@@ -90,8 +90,8 @@ const Books: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Tech4Humanity Book Series</title>
-        <meta name="description" content="Explore our comprehensive book series on AI transformation, digital sovereignty, and human-centered technology. Five books covering augmented humanity, governance frameworks, and practical implementation guides." />
+        <title>The Book Club - Tech4Humanity</title>
+        <meta name="description" content="Join The Book Club exploring AI transformation, digital sovereignty, and human-centered technology through our comprehensive series." />
         <meta name="keywords" content="AI transformation, digital sovereignty, tech for humanity, book series, augmented humanity" />
         <link rel="canonical" href="/books" />
       </Helmet>
@@ -117,10 +117,10 @@ const Books: React.FC = () => {
           {/* Hero Section */}
           <div className="text-center mb-8 space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">
-              Tech for Humanity
+              The Book Club
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive book series exploring AI transformation, digital sovereignty, and human-centered technology for the modern era.
+              A comprehensive book series exploring AI transformation, digital sovereignty, and human-centered technology for the modern era
             </p>
           </div>
 
