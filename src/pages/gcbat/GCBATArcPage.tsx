@@ -13,13 +13,14 @@ import { ArrowLeft, BookOpen } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function GCBATArcPage() {
-  const { slug, arcNumber } = useParams<{ slug: string; arcNumber: string }>();
+  const SLUG = "gcbat-vignettes";
+  const { arcNumber } = useParams<{ arcNumber: string }>();
   const { data: books } = useBooks();
-  const book = books?.find(b => b.slug === slug);
+  const book = books?.find(b => b.slug === SLUG);
   const arc = GCBAT_ARCS.find(a => a.number === parseInt(arcNumber || '0'));
 
   const { data: chapters, isLoading } = useQuery({
-    queryKey: ['arc-chapters', slug, arcNumber],
+    queryKey: ['arc-chapters', SLUG, arcNumber],
     queryFn: async () => {
       if (!book?.id || !arc) return [];
 
@@ -61,7 +62,7 @@ export default function GCBATArcPage() {
 
       <div className="container mx-auto px-4 py-8 space-y-8">
         <Button variant="ghost" asChild>
-          <Link to={`/books/${slug}`}>
+          <Link to={`/books/${SLUG}`}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Book
           </Link>
@@ -118,7 +119,7 @@ export default function GCBATArcPage() {
                         <CardTitle className="text-xl">{chapter.title}</CardTitle>
                       </div>
                       <Button asChild>
-                        <Link to={`/books/${slug}/chapter/${chapter.chapter_order}`}>
+                        <Link to={`/books/${SLUG}/chapter/${chapter.chapter_order}`}>
                           <BookOpen className="mr-2 h-4 w-4" />
                           Read
                         </Link>

@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { Button } from "@/components/ui/button";
 import { GCBATCharacterGrid } from "@/components/gcbat/GCBATCharacterGrid";
@@ -8,9 +8,9 @@ import { Helmet } from "react-helmet-async";
 import { Grid3x3, BookOpen } from "lucide-react";
 
 export default function GCBATLanding() {
-  const { slug } = useParams<{ slug: string }>();
+  const SLUG = "gcbat-vignettes";
   const { data: books } = useBooks();
-  const book = books?.find(b => b.slug === slug);
+  const book = books?.find(b => b.slug === SLUG);
 
   if (!book) {
     return <div>Book not found</div>;
@@ -42,13 +42,13 @@ export default function GCBATLanding() {
           
           <div className="flex gap-4 justify-center mt-6">
             <Button asChild size="lg">
-              <Link to={`/books/${slug}/chapters`}>
+              <Link to={`/books/${SLUG}/chapters`}>
                 <BookOpen className="mr-2 h-4 w-4" />
                 Start Reading
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to={`/books/${slug}/matrix`}>
+              <Link to={`/books/${SLUG}/matrix`}>
                 <Grid3x3 className="mr-2 h-4 w-4" />
                 View Story Matrix
               </Link>
@@ -72,7 +72,7 @@ export default function GCBATLanding() {
         <Separator />
 
         {/* Arcs Section */}
-        <GCBATArcNavigator bookSlug={slug!} />
+        <GCBATArcNavigator bookSlug={SLUG} />
       </div>
     </>
   );

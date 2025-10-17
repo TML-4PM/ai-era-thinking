@@ -1,13 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { GCBATCharacterGrid } from "@/components/gcbat/GCBATCharacterGrid";
 import { Helmet } from "react-helmet-async";
 import { Users } from "lucide-react";
 
 export default function GCBATCharactersPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const SLUG = "gcbat-vignettes";
   const { data: books } = useBooks();
-  const book = books?.find(b => b.slug === slug);
+  const book = books?.find(b => b.slug === SLUG);
 
   if (!book) {
     return <div>Book not found</div>;

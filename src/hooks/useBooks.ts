@@ -502,7 +502,7 @@ const DEFAULT_BOOKS: Book[] = [
     subtitle: "Quantum Foundations for Biological and Cognitive Systems",
     slug: "quantum-logic-systems",
     lead: "Exploring quantum principles in biological systems and their implications for AI and consciousness.",
-    cover: "/assets/covers/placeholder.jpg",
+    cover: "/assets/covers/quantum-logic-systems.jpg",
     series_name: "Quantum Logic Systems",
     collection: "Single Volume",
     status: "concept",

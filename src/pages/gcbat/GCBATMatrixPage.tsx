@@ -1,13 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { GCBATStoryMatrix } from "@/components/gcbat/GCBATStoryMatrix";
 import { Helmet } from "react-helmet-async";
 import { Grid3x3 } from "lucide-react";
 
 export default function GCBATMatrixPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const SLUG = "gcbat-vignettes";
   const { data: books } = useBooks();
-  const book = books?.find(b => b.slug === slug);
+  const book = books?.find(b => b.slug === SLUG);
 
   if (!book) {
     return <div>Book not found</div>;
@@ -34,7 +33,7 @@ export default function GCBATMatrixPage() {
           </p>
         </div>
 
-        <GCBATStoryMatrix bookSlug={slug!} />
+        <GCBATStoryMatrix bookSlug={SLUG} />
       </div>
     </>
   );
