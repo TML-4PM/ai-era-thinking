@@ -48,6 +48,7 @@ const Books: React.FC = () => {
   // Three-tier organization
   const premierSlugs = ['tech-for-humanity', 'thinking-engine', 'gcbat-vignettes'];
   const coreSlugs = ['workfamilyai', 'sovereign-systems', 'entangled-time', 'living-stack'];
+  const developmentSlugs = ['regenerative-organization', 'quantum-logic-systems'];
   
   // Sort books by predefined order
   const sortByOrder = (bookList: any[], order: string[]) => {
@@ -76,12 +77,14 @@ const Books: React.FC = () => {
     coreSlugs
   );
   
-  // Development Books - Everything else (exclude Part books)
-  const developmentBooks = books?.filter(book => 
-    !premierSlugs.includes(book.slug) && 
-    !coreSlugs.includes(book.slug) &&
-    !book.collection?.includes("Series")
-  ) || [];
+  // Development Books - Specific development slugs only
+  const developmentBooks = sortByOrder(
+    books?.filter(book => 
+      developmentSlugs.includes(book.slug) && 
+      !book.collection?.includes("Series")
+    ) || [],
+    developmentSlugs
+  );
   
   // Check if a book slug is "coming soon" (in UPCOMING_BOOKS but not in DB)
   const isComingSoon = (slug: string) => {
