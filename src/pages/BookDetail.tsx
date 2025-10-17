@@ -1,15 +1,22 @@
 import { Helmet } from "react-helmet-async";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, BookOpen, Clock, Users } from "lucide-react";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const BookDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(book => book.slug === slug);
 
   const calculateAverageProgress = (chapters: any[]) => {

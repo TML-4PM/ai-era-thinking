@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import DOMPurify from "dompurify";
 import { useToast } from "@/hooks/use-toast";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 interface Chapter {
   id: string;
@@ -33,6 +34,11 @@ interface Book {
 const ChapterPage = () => {
   const { slug, chapterOrder } = useParams<{ slug: string; chapterOrder: string }>();
   const { toast } = useToast();
+  
+  // Guard against placeholder params
+  if (!slug || !chapterOrder || isPlaceholderParam(slug) || isPlaceholderParam(chapterOrder)) {
+    return <Navigate to="/books" replace />;
+  }
 
   const { data: book, isLoading: bookLoading } = useQuery({
     queryKey: ["book", slug],

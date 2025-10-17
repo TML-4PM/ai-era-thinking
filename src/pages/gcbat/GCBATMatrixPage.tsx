@@ -1,8 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { GCBATStoryMatrix } from "@/components/gcbat/GCBATStoryMatrix";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 export default function GCBATMatrixPage() {
   const { slug } = useParams<{ slug: string }>();
+
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,10 +24,17 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const BookResources = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(book => book.slug === slug);
 
   if (!book) return null;

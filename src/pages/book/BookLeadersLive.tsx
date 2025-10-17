@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { AllThinkersGrid } from "@/components/AllThinkersGrid";
 import { TopThinkersPanel } from "@/components/TopThinkersPanel";
@@ -8,10 +8,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { THINKERS } from "@/data/thinkers";
 import { useState } from "react";
 import { Users, BookOpen, Star } from "lucide-react";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const BookLeadersLive = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(book => book.slug === slug);
   const [selectedThinker, setSelectedThinker] = useState<any>(null);
 

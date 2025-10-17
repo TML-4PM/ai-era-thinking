@@ -28,7 +28,7 @@ const DEFAULT_BOOKS: Book[] = [
     subtitle: "Tech for Humanity Vol. 1",
     slug: "tech-for-humanity-ethics-consent",
     lead: "Foundational principles for ethical technology development and digital rights.",
-    cover: "/assets/covers/placeholder.jpg",
+    cover: "/assets/covers/tech-for-humanity-ethics-consent.jpg",
     series_name: "Tech for Humanity",
     collection: "A Series",
     status: "draft",

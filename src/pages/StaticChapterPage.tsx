@@ -8,10 +8,16 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import DOMPurify from "dompurify";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const StaticChapterPage = () => {
   const { slug, chapterNumber } = useParams<{ slug: string; chapterNumber: string }>();
   const { data: books, isLoading } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || !chapterNumber || isPlaceholderParam(slug) || isPlaceholderParam(chapterNumber)) {
+    return <Navigate to="/books" replace />;
+  }
 
   if (isLoading) {
     return (

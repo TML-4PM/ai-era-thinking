@@ -1,10 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { GCBATArcNavigator } from "@/components/gcbat/GCBATArcNavigator";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 export default function GCBATLanding() {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(b => b.slug === slug);
 
   if (!book) {
