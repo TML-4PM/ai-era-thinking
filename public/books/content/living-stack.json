@@ -1,0 +1,160 @@
+{
+  "id": "living-stack",
+  "title": "Living Stack",
+  "description": "A Cognitive Reef Architecture for Signal-Driven Systems - treating tasks as signals, roles that mutate in real-time, and recovery mechanisms that ensure continuity across human-machine collaboration.",
+  "clusters": [
+    {
+      "id": "foundation",
+      "name": "Foundation Concepts",
+      "exemplars": [
+        {
+          "name": "The Coordination Problem",
+          "type": "framework",
+          "eraMapping": {
+            "on_prem": "Manual coordination, hierarchical task assignment",
+            "cloud_native": "API-based task routing, event-driven workflows",
+            "agentic_ai": "Intent-based orchestration, dynamic role assignment",
+            "gen_ai": "Context-aware task interpretation, collaborative planning",
+            "bci": "Neural intent capture, thought-to-task translation"
+          },
+          "caseStudies": ["Family task coordination", "Team project management"],
+          "relatedThinkers": ["herbert-simon", "norbert-wiener"],
+          "relatedFrameworks": ["Systems Thinking", "Cybernetics"],
+          "progress": 15,
+          "status": "draft"
+        },
+        {
+          "name": "Tasks as Signals",
+          "type": "methodology",
+          "eraMapping": {
+            "on_prem": "Tasks as tickets in queue",
+            "cloud_native": "Tasks as events in stream",
+            "agentic_ai": "Tasks as signals with context and urgency",
+            "gen_ai": "Tasks with natural language intent",
+            "bci": "Tasks from cognitive load patterns"
+          },
+          "caseStudies": ["Signal processing in household management"],
+          "relatedThinkers": ["claude-shannon"],
+          "relatedFrameworks": ["Signal Processing", "Event Sourcing"],
+          "progress": 20,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Cognitive Reef Architecture",
+      "exemplars": [
+        {
+          "name": "Agent Roster Design",
+          "type": "architecture",
+          "eraMapping": {
+            "on_prem": "Fixed role assignments, static org charts",
+            "cloud_native": "Service mesh, containerized microservices",
+            "agentic_ai": "Dynamic agent pools with capability matching",
+            "gen_ai": "Agents with evolving specializations",
+            "bci": "Neural-aligned cognitive agents"
+          },
+          "caseStudies": ["Multi-agent household system", "Enterprise agent orchestration"],
+          "relatedThinkers": ["marvin-minsky", "john-holland"],
+          "relatedFrameworks": ["Multi-Agent Systems", "Complex Adaptive Systems"],
+          "progress": 25,
+          "status": "in_progress"
+        },
+        {
+          "name": "Mutation Protocols",
+          "type": "mechanism",
+          "eraMapping": {
+            "on_prem": "Manual role redefinition",
+            "cloud_native": "Blue-green deployments",
+            "agentic_ai": "Real-time role evolution based on context",
+            "gen_ai": "Self-modifying agent capabilities",
+            "bci": "Intent-driven role adaptation"
+          },
+          "caseStudies": ["Role evolution in crisis scenarios"],
+          "relatedThinkers": ["john-holland", "stuart-kauffman"],
+          "relatedFrameworks": ["Evolutionary Computing", "Adaptive Systems"],
+          "progress": 10,
+          "status": "draft"
+        },
+        {
+          "name": "Recovery Mechanisms",
+          "type": "resilience",
+          "eraMapping": {
+            "on_prem": "Manual failover and backup procedures",
+            "cloud_native": "Circuit breakers, retry logic",
+            "agentic_ai": "Autonomous recovery with context preservation",
+            "gen_ai": "Predictive failure prevention",
+            "bci": "Cognitive continuity across disruptions"
+          },
+          "caseStudies": ["System recovery after agent failure", "Continuity planning"],
+          "relatedThinkers": ["nancy-leveson", "richard-cook"],
+          "relatedFrameworks": ["Resilience Engineering", "Safety Systems"],
+          "progress": 15,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "id": "implementation",
+      "name": "Implementation Patterns",
+      "exemplars": [
+        {
+          "name": "Time Tree Integration",
+          "type": "tool",
+          "eraMapping": {
+            "on_prem": "Static calendars and schedules",
+            "cloud_native": "Calendar APIs and webhooks",
+            "agentic_ai": "Temporal reasoning for task scheduling",
+            "gen_ai": "Natural language time negotiation",
+            "bci": "Time perception and priority sensing"
+          },
+          "caseStudies": ["Family calendar coordination", "Multi-stakeholder scheduling"],
+          "relatedThinkers": ["edward-hall"],
+          "relatedFrameworks": ["Temporal Logic", "Constraint Programming"],
+          "progress": 20,
+          "status": "draft"
+        },
+        {
+          "name": "Cognitive Load Management",
+          "type": "optimization",
+          "eraMapping": {
+            "on_prem": "Manual workload balancing",
+            "cloud_native": "Load balancers and autoscaling",
+            "agentic_ai": "Cognitive capacity monitoring and distribution",
+            "gen_ai": "Attention and context management",
+            "bci": "Real-time cognitive state tracking"
+          },
+          "caseStudies": ["Household task distribution", "Knowledge worker optimization"],
+          "relatedThinkers": ["daniel-kahneman", "herbert-simon"],
+          "relatedFrameworks": ["Cognitive Psychology", "Attention Economics"],
+          "progress": 10,
+          "status": "concept"
+        },
+        {
+          "name": "Multi-Agent Orchestration",
+          "type": "coordination",
+          "eraMapping": {
+            "on_prem": "Manual coordination meetings",
+            "cloud_native": "Message queues and pub-sub",
+            "agentic_ai": "Autonomous agent negotiation",
+            "gen_ai": "Collaborative reasoning and planning",
+            "bci": "Collective intelligence coordination"
+          },
+          "caseStudies": ["Team coordination patterns", "Distributed decision-making"],
+          "relatedThinkers": ["john-nash", "herbert-simon"],
+          "relatedFrameworks": ["Game Theory", "Distributed Systems"],
+          "progress": 5,
+          "status": "concept"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Simon, H. A. (1962). The Architecture of Complexity",
+    "Wiener, N. (1948). Cybernetics: Or Control and Communication in the Animal and the Machine",
+    "Minsky, M. (1986). The Society of Mind",
+    "Holland, J. H. (1992). Adaptation in Natural and Artificial Systems",
+    "Shannon, C. E. (1948). A Mathematical Theory of Communication"
+  ]
+}
