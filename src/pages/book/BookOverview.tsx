@@ -233,7 +233,7 @@ export default function BookOverview() {
                                     <Button 
                                       variant="outline" 
                                       size="sm"
-                                      onClick={() => window.location.href = `/books/${volume.slug}`}
+                                      onClick={() => window.location.href = `/books/${bookSlug}/sections/${volume.slug}`}
                                       className="w-full"
                                     >
                                       <BookOpen className="w-4 h-4 mr-2" />
