@@ -18,6 +18,7 @@ import Auth from "./pages/Auth";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
 import ChapterPage from "./pages/ChapterPage";
+import StaticChapterPage from "./pages/StaticChapterPage";
 import AdminBooks from "./pages/AdminBooks";
 import Thinkers from "./pages/Thinkers";
 import Frameworks from "./pages/Frameworks";
@@ -91,6 +92,7 @@ const App = () => (
                 <Route path="resources" element={<BookResources />} />
               </Route>
               <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
+              <Route path="/books/:slug/chapter/:chapterNumber" element={<StaticChapterPage />} />
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/thinkers" element={<Thinkers />} />
               <Route path="/frameworks" element={<Frameworks />} />

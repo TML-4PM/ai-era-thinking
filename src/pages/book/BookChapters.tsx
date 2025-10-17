@@ -54,6 +54,11 @@ const BookChapters = () => {
     }
   };
 
+  const handleChapterClick = (chapterIndex: number) => {
+    // Navigate to static chapter page
+    navigate(`/books/${slug}/chapter/${chapterIndex + 1}`);
+  };
+
   if (isSuiteHub) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -234,7 +239,11 @@ const BookChapters = () => {
       {sortedChapters.length > 0 ? (
         <div className="space-y-6">
           {sortedChapters.map((chapter, index) => (
-            <Card key={chapter.id || index} className="hover:shadow-lg transition-shadow">
+            <Card 
+              key={chapter.id || index} 
+              className="hover:shadow-lg transition-shadow cursor-pointer"
+              onClick={() => handleChapterClick(index)}
+            >
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -295,6 +304,10 @@ const BookChapters = () => {
                   <Button 
                     variant={chapter.progress > 0 ? "default" : "outline"}
                     size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleChapterClick(index);
+                    }}
                   >
                     {chapter.progress === 100 ? 'Review' : chapter.progress > 0 ? 'Continue' : 'Start Reading'}
                   </Button>

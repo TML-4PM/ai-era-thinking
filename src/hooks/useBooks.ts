@@ -85,7 +85,7 @@ const DEFAULT_BOOKS: Book[] = [
     id: "A5",
     title: "Work and Economy",
     subtitle: "Tech for Humanity Vol. 5",
-    slug: "work-economy",
+    slug: "workfamilyai",
     lead: "The future of work and economic systems in a technological age.",
     cover: "/assets/covers/workfamilyai.jpg",
     series_name: "Tech for Humanity", 
@@ -540,6 +540,29 @@ const DEFAULT_BOOKS: Book[] = [
       { title: "Culture and Change Readiness", sections: ["Mindset", "Skills", "Leadership"], progress: 0, chapter_order: 5 },
       { title: "Ecosystem-Level Regeneration", sections: ["Networks", "Partnerships", "Impact"], progress: 0, chapter_order: 6 },
       { title: "Future-Oriented Metrics", sections: ["Indicators", "Dashboards", "Reporting"], progress: 0, chapter_order: 7 }
+    ]
+  },
+
+  // F: GCBAT Vignettes - Neural Ennead BCI Governance Stories
+  {
+    id: "F",
+    title: "GCBAT Vignettes",
+    subtitle: "Neural Ennead: BCI Governance Stories",
+    slug: "gcbat-vignettes",
+    lead: "32 narrative vignettes exploring Brain-Computer Interface governance through 9 characters across 5 story arcs.",
+    cover: "/assets/covers/gcbat-vignettes.jpg",
+    series_name: "GCBAT Vignettes",
+    collection: "Single Volume",
+    status: "in_progress",
+    owner: "GCBAT Team",
+    ready_flag: true,
+    chapters: [
+      { title: "The Neural Ennead", sections: ["Characters", "Roles", "Relationships"], progress: 100, chapter_order: 0 },
+      { title: "Arc 1: Infrastructure Collapse", sections: ["7 Stories", "Chapters 11-17"], progress: 30, chapter_order: 1 },
+      { title: "Arc 2: Cognitive & Social Disruption", sections: ["6 Stories", "Chapters 18-24"], progress: 15, chapter_order: 2 },
+      { title: "Arc 3: Rights & Agency Erosion", sections: ["6 Stories", "Chapters 25-31"], progress: 10, chapter_order: 3 },
+      { title: "Arc 4: Environmental & Physical Systems", sections: ["6 Stories", "Chapters 32-38"], progress: 5, chapter_order: 4 },
+      { title: "Arc 5: Governance Crisis & Resolution", sections: ["7 Stories", "Chapters 39-46"], progress: 0, chapter_order: 5 }
     ]
   }
 ];

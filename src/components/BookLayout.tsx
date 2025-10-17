@@ -187,77 +187,115 @@ const BookLayout = () => {
         <div className="border-b bg-white/20 dark:bg-gray-900/20">
           <div className="max-w-7xl mx-auto px-4">
             <nav className="flex gap-1 overflow-x-auto">
-              {shouldShowTab(slug, location.pathname, 'overview') && (
-                <Link to={`/books/${slug}`}>
-                  <Button 
-                    variant={isActive(`/books/${slug}`) ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <Home className="w-4 h-4 mr-2" />
-                    Overview
-                  </Button>
-                </Link>
-              )}
-              {shouldShowTab(slug, location.pathname, 'chapters') && (
-                <Link to={`/books/${slug}/chapters`}>
-                  <Button 
-                    variant={isActive(`/books/${slug}/chapters`) ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <FileText className="w-4 h-4 mr-2" />
-                    Chapters
-                  </Button>
-                </Link>
-              )}
-              {shouldShowTab(slug, location.pathname, 'leaders-live') && (
-                <Link to={`/books/${slug}/leaders-live`}>
-                  <Button 
-                    variant={isActive(`/books/${slug}/leaders-live`) ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    Leaders Live
-                  </Button>
-                </Link>
-              )}
-              {shouldShowTab(slug, location.pathname, 'add-guru') && (
-                <Link to={`/books/${slug}/add-guru`}>
-                  <Button 
-                    variant={isActive(`/books/${slug}/add-guru`) ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Your Guru
-                  </Button>
-                </Link>
-              )}
-              {shouldShowTab(slug, location.pathname, 'resources') && (
-                <Link to={`/books/${slug}/resources`}>
-                  <Button 
-                    variant={isActive(`/books/${slug}/resources`) ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <Settings className="w-4 h-4 mr-2" />
-                    Resources
-                  </Button>
-                </Link>
-              )}
-              {shouldShowTab(slug, location.pathname, 'crowdsourced') && (
-                <Link to="/thinkers">
-                  <Button 
-                    variant={isActive('/thinkers') ? "default" : "ghost"} 
-                    size="sm"
-                    className="whitespace-nowrap"
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    Crowdsourced Thinkers
-                  </Button>
-                </Link>
+              {/* GCBAT Vignettes custom navigation */}
+              {slug === 'gcbat-vignettes' ? (
+                <>
+                  <Link to={`/books/${slug}`}>
+                    <Button 
+                      variant={location.pathname === `/books/${slug}` ? "default" : "ghost"} 
+                      size="sm"
+                      className="whitespace-nowrap"
+                    >
+                      <Home className="w-4 h-4 mr-2" />
+                      Overview
+                    </Button>
+                  </Link>
+                  <Link to={`/books/${slug}/characters`}>
+                    <Button 
+                      variant={location.pathname.includes('/characters') ? "default" : "ghost"} 
+                      size="sm"
+                      className="whitespace-nowrap"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Characters
+                    </Button>
+                  </Link>
+                  <Link to={`/books/${slug}/matrix`}>
+                    <Button 
+                      variant={location.pathname.includes('/matrix') ? "default" : "ghost"} 
+                      size="sm"
+                      className="whitespace-nowrap"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Story Matrix
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {shouldShowTab(slug, location.pathname, 'overview') && (
+                    <Link to={`/books/${slug}`}>
+                      <Button 
+                        variant={isActive(`/books/${slug}`) ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <Home className="w-4 h-4 mr-2" />
+                        Overview
+                      </Button>
+                    </Link>
+                  )}
+                  {shouldShowTab(slug, location.pathname, 'chapters') && (
+                    <Link to={`/books/${slug}/chapters`}>
+                      <Button 
+                        variant={isActive(`/books/${slug}/chapters`) ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <FileText className="w-4 h-4 mr-2" />
+                        Chapters
+                      </Button>
+                    </Link>
+                  )}
+                  {shouldShowTab(slug, location.pathname, 'leaders-live') && (
+                    <Link to={`/books/${slug}/leaders-live`}>
+                      <Button 
+                        variant={isActive(`/books/${slug}/leaders-live`) ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <Users className="w-4 h-4 mr-2" />
+                        Leaders Live
+                      </Button>
+                    </Link>
+                  )}
+                  {shouldShowTab(slug, location.pathname, 'add-guru') && (
+                    <Link to={`/books/${slug}/add-guru`}>
+                      <Button 
+                        variant={isActive(`/books/${slug}/add-guru`) ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Add Your Guru
+                      </Button>
+                    </Link>
+                  )}
+                  {shouldShowTab(slug, location.pathname, 'resources') && (
+                    <Link to={`/books/${slug}/resources`}>
+                      <Button 
+                        variant={isActive(`/books/${slug}/resources`) ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <Settings className="w-4 h-4 mr-2" />
+                        Resources
+                      </Button>
+                    </Link>
+                  )}
+                  {shouldShowTab(slug, location.pathname, 'crowdsourced') && (
+                    <Link to="/thinkers">
+                      <Button 
+                        variant={isActive('/thinkers') ? "default" : "ghost"} 
+                        size="sm"
+                        className="whitespace-nowrap"
+                      >
+                        <Users className="w-4 h-4 mr-2" />
+                        Crowdsourced Thinkers
+                      </Button>
+                    </Link>
+                  )}
+                </>
               )}
             </nav>
           </div>

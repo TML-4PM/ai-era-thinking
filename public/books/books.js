@@ -6,7 +6,7 @@ window.T4H_BOOKS = [
   { id: "A2", title: "Governance & Policy", subtitle: "Tech for Humanity Vol. 2", slug: "tech-for-humanity-governance-policy", lead: "How institutions adapt to govern emerging technologies effectively.", cover: "/assets/covers/placeholder.jpg", series_name: "Tech for Humanity", chapters: [] },
   { id: "A3", title: "Education & Knowledge", subtitle: "Tech for Humanity Vol. 3", slug: "tech-for-humanity-education-knowledge", lead: "Transforming education through technology for lifelong learning.", cover: "/assets/covers/placeholder.jpg", series_name: "Tech for Humanity", chapters: [] },
   { id: "A4", title: "Healthcare & Wellbeing", subtitle: "Tech for Humanity Vol. 4", slug: "tech-for-humanity-healthcare-wellbeing", lead: "Technology's role in healthcare, wellness, and human systems.", cover: "/assets/covers/placeholder.jpg", series_name: "Tech for Humanity", chapters: [] },
-  { id: "A5", title: "Work and Economy", subtitle: "Tech for Humanity Vol. 5", slug: "work-economy", lead: "The future of work and economic systems in a technological age.", cover: "/assets/covers/workfamilyai.jpg", series_name: "Tech for Humanity", chapters: [
+  { id: "A5", title: "Work and Economy", subtitle: "Tech for Humanity Vol. 5", slug: "workfamilyai", lead: "The future of work and economic systems in a technological age.", cover: "/assets/covers/workfamilyai.jpg", series_name: "Tech for Humanity", chapters: [
     { title: "Foundations", sections: ["Principles", "Safety", "Agent Roles"], progress: 65 },
     { title: "Household Agents", sections: ["Scheduling", "Care", "Finance"], progress: 40 },
     { title: "Org Agents", sections: ["PMO", "Ops", "Compliance"], progress: 55 }
@@ -71,6 +71,16 @@ window.T4H_BOOKS = [
     { title: "Culture and Change Readiness", sections: ["Mindset", "Skills", "Leadership"], progress: 0 },
     { title: "Ecosystem-Level Regeneration", sections: ["Networks", "Partnerships", "Impact"], progress: 0 },
     { title: "Future-Oriented Metrics", sections: ["Indicators", "Dashboards", "Reporting"], progress: 0 }
+  ]},
+
+  // F: GCBAT Vignettes - Neural Ennead BCI Governance Stories
+  { id: "F", title: "GCBAT Vignettes", subtitle: "Neural Ennead: BCI Governance Stories", slug: "gcbat-vignettes", lead: "32 narrative vignettes exploring Brain-Computer Interface governance through 9 characters across 5 story arcs.", cover: "/assets/covers/gcbat-vignettes.jpg", series_name: "GCBAT Vignettes", chapters: [
+    { title: "The Neural Ennead", sections: ["Characters", "Roles", "Relationships"], progress: 100 },
+    { title: "Arc 1: Infrastructure Collapse", sections: ["7 Stories", "Chapters 11-17"], progress: 30 },
+    { title: "Arc 2: Cognitive & Social Disruption", sections: ["6 Stories", "Chapters 18-24"], progress: 15 },
+    { title: "Arc 3: Rights & Agency Erosion", sections: ["6 Stories", "Chapters 25-31"], progress: 10 },
+    { title: "Arc 4: Environmental & Physical Systems", sections: ["6 Stories", "Chapters 32-38"], progress: 5 },
+    { title: "Arc 5: Governance Crisis & Resolution", sections: ["7 Stories", "Chapters 39-46"], progress: 0 }
   ]}
 ];
 
