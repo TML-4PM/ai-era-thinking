@@ -63,3 +63,6 @@ verify_jwt = false
 
 [functions.batch-generate-teams]
 verify_jwt = false
+
+[functions.edge-health]
+verify_jwt = false

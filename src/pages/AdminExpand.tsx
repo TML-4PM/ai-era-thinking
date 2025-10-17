@@ -365,32 +365,65 @@ export const AdminExpandPage: React.FC = () => {
       addToLog("Starting Neural Ennead member seeding...");
       toast({
         title: "Seeding Data",
+        description: "Checking existing Neural Ennead members...",
+      });
+
+      // Check current count to avoid reseeding unnecessarily
+      const { count, error: countError } = await supabase
+        .from('neural_ennead_members')
+        .select('*', { head: true, count: 'exact' });
+
+      if (countError) {
+        addToLog(`Warning: could not check member count: ${countError.message}`);
+      }
+
+      if (typeof count === 'number' && count >= 729) {
+        addToLog(`✓ Neural Ennead already seeded (${count} members). Skipping.`);
+        toast({
+          title: "Already Seeded",
+          description: `${count} members present. Skipping seeding.`,
+        });
+        return;
+      }
+
+      toast({
+        title: "Seeding Data",
         description: "Initializing Neural Ennead members (this may take a moment)...",
       });
 
       const { data, error } = await supabase.functions.invoke('seed-neural-ennead-members');
-      
-      if (error) {
-        throw new Error(error.message);
-      }
+      if (error) throw new Error(error.message);
 
-      if (data.success) {
+      if (data?.success) {
         addToLog(`✓ Successfully seeded ${data.total_members} Neural Ennead members`);
         toast({
           title: "Data Seeded Successfully",
           description: `Initialized ${data.total_members} Neural Ennead members`,
         });
       } else {
-        throw new Error(data.error || 'Failed to seed data');
+        throw new Error(data?.error || 'Failed to seed data');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error seeding Neural Ennead members:', error);
-      addToLog(`✗ Failed to seed Neural Ennead members: ${error.message}`);
+      addToLog(`✗ Failed to seed Neural Ennead members: ${error.message || error}`);
       toast({
         title: "Seeding Failed",
-        description: error.message,
+        description: error.message || String(error),
         variant: "destructive"
       });
+    }
+  };
+
+  const pingEdge = async () => {
+    try {
+      addToLog('Pinging Edge Functions...');
+      const { data, error } = await supabase.functions.invoke('edge-health', { body: { ping: true } });
+      if (error) throw new Error(error.message);
+      addToLog(`✓ Edge OK at ${data?.time || 'now'}${data?.region ? ` (region: ${data.region})` : ''}`);
+      toast({ title: 'Edge Reachable', description: 'Health check passed.' });
+    } catch (error: any) {
+      addToLog(`✗ Edge health check failed: ${error.message || error}`);
+      toast({ title: 'Edge Unreachable', description: error.message || String(error), variant: 'destructive' });
     }
   };
 
@@ -691,14 +724,24 @@ export const AdminExpandPage: React.FC = () => {
                 <p className="text-sm text-muted-foreground">
                   Ensure Neural Ennead members are seeded before generating teams. This is required for proper team assembly.
                 </p>
-                <Button 
-                  onClick={seedNeuralEnneadMembers}
-                  disabled={isGenerating || isExpanding}
-                  variant="outline"
-                >
-                  <Database className="w-4 h-4 mr-2" />
-                  Seed Neural Ennead Members
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    onClick={seedNeuralEnneadMembers}
+                    disabled={isGenerating || isExpanding}
+                    variant="outline"
+                  >
+                    <Database className="w-4 h-4 mr-2" />
+                    Seed Neural Ennead Members
+                  </Button>
+                  <Button 
+                    onClick={pingEdge}
+                    disabled={isGenerating || isExpanding}
+                    variant="secondary"
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Ping Edge Functions
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
