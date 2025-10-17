@@ -49,8 +49,8 @@ const BookChapters = () => {
   };
 
   const handleVolumeClick = (volume: Volume) => {
-    if (volume.status === 'seeded' && volume.slug) {
-      navigate(`/section-content/${volume.slug}`);
+    if (volume.status === 'seeded' && volume.slug && slug) {
+      navigate(`/books/${slug}/sections/${volume.slug}`);
     }
   };
 

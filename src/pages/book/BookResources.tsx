@@ -199,7 +199,7 @@ const BookResources = () => {
                       {seededVolumes.map((volume) => (
                         <a 
                           key={volume.id}
-                          href={`/section-content/${volume.slug}`}
+                          href={`/books/${slug}/sections/${volume.slug}`}
                           className="flex items-center justify-between p-4 border rounded-lg hover:bg-accent transition-colors"
                         >
                           <div>

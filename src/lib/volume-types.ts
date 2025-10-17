@@ -52,7 +52,7 @@ export function shouldShowTab(bookSlug: string, currentPath: string, tabName: st
   }
   
   // For thinking engine, check if we're in a specific volume
-  const volumeSlugMatch = currentPath.match(/\/section-content\/([^\/]+)/);
+  const volumeSlugMatch = currentPath.match(/\/books\/[^\/]+\/sections\/([^\/]+)/);
   if (!volumeSlugMatch) {
     // Show all tabs on main book page
     return true;
