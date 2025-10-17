@@ -14,6 +14,7 @@ import { AuthorModeToggle } from "@/components/AuthorModeToggle";
 import { InsightInbox } from '@/components/author/InsightInbox';
 import { useAuthorMode } from '@/hooks/useAuthorMode';
 import { isPlaceholderParam } from '@/lib/route-guards';
+import GCBATLanding from '@/pages/gcbat/GCBATLanding';
 
 export default function BookOverview() {
   const { slug: bookSlug } = useParams<{ slug: string }>();
@@ -28,6 +29,11 @@ export default function BookOverview() {
   const book = books?.find(book => book.slug === bookSlug);
 
   if (!book) return null;
+  
+  // Special case: GCBAT Vignettes uses custom overview
+  if (bookSlug === 'gcbat-vignettes') {
+    return <GCBATLanding />;
+  }
 
   const calculateAverageProgress = (chapters: any[]) => {
     if (!chapters || chapters.length === 0) return 0;

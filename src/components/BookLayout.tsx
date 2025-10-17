@@ -192,7 +192,7 @@ const BookLayout = () => {
                 <>
                   <Link to={`/books/${slug}`}>
                     <Button 
-                      variant={location.pathname === `/books/${slug}` ? "default" : "ghost"} 
+                      variant={isActive(`/books/${slug}`) ? "default" : "ghost"} 
                       size="sm"
                       className="whitespace-nowrap"
                     >
@@ -200,9 +200,19 @@ const BookLayout = () => {
                       Overview
                     </Button>
                   </Link>
+                  <Link to={`/books/${slug}/chapters`}>
+                    <Button 
+                      variant={isActive(`/books/${slug}/chapters`) ? "default" : "ghost"} 
+                      size="sm"
+                      className="whitespace-nowrap"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Stories
+                    </Button>
+                  </Link>
                   <Link to={`/books/${slug}/characters`}>
                     <Button 
-                      variant={location.pathname.includes('/characters') ? "default" : "ghost"} 
+                      variant={isActive(`/books/${slug}/characters`) ? "default" : "ghost"} 
                       size="sm"
                       className="whitespace-nowrap"
                     >
@@ -212,7 +222,7 @@ const BookLayout = () => {
                   </Link>
                   <Link to={`/books/${slug}/matrix`}>
                     <Button 
-                      variant={location.pathname.includes('/matrix') ? "default" : "ghost"} 
+                      variant={isActive(`/books/${slug}/matrix`) ? "default" : "ghost"} 
                       size="sm"
                       className="whitespace-nowrap"
                     >

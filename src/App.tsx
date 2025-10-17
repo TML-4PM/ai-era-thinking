@@ -77,10 +77,7 @@ const App = () => (
               <Route path="/books" element={<Books />} />
               <Route path="/books/:bookSlug/sections/:sectionId" element={<SectionContent />} />
               
-              {/* GCBAT Vignettes specific routes */}
-              <Route path="/books/gcbat-vignettes" element={<GCBATLanding />} />
-              <Route path="/books/gcbat-vignettes/characters" element={<GCBATCharactersPage />} />
-              <Route path="/books/gcbat-vignettes/matrix" element={<GCBATMatrixPage />} />
+              {/* GCBAT Arc pages - keep as custom route */}
               <Route path="/books/gcbat-vignettes/arc/:arcNumber" element={<GCBATArcPage />} />
               
               {/* General book routes */}
@@ -90,6 +87,8 @@ const App = () => (
                 <Route path="leaders-live" element={<BookLeadersLive />} />
                 <Route path="add-guru" element={<BookAddGuru />} />
                 <Route path="resources" element={<BookResources />} />
+                <Route path="characters" element={<GCBATCharactersPage />} />
+                <Route path="matrix" element={<GCBATMatrixPage />} />
               </Route>
               <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
               <Route path="/books/:slug/chapter/:chapterNumber" element={<StaticChapterPage />} />
