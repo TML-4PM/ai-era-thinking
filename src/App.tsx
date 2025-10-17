@@ -41,6 +41,7 @@ import BookLeadersLive from "./pages/book/BookLeadersLive";
 import BookAddGuru from "./pages/book/BookAddGuru";
 import BookResources from "./pages/book/BookResources";
 import SectionContent from "./pages/SectionContent";
+import SectionContentRedirect from "./pages/SectionContentRedirect";
 import GCBATLanding from "./pages/gcbat/GCBATLanding";
 import GCBATCharactersPage from "./pages/gcbat/GCBATCharactersPage";
 import GCBATMatrixPage from "./pages/gcbat/GCBATMatrixPage";
@@ -76,6 +77,9 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
               <Route path="/books/:bookSlug/sections/:sectionId" element={<SectionContent />} />
+              
+              {/* Legacy redirect for old section-content routes */}
+              <Route path="/section-content/:sectionId" element={<SectionContentRedirect />} />
               
               {/* GCBAT Arc pages - keep as custom route */}
               <Route path="/books/gcbat-vignettes/arc/:arcNumber" element={<GCBATArcPage />} />
