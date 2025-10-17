@@ -123,7 +123,7 @@ export default function SectionContent() {
                 </div>
               </div>
 
-              {/* Special handling for thinkers section - show interactive All Thinkers Grid */}
+            {/* Special handling for thinkers section - show interactive All Thinkers Grid */}
               {sectionId === 'thinkers' ? (
                 <div className="space-y-8">
                   <div className="bg-card/50 backdrop-blur-sm rounded-lg border p-6">
@@ -144,6 +144,14 @@ export default function SectionContent() {
                       contentFile={getContentFileForSection(sectionId)}
                     />
                   </div>
+                </div>
+              ) : sectionId === 'frameworks' ? (
+                <div className="space-y-8">
+                  <ContentLoaderNew 
+                    bookSlug={bookSlug}
+                    contentFile={getContentFileForSection(sectionId)}
+                    showFrameworkExpansion={true}
+                  />
                 </div>
               ) : (
                 <ContentLoaderNew 

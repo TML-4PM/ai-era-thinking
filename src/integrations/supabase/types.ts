@@ -29407,6 +29407,562 @@ export type Database = {
           },
         ]
       }
+      survey_autonomy: {
+        Row: {
+          additional_comments: string | null
+          adjust_behavior_features: number | null
+          adjust_data_collection: number | null
+          advance_notification: number | null
+          algorithmic_processes_explained: number | null
+          caregiver_impacts_explained: number | null
+          costs_disclosed_upfront: number | null
+          created_at: string
+          data_portability_process: number | null
+          dependencies_disclosed: number | null
+          discontinuation_support: number | null
+          discontinue_keep_data: number | null
+          educational_resources_provided: number | null
+          id: string
+          influence_indication_clear: number | null
+          information_accessible: number | null
+          irreversible_effects_disclosed: number | null
+          marketing_aligns_evidence: number | null
+          override_automated_decisions: number | null
+          response_id: string
+          selective_revocation: number | null
+          use_case_distinctions_clear: number | null
+        }
+        Insert: {
+          additional_comments?: string | null
+          adjust_behavior_features?: number | null
+          adjust_data_collection?: number | null
+          advance_notification?: number | null
+          algorithmic_processes_explained?: number | null
+          caregiver_impacts_explained?: number | null
+          costs_disclosed_upfront?: number | null
+          created_at?: string
+          data_portability_process?: number | null
+          dependencies_disclosed?: number | null
+          discontinuation_support?: number | null
+          discontinue_keep_data?: number | null
+          educational_resources_provided?: number | null
+          id?: string
+          influence_indication_clear?: number | null
+          information_accessible?: number | null
+          irreversible_effects_disclosed?: number | null
+          marketing_aligns_evidence?: number | null
+          override_automated_decisions?: number | null
+          response_id: string
+          selective_revocation?: number | null
+          use_case_distinctions_clear?: number | null
+        }
+        Update: {
+          additional_comments?: string | null
+          adjust_behavior_features?: number | null
+          adjust_data_collection?: number | null
+          advance_notification?: number | null
+          algorithmic_processes_explained?: number | null
+          caregiver_impacts_explained?: number | null
+          costs_disclosed_upfront?: number | null
+          created_at?: string
+          data_portability_process?: number | null
+          dependencies_disclosed?: number | null
+          discontinuation_support?: number | null
+          discontinue_keep_data?: number | null
+          educational_resources_provided?: number | null
+          id?: string
+          influence_indication_clear?: number | null
+          information_accessible?: number | null
+          irreversible_effects_disclosed?: number | null
+          marketing_aligns_evidence?: number | null
+          override_automated_decisions?: number | null
+          response_id?: string
+          selective_revocation?: number | null
+          use_case_distinctions_clear?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_autonomy_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_consent: {
+        Row: {
+          age_confirmed: boolean
+          created_at: string
+          gdpr_consent: boolean
+          has_professional_experience: boolean
+          id: string
+          participation_consent: boolean
+          response_id: string
+        }
+        Insert: {
+          age_confirmed: boolean
+          created_at?: string
+          gdpr_consent?: boolean
+          has_professional_experience: boolean
+          id?: string
+          participation_consent: boolean
+          response_id: string
+        }
+        Update: {
+          age_confirmed?: boolean
+          created_at?: string
+          gdpr_consent?: boolean
+          has_professional_experience?: boolean
+          id?: string
+          participation_consent?: boolean
+          response_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_consent_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_data_practices: {
+        Row: {
+          access_without_consent: number | null
+          additional_comments: string | null
+          aggregated_data_transparency: number | null
+          aggregation_explained: number | null
+          all_data_types_listed: number | null
+          anonymization_validated: number | null
+          collection_frequency_specified: number | null
+          commercialization_disclosed: number | null
+          created_at: string
+          data_download_verify: number | null
+          data_handling_described: number | null
+          data_sharing_track_record: number | null
+          dedicated_signal_data_policy: number | null
+          device_modes_transparency: number | null
+          id: string
+          inferences_disclosed: number | null
+          permanent_deletion_process: number | null
+          processing_location_transparency: number | null
+          realtime_controls: number | null
+          realtime_usage_notification: number | null
+          research_participation_control: number | null
+          response_id: string
+          third_parties_named: number | null
+          user_data_management: number | null
+          user_data_rights_explained: number | null
+        }
+        Insert: {
+          access_without_consent?: number | null
+          additional_comments?: string | null
+          aggregated_data_transparency?: number | null
+          aggregation_explained?: number | null
+          all_data_types_listed?: number | null
+          anonymization_validated?: number | null
+          collection_frequency_specified?: number | null
+          commercialization_disclosed?: number | null
+          created_at?: string
+          data_download_verify?: number | null
+          data_handling_described?: number | null
+          data_sharing_track_record?: number | null
+          dedicated_signal_data_policy?: number | null
+          device_modes_transparency?: number | null
+          id?: string
+          inferences_disclosed?: number | null
+          permanent_deletion_process?: number | null
+          processing_location_transparency?: number | null
+          realtime_controls?: number | null
+          realtime_usage_notification?: number | null
+          research_participation_control?: number | null
+          response_id: string
+          third_parties_named?: number | null
+          user_data_management?: number | null
+          user_data_rights_explained?: number | null
+        }
+        Update: {
+          access_without_consent?: number | null
+          additional_comments?: string | null
+          aggregated_data_transparency?: number | null
+          aggregation_explained?: number | null
+          all_data_types_listed?: number | null
+          anonymization_validated?: number | null
+          collection_frequency_specified?: number | null
+          commercialization_disclosed?: number | null
+          created_at?: string
+          data_download_verify?: number | null
+          data_handling_described?: number | null
+          data_sharing_track_record?: number | null
+          dedicated_signal_data_policy?: number | null
+          device_modes_transparency?: number | null
+          id?: string
+          inferences_disclosed?: number | null
+          permanent_deletion_process?: number | null
+          processing_location_transparency?: number | null
+          realtime_controls?: number | null
+          realtime_usage_notification?: number | null
+          research_participation_control?: number | null
+          response_id?: string
+          third_parties_named?: number | null
+          user_data_management?: number | null
+          user_data_rights_explained?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_data_practices_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_demographics: {
+        Row: {
+          age_range: string | null
+          country: string | null
+          created_at: string
+          education_level: string | null
+          gender: string | null
+          gender_self_describe: string | null
+          id: string
+          occupation: string | null
+          occupation_other: string | null
+          response_id: string
+        }
+        Insert: {
+          age_range?: string | null
+          country?: string | null
+          created_at?: string
+          education_level?: string | null
+          gender?: string | null
+          gender_self_describe?: string | null
+          id?: string
+          occupation?: string | null
+          occupation_other?: string | null
+          response_id: string
+        }
+        Update: {
+          age_range?: string | null
+          country?: string | null
+          created_at?: string
+          education_level?: string | null
+          gender?: string | null
+          gender_self_describe?: string | null
+          id?: string
+          occupation?: string | null
+          occupation_other?: string | null
+          response_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_demographics_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_device_functionality: {
+        Row: {
+          additional_comments: string | null
+          adverse_event_reporting: number | null
+          benefits_clearly_stated: number | null
+          clinical_trials_available: number | null
+          created_at: string
+          cybersecurity_risks_communicated: number | null
+          cybersecurity_track_record: number | null
+          device_failure_modes_explained: number | null
+          encryption_standards_clear: number | null
+          evidence_level_communicated: number | null
+          id: string
+          independent_security_audits: number | null
+          legal_regulatory_track_record: number | null
+          limitations_disclosed: number | null
+          product_claims_backed: number | null
+          psychological_risks_addressed: number | null
+          response_id: string
+          risk_frequencies_disclosed: number | null
+          risks_list_accessible: number | null
+          safety_track_record: number | null
+          security_update_frequency: number | null
+          vulnerability_disclosure_policy: number | null
+          vulnerable_populations_protected: number | null
+        }
+        Insert: {
+          additional_comments?: string | null
+          adverse_event_reporting?: number | null
+          benefits_clearly_stated?: number | null
+          clinical_trials_available?: number | null
+          created_at?: string
+          cybersecurity_risks_communicated?: number | null
+          cybersecurity_track_record?: number | null
+          device_failure_modes_explained?: number | null
+          encryption_standards_clear?: number | null
+          evidence_level_communicated?: number | null
+          id?: string
+          independent_security_audits?: number | null
+          legal_regulatory_track_record?: number | null
+          limitations_disclosed?: number | null
+          product_claims_backed?: number | null
+          psychological_risks_addressed?: number | null
+          response_id: string
+          risk_frequencies_disclosed?: number | null
+          risks_list_accessible?: number | null
+          safety_track_record?: number | null
+          security_update_frequency?: number | null
+          vulnerability_disclosure_policy?: number | null
+          vulnerable_populations_protected?: number | null
+        }
+        Update: {
+          additional_comments?: string | null
+          adverse_event_reporting?: number | null
+          benefits_clearly_stated?: number | null
+          clinical_trials_available?: number | null
+          created_at?: string
+          cybersecurity_risks_communicated?: number | null
+          cybersecurity_track_record?: number | null
+          device_failure_modes_explained?: number | null
+          encryption_standards_clear?: number | null
+          evidence_level_communicated?: number | null
+          id?: string
+          independent_security_audits?: number | null
+          legal_regulatory_track_record?: number | null
+          limitations_disclosed?: number | null
+          product_claims_backed?: number | null
+          psychological_risks_addressed?: number | null
+          response_id?: string
+          risk_frequencies_disclosed?: number | null
+          risks_list_accessible?: number | null
+          safety_track_record?: number | null
+          security_update_frequency?: number | null
+          vulnerability_disclosure_policy?: number | null
+          vulnerable_populations_protected?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_device_functionality_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_final_feedback: {
+        Row: {
+          concerns_about_efforts: string | null
+          created_at: string
+          id: string
+          other_feedback: string | null
+          response_id: string
+          responsible_innovation_important: number | null
+          rubric_lacking_components: string | null
+        }
+        Insert: {
+          concerns_about_efforts?: string | null
+          created_at?: string
+          id?: string
+          other_feedback?: string | null
+          response_id: string
+          responsible_innovation_important?: number | null
+          rubric_lacking_components?: string | null
+        }
+        Update: {
+          concerns_about_efforts?: string | null
+          created_at?: string
+          id?: string
+          other_feedback?: string | null
+          response_id?: string
+          responsible_innovation_important?: number | null
+          rubric_lacking_components?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_final_feedback_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_general_attitudes: {
+        Row: {
+          companies_guided_by_public_interest: number | null
+          concerned_about_advances: number | null
+          created_at: string
+          excited_about_advances: number | null
+          id: string
+          response_id: string
+          trust_companies_act_in_best_interest: number | null
+          trust_companies_without_regulation: number | null
+        }
+        Insert: {
+          companies_guided_by_public_interest?: number | null
+          concerned_about_advances?: number | null
+          created_at?: string
+          excited_about_advances?: number | null
+          id?: string
+          response_id: string
+          trust_companies_act_in_best_interest?: number | null
+          trust_companies_without_regulation?: number | null
+        }
+        Update: {
+          companies_guided_by_public_interest?: number | null
+          concerned_about_advances?: number | null
+          created_at?: string
+          excited_about_advances?: number | null
+          id?: string
+          response_id?: string
+          trust_companies_act_in_best_interest?: number | null
+          trust_companies_without_regulation?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_general_attitudes_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_responses: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          ip_country: string | null
+          session_id: string
+          started_at: string
+          status: Database["public"]["Enums"]["survey_status"]
+          updated_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          ip_country?: string | null
+          session_id?: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["survey_status"]
+          updated_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          ip_country?: string | null
+          session_id?: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["survey_status"]
+          updated_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      survey_societal_impact: {
+        Row: {
+          additional_comments: string | null
+          ai_model_audits: number | null
+          annual_transparency_report: number | null
+          broader_implications_discussed: number | null
+          created_at: string
+          cultural_barriers_addressed: number | null
+          dual_use_stance: number | null
+          ethical_concerns_documented: number | null
+          ethics_advisory_board: number | null
+          ethics_policy_published: number | null
+          geographic_availability_transparency: number | null
+          id: string
+          inclusive_design_practices: number | null
+          longitudinal_research: number | null
+          open_research_contribution: number | null
+          policy_participation: number | null
+          pricing_equity: number | null
+          public_concern_channel: number | null
+          public_forums: number | null
+          response_id: string
+          societal_impact_assessments: number | null
+          underserved_access_programs: number | null
+          use_restrictions_stated: number | null
+          user_advisory_council: number | null
+          user_support_commitment: number | null
+          wellbeing_alignment: number | null
+        }
+        Insert: {
+          additional_comments?: string | null
+          ai_model_audits?: number | null
+          annual_transparency_report?: number | null
+          broader_implications_discussed?: number | null
+          created_at?: string
+          cultural_barriers_addressed?: number | null
+          dual_use_stance?: number | null
+          ethical_concerns_documented?: number | null
+          ethics_advisory_board?: number | null
+          ethics_policy_published?: number | null
+          geographic_availability_transparency?: number | null
+          id?: string
+          inclusive_design_practices?: number | null
+          longitudinal_research?: number | null
+          open_research_contribution?: number | null
+          policy_participation?: number | null
+          pricing_equity?: number | null
+          public_concern_channel?: number | null
+          public_forums?: number | null
+          response_id: string
+          societal_impact_assessments?: number | null
+          underserved_access_programs?: number | null
+          use_restrictions_stated?: number | null
+          user_advisory_council?: number | null
+          user_support_commitment?: number | null
+          wellbeing_alignment?: number | null
+        }
+        Update: {
+          additional_comments?: string | null
+          ai_model_audits?: number | null
+          annual_transparency_report?: number | null
+          broader_implications_discussed?: number | null
+          created_at?: string
+          cultural_barriers_addressed?: number | null
+          dual_use_stance?: number | null
+          ethical_concerns_documented?: number | null
+          ethics_advisory_board?: number | null
+          ethics_policy_published?: number | null
+          geographic_availability_transparency?: number | null
+          id?: string
+          inclusive_design_practices?: number | null
+          longitudinal_research?: number | null
+          open_research_contribution?: number | null
+          policy_participation?: number | null
+          pricing_equity?: number | null
+          public_concern_channel?: number | null
+          public_forums?: number | null
+          response_id?: string
+          societal_impact_assessments?: number | null
+          underserved_access_programs?: number | null
+          use_restrictions_stated?: number | null
+          user_advisory_council?: number | null
+          user_support_commitment?: number | null
+          wellbeing_alignment?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_societal_impact_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tags: {
         Row: {
           name: string | null
@@ -36220,6 +36776,7 @@ export type Database = {
         | "negotiation"
         | "closed_won"
         | "closed_lost"
+      survey_status: "in_progress" | "completed" | "abandoned"
       value_tier: "high" | "medium" | "low"
     }
     CompositeTypes: {
@@ -36389,6 +36946,7 @@ export const Constants = {
         "closed_won",
         "closed_lost",
       ],
+      survey_status: ["in_progress", "completed", "abandoned"],
       value_tier: ["high", "medium", "low"],
     },
   },

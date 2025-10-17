@@ -66,3 +66,6 @@ verify_jwt = false
 
 [functions.edge-health]
 verify_jwt = false
+
+[functions.expand-framework]
+verify_jwt = false

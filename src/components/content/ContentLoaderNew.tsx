@@ -6,6 +6,7 @@ import { ContentModel } from '@/types/content';
 import { useMaster4500Section } from '@/hooks/useMaster4500';
 import { Master4500ExemplarCard } from './Master4500ExemplarCard';
 import { ExemplarCard } from './ExemplarCard';
+import { FrameworkExpansion } from '@/components/FrameworkExpansion';
 
 interface ContentLoaderProps {
   children?: (content: ContentModel) => React.ReactNode;
@@ -13,6 +14,7 @@ interface ContentLoaderProps {
   contentFile?: string;
   renderContent?: (content: ContentModel) => React.ReactNode;
   className?: string;
+  showFrameworkExpansion?: boolean;
 }
 
 export function ContentLoader({ 
@@ -20,7 +22,8 @@ export function ContentLoader({
   bookSlug, 
   contentFile,
   renderContent,
-  className = ""
+  className = "",
+  showFrameworkExpansion = false
 }: ContentLoaderProps) {
   // Special handling for "The Thinking Engine" - use database instead of JSON
   const sectionSlug = contentFile?.replace('.json', '');
@@ -98,6 +101,11 @@ export function ContentLoader({
   if (shouldUseDb) {
     return (
       <div className={className}>
+        {showFrameworkExpansion && sectionSlug === 'frameworks' && (
+          <div className="mb-8">
+            <FrameworkExpansion sectionSlug={sectionSlug} />
+          </div>
+        )}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {dbContent.map((exemplar) => (
             <Master4500ExemplarCard
