@@ -3,7 +3,7 @@
   "subtitle": "Comprehensive Framework Analysis",
   "description": "Exploring how thinkers' frameworks evolve and apply across different domains and contexts.",
   "totalSections": 15,
-  "seededSections": 3,
+  "seededSections": 6,
   "sections": [
     {
       "id": "principles",
@@ -51,17 +51,19 @@
       "id": "disciplines", 
       "title": "Disciplines",
       "slug": "thinking-engine-disciplines",
-      "status": "scaffold",
+      "status": "seeded",
       "lead": "Academic disciplines contributing to AI research",
-      "exemplarCount": 60
+      "exemplarCount": 60,
+      "contentFile": "disciplines.json"
     },
     {
       "id": "technologies",
       "title": "Technologies",
       "slug": "thinking-engine-technologies", 
-      "status": "scaffold",
+      "status": "seeded",
       "lead": "Core technologies enabling artificial intelligence",
-      "exemplarCount": 85
+      "exemplarCount": 85,
+      "contentFile": "technologies.json"
     },
     {
       "id": "organizations",
@@ -100,9 +102,10 @@
       "id": "eras",
       "title": "Eras", 
       "slug": "thinking-engine-eras",
-      "status": "scaffold",
+      "status": "seeded",
       "lead": "Historical eras in AI development and adoption",
-      "exemplarCount": 30
+      "exemplarCount": 30,
+      "contentFile": "eras.json"
     },
     {
       "id": "environment",

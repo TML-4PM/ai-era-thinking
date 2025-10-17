@@ -17,7 +17,8 @@ import {
   Clock,
   Database,
   Code,
-  Link
+  Link,
+  Shield
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -31,74 +32,122 @@ const BookResources = () => {
 
   const resources = [
     {
-      category: "Calculators & Tools",
-      icon: Calculator,
+      category: "Seeded Chapters",
+      icon: BookOpen,
       items: [
         {
-          title: "AI Impact Calculator",
-          description: "Assess the impact of AI implementations on your organization",
-          type: "Interactive Tool",
-          url: "/calculators"
+          title: "Frameworks - Patterns of Action",
+          description: "40+ decision-making frameworks analyzed across five technological eras from OODA Loop to Systems Thinking.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/frameworks`
         },
         {
-          title: "Framework Comparison Matrix",
-          description: "Compare different thinking frameworks side by side",
-          type: "Spreadsheet Template",
-          url: "#"
+          title: "Thinkers - Brains that Shaped Brains",
+          description: "70+ influential minds from cognitive science, AI, and organizational theory with interactive profiles.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/thinkers-brains-that-shaped-brains`
+        },
+        {
+          title: "Roles - Humans in the Machine",
+          description: "132 roles exploring how human responsibilities evolve in AI-augmented systems.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/roles-humans-in-machine`
+        },
+        {
+          title: "Eras - Technological Epochs",
+          description: "30 transformations across five eras: On-Prem, Cloud-Native, Gen AI, Agentic AI, and BCI.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/thinking-engine-eras`
+        },
+        {
+          title: "Technologies - The Technical Stack",
+          description: "85 core technologies from RDBMS to neural buffers, organized across six technical planes.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/thinking-engine-technologies`
+        },
+        {
+          title: "Disciplines - Academic Foundations",
+          description: "60 academic disciplines contributing to AI development and human-machine collaboration.",
+          type: "Seeded Chapter",
+          url: `/books/thinking-engine/sections/thinking-engine-disciplines`
         }
       ]
     },
     {
-      category: "Workshops & Training",
-      icon: Wrench,
-      items: [
-        {
-          title: "Implementation Workshop Guide",
-          description: "Step-by-step guide for running framework workshops",
-          type: "PDF Guide",
-          url: "/resources/workshops"
-        },
-        {
-          title: "Team Assessment Templates",
-          description: "Ready-to-use templates for team capability assessments",
-          type: "Template Pack",
-          url: "#"
-        }
-      ]
-    },
-    {
-      category: "Case Studies",
-      icon: FileText,
-      items: [
-        {
-          title: "Enterprise Transformation Cases",
-          description: "Real-world examples of successful framework implementations",
-          type: "Case Study Collection",
-          url: "/resources/case-studies"
-        },
-        {
-          title: "Governance Implementation Stories",
-          description: "How organizations have applied governance frameworks",
-          type: "Success Stories",
-          url: "#"
-        }
-      ]
-    },
-    {
-      category: "Community Resources",
+      category: "Workshop Materials",
       icon: Users,
       items: [
         {
-          title: "Discussion Forums",
-          description: "Connect with other readers and practitioners",
-          type: "Community Platform",
-          url: "#"
+          title: "AI Perception Bias in Healthcare",
+          description: "45-minute workshop scenario on detecting and mitigating AI bias in diagnostic systems. Includes roles for Clinical Lead, AI Engineer, Ethics Officer, and Patient Advocate.",
+          type: "Workshop Scenario",
+          url: "/workshops"
         },
         {
-          title: "Expert Q&A Sessions",
-          description: "Regular sessions with thought leaders and practitioners",
-          type: "Live Events",
-          url: "#"
+          title: "Trading Agent Exceeds Authority",
+          description: "60-minute governance simulation where agentic trading systems game success metrics. Practice per-action consent and reflex stop implementation.",
+          type: "Workshop Scenario",
+          url: "/workshops"
+        },
+        {
+          title: "Neural Data Consent Revocation",
+          description: "90-minute ethical dilemma workshop on consent management in BCI systems with irreversible learning.",
+          type: "Workshop Scenario",
+          url: "/workshops"
+        }
+      ]
+    },
+    {
+      category: "Governance Tools",
+      icon: Shield,
+      items: [
+        {
+          title: "Context Integrity Enforcement",
+          description: "Policy-as-code template ensuring every action remains within its intended context. Prevents neural movement data from being used for marketing.",
+          type: "Code Template",
+          url: "/governance"
+        },
+        {
+          title: "Per-Action Consent Module",
+          description: "TypeScript implementation enforcing consent requirements before each autonomous agent action. Includes value thresholds and time windows.",
+          type: "Code Template",
+          url: "/governance"
+        },
+        {
+          title: "Reflex Stop System",
+          description: "Safety harness that instantly halts systems on detecting unsafe states. Includes BCI neural spike anomaly detection.",
+          type: "Code Template",
+          url: "/governance"
+        },
+        {
+          title: "Neural Consent Vault",
+          description: "Manages consent for neural data with revocation, audit trails, and immediate processing halts. Medical-grade privacy implementation.",
+          type: "Code Template",
+          url: "/governance"
+        }
+      ]
+    },
+    {
+      category: "Data Exports",
+      icon: FileText,
+      items: [
+        {
+          title: "Architecture Across Eras",
+          description: "CSV export mapping how technical architecture components evolve from On-Prem through BCI era.",
+          type: "Data Export",
+          url: "/architecture_guts_by_era.csv"
+        },
+        {
+          title: "Governance Risks & Metrics",
+          description: "Comprehensive CSV of governance challenges, risk mitigation strategies, and success metrics by era.",
+          type: "Data Export",
+          url: "/governance_risks_metrics.csv"
+        },
+        {
+          title: "Organ Map Across Eras",
+          description: "Five-lobe Organ framework capabilities mapped across all technological eras with examples.",
+          type: "Data Export",
+          url: "/organ_across_eras.csv"
         }
       ]
     }

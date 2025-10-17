@@ -17,10 +17,13 @@ function getContentFileForSection(sectionId: string): string {
   const sectionFileMap: Record<string, string> = {
     'thinkers': 'thinkers-brains-that-shaped-brains.json',
     'frameworks': 'frameworks.json',
+    'roles': 'roles-humans-in-machine.json',
+    'thinking-engine-disciplines': 'disciplines.json',
+    'thinking-engine-technologies': 'technologies.json',
+    'thinking-engine-eras': 'eras.json',
     'quantum-logic-systems': 'quantum-logic-systems.json',
     'entangled-time': 'entangled-time.json',
     'roles-humans-in-machine': 'roles-humans-in-machine.json',
-    // Add more mappings as needed
   };
   
   return sectionFileMap[sectionId] || `${sectionId}.json`;
@@ -35,13 +38,20 @@ export default function SectionContent() {
     return <Navigate to="/books" replace />;
   }
 
-  // Special handling for "The Thinking Engine" 
+  // Special handling for "The Thinking Engine" - check for JSON content first
   const isThinkingEngine = bookSlug === 'thinking-engine';
+  const contentFile = isThinkingEngine ? getContentFileForSection(sectionId || '') : null;
+  const hasJsonContent = contentFile && ['frameworks.json', 'thinkers-brains-that-shaped-brains.json', 'roles-humans-in-machine.json', 'eras.json', 'technologies.json', 'disciplines.json'].includes(contentFile);
+  
   const { data: dbContent, isLoading: isDbLoading } = useMaster4500Section(sectionId || '');
   const { data: sectionProgress } = useMaster4500Progress();
 
-  // For "The Thinking Engine", render database content directly
-  if (isThinkingEngine) {
+  // For "The Thinking Engine" with JSON content, use the standard path (non-database)
+  if (isThinkingEngine && hasJsonContent) {
+    // Fall through to standard rendering below which uses ContentLoader with JSON
+  }
+  // For "The Thinking Engine" without JSON content, render database content directly
+  else if (isThinkingEngine) {
     if (isDbLoading) {
       return (
         <div className="container mx-auto px-4 py-8">
