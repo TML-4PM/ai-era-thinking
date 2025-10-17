@@ -1,0 +1,140 @@
+-- Phase 1 Continued: Management Theorists, Technology Pioneers, and remaining clusters
+
+INSERT INTO master_4500 (
+  book_slug,
+  section_slug,
+  title,
+  exemplar_type,
+  status,
+  progress,
+  description,
+  era_on_prem,
+  era_cloud_native,
+  era_gen_ai,
+  era_agentic_ai,
+  era_bci,
+  case_studies,
+  related_thinkers,
+  related_frameworks
+) VALUES
+-- Management Theorists Cluster
+('thinking-engine', 'thinkers', 'Peter Drucker', 'thinker', 'complete', 100, 'Father of modern management who introduced management by objectives and knowledge work concepts',
+ 'Management by objectives', 'Knowledge work optimization', 'AI-assisted management', 'Autonomous management systems', 'Enhanced management intuition',
+ ARRAY['Corporate management evolution', 'Knowledge work'], 
+ ARRAY['Frederick Taylor', 'Henri Fayol'], 
+ ARRAY['Management by Objectives', 'Knowledge Work']),
+
+('thinking-engine', 'thinkers', 'W. Edwards Deming', 'thinker', 'complete', 100, 'Quality management pioneer who transformed Japanese manufacturing and introduced PDCA cycle',
+ 'Quality management systems', 'Continuous improvement platforms', 'AI quality optimization', 'Self-improving quality systems', 'Quality sensing interfaces',
+ ARRAY['Japanese quality revolution', 'Toyota Production System'], 
+ ARRAY['Joseph Juran', 'Walter Shewhart'], 
+ ARRAY['Total Quality Management', 'PDCA Cycle']),
+
+('thinking-engine', 'thinkers', 'Frederick Winslow Taylor', 'thinker', 'seeded', 75, 'Engineer who founded scientific management and time-motion studies',
+ 'Scientific management principles', 'Process optimization', 'AI work optimization', 'Autonomous work design', 'Ergonomic neural interfaces',
+ ARRAY['Industrial efficiency', 'Manufacturing systems'], 
+ ARRAY['Henri Fayol', 'Max Weber'], 
+ ARRAY['Scientific Management', 'Time and Motion Studies']),
+
+('thinking-engine', 'thinkers', 'Henri Fayol', 'thinker', 'seeded', 75, 'Management theorist who defined the five functions of management',
+ 'Administrative management theory', 'Digital management systems', 'AI management principles', 'Self-managing organizations', 'Administrative neural interfaces',
+ ARRAY['Management education', 'Administrative systems'], 
+ ARRAY['Frederick Taylor', 'Max Weber'], 
+ ARRAY['Administrative Management', 'Management Functions']),
+
+('thinking-engine', 'thinkers', 'Max Weber', 'thinker', 'seeded', 75, 'Sociologist who analyzed bureaucracy and authority structures in organizations',
+ 'Bureaucratic organization theory', 'Digital bureaucracy', 'AI bureaucratic efficiency', 'Autonomous administrative systems', 'Authority sensing interfaces',
+ ARRAY['Government administration', 'Large organizations'], 
+ ARRAY['Henri Fayol', 'Chester Barnard'], 
+ ARRAY['Bureaucratic Theory', 'Authority Types']),
+
+('thinking-engine', 'thinkers', 'Chester Barnard', 'thinker', 'seeded', 75, 'Executive who theorized about cooperative systems and informal organization',
+ 'Cooperative system theory', 'Collaborative platforms', 'AI cooperation enhancement', 'Self-organizing cooperation', 'Cooperative sensing networks',
+ ARRAY['Executive leadership', 'Organizational cooperation'], 
+ ARRAY['Mary Parker Follett', 'Elton Mayo'], 
+ ARRAY['Cooperative Systems', 'Executive Functions']),
+
+('thinking-engine', 'thinkers', 'Mary Parker Follett', 'thinker', 'seeded', 75, 'Management consultant who pioneered collaborative leadership and power-with philosophy',
+ 'Power-with leadership philosophy', 'Collaborative leadership platforms', 'AI collaborative leadership', 'Distributed autonomous leadership', 'Empathic leadership interfaces',
+ ARRAY['Democratic management', 'Conflict resolution'], 
+ ARRAY['Chester Barnard', 'Kurt Lewin'], 
+ ARRAY['Collaborative Leadership', 'Power Dynamics']),
+
+('thinking-engine', 'thinkers', 'Douglas McGregor', 'thinker', 'seeded', 75, 'Psychologist who developed Theory X and Theory Y of human motivation',
+ 'Theory X and Y management', 'Employee engagement platforms', 'AI motivation analysis', 'Autonomous motivation systems', 'Motivation sensing interfaces',
+ ARRAY['Human resource management', 'Employee motivation'], 
+ ARRAY['Abraham Maslow', 'Frederick Herzberg'], 
+ ARRAY['Theory X and Y', 'Human Relations']),
+
+('thinking-engine', 'thinkers', 'Abraham Maslow', 'thinker', 'seeded', 75, 'Psychologist who created the hierarchy of needs theory',
+ 'Hierarchy of needs theory', 'Personalized motivation systems', 'AI needs assessment', 'Autonomous need fulfillment', 'Need sensing interfaces',
+ ARRAY['Employee motivation', 'Personal development'], 
+ ARRAY['Douglas McGregor', 'Frederick Herzberg'], 
+ ARRAY['Hierarchy of Needs', 'Self-Actualization']),
+
+('thinking-engine', 'thinkers', 'Kurt Lewin', 'thinker', 'seeded', 75, 'Psychologist who developed field theory and pioneered group dynamics research',
+ 'Field theory and group dynamics', 'Virtual team dynamics', 'AI group optimization', 'Self-optimizing teams', 'Group dynamic sensing',
+ ARRAY['Change management', 'Group dynamics'], 
+ ARRAY['Mary Parker Follett', 'Edgar Schein'], 
+ ARRAY['Field Theory', 'Change Management']),
+
+-- Technology Pioneers Cluster
+('thinking-engine', 'thinkers', 'Alan Turing', 'thinker', 'seeded', 85, 'Mathematician who laid foundations for computer science and artificial intelligence',
+ 'Theoretical computing foundations', 'Distributed computation', 'AI reasoning systems', 'Autonomous intelligent agents', 'Machine consciousness interfaces',
+ ARRAY['Computer science foundations', 'AI development'], 
+ ARRAY['John von Neumann', 'Claude Shannon'], 
+ ARRAY['Turing Machine', 'Turing Test']),
+
+('thinking-engine', 'thinkers', 'John von Neumann', 'thinker', 'seeded', 85, 'Mathematician who designed modern computer architecture and contributed to game theory',
+ 'Computer architecture design', 'Distributed architectures', 'Neural network architectures', 'Self-replicating systems', 'Brain-computer architectures',
+ ARRAY['Computer development', 'Game theory'], 
+ ARRAY['Alan Turing', 'Norbert Wiener'], 
+ ARRAY['Von Neumann Architecture', 'Game Theory']),
+
+('thinking-engine', 'thinkers', 'Claude Shannon', 'thinker', 'seeded', 85, 'Mathematician who created information theory and digital circuit design',
+ 'Information theory foundations', 'Network information theory', 'AI information processing', 'Autonomous information systems', 'Neural information interfaces',
+ ARRAY['Digital communications', 'Information systems'], 
+ ARRAY['Alan Turing', 'Norbert Wiener'], 
+ ARRAY['Information Theory', 'Boolean Logic']),
+
+('thinking-engine', 'thinkers', 'Marvin Minsky', 'thinker', 'seeded', 85, 'AI pioneer who co-founded MIT AI Lab and developed Society of Mind theory',
+ 'AI laboratory research', 'Distributed AI research', 'Advanced AI systems', 'Society of mind agents', 'Mind-machine integration',
+ ARRAY['MIT AI Lab', 'AI research'], 
+ ARRAY['John McCarthy', 'Herbert Simon'], 
+ ARRAY['Society of Mind', 'Artificial Intelligence']),
+
+('thinking-engine', 'thinkers', 'John McCarthy', 'thinker', 'seeded', 85, 'Computer scientist who coined term artificial intelligence and created Lisp',
+ 'AI programming languages', 'Distributed AI platforms', 'AI reasoning systems', 'Autonomous reasoning agents', 'Symbolic reasoning interfaces',
+ ARRAY['Lisp programming', 'Stanford AI'], 
+ ARRAY['Marvin Minsky', 'Allen Newell'], 
+ ARRAY['Artificial Intelligence', 'Lisp Programming']),
+
+('thinking-engine', 'thinkers', 'Douglas Engelbart', 'thinker', 'seeded', 80, 'Engineer who invented computer mouse and pioneered human-computer interaction',
+ 'Human-computer interaction', 'Collaborative computing', 'AI-human collaboration', 'Seamless human-AI interaction', 'Direct neural interfaces',
+ ARRAY['Computer mouse invention', 'Hypertext systems'], 
+ ARRAY['Vannevar Bush', 'J.C.R. Licklider'], 
+ ARRAY['Human-Computer Interaction', 'Augmentation']),
+
+('thinking-engine', 'thinkers', 'J.C.R. Licklider', 'thinker', 'seeded', 80, 'Computer scientist who envisioned man-computer symbiosis and led ARPANET development',
+ 'Man-computer symbiosis', 'Network computing', 'Human-AI symbiosis', 'Symbiotic intelligence', 'Symbiotic neural networks',
+ ARRAY['ARPANET development', 'Interactive computing'], 
+ ARRAY['Douglas Engelbart', 'Vannevar Bush'], 
+ ARRAY['Man-Computer Symbiosis', 'Interactive Computing']),
+
+('thinking-engine', 'thinkers', 'Vannevar Bush', 'thinker', 'seeded', 80, 'Engineer who conceptualized Memex, precursor to hypertext and the web',
+ 'Memex conceptual design', 'Hypertext and web systems', 'AI knowledge organization', 'Autonomous knowledge systems', 'Memory augmentation interfaces',
+ ARRAY['Hypertext concept', 'Information organization'], 
+ ARRAY['Douglas Engelbart', 'Ted Nelson'], 
+ ARRAY['Memex', 'Hypertext']),
+
+('thinking-engine', 'thinkers', 'Ted Nelson', 'thinker', 'seeded', 80, 'Sociologist who coined term hypertext and designed Project Xanadu',
+ 'Hypertext vision', 'World Wide Web', 'AI content linking', 'Autonomous content organization', 'Thought-based navigation',
+ ARRAY['Project Xanadu', 'Hypertext systems'], 
+ ARRAY['Vannevar Bush', 'Tim Berners-Lee'], 
+ ARRAY['Hypertext', 'Information Linking']),
+
+('thinking-engine', 'thinkers', 'Tim Berners-Lee', 'thinker', 'seeded', 80, 'Computer scientist who invented the World Wide Web and semantic web vision',
+ 'World Wide Web creation', 'Semantic web vision', 'AI web understanding', 'Autonomous web agents', 'Direct web interfaces',
+ ARRAY['World Wide Web', 'Semantic web'], 
+ ARRAY['Ted Nelson', 'Vint Cerf'], 
+ ARRAY['World Wide Web', 'Semantic Web']);
