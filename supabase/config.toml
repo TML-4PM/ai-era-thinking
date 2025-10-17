@@ -60,3 +60,6 @@ verify_jwt = false
 
 [functions.generate-book-pdf]
 verify_jwt = false
+
+[functions.batch-generate-teams]
+verify_jwt = false

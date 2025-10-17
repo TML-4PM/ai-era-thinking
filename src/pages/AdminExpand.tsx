@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -43,6 +43,10 @@ export const AdminExpandPage: React.FC = () => {
   const [isExpanding, setIsExpanding] = useState(false);
   const [isAuditing, setIsAuditing] = useState(false);
   const { toast } = useToast();
+  
+  // Use refs for synchronous loop guards
+  const generationCancelRef = useRef(false);
+  const expansionCancelRef = useRef(false);
 
   useEffect(() => {
     loadData();
@@ -76,6 +80,7 @@ export const AdminExpandPage: React.FC = () => {
     }
 
     setIsGenerating(true);
+    generationCancelRef.current = false;
     setCurrentBatch(0);
     setTotalBatches(thinkersWithoutProfiles.length);
     setProgress(0);
@@ -87,7 +92,7 @@ export const AdminExpandPage: React.FC = () => {
     let completed = 0;
 
     for (let i = 0; i < thinkersWithoutProfiles.length; i += CHUNK_SIZE) {
-      if (!isGenerating) break; // Stop if cancelled
+      if (generationCancelRef.current) break; // Stop if cancelled
       
       const chunk = thinkersWithoutProfiles.slice(i, i + CHUNK_SIZE);
       
@@ -146,6 +151,7 @@ export const AdminExpandPage: React.FC = () => {
     }
 
     setIsGenerating(true);
+    generationCancelRef.current = false;
     setCurrentBatch(0);
     setTotalBatches(thinkersWithoutTeams.length);
     setProgress(0);
@@ -157,7 +163,7 @@ export const AdminExpandPage: React.FC = () => {
     let completed = 0;
 
     for (let i = 0; i < thinkersWithoutTeams.length; i += CHUNK_SIZE) {
-      if (!isGenerating) break; // Stop if cancelled
+      if (generationCancelRef.current) break; // Stop if cancelled
       
       const chunk = thinkersWithoutTeams.slice(i, i + CHUNK_SIZE);
       
@@ -207,6 +213,8 @@ export const AdminExpandPage: React.FC = () => {
 
   const stopGeneration = () => {
     setIsGenerating(false);
+    generationCancelRef.current = true;
+    expansionCancelRef.current = true;
     addToLog("Generation stopped by user");
   };
 
@@ -222,6 +230,7 @@ export const AdminExpandPage: React.FC = () => {
     }
 
     setIsExpanding(true);
+    expansionCancelRef.current = false;
     setGenerationLog([]);
     addToLog(`Starting framework expansions for ${thinkersWithProfiles.length} thinkers`);
 
@@ -229,7 +238,7 @@ export const AdminExpandPage: React.FC = () => {
     let completed = 0;
 
     for (let i = 0; i < thinkersWithProfiles.length; i += CHUNK_SIZE) {
-      if (!isExpanding) break;
+      if (expansionCancelRef.current) break;
       
       const chunk = thinkersWithProfiles.slice(i, i + CHUNK_SIZE);
       
