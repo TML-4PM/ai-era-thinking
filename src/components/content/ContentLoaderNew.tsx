@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
 import { ContentModel } from '@/types/content';
 import { useMaster4500Section } from '@/hooks/useMaster4500';
 import { Master4500ExemplarCard } from './Master4500ExemplarCard';
@@ -36,16 +37,29 @@ export function ContentLoader({
     queryFn: async (): Promise<ContentModel | null> => {
       if (!contentFile) return null;
       
-      const response = await fetch(`/books/content/${contentFile}`);
-      if (!response.ok) {
-        throw new Error(`Failed to load content: ${response.statusText}`);
+      try {
+        const response = await fetch(`/books/content/${contentFile}`);
+        if (!response.ok) {
+          // Return null for 404s (scaffold sections without JSON files)
+          if (response.status === 404) {
+            return null;
+          }
+          throw new Error(`Failed to load content: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        return data as ContentModel;
+      } catch (error) {
+        // Gracefully handle JSON parsing errors for scaffold sections
+        if (error instanceof SyntaxError) {
+          return null;
+        }
+        throw error;
       }
-      
-      const data = await response.json();
-      return data as ContentModel;
     },
     enabled: !!contentFile,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: false, // Don't retry 404s
   });
 
   // For thinking-engine: use DB if available, otherwise fallback to JSON
@@ -125,8 +139,20 @@ export function ContentLoader({
   // Handle empty content for "The Thinking Engine"
   if (isThinkingEngine && (!dbContent || dbContent.length === 0) && !jsonContent) {
     return (
-      <div className={`text-center py-8 ${className}`}>
-        <p className="text-muted-foreground">No exemplars found for this section</p>
+      <div className={`text-center py-12 ${className}`}>
+        <div className="max-w-2xl mx-auto space-y-4">
+          <div className="text-6xl mb-4">🚧</div>
+          <h3 className="text-2xl font-bold">Coming Soon</h3>
+          <p className="text-muted-foreground">
+            This section is currently being developed. The content framework has been 
+            established and exemplars will be added soon through our database system.
+          </p>
+          <div className="pt-4">
+            <Badge variant="outline" className="bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/20">
+              Scaffold Status - Content Framework Ready
+            </Badge>
+          </div>
+        </div>
       </div>
     );
   }
