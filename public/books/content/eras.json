@@ -1,0 +1,79 @@
+{
+  "id": "eras",
+  "title": "Eras: Technological Epochs",
+  "description": "Five distinct technological eras that shaped how humans and machines collaborate - from on-premises infrastructure to brain-computer interfaces - comprehensive analysis of 30 era-defining transformations.",
+  "clusters": [
+    {
+      "id": "infrastructure-eras",
+      "title": "Infrastructure & Platform Eras",
+      "description": "How technological infrastructure evolved from physical data centers to neural interfaces",
+      "exemplars": [
+        {"name": "On-Premises Era (1960-2005)", "type": "era", "eraMapping": {"onPrem": "Dominant paradigm: owned infrastructure, manual operations", "cloudNative": "Legacy systems requiring migration", "genAI": "Data sources for AI training", "agenticAI": "Historical context for autonomous systems", "bci": "Foundation for neural computing evolution"}, "caseStudies": ["IBM mainframes", "Enterprise data centers", "Client-server architecture"], "relatedThinkers": ["Grace Hopper", "Edgar Codd", "Fred Brooks"], "relatedFrameworks": ["Waterfall", "ITIL", "Enterprise Architecture"]},
+        {"name": "Cloud-Native Era (2006-2018)", "type": "era", "eraMapping": {"onPrem": "Disruption of traditional IT", "cloudNative": "Dominant paradigm: elastic infrastructure, DevOps", "genAI": "Platform for AI/ML at scale", "agenticAI": "Foundation for agent orchestration", "bci": "Cloud infrastructure for neural processing"}, "caseStudies": ["AWS launch 2006", "Netflix cloud migration", "Spotify microservices"], "relatedThinkers": ["Werner Vogels", "Adrian Cockcroft", "Jez Humble"], "relatedFrameworks": ["Microservices", "DevOps", "Continuous Delivery"]},
+        {"name": "Generative AI Era (2019-2023)", "type": "era", "eraMapping": {"onPrem": "AI requires cloud scale", "cloudNative": "Infrastructure for LLM training", "genAI": "Dominant paradigm: foundation models, prompt engineering", "agenticAI": "Building blocks for autonomous agents", "bci": "AI models for neural decoding"}, "caseStudies": ["GPT-3 launch", "Stable Diffusion", "GitHub Copilot"], "relatedThinkers": ["Sam Altman", "Ilya Sutskever", "Andrej Karpathy"], "relatedFrameworks": ["Prompt Engineering", "RAG", "Fine-tuning"]},
+        {"name": "Agentic AI Era (2024-2028)", "type": "era", "eraMapping": {"onPrem": "Legacy modernization via agents", "cloudNative": "Agent orchestration platforms", "genAI": "Agents using foundation models", "agenticAI": "Dominant paradigm: autonomous multi-agent systems", "bci": "Agents augmented by neural input"}, "caseStudies": ["Multi-agent workflows", "Autonomous coding assistants", "Self-managing infrastructure"], "relatedThinkers": ["Yann LeCun", "Fei-Fei Li", "Demis Hassabis"], "relatedFrameworks": ["Multi-agent systems", "Tool use", "Policy-as-code"]},
+        {"name": "Brain-Computer Interface Era (2029+)", "type": "era", "eraMapping": {"onPrem": "Neural sensing of legacy systems", "cloudNative": "Cloud processing of neural signals", "genAI": "AI decoding of brain activity", "agenticAI": "Agents responding to neural commands", "bci": "Dominant paradigm: direct neural interfaces"}, "caseStudies": ["Neuralink trials", "Neural typing systems", "Thought-controlled interfaces"], "relatedThinkers": ["Elon Musk", "Mary Lou Jepsen", "Miguel Nicolelis"], "relatedFrameworks": ["Neural consent", "BCI safety", "Adverse event reporting"]}
+      ]
+    },
+    {
+      "id": "perception-patterning",
+      "title": "Perception & Patterning Evolution",
+      "description": "How systems perceive and recognize patterns across technological eras",
+      "exemplars": [
+        {"name": "Logs and Batch Reports (On-Prem)", "type": "capability", "eraMapping": {"onPrem": "Periodic, lagging signals from system logs", "cloudNative": "Real-time streaming logs", "genAI": "AI-analyzed log patterns", "agenticAI": "Agents learning from log data", "bci": "Neural sensing augments logs"}, "caseStudies": ["Unix syslog", "Enterprise monitoring", "Batch reporting"], "relatedThinkers": ["Ken Thompson", "Dennis Ritchie"], "relatedFrameworks": ["System monitoring", "Log analysis"]},
+        {"name": "Streams and Feature Stores (Cloud-Native)", "type": "capability", "eraMapping": {"onPrem": "Batch ETL processes", "cloudNative": "Near real-time patterns from streaming data", "genAI": "Features for ML models", "agenticAI": "Real-time agent decision inputs", "bci": "Neural pattern recognition"}, "caseStudies": ["Kafka at LinkedIn", "Uber feature store", "Netflix streaming"], "relatedThinkers": ["Jay Kreps", "Martin Kleppmann"], "relatedFrameworks": ["Event sourcing", "Stream processing"]},
+        {"name": "Embeddings and Vectors (Gen AI)", "type": "capability", "eraMapping": {"onPrem": "Text search only", "cloudNative": "Semantic search emerging", "genAI": "Semantic retrieval at scale via vector databases", "agenticAI": "Agents using semantic memory", "bci": "Neural embedding spaces"}, "caseStudies": ["OpenAI embeddings", "Pinecone vector DB", "Semantic search"], "relatedThinkers": ["Yoshua Bengio", "Geoffrey Hinton"], "relatedFrameworks": ["Transformers", "RAG", "Vector search"]},
+        {"name": "Live World Models (Agentic AI)", "type": "capability", "eraMapping": {"onPrem": "Static snapshots", "cloudNative": "Real-time dashboards", "genAI": "AI-generated summaries", "agenticAI": "Continuously updated state graphs tracking entities and events", "bci": "Neural world model integration"}, "caseStudies": ["Multi-agent coordination", "Game AI world models", "Autonomous systems"], "relatedThinkers": ["Yann LeCun", "Demis Hassabis"], "relatedFrameworks": ["World models", "Event graphs", "Entity resolution"]},
+        {"name": "Neural Signals (BCI)", "type": "capability", "eraMapping": {"onPrem": "No neural input", "cloudNative": "Medical EEG systems", "genAI": "AI-decoded neural patterns", "agenticAI": "Agents responding to thoughts", "bci": "Consent-first neural inputs providing direct brain-computer communication"}, "caseStudies": ["Neuralink progress", "Neural typing demos", "Brain signal decoding"], "relatedThinkers": ["Elon Musk", "Miguel Nicolelis"], "relatedFrameworks": ["Neural consent", "BCI safety protocols"]}
+      ]
+    },
+    {
+      "id": "decision-action",
+      "title": "Decision & Action Evolution",
+      "description": "How systems make decisions and take actions across technological eras",
+      "exemplars": [
+        {"name": "Rules and Tickets (On-Prem)", "type": "capability", "eraMapping": {"onPrem": "Manual gating via approval workflows", "cloudNative": "Automated workflows", "genAI": "AI-suggested actions", "agenticAI": "Autonomous actions within bounds", "bci": "Neural override capabilities"}, "caseStudies": ["ITSM ticketing", "Change management boards", "Approval workflows"], "relatedThinkers": ["W. Edwards Deming", "Eliyahu Goldratt"], "relatedFrameworks": ["ITIL", "Change management"]},
+        {"name": "APIs and SLOs (Cloud-Native)", "type": "capability", "eraMapping": {"onPrem": "Manual operations", "cloudNative": "Automated paths with SLO guardrails", "genAI": "AI-optimized APIs", "agenticAI": "Agent-to-agent API calls", "bci": "Neural-triggered actions"}, "caseStudies": ["Google SRE practices", "Stripe API design", "RESTful architectures"], "relatedThinkers": ["Ben Treynor", "Roy Fielding"], "relatedFrameworks": ["SRE", "Error budgets", "API design"]},
+        {"name": "Prompts with Review (Gen AI)", "type": "capability", "eraMapping": {"onPrem": "No AI decision support", "cloudNative": "Rule-based automation", "genAI": "Human in the loop reviewing AI suggestions", "agenticAI": "AI autonomy with escalation", "bci": "Neural confirmation loops"}, "caseStudies": ["GitHub Copilot", "ChatGPT assistants", "AI code review"], "relatedThinkers": ["Sam Altman", "Andrej Karpathy"], "relatedFrameworks": ["Prompt engineering", "Human oversight", "RLHF"]},
+        {"name": "Plans + Tools (Agentic AI)", "type": "capability", "eraMapping": {"onPrem": "Human planning only", "cloudNative": "Workflow orchestration", "genAI": "AI planning assistance", "agenticAI": "Bounded autonomy with rollback capabilities", "bci": "Neural plan adjustments"}, "caseStudies": ["AutoGPT", "LangChain agents", "Multi-agent planners"], "relatedThinkers": ["Fei-Fei Li", "Yann LeCun"], "relatedFrameworks": ["ReAct", "Tool use", "Multi-agent systems"]},
+        {"name": "Reflex Loops (BCI)", "type": "capability", "eraMapping": {"onPrem": "No neural input", "cloudNative": "Millisecond API responses", "genAI": "Real-time AI inference", "agenticAI": "Agent reaction times", "bci": "Hard stops and safety tiers for neural commands"}, "caseStudies": ["Neural prosthetics", "Brain-controlled devices", "Thought interfaces"], "relatedThinkers": ["Miguel Nicolelis", "Elon Musk"], "relatedFrameworks": ["Neural safety", "Reflex architectures", "Kill switches"]}
+      ]
+    },
+    {
+      "id": "innovation-strategy",
+      "title": "Innovation & Strategy Evolution",
+      "description": "How organizations innovate and strategize across technological eras",
+      "exemplars": [
+        {"name": "Projects + CAPEX (On-Prem)", "type": "capability", "eraMapping": {"onPrem": "Slow cycles with annual budgeting", "cloudNative": "Faster iteration cycles", "genAI": "Rapid prototyping", "agenticAI": "Continuous experimentation", "bci": "Neural insight-driven innovation"}, "caseStudies": ["Traditional IT projects", "Waterfall development", "Annual budgets"], "relatedThinkers": ["Fred Brooks", "Barry Boehm"], "relatedFrameworks": ["Waterfall", "Stage-gate", "Business cases"]},
+        {"name": "Products + CI/CD (Cloud-Native)", "type": "capability", "eraMapping": {"onPrem": "Project-based delivery", "cloudNative": "Faster iteration with continuous deployment", "genAI": "AI-enhanced development", "agenticAI": "Automated product evolution", "bci": "User neural feedback"}, "caseStudies": ["Amazon continuous deployment", "Netflix experimentation", "Spotify feature flags"], "relatedThinkers": ["Eric Ries", "Jez Humble"], "relatedFrameworks": ["Lean Startup", "DevOps", "Continuous delivery"]},
+        {"name": "Prompt Ops (Gen AI)", "type": "capability", "eraMapping": {"onPrem": "No AI prototyping", "cloudNative": "Rapid digital prototyping", "genAI": "Rapid AI-powered prototyping and ideation", "agenticAI": "AI-generated prototypes", "bci": "Thought-to-prototype interfaces"}, "caseStudies": ["GPT-based MVPs", "AI design tools", "Rapid AI prototyping"], "relatedThinkers": ["Sam Altman", "Reid Hoffman"], "relatedFrameworks": ["Prompt engineering", "AI-first design", "Rapid experimentation"]},
+        {"name": "Continuous Experiments (Agentic AI)", "type": "capability", "eraMapping": {"onPrem": "Quarterly experiments", "cloudNative": "A/B testing culture", "genAI": "AI experiment design", "agenticAI": "Portfolio refresh as default with autonomous experimentation", "bci": "Neural preference testing"}, "caseStudies": ["Netflix recommendations", "Amazon personalization", "Autonomous optimization"], "relatedThinkers": ["Ron Kohavi", "Ronny Kohavi"], "relatedFrameworks": ["Experimentation platforms", "Multi-armed bandits", "Bayesian optimization"]},
+        {"name": "New Markets + Neuro UX (BCI)", "type": "capability", "eraMapping": {"onPrem": "Traditional markets", "cloudNative": "Digital markets", "genAI": "AI-enabled products", "agenticAI": "Agent-mediated services", "bci": "New categories enabled by neural interfaces"}, "caseStudies": ["Neural gaming", "Thought interfaces", "BCI applications"], "relatedThinkers": ["Elon Musk", "Mary Lou Jepsen"], "relatedFrameworks": ["Neural UX design", "BCI product development", "Neuro ethics"]}
+      ]
+    },
+    {
+      "id": "culture-behavior",
+      "title": "Culture & Behavior Evolution",
+      "description": "How organizational culture and human behavior evolve across eras",
+      "exemplars": [
+        {"name": "Office-First Culture (On-Prem)", "type": "cultural", "eraMapping": {"onPrem": "Local norms and in-person collaboration", "cloudNative": "Remote work emerging", "genAI": "AI collaboration tools", "agenticAI": "Human-AI hybrid teams", "bci": "Neural team coordination"}, "caseStudies": ["IBM office culture", "Traditional corporations", "Cubicle farms"], "relatedThinkers": ["Peter Drucker", "Tom Peters"], "relatedFrameworks": ["Management by objectives", "Corporate culture"]},
+        {"name": "Platform Culture (Cloud-Native)", "type": "cultural", "eraMapping": {"onPrem": "Hierarchical structures", "cloudNative": "Distributed practices and remote-first teams", "genAI": "AI-mediated collaboration", "agenticAI": "Agent-augmented teams", "bci": "Neural presence"}, "caseStudies": ["Spotify squads", "GitLab remote", "Automattic distributed"], "relatedThinkers": ["Daniel Pink", "Cal Newport"], "relatedFrameworks": ["Remote work", "Async communication", "Platform thinking"]},
+        {"name": "New Content + Channels (Gen AI)", "type": "cultural", "eraMapping": {"onPrem": "Traditional media", "cloudNative": "Social media platforms", "genAI": "Narratives shift with AI-generated content", "agenticAI": "AI narrative architects", "bci": "Direct neural communication"}, "caseStudies": ["AI-generated content", "Synthetic media", "Personalized narratives"], "relatedThinkers": ["Neil Postman", "Marshall McLuhan"], "relatedFrameworks": ["Media theory", "Narrative design", "Content strategy"]},
+        {"name": "Narrative Steering + Tipping Points (Agentic AI)", "type": "cultural", "eraMapping": {"onPrem": "Human-only narratives", "cloudNative": "Viral content dynamics", "genAI": "AI content generation", "agenticAI": "Algorithmic culture with AI-driven narrative evolution", "bci": "Collective neural consciousness"}, "caseStudies": ["Recommendation algorithms", "Filter bubbles", "Algorithmic influence"], "relatedThinkers": ["Malcolm Gladwell", "Jaron Lanier"], "relatedFrameworks": ["Tipping points", "Network effects", "Algorithmic culture"]},
+        {"name": "Identity + Agency Shifts (BCI)", "type": "cultural", "eraMapping": {"onPrem": "Traditional identity", "cloudNative": "Digital identity", "genAI": "AI-augmented identity", "agenticAI": "Human-AI identity fusion", "bci": "Identity shifts requiring explicit disclosure and consent"}, "caseStudies": ["Neural augmentation ethics", "BCI identity questions", "Enhanced cognition"], "relatedThinkers": ["Andy Clark", "David Chalmers"], "relatedFrameworks": ["Extended mind", "Cyborg anthropology", "Neural ethics"]}
+      ]
+    }
+  ],
+  "references": [
+    "Vogels, W. (2006). Amazon's Approach to Building Scalable Systems",
+    "Humble, J. & Farley, D. (2010). Continuous Delivery",
+    "Altman, S. (2023). Planning for AGI and Beyond",
+    "Hassabis, D. (2016). Artificial Intelligence: Chess Match of the Century",
+    "Musk, E. (2019). An Integrated Brain-Machine Interface Platform",
+    "Kreps, J. (2013). The Log: What every software engineer should know",
+    "LeCun, Y. (2022). A Path Towards Autonomous Machine Intelligence",
+    "Treynor, B. (2016). Site Reliability Engineering at Google",
+    "Ries, E. (2011). The Lean Startup",
+    "McLuhan, M. (1964). Understanding Media: The Extensions of Man"
+  ]
+}

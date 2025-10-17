@@ -1,0 +1,115 @@
+{
+  "id": "technologies",
+  "title": "Technologies: The Technical Stack",
+  "description": "Core technologies enabling artificial intelligence across infrastructure layers - comprehensive analysis of 85 technical capabilities from data storage to neural interfaces.",
+  "clusters": [
+    {
+      "id": "data-plane",
+      "title": "Data Plane Technologies",
+      "description": "How data storage and processing capabilities evolved across technological eras",
+      "exemplars": [
+        {"name": "RDBMS + Nightly ETL", "type": "technology", "eraMapping": {"onPrem": "Files and scheduled loads dominate", "cloudNative": "Cloud databases with real-time replication", "genAI": "Training data sources", "agenticAI": "Structured data for agent decisions", "bci": "Patient record systems"}, "caseStudies": ["Oracle databases", "SQL Server implementations", "PostgreSQL adoption"], "relatedThinkers": ["Edgar Codd", "Michael Stonebraker"], "relatedFrameworks": ["Relational algebra", "ACID transactions", "ETL patterns"]},
+        {"name": "Managed Stores + Streams", "type": "technology", "eraMapping": {"onPrem": "Self-managed databases", "cloudNative": "Serverless databases with pub/sub messaging", "genAI": "Real-time ML feature stores", "agenticAI": "Event streams for agent coordination", "bci": "Real-time neural signal processing"}, "caseStudies": ["AWS RDS", "Google Cloud Pub/Sub", "Kafka at scale"], "relatedThinkers": ["Werner Vogels", "Jay Kreps"], "relatedFrameworks": ["Event sourcing", "CQRS", "Stream processing"]},
+        {"name": "Vectors + Feature Stores", "type": "technology", "eraMapping": {"onPrem": "Text search only", "cloudNative": "Elasticsearch semantic search", "genAI": "Embeddings and feature engineering at scale", "agenticAI": "Semantic memory for agents", "bci": "Neural embedding spaces"}, "caseStudies": ["Pinecone vector DB", "Uber Michelangelo", "OpenAI embeddings"], "relatedThinkers": ["Yoshua Bengio", "Jeff Dean"], "relatedFrameworks": ["Vector databases", "Embedding models", "Similarity search"]},
+        {"name": "Event Graph + World State", "type": "technology", "eraMapping": {"onPrem": "Static relational data", "cloudNative": "Real-time event streams", "genAI": "Knowledge graphs", "agenticAI": "Entity-event timelines tracking system state", "bci": "Neural state integration"}, "caseStudies": ["Neo4j knowledge graphs", "Event sourcing systems", "Temporal databases"], "relatedThinkers": ["Martin Fowler", "Greg Young"], "relatedFrameworks": ["Event sourcing", "Graph databases", "Temporal modeling"]},
+        {"name": "Neural Buffers + Labeled Timelines", "type": "technology", "eraMapping": {"onPrem": "No neural data", "cloudNative": "Medical EEG storage", "genAI": "AI-processed neural signals", "agenticAI": "Agent-neural data fusion", "bci": "EEG/EMG stores with consent tracking"}, "caseStudies": ["Neuralink data architecture", "Medical neural databases", "BCI data systems"], "relatedThinkers": ["Miguel Nicolelis", "Elon Musk"], "relatedFrameworks": ["Neural data management", "BCI storage", "Consent ledgers"]}
+      ]
+    },
+    {
+      "id": "model-plane",
+      "title": "Model Plane Technologies",
+      "description": "Evolution of machine learning and AI models across eras",
+      "exemplars": [
+        {"name": "Classic ML", "type": "technology", "eraMapping": {"onPrem": "On-premises training with scikit-learn and traditional algorithms", "cloudNative": "Distributed training", "genAI": "Feature engineering for LLMs", "agenticAI": "Hybrid classical-neural systems", "bci": "Signal classification models"}, "caseStudies": ["Netflix recommendations", "Amazon product suggestions", "Credit scoring systems"], "relatedThinkers": ["Andrew Ng", "Pedro Domingos"], "relatedFrameworks": ["Supervised learning", "Feature engineering", "Model validation"]},
+        {"name": "Managed Training/Pipelines", "type": "technology", "eraMapping": {"onPrem": "Manual model training", "cloudNative": "AutoML and hosted training platforms", "genAI": "Foundation model fine-tuning", "agenticAI": "Continuous model improvement", "bci": "Neural decoder training"}, "caseStudies": ["Google AutoML", "AWS SageMaker", "Azure ML Studio"], "relatedThinkers": ["Jeff Dean", "Quoc Le"], "relatedFrameworks": ["MLOps", "AutoML", "Hyperparameter tuning"]},
+        {"name": "Hosted LLMs + Fine-tunes", "type": "technology", "eraMapping": {"onPrem": "No large language models", "cloudNative": "API-based ML inference", "genAI": "Foundation models accessible via APIs", "agenticAI": "LLMs as agent reasoning engines", "bci": "Language models for neural decoding"}, "caseStudies": ["GPT-4 API", "Claude", "Anthropic models"], "relatedThinkers": ["Sam Altman", "Dario Amodei"], "relatedFrameworks": ["Prompt engineering", "Fine-tuning", "RLHF"]},
+        {"name": "Planners/Tools/Skills with Policy", "type": "technology", "eraMapping": {"onPrem": "Rule-based automation", "cloudNative": "Workflow orchestration", "genAI": "LLM-based planning", "agenticAI": "Toolformer and skills graph with policy constraints", "bci": "Neural-guided planning"}, "caseStudies": ["AutoGPT", "LangChain", "Semantic Kernel"], "relatedThinkers": ["Yann LeCun", "Fei-Fei Li"], "relatedFrameworks": ["ReAct", "Tool use", "Policy enforcement"]},
+        {"name": "EEG/EMG Decoders + Fusion", "type": "technology", "eraMapping": {"onPrem": "No neural ML", "cloudNative": "Medical signal processing", "genAI": "Deep learning for neural signals", "agenticAI": "Real-time neural interpretation", "bci": "Multi-signal decoders combining EEG, EMG, and context"}, "caseStudies": ["Neural prosthetics", "BCI typing systems", "Thought-to-text"], "relatedThinkers": ["Miguel Nicolelis", "Krishna Shenoy"], "relatedFrameworks": ["Signal processing", "Neural decoding", "Multi-modal fusion"]}
+      ]
+    },
+    {
+      "id": "agent-plane",
+      "title": "Agent Plane Technologies",
+      "description": "Evolution of autonomous agents and orchestration systems",
+      "exemplars": [
+        {"name": "Scripts/Jobs", "type": "technology", "eraMapping": {"onPrem": "Cron and batch processing dominate", "cloudNative": "Scheduled cloud functions", "genAI": "AI-generated scripts", "agenticAI": "Self-writing automation", "bci": "Neural-triggered tasks"}, "caseStudies": ["Unix cron jobs", "Windows Task Scheduler", "Batch processing"], "relatedThinkers": ["Ken Thompson", "Dennis Ritchie"], "relatedFrameworks": ["Shell scripting", "Batch processing", "Job scheduling"]},
+        {"name": "Workflows", "type": "technology", "eraMapping": {"onPrem": "Manual workflow coordination", "cloudNative": "Orchestration engines like Airflow", "genAI": "AI-optimized workflows", "agenticAI": "Self-organizing workflows", "bci": "Neural workflow triggers"}, "caseStudies": ["Apache Airflow", "AWS Step Functions", "GitHub Actions"], "relatedThinkers": ["Maxime Beauchemin", "Martin Fowler"], "relatedFrameworks": ["Workflow orchestration", "DAG execution", "Pipeline automation"]},
+        {"name": "Copilots + Chat Bots", "type": "technology", "eraMapping": {"onPrem": "No AI assistants", "cloudNative": "Rule-based chatbots", "genAI": "Task-oriented AI assistants", "agenticAI": "Multi-capability agents", "bci": "Thought-controlled assistants"}, "caseStudies": ["GitHub Copilot", "ChatGPT", "Microsoft Copilot"], "relatedThinkers": ["Sam Altman", "Satya Nadella"], "relatedFrameworks": ["Prompt engineering", "RAG", "Conversational AI"]},
+        {"name": "Multi-Agent Orchestration", "type": "technology", "eraMapping": {"onPrem": "Single-threaded automation", "cloudNative": "Microservice coordination", "genAI": "LLM-based agents", "agenticAI": "Roles, memory, and evaluators coordinating autonomous agents", "bci": "Neural-agent collaboration"}, "caseStudies": ["AutoGPT", "BabyAGI", "MetaGPT"], "relatedThinkers": ["Yann LeCun", "Stuart Russell"], "relatedFrameworks": ["Multi-agent systems", "Agent communication", "Shared memory"]},
+        {"name": "Neuro Agents with Reflex Tiers", "type": "technology", "eraMapping": {"onPrem": "No neural agents", "cloudNative": "Fast API responses", "genAI": "Real-time AI agents", "agenticAI": "Millisecond agent responses", "bci": "Human override with neural safety tiers"}, "caseStudies": ["Neural prosthetics control", "BCI safety systems", "Neural kill switches"], "relatedThinkers": ["Miguel Nicolelis", "Elon Musk"], "relatedFrameworks": ["Neural safety", "Reflex architectures", "Human override"]}
+      ]
+    },
+    {
+      "id": "control-plane",
+      "title": "Control Plane Technologies",
+      "description": "Governance, oversight, and control mechanisms across eras",
+      "exemplars": [
+        {"name": "ITSM + Change Boards", "type": "technology", "eraMapping": {"onPrem": "Manual approvals and change control boards", "cloudNative": "Automated change management", "genAI": "AI change impact analysis", "agenticAI": "Intelligent change orchestration", "bci": "Neural approval workflows"}, "caseStudies": ["ServiceNow ITSM", "Jira Service Management", "BMC Remedy"], "relatedThinkers": ["Gene Kim", "Tom Limoncelli"], "relatedFrameworks": ["ITIL", "Change management", "CAB processes"]},
+        {"name": "SLOs + Runbooks", "type": "technology", "eraMapping": {"onPrem": "Manual incident response", "cloudNative": "Automated remediation with SLO tracking", "genAI": "AI-generated runbooks", "agenticAI": "Self-healing systems", "bci": "Neural system health monitoring"}, "caseStudies": ["Google SRE practices", "PagerDuty automation", "Error budgets"], "relatedThinkers": ["Ben Treynor", "Betsy Beyer"], "relatedFrameworks": ["SRE", "Error budgets", "Runbook automation"]},
+        {"name": "Eval Harness + Prompt Registry", "type": "technology", "eraMapping": {"onPrem": "No AI evaluation", "cloudNative": "Traditional testing", "genAI": "Playbooks for testing LLM outputs", "agenticAI": "Continuous AI evaluation", "bci": "Neural output validation"}, "caseStudies": ["OpenAI Evals", "LangChain evaluation", "Prompt testing frameworks"], "relatedThinkers": ["Andrej Karpathy", "Jason Wei"], "relatedFrameworks": ["LLM evaluation", "Prompt testing", "Output validation"]},
+        {"name": "Policy-as-Code + Risk Maps + Auto Rollback", "type": "technology", "eraMapping": {"onPrem": "Manual policy enforcement", "cloudNative": "Infrastructure as code", "genAI": "AI policy validation", "agenticAI": "Kill-switches and automated rollback for autonomous systems", "bci": "Neural safety gates"}, "caseStudies": ["OPA policy engine", "Automated rollback systems", "Kill switches"], "relatedThinkers": ["Kelsey Hightower", "Charity Majors"], "relatedFrameworks": ["Policy as code", "GitOps", "Automated rollback"]},
+        {"name": "Neuro Safety Gates + Black Box Recorder", "type": "technology", "eraMapping": {"onPrem": "No neural safety", "cloudNative": "Traditional safety systems", "genAI": "AI safety monitoring", "agenticAI": "Multi-layer safety protocols", "bci": "Clinical review and neural event recording"}, "caseStudies": ["Neuralink safety protocols", "BCI adverse event tracking", "Neural black boxes"], "relatedThinkers": ["Stuart Russell", "Elon Musk"], "relatedFrameworks": ["BCI safety", "Adverse event reporting", "Clinical oversight"]}
+      ]
+    },
+    {
+      "id": "identity-plane",
+      "title": "Identity Plane Technologies",
+      "description": "Authentication, authorization, and consent management evolution",
+      "exemplars": [
+        {"name": "AD + VPN", "type": "technology", "eraMapping": {"onPrem": "Network perimeter security with Active Directory", "cloudNative": "Cloud directory services", "genAI": "AI-enhanced identity", "agenticAI": "Agent identity management", "bci": "Neural biometric identity"}, "caseStudies": ["Microsoft Active Directory", "LDAP directories", "VPN access control"], "relatedThinkers": ["Bill Gates", "Eric Grosse"], "relatedFrameworks": ["Perimeter security", "Network access control", "Directory services"]},
+        {"name": "IAM + SSO", "type": "technology", "eraMapping": {"onPrem": "Siloed authentication", "cloudNative": "Fine-grained roles with single sign-on", "genAI": "AI anomaly detection", "agenticAI": "Dynamic access policies", "bci": "Neural authentication"}, "caseStudies": ["Okta", "AWS IAM", "Azure AD"], "relatedThinkers": ["Eric Grosse", "BeyondCorp team"], "relatedFrameworks": ["Zero Trust", "RBAC", "OAuth"]},
+        {"name": "Governance + Masking", "type": "technology", "eraMapping": {"onPrem": "Limited data protection", "cloudNative": "Data classification", "genAI": "PII minimization and automated masking", "agenticAI": "Context-aware data protection", "bci": "Neural data privacy"}, "caseStudies": ["GDPR compliance tools", "Data masking solutions", "PII detection"], "relatedThinkers": ["Ann Cavoukian", "Latanya Sweeney"], "relatedFrameworks": ["Privacy by design", "Data minimization", "PII protection"]},
+        {"name": "Per-Action Consent + Provenance", "type": "technology", "eraMapping": {"onPrem": "Blanket permissions", "cloudNative": "Role-based access", "genAI": "Purpose-limited consent", "agenticAI": "Context integrity with per-action authorization", "bci": "Neural consent verification"}, "caseStudies": ["Contextual integrity frameworks", "Fine-grained consent", "Data provenance"], "relatedThinkers": ["Helen Nissenbaum", "Latanya Sweeney"], "relatedFrameworks": ["Context integrity", "Consent management", "Data lineage"]},
+        {"name": "Neural Consent Vault + Integrity Checks", "type": "technology", "eraMapping": {"onPrem": "No neural consent", "cloudNative": "Traditional consent management", "genAI": "AI consent verification", "agenticAI": "Multi-party consent orchestration", "bci": "Medical-grade privacy with neural-specific consent"}, "caseStudies": ["BCI consent protocols", "Neural data vaults", "Medical privacy systems"], "relatedThinkers": ["Elon Musk", "Nita Farahany"], "relatedFrameworks": ["Neural consent", "BCI ethics", "Medical privacy"]}
+      ]
+    },
+    {
+      "id": "safety-plane",
+      "title": "Safety Plane Technologies",
+      "description": "Safety, compliance, and risk management technologies",
+      "exemplars": [
+        {"name": "Yearly Audits", "type": "technology", "eraMapping": {"onPrem": "Point-in-time compliance audits", "cloudNative": "Quarterly assessments", "genAI": "Continuous monitoring", "agenticAI": "Real-time compliance", "bci": "Clinical safety reviews"}, "caseStudies": ["SOX audits", "ISO certifications", "Compliance reporting"], "relatedThinkers": ["Michael Power", "Philip Hampton"], "relatedFrameworks": ["Audit standards", "Compliance frameworks", "Risk assessment"]},
+        {"name": "Continuous Compliance", "type": "technology", "eraMapping": {"onPrem": "Annual compliance checks", "cloudNative": "Drift detection and automated compliance", "genAI": "AI compliance prediction", "agenticAI": "Self-regulating compliance", "bci": "Real-time safety monitoring"}, "caseStudies": ["AWS Config", "Azure Policy", "GCP Security Command Center"], "relatedThinkers": ["Gene Kim", "Nicole Forsgren"], "relatedFrameworks": ["Continuous compliance", "Drift detection", "Policy as code"]},
+        {"name": "Model Cards + Bias Tests", "type": "technology", "eraMapping": {"onPrem": "No AI documentation", "cloudNative": "Code documentation", "genAI": "Audit-ready model documentation", "agenticAI": "Continuous bias monitoring", "bci": "Neural fairness testing"}, "caseStudies": ["Google Model Cards", "Hugging Face model cards", "AI transparency"], "relatedThinkers": ["Timnit Gebru", "Margaret Mitchell"], "relatedFrameworks": ["Model cards", "Bias testing", "AI transparency"]},
+        {"name": "Red Teaming + Drills", "type": "technology", "eraMapping": {"onPrem": "Security assessments", "cloudNative": "Chaos engineering", "genAI": "AI red teaming", "agenticAI": "Operational safety with adversarial testing", "bci": "Neural safety drills"}, "caseStudies": ["OpenAI red teaming", "Anthropic safety testing", "AI security research"], "relatedThinkers": ["Stuart Russell", "Dario Amodei"], "relatedFrameworks": ["AI red teaming", "Adversarial testing", "Safety engineering"]},
+        {"name": "Medical Privacy + Adverse Event Reporting", "type": "technology", "eraMapping": {"onPrem": "Basic medical privacy", "cloudNative": "HIPAA compliance", "genAI": "AI-enhanced privacy", "agenticAI": "Automated privacy protection", "bci": "Clinical duty of care with mandatory reporting"}, "caseStudies": ["FDA adverse event systems", "Clinical trial safety", "Medical device monitoring"], "relatedThinkers": ["Atul Gawande", "Eric Topol"], "relatedFrameworks": ["Medical privacy", "Adverse event reporting", "Clinical oversight"]}
+      ]
+    },
+    {
+      "id": "observability-plane",
+      "title": "Observability Plane Technologies",
+      "description": "Monitoring, logging, and tracing technologies across eras",
+      "exemplars": [
+        {"name": "Logs + Tickets", "type": "technology", "eraMapping": {"onPrem": "Reactive log analysis and manual ticketing", "cloudNative": "Centralized logging", "genAI": "AI log analysis", "agenticAI": "Predictive alerting", "bci": "Neural system sensing"}, "caseStudies": ["Syslog", "Splunk", "ELK stack"], "relatedThinkers": ["Ken Thompson", "Dennis Ritchie"], "relatedFrameworks": ["Log management", "ITSM ticketing", "Incident response"]},
+        {"name": "Tracing + Metrics", "type": "technology", "eraMapping": {"onPrem": "Basic monitoring", "cloudNative": "Golden signals and distributed tracing", "genAI": "AI anomaly detection", "agenticAI": "Self-diagnosing systems", "bci": "Neural health telemetry"}, "caseStudies": ["Google Dapper", "Prometheus", "Datadog"], "relatedThinkers": ["Ben Sigelman", "Adrian Cole"], "relatedFrameworks": ["SRE", "Golden signals", "Distributed tracing"]},
+        {"name": "Token Logs + Eval Scores", "type": "technology", "eraMapping": {"onPrem": "No AI telemetry", "cloudNative": "Application monitoring", "genAI": "Prompt-level telemetry for LLM usage", "agenticAI": "Agent performance tracking", "bci": "Neural interaction logging"}, "caseStudies": ["LangSmith", "Weights & Biases", "Humanloop"], "relatedThinkers": ["Harrison Chase", "Jerry Liu"], "relatedFrameworks": ["LLM observability", "Prompt monitoring", "AI evaluation"]},
+        {"name": "Recorded Plans + Tool Calls", "type": "technology", "eraMapping": {"onPrem": "No agent tracing", "cloudNative": "API call logging", "genAI": "LLM interaction logs", "agenticAI": "Decision traces for agent reasoning", "bci": "Neural decision recording"}, "caseStudies": ["LangSmith tracing", "Agent monitoring", "Decision auditing"], "relatedThinkers": ["Harrison Chase", "Logan Kilpatrick"], "relatedFrameworks": ["Agent observability", "Decision tracing", "Tool call logging"]},
+        {"name": "Neural Event Timelines + Artifact Trails", "type": "technology", "eraMapping": {"onPrem": "No neural logging", "cloudNative": "Medical event logging", "genAI": "AI-processed neural logs", "agenticAI": "Agent-neural interaction logs", "bci": "End-to-end provenance from thought to action"}, "caseStudies": ["BCI event recording", "Neural black boxes", "Medical device logging"], "relatedThinkers": ["Miguel Nicolelis", "Krishna Shenoy"], "relatedFrameworks": ["Neural telemetry", "Event timelines", "Artifact provenance"]}
+      ]
+    },
+    {
+      "id": "devops-plane",
+      "title": "DevOps Plane Technologies",
+      "description": "Development and operations practices evolution",
+      "exemplars": [
+        {"name": "DevOps + ITIL", "type": "technology", "eraMapping": {"onPrem": "Change management and waterfall delivery", "cloudNative": "Agile and CI/CD", "genAI": "AI-assisted development", "agenticAI": "Autonomous development", "bci": "Neural development interfaces"}, "caseStudies": ["Toyota DevOps adoption", "Netflix evolution", "Google SRE"], "relatedThinkers": ["Gene Kim", "Jez Humble"], "relatedFrameworks": ["DevOps", "ITIL", "Continuous integration"]},
+        {"name": "DevSecOps", "type": "technology", "eraMapping": {"onPrem": "Security as final gate", "cloudNative": "Shift-left security in pipelines", "genAI": "AI security scanning", "agenticAI": "Autonomous security", "bci": "Neural security monitoring"}, "caseStudies": ["Snyk adoption", "GitHub Advanced Security", "Cloud security posture"], "relatedThinkers": ["Gene Kim", "Nicole Forsgren"], "relatedFrameworks": ["DevSecOps", "Shift-left security", "Security automation"]},
+        {"name": "MLOps + PromptOps", "type": "technology", "eraMapping": {"onPrem": "Manual model deployment", "cloudNative": "Automated ML pipelines", "genAI": "Model lifecycle and prompt management", "agenticAI": "Self-improving models", "bci": "Neural model optimization"}, "caseStudies": ["Google Vertex AI", "AWS SageMaker", "MLflow"], "relatedThinkers": ["Andrew Ng", "Chip Huyen"], "relatedFrameworks": ["MLOps", "Model governance", "Prompt management"]},
+        {"name": "AIOps + AgentOps", "type": "technology", "eraMapping": {"onPrem": "Manual operations", "cloudNative": "Automated Ops", "genAI": "AI operations automation", "agenticAI": "Agent lifecycle management", "bci": "Neural operations monitoring"}, "caseStudies": ["Datadog AIOps", "Dynatrace AI", "Agent monitoring"], "relatedThinkers": ["Ben Treynor", "Charity Majors"], "relatedFrameworks": ["AIOps", "AgentOps", "Intelligent automation"]},
+        {"name": "NeuroOps + Clinical Review", "type": "technology", "eraMapping": {"onPrem": "No neural operations", "cloudNative": "Medical device management", "genAI": "AI-enhanced medical ops", "agenticAI": "Automated medical monitoring", "bci": "Human factors and clinical oversight for BCI systems"}, "caseStudies": ["FDA device monitoring", "Clinical trial management", "BCI safety protocols"], "relatedThinkers": ["Atul Gawande", "Eric Topol"], "relatedFrameworks": ["NeuroOps", "Clinical review", "Medical device management"]}
+      ]
+    }
+  ],
+  "references": [
+    "Codd, E.F. (1970). A Relational Model of Data for Large Shared Data Banks",
+    "Vogels, W. (2008). Eventually Consistent",
+    "Kreps, J. (2013). The Log: What every software engineer should know",
+    "Bengio, Y., Courville, A., & Vincent, P. (2013). Representation Learning",
+    "Ng, A. (2011). Machine Learning Course",
+    "Altman, S. (2023). GPT-4 Technical Report",
+    "Kim, G. (2018). The DevOps Handbook",
+    "Treynor, B. (2016). Site Reliability Engineering",
+    "Nissenbaum, H. (2009). Privacy in Context",
+    "Nicolelis, M. (2011). Beyond Boundaries: The New Neuroscience"
+  ]
+}
