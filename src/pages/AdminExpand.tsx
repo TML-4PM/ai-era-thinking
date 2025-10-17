@@ -54,14 +54,36 @@ export const AdminExpandPage: React.FC = () => {
 
   const loadData = async () => {
     try {
+      console.log('📊 Loading admin data...');
       const [thinkers, stats] = await Promise.all([
         thinkerService.getAllEnhancedThinkers(),
         thinkerService.getCoverageStats()
       ]);
       setEnhancedThinkers(thinkers);
       setCoverageStats(stats);
+      console.log('📈 Coverage stats:', stats);
+      
+      // Auto-run integrity check on mount
+      console.log('🔍 Running initial integrity check...');
+      try {
+        const results = await thinkerService.runIntegrityCheck();
+        setAuditResults(results);
+        console.log('✅ Integrity check complete:', results);
+      } catch (error) {
+        console.error('❌ Integrity check failed:', error);
+        toast({
+          title: "Integrity Check Failed",
+          description: String(error),
+          variant: "destructive"
+        });
+      }
     } catch (error) {
       console.error('Error loading enhanced thinkers:', error);
+      toast({
+        title: "Loading Failed",
+        description: String(error),
+        variant: "destructive"
+      });
     }
   };
 
@@ -128,7 +150,7 @@ export const AdminExpandPage: React.FC = () => {
     setIsGenerating(false);
     addToLog(`Profile generation completed. ${completed} out of ${thinkersWithoutProfiles.length} profiles processed.`);
     
-    // Reload data
+    // Reload data and refresh stats
     await loadData();
     
     toast({
@@ -196,7 +218,7 @@ export const AdminExpandPage: React.FC = () => {
     setIsGenerating(false);
     addToLog(`Team generation completed. ${completed} out of ${thinkersWithoutTeams.length} teams processed.`);
     
-    // Reload data
+    // Reload data and refresh stats
     await loadData();
     
     toast({
@@ -260,6 +282,8 @@ export const AdminExpandPage: React.FC = () => {
 
     setIsExpanding(false);
     addToLog(`Framework expansion completed. ${completed} thinkers processed.`);
+    
+    // Reload data and refresh stats
     await loadData();
     
     toast({

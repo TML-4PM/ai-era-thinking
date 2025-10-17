@@ -358,23 +358,54 @@ export class ThinkerService {
     withExpansions: number;
     coverage: number;
   }> {
-    const enhanced = await this.getAllEnhancedThinkers();
-    const total = enhanced.length;
-    const withProfiles = enhanced.filter(t => t.hasDeepProfile).length;
-    const withTeams = enhanced.filter(t => t.hasTeam).length;
-    const withBoth = enhanced.filter(t => t.hasDeepProfile && t.hasTeam).length;
-    const withExpansions = enhanced.filter(t => 
-      t.profileData?.metadata?.framework_expansions && 
-      Object.keys(t.profileData.metadata.framework_expansions).length >= 8
-    ).length;
-    const coverage = (withBoth / total) * 100;
+    // Fetch all profiles and teams from database
+    const [profilesResult, teamsResult] = await Promise.all([
+      supabase.from('thinker_profiles').select('thinker_name, metadata'),
+      supabase.from('thinker_alignment_teams').select('thinker_name')
+    ]);
+
+    const profiles = profilesResult.data || [];
+    const teams = teamsResult.data || [];
+
+    // Create lookup sets for O(1) matching
+    const profileNames = new Set(profiles.map(p => p.thinker_name));
+    const teamNames = new Set(teams.map(t => t.thinker_name));
+    
+    // Count expansions by checking metadata
+    const expansionNames = new Set(
+      profiles
+        .filter(p => {
+          const metadata = p.metadata as any;
+          return metadata?.framework_expansions && 
+                 typeof metadata.framework_expansions === 'object' &&
+                 Object.keys(metadata.framework_expansions).length >= 8;
+        })
+        .map(p => p.thinker_name)
+    );
+
+    // Count against THINKERS array
+    let withProfiles = 0;
+    let withTeams = 0;
+    let withBoth = 0;
+    
+    THINKERS.forEach(thinker => {
+      const hasProfile = profileNames.has(thinker.name);
+      const hasTeam = teamNames.has(thinker.name);
+      
+      if (hasProfile) withProfiles++;
+      if (hasTeam) withTeams++;
+      if (hasProfile && hasTeam) withBoth++;
+    });
+
+    const total = THINKERS.length;
+    const coverage = total > 0 ? (withBoth / total) * 100 : 0;
 
     return {
       total,
       withProfiles,
       withTeams,
       withBoth,
-      withExpansions,
+      withExpansions: expansionNames.size,
       coverage
     };
   }
