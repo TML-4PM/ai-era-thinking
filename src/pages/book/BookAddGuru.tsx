@@ -1,15 +1,22 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { AddThinkerForm } from "@/components/AddThinkerForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuthorMode } from "@/hooks/useAuthorMode";
 import { Plus, Lightbulb, Users, BookOpen } from "lucide-react";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const BookAddGuru = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
   const { isAuthorMode } = useAuthorMode();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(book => book.slug === slug);
 
   if (!book) return null;

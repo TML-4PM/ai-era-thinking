@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,11 +13,17 @@ import { ContributionForm } from "@/components/content/ContributionForm";
 import { AuthorModeToggle } from "@/components/AuthorModeToggle";
 import { InsightInbox } from '@/components/author/InsightInbox';
 import { useAuthorMode } from '@/hooks/useAuthorMode';
+import { isPlaceholderParam } from '@/lib/route-guards';
 
 export default function BookOverview() {
   const { slug: bookSlug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
   const { isAuthorMode } = useAuthorMode();
+  
+  // Guard against placeholder params
+  if (!bookSlug || isPlaceholderParam(bookSlug)) {
+    return <Navigate to="/books" replace />;
+  }
   
   const book = books?.find(book => book.slug === bookSlug);
 

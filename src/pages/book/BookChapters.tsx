@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,11 +7,18 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Play, CheckCircle, FileText, Lightbulb } from "lucide-react";
 import { ContentLoader } from "@/components/content/ContentLoader";
 import { ContentModel, Volume } from "@/types/content";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 const BookChapters = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { data: books } = useBooks();
+  
+  // Guard against placeholder params
+  if (!slug || isPlaceholderParam(slug)) {
+    return <Navigate to="/books" replace />;
+  }
+  
   const book = books?.find(book => book.slug === slug);
 
   if (!book) return null;

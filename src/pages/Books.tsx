@@ -6,9 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Calendar, User, FileText, CheckCircle, AlertCircle } from "lucide-react";
+import { Calendar, User, FileText, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import { useBooks } from "@/hooks/useBooks";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { UPCOMING_BOOKS } from "@/data/upcoming-books";
 
 const Books: React.FC = () => {
   const navigate = useNavigate();
@@ -51,6 +52,11 @@ const Books: React.FC = () => {
   const filteredBooks = books?.filter(book => 
     fiveMainBooks.includes(book.slug)
   ) || [];
+  
+  // Check if a book slug is "coming soon" (in UPCOMING_BOOKS but not in DB)
+  const isComingSoon = (slug: string) => {
+    return UPCOMING_BOOKS.some(ub => ub.slug === slug) && !books?.some(b => b.slug === slug);
+  };
 
   const getBookSnapshot = (book: any) => {
     switch (book.slug) {
@@ -146,14 +152,23 @@ const Books: React.FC = () => {
                         
                         {/* Status and Ready Flag Badges */}
                         <div className="absolute top-3 left-3 flex gap-2">
-                          <Badge className={`${getStatusColor(book.status)} text-white`}>
-                            {getStatusLabel(book.status)}
-                          </Badge>
-                          {book.ready_flag && (
-                            <Badge className="bg-green-500 text-white">
-                              <CheckCircle className="w-3 h-3 mr-1" />
-                              Ready
+                          {isComingSoon(book.slug) ? (
+                            <Badge className="bg-purple-500 text-white">
+                              <Clock className="w-3 h-3 mr-1" />
+                              Coming Soon
                             </Badge>
+                          ) : (
+                            <>
+                              <Badge className={`${getStatusColor(book.status)} text-white`}>
+                                {getStatusLabel(book.status)}
+                              </Badge>
+                              {book.ready_flag && (
+                                <Badge className="bg-green-500 text-white">
+                                  <CheckCircle className="w-3 h-3 mr-1" />
+                                  Ready
+                                </Badge>
+                              )}
+                            </>
                           )}
                         </div>
 

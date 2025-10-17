@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuthorMode } from "@/hooks/useAuthorMode";
+import { isPlaceholderParam } from "@/lib/route-guards";
 import { 
   ArrowLeft, 
   BookOpen, 
@@ -15,17 +17,36 @@ import {
   Heart,
   Settings,
   Home,
-  FileText
+  FileText,
+  Edit
 } from "lucide-react";
 
 const BookLayout = () => {
   const { slug } = useParams<{ slug: string }>();
   const location = useLocation();
   const { data: books } = useBooks();
+  const { isAuthorMode } = useAuthorMode();
+  
+  // Guard against placeholder params - redirect to books list
+  if (!slug || isPlaceholderParam(slug)) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-foreground mb-4">Invalid Book URL</h1>
+          <p className="text-muted-foreground mb-4">The book URL appears to be a template.</p>
+          <Link to="/books">
+            <Button>← Back to Books</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  
   const book = books?.find(book => book.slug === slug);
   
-  // Check for upcoming books if not found in database
-  const upcomingBook = !book ? UPCOMING_BOOKS.find(b => b.slug === slug) : null;
+  // Check if this slug is in UPCOMING_BOOKS and NOT in the database
+  const upcomingBook = UPCOMING_BOOKS.find(b => b.slug === slug);
+  const isUpcomingOnly = upcomingBook && !book;
 
   const calculateAverageProgress = (chapters: any[]) => {
     if (!chapters || chapters.length === 0) return 0;
@@ -40,9 +61,9 @@ const BookLayout = () => {
     return location.pathname.startsWith(path) && path !== `/books/${slug}`;
   };
 
-  // Show coming soon page if book is upcoming
-  if (upcomingBook) {
-    return <ComingSoonBookPage book={upcomingBook} />;
+  // Show coming soon page if book is upcoming and not in DB
+  if (isUpcomingOnly) {
+    return <ComingSoonBookPage book={upcomingBook!} />;
   }
 
   // Only show 404 if book is not found in either active or upcoming lists
@@ -102,6 +123,14 @@ const BookLayout = () => {
               </div>
 
               <div className="flex items-center gap-2">
+                {isAuthorMode && (
+                  <Link to="/admin/books">
+                    <Button variant="outline" size="sm">
+                      <Edit className="w-4 h-4 mr-2" />
+                      Author Panel
+                    </Button>
+                  </Link>
+                )}
                 <ThemeToggle />
               </div>
             </div>

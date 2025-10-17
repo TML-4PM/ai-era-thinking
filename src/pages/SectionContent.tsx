@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useMaster4500Section, useMaster4500Progress } from '@/hooks/useMaster4500';
 import { AllThinkersGrid } from '@/components/AllThinkersGrid';
+import { isPlaceholderParam } from '@/lib/route-guards';
 
 // Map section IDs to their corresponding JSON content files
 function getContentFileForSection(sectionId: string): string {
@@ -29,14 +30,15 @@ export default function SectionContent() {
   const { bookSlug, sectionId } = useParams<{ bookSlug: string; sectionId: string }>();
   const navigate = useNavigate();
 
+  // Guard against placeholder params
+  if (!bookSlug || !sectionId || isPlaceholderParam(bookSlug) || isPlaceholderParam(sectionId)) {
+    return <Navigate to="/books" replace />;
+  }
+
   // Special handling for "The Thinking Engine" 
   const isThinkingEngine = bookSlug === 'thinking-engine';
   const { data: dbContent, isLoading: isDbLoading } = useMaster4500Section(sectionId || '');
   const { data: sectionProgress } = useMaster4500Progress();
-
-  if (!bookSlug || !sectionId) {
-    return <Navigate to="/books" replace />;
-  }
 
   // For "The Thinking Engine", render database content directly
   if (isThinkingEngine) {
