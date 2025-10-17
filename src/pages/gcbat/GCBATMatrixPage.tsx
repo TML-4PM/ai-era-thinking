@@ -27,7 +27,7 @@ export default function GCBATMatrixPage() {
             <h1 className="text-4xl font-bold">Story-Character Matrix</h1>
           </div>
           <p className="text-lg text-muted-foreground">
-            Explore which characters appear in each of the 32 stories. 
+            Explore which Neural Ennead characters appear in each of the 32 BCI governance stories. 
             <span className="block mt-2">
               <strong>P</strong> = Protagonist · <strong>S</strong> = Supporting · <strong>C</strong> = Cameo
             </span>

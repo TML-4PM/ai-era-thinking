@@ -27,8 +27,8 @@ export default function GCBATCharactersPage() {
             <h1 className="text-4xl font-bold">The Neural Ennead</h1>
           </div>
           <p className="text-lg text-muted-foreground">
-            Nine professionals from across the GC-BAT framework, each bringing unique perspectives
-            on governance, compliance, business, architecture, and technology in the age of AI.
+            Nine professionals navigating Brain-Computer Interface governance across the GCBAT framework—
+            from neural ethics and cognitive privacy to BCI architecture and neurotechnology policy.
           </p>
         </div>
 

@@ -31,6 +31,14 @@ export default function GCBATLanding() {
             <p className="text-xl text-muted-foreground">{book.subtitle}</p>
           )}
           <p className="text-lg leading-relaxed">{book.lead}</p>
+          <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+            <p className="text-sm font-semibold text-primary">About GCBAT & Brain-Computer Interfaces</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              GCBAT (Governance, Compliance, Business, Architecture, Technology) provides frameworks 
+              for responsible development of Brain-Computer Interface systems. These 32 stories explore 
+              the ethical, security, and societal challenges as neural augmentation becomes reality.
+            </p>
+          </div>
           
           <div className="flex gap-4 justify-center mt-6">
             <Button asChild size="lg">
@@ -55,7 +63,7 @@ export default function GCBATLanding() {
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-2">Meet the Neural Ennead</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Nine voices navigating the intersection of technology, governance, and humanity
+              Nine professionals navigating the ethical, technical, and societal challenges of Brain-Computer Interface governance
             </p>
           </div>
           <GCBATCharacterGrid />

@@ -36,35 +36,35 @@ export const GCBAT_ARCS: GCBATStoryArc[] = [
   {
     number: 1,
     name: "Infrastructure Collapse",
-    description: "Digital systems fail, revealing our dependencies",
+    description: "Neural networks fail, revealing our cognitive dependencies on BCI systems",
     storyCount: 7,
     chapterRange: [11, 17]
   },
   {
     number: 2,
     name: "Cognitive & Social Disruption",
-    description: "AI reshapes how we think, connect, and relate",
+    description: "Brain-Computer Interfaces reshape how we think, connect, and form relationships",
     storyCount: 6,
     chapterRange: [18, 24]
   },
   {
     number: 3,
     name: "Rights & Agency Erosion",
-    description: "Privacy, consent, and autonomy under pressure",
+    description: "Cognitive privacy, neural consent, and mental autonomy under siege",
     storyCount: 6,
     chapterRange: [25, 31]
   },
   {
     number: 4,
     name: "Environmental & Physical Systems",
-    description: "Technology's impact on our planet and bodies",
+    description: "Neural implants' impact on our bodies, brains, and biological integrity",
     storyCount: 6,
     chapterRange: [32, 38]
   },
   {
     number: 5,
     name: "Governance Crisis & Resolution",
-    description: "Who decides? Building systems that serve humanity",
+    description: "Who controls the human mind? Building BCI governance that protects humanity",
     storyCount: 7,
     chapterRange: [39, 46]
   }
