@@ -84,7 +84,7 @@ const Books: React.FC = () => {
   const getBookSnapshot = (book: any) => {
     switch (book.slug) {
       case 'tech-for-humanity':
-        return 'Seeded 5/15 volumes • Ethics & Consent, Governance & Policy, Education & Knowledge, Healthcare & Wellbeing, Climate & Environment';
+        return 'Ethics & Consent, Governance & Policy, Education & Knowledge, Healthcare & Wellbeing, Climate & Environment';
       case 'thinking-engine':
         return 'Sections seeded • Roles, Frameworks, Thinkers';
       case 'gcbat-vignettes':
@@ -186,7 +186,18 @@ const Books: React.FC = () => {
                 {premierBooks.map((book) => (
                   <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
                     <CardHeader className="p-0">
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-t-lg">
+                  <div 
+                    className="relative aspect-[3/4] overflow-hidden rounded-t-lg cursor-pointer"
+                    onClick={() => navigate(`/books/${book.slug}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate(`/books/${book.slug}`);
+                      }
+                    }}
+                  >
                         {book.cover && book.cover !== "/assets/covers/placeholder.jpg" ? (
                           <img 
                             src={book.cover} 
@@ -326,7 +337,18 @@ const Books: React.FC = () => {
                 {coreBooks.map((book) => (
                   <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
                     <CardHeader className="p-0">
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-t-lg">
+                  <div 
+                    className="relative aspect-[3/4] overflow-hidden rounded-t-lg cursor-pointer"
+                    onClick={() => navigate(`/books/${book.slug}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate(`/books/${book.slug}`);
+                      }
+                    }}
+                  >
                         {book.cover && book.cover !== "/assets/covers/placeholder.jpg" ? (
                           <img 
                             src={book.cover} 
@@ -460,7 +482,18 @@ const Books: React.FC = () => {
                 {developmentBooks.map((book) => (
                   <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
                     <CardHeader className="p-0">
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-t-lg">
+                  <div 
+                    className="relative aspect-[3/4] overflow-hidden rounded-t-lg cursor-pointer"
+                    onClick={() => navigate(`/books/${book.slug}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate(`/books/${book.slug}`);
+                      }
+                    }}
+                  >
                         {book.cover && book.cover !== "/assets/covers/placeholder.jpg" ? (
                           <img 
                             src={book.cover} 
