@@ -5,6 +5,7 @@ import { ContentLoader as ContentLoaderNew } from '@/components/content/ContentL
 import { ExemplarCard } from '@/components/content/ExemplarCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Users, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
@@ -277,9 +278,16 @@ export default function SectionContent() {
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                       {section.lead}
                     </p>
-                    <Badge className="bg-yellow-500 text-white">
-                      Content framework ready - awaiting development
-                    </Badge>
+                    <div className="flex items-center justify-center gap-4">
+                      <Badge className="bg-yellow-500 text-white">
+                        Content framework ready - awaiting development
+                      </Badge>
+                      {section.exemplarCount && (
+                        <Badge variant="secondary">
+                          0 of {section.exemplarCount} exemplars
+                        </Badge>
+                      )}
+                    </div>
                   </div>
 
                   <Card>
@@ -287,10 +295,18 @@ export default function SectionContent() {
                       <CardTitle>Coming Soon</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">
-                        This section is currently being developed. The content framework 
-                        has been established and exemplars will be added soon.
-                      </p>
+                      <div className="space-y-4">
+                        <p className="text-muted-foreground">
+                          This chapter is currently being developed. The content framework 
+                          has been established and {section.exemplarCount || 'multiple'} exemplars will be added soon.
+                        </p>
+                        {section.exemplarCount && (
+                          <div className="flex items-center gap-2">
+                            <Progress value={25} className="flex-1" />
+                            <span className="text-sm text-muted-foreground">25% (Framework Complete)</span>
+                          </div>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </div>

@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useBooks } from "@/hooks/useBooks";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ContentLoader } from "@/components/content/ContentLoader";
 import { 
   Settings, 
   FileText, 
@@ -18,7 +19,8 @@ import {
   Database,
   Code,
   Link,
-  Shield
+  Shield,
+  ArrowRight
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -29,6 +31,8 @@ const BookResources = () => {
   const book = books?.find(book => book.slug === slug);
 
   if (!book) return null;
+
+  const isThinkingEngine = slug === 'thinking-engine';
 
   const resources = [
     {
@@ -158,10 +162,54 @@ const BookResources = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4">Resources & Tools</h1>
         <p className="text-lg text-muted-foreground max-w-3xl">
-          Comprehensive resources to help you apply the concepts from {book.title} in your work. 
-          From calculators and templates to workshops and case studies.
+          {isThinkingEngine 
+            ? 'Access chapter-specific resources, data exports, and learning materials for The Thinking Engine Hub.'
+            : `Comprehensive resources to help you apply the concepts from ${book.title} in your work. From calculators and templates to workshops and case studies.`
+          }
         </p>
       </div>
+
+      {isThinkingEngine && (
+        <ContentLoader bookSlug={slug!}>
+          {({ content }) => {
+            const volumes = content?.volumes || [];
+            const seededVolumes = volumes.filter(v => v.status === 'seeded');
+
+            return (
+              <section className="mb-12">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <BookOpen className="w-5 h-5" />
+                      Seeded Chapters
+                    </CardTitle>
+                    <CardDescription>
+                      {seededVolumes.length} chapters with complete content available
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {seededVolumes.map((volume) => (
+                        <a 
+                          key={volume.id}
+                          href={`/section-content/${volume.slug}`}
+                          className="flex items-center justify-between p-4 border rounded-lg hover:bg-accent transition-colors"
+                        >
+                          <div>
+                            <div className="font-medium">{volume.title}</div>
+                            <div className="text-sm text-muted-foreground">{volume.exemplarCount} exemplars</div>
+                          </div>
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+            );
+          }}
+        </ContentLoader>
+      )}
 
       {/* Book-Specific Resources */}
       <section className="mb-12">
