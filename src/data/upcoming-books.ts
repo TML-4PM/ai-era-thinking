@@ -61,7 +61,7 @@ export const UPCOMING_BOOKS: UpcomingBook[] = [
     title: "Quantum Logic Systems",
     subtitle: "Beyond Binary Thinking",
     lead: "Discover how quantum principles reshape logic, computation, and reasoning systems for next-generation AI architectures.",
-    cover: "/assets/covers/placeholder.jpg",
+    cover: "/assets/covers/quantum-logic-systems.jpg",
     series_name: "Quantum Logic Systems",
     status: "coming_soon",
     expectedDate: "2025 Q3",
