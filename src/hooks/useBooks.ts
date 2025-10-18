@@ -12,7 +12,7 @@ const DEFAULT_BOOKS: Book[] = [
     subtitle: "Complete Collection",
     slug: "tech-for-humanity",
     lead: "A comprehensive 15-part exploration of technology's role in human flourishing.",
-    cover: "/assets/covers/tech-for-humanity-hub.jpg",
+    cover: "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/AHC%20Man.png",
     series_name: "Tech for Humanity",
     collection: "Suite Hub",
     status: "suite_hub",
