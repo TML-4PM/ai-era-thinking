@@ -11372,6 +11372,59 @@ export type Database = {
         }
         Relationships: []
       }
+      cv_generations: {
+        Row: {
+          created_at: string | null
+          format: string | null
+          generated_cv: string
+          generation_time_ms: number | null
+          id: string
+          job_description: string
+          match_score: number | null
+          profile_id: string | null
+          style_version: string | null
+          tokens_used: number | null
+          updated_at: string | null
+          user_email: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          format?: string | null
+          generated_cv: string
+          generation_time_ms?: number | null
+          id?: string
+          job_description: string
+          match_score?: number | null
+          profile_id?: string | null
+          style_version?: string | null
+          tokens_used?: number | null
+          updated_at?: string | null
+          user_email?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          format?: string | null
+          generated_cv?: string
+          generation_time_ms?: number | null
+          id?: string
+          job_description?: string
+          match_score?: number | null
+          profile_id?: string | null
+          style_version?: string | null
+          tokens_used?: number | null
+          updated_at?: string | null
+          user_email?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cv_generations_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "cv_profiles"
+            referencedColumns: ["cv_id"]
+          },
+        ]
+      }
       cv_master: {
         Row: {
           cv_text: string
