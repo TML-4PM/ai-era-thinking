@@ -225,6 +225,27 @@ const DEFAULT_BOOKS: Book[] = [
       { title: "Arc 4: Environmental & Physical Systems", sections: ["6 Stories", "Chapters 32-38"], progress: 5, chapter_order: 4 },
       { title: "Arc 5: Governance Crisis & Resolution", sections: ["7 Stories", "Chapters 39-46"], progress: 0, chapter_order: 5 }
     ]
+  },
+
+  // Living Stack - Cognitive Reef Architecture
+  {
+    id: "living-stack",
+    title: "Living Stack",
+    subtitle: "A Cognitive Reef Architecture for Signal-Driven Systems",
+    slug: "living-stack",
+    lead: "Treating tasks as signals, roles that mutate in real-time, and recovery mechanisms that ensure continuity across human-machine collaboration.",
+    cover: "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg",
+    series_name: "Tech for Humanity",
+    collection: "Tech for Humanity Suite",
+    status: "in_progress",
+    progress: 35,
+    owner: "Tech for Humanity Team",
+    ready_flag: true,
+    chapters: [
+      { title: "Foundation Concepts", sections: ["The Coordination Problem", "Tasks as Signals"], progress: 17, chapter_order: 1 },
+      { title: "Cognitive Reef Architecture", sections: ["Agent Roster Design", "Mutation Protocols", "Recovery Mechanisms"], progress: 16, chapter_order: 2 },
+      { title: "Implementation Patterns", sections: ["Time Tree Integration", "Cognitive Load Management", "Multi-Agent Orchestration"], progress: 11, chapter_order: 3 }
+    ]
   }
 ];
 

@@ -89,6 +89,84 @@ export type Database = {
         }
         Relationships: []
       }
+      "175+ Skills Matrix": {
+        Row: {
+          alignment_score: string | null
+          Certification: string | null
+          domain: string | null
+          "Endorsements Count": string | null
+          evidence_level: string | null
+          impact_metric: string | null
+          "Job Keywords Matched": string | null
+          market_trend: string | null
+          "Proficiency Level": string | null
+          "Project Examples": string | null
+          proof: string | null
+          rating: number | null
+          recency_year: string | null
+          role_alignment: string | null
+          seniority_band: string | null
+          skill: string | null
+          skill_usage_count: string | null
+          source_cv: string | null
+          status: string | null
+          "Tools Used": string | null
+          "Training Needed": string | null
+          Transferability: string | null
+          trend: string | null
+        }
+        Insert: {
+          alignment_score?: string | null
+          Certification?: string | null
+          domain?: string | null
+          "Endorsements Count"?: string | null
+          evidence_level?: string | null
+          impact_metric?: string | null
+          "Job Keywords Matched"?: string | null
+          market_trend?: string | null
+          "Proficiency Level"?: string | null
+          "Project Examples"?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: string | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string | null
+          skill_usage_count?: string | null
+          source_cv?: string | null
+          status?: string | null
+          "Tools Used"?: string | null
+          "Training Needed"?: string | null
+          Transferability?: string | null
+          trend?: string | null
+        }
+        Update: {
+          alignment_score?: string | null
+          Certification?: string | null
+          domain?: string | null
+          "Endorsements Count"?: string | null
+          evidence_level?: string | null
+          impact_metric?: string | null
+          "Job Keywords Matched"?: string | null
+          market_trend?: string | null
+          "Proficiency Level"?: string | null
+          "Project Examples"?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: string | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string | null
+          skill_usage_count?: string | null
+          source_cv?: string | null
+          status?: string | null
+          "Tools Used"?: string | null
+          "Training Needed"?: string | null
+          Transferability?: string | null
+          trend?: string | null
+        }
+        Relationships: []
+      }
       "65 project summary": {
         Row: {
           Cost: string | null
@@ -9092,6 +9170,42 @@ export type Database = {
           sku?: string | null
           sku_grouping?: string | null
           volume_discount?: string | null
+        }
+        Relationships: []
+      }
+      cleaned_troy_latter_star: {
+        Row: {
+          Action: string | null
+          Framing: string | null
+          Lesson: string | null
+          mapped_skill: string | null
+          Organisation: string | null
+          Result: string | null
+          Situation: string | null
+          Task: string | null
+          Theme: string | null
+        }
+        Insert: {
+          Action?: string | null
+          Framing?: string | null
+          Lesson?: string | null
+          mapped_skill?: string | null
+          Organisation?: string | null
+          Result?: string | null
+          Situation?: string | null
+          Task?: string | null
+          Theme?: string | null
+        }
+        Update: {
+          Action?: string | null
+          Framing?: string | null
+          Lesson?: string | null
+          mapped_skill?: string | null
+          Organisation?: string | null
+          Result?: string | null
+          Situation?: string | null
+          Task?: string | null
+          Theme?: string | null
         }
         Relationships: []
       }
