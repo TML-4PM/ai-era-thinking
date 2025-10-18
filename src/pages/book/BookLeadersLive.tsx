@@ -14,6 +14,11 @@ const BookLeadersLive = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: books } = useBooks();
   
+  // Redirect WorkFamilyAI to Executive Team page
+  if (slug === 'workfamilyai') {
+    return <Navigate to={`/books/${slug}/executive-team`} replace />;
+  }
+  
   // Guard against placeholder params
   if (!slug || isPlaceholderParam(slug)) {
     return <Navigate to="/books" replace />;

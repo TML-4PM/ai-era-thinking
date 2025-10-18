@@ -24,6 +24,8 @@ import Thinkers from "./pages/Thinkers";
 import Frameworks from "./pages/Frameworks";
 import Chat from "./pages/Chat";
 import WorkFamily from "./pages/WorkFamily";
+import WorkFamilyExecutiveTeam from "./pages/book/WorkFamilyExecutiveTeam";
+import WorkFamilyAlignmentTools from "./pages/book/WorkFamilyAlignmentTools";
 import Calculators from "./pages/Calculators";
 import Resources from "./pages/Resources";
 import Workshops from "./pages/Workshops";
@@ -91,6 +93,12 @@ const App = () => (
                 <Route path="leaders-live" element={<BookLeadersLive />} />
                 <Route path="add-guru" element={<BookAddGuru />} />
                 <Route path="resources" element={<BookResources />} />
+                
+                {/* WorkFamilyAI-specific routes */}
+                <Route path="executive-team" element={<WorkFamilyExecutiveTeam />} />
+                <Route path="alignment-tools" element={<WorkFamilyAlignmentTools />} />
+                
+                {/* GCBAT-specific routes */}
                 <Route path="characters" element={<GCBATCharactersPage />} />
                 <Route path="matrix" element={<GCBATMatrixPage />} />
               </Route>

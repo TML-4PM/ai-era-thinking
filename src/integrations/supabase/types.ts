@@ -6779,14 +6779,18 @@ export type Database = {
           book_id: string
           chapter_order: number
           chapter_status: Database["public"]["Enums"]["chapter_status"] | null
+          chapter_tags: string[] | null
           content: string | null
           created_at: string
           est_read_minutes: number | null
           id: string
           is_published: boolean | null
+          primary_character_id: string | null
           progress_percentage: number | null
+          risk_tier: string | null
           sections: Json | null
           slug: string | null
+          story_arc: number | null
           title: string
           updated_at: string
           word_count: number | null
@@ -6795,14 +6799,18 @@ export type Database = {
           book_id: string
           chapter_order: number
           chapter_status?: Database["public"]["Enums"]["chapter_status"] | null
+          chapter_tags?: string[] | null
           content?: string | null
           created_at?: string
           est_read_minutes?: number | null
           id?: string
           is_published?: boolean | null
+          primary_character_id?: string | null
           progress_percentage?: number | null
+          risk_tier?: string | null
           sections?: Json | null
           slug?: string | null
+          story_arc?: number | null
           title: string
           updated_at?: string
           word_count?: number | null
@@ -6811,14 +6819,18 @@ export type Database = {
           book_id?: string
           chapter_order?: number
           chapter_status?: Database["public"]["Enums"]["chapter_status"] | null
+          chapter_tags?: string[] | null
           content?: string | null
           created_at?: string
           est_read_minutes?: number | null
           id?: string
           is_published?: boolean | null
+          primary_character_id?: string | null
           progress_percentage?: number | null
+          risk_tier?: string | null
           sections?: Json | null
           slug?: string | null
+          story_arc?: number | null
           title?: string
           updated_at?: string
           word_count?: number | null
@@ -6829,6 +6841,13 @@ export type Database = {
             columns: ["book_id"]
             isOneToOne: false
             referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_chapters_primary_character_id_fkey"
+            columns: ["primary_character_id"]
+            isOneToOne: false
+            referencedRelation: "gcbat_characters"
             referencedColumns: ["id"]
           },
         ]
@@ -27999,6 +28018,7 @@ export type Database = {
           domain: string | null
           evidence_level: string | null
           impact_metric: string | null
+          market_trend: string | null
           proof: string | null
           rating: number | null
           recency_year: number | null
@@ -28008,11 +28028,14 @@ export type Database = {
           source_cv: string | null
           status: string | null
           trend: string | null
+          usage_frequency: number | null
+          visibility_score: number | null
         }
         Insert: {
           domain?: string | null
           evidence_level?: string | null
           impact_metric?: string | null
+          market_trend?: string | null
           proof?: string | null
           rating?: number | null
           recency_year?: number | null
@@ -28022,11 +28045,14 @@ export type Database = {
           source_cv?: string | null
           status?: string | null
           trend?: string | null
+          usage_frequency?: number | null
+          visibility_score?: number | null
         }
         Update: {
           domain?: string | null
           evidence_level?: string | null
           impact_metric?: string | null
+          market_trend?: string | null
           proof?: string | null
           rating?: number | null
           recency_year?: number | null
@@ -28036,6 +28062,8 @@ export type Database = {
           source_cv?: string | null
           status?: string | null
           trend?: string | null
+          usage_frequency?: number | null
+          visibility_score?: number | null
         }
         Relationships: []
       }
