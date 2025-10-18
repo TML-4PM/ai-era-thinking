@@ -27,8 +27,11 @@ export const BOOK_TAB_CONFIGS: Record<string, BookTabConfig[]> = {
 
   // The Thinking Engine - Master framework with sections
   'thinking-engine': [
-    { path: '', label: 'Hub', icon: 'Compass' },
-    { path: 'chapters', label: 'Sections', icon: 'BookOpen' },
+    { path: '', label: 'Overview', icon: 'Home' },
+    { path: 'explorer', label: 'Explorer', icon: 'Compass' },
+    { path: 'chapters', label: 'Chapters', icon: 'BookOpen' },
+    { path: 'era-evolution', label: 'Era Evolution', icon: 'Calendar' },
+    { path: 'master4500', label: 'Master 4500', icon: 'Grid3x3' },
     { path: 'resources', label: 'Resources', icon: 'FolderOpen' }
   ],
 

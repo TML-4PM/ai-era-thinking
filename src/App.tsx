@@ -48,6 +48,9 @@ import GCBATLanding from "./pages/gcbat/GCBATLanding";
 import GCBATCharactersPage from "./pages/gcbat/GCBATCharactersPage";
 import GCBATMatrixPage from "./pages/gcbat/GCBATMatrixPage";
 import GCBATArcPage from "./pages/gcbat/GCBATArcPage";
+import ThinkingEngineExplorer from "./pages/ThinkingEngineExplorer";
+import Master4500BrowserPage from "./pages/Master4500BrowserPage";
+import EraEvolutionPage from "./pages/EraEvolutionPage";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -82,6 +85,11 @@ const App = () => (
               
               {/* Legacy redirect for old section-content routes */}
               <Route path="/section-content/:sectionId" element={<SectionContentRedirect />} />
+              
+              {/* Thinking Engine specific routes */}
+              <Route path="/books/thinking-engine/explorer" element={<ThinkingEngineExplorer />} />
+              <Route path="/books/thinking-engine/master4500" element={<Master4500BrowserPage />} />
+              <Route path="/books/thinking-engine/era-evolution" element={<EraEvolutionPage />} />
               
               {/* GCBAT Arc pages - keep as custom route */}
               <Route path="/books/gcbat-vignettes/arc/:arcNumber" element={<GCBATArcPage />} />
