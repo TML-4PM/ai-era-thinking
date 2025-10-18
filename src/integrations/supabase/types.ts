@@ -27996,37 +27996,244 @@ export type Database = {
       }
       skills_master: {
         Row: {
-          group_name: string | null
-          id: string
-          last_updated: string | null
+          domain: string | null
+          evidence_level: string | null
+          impact_metric: string | null
           proof: string | null
-          skill_name: string
-          source: string | null
-          strength: number | null
+          rating: number | null
+          recency_year: number | null
+          role_alignment: string | null
+          seniority_band: string | null
+          skill: string | null
+          source_cv: string | null
+          status: string | null
           trend: string | null
-          user_id: string | null
         }
         Insert: {
-          group_name?: string | null
-          id?: string
-          last_updated?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          impact_metric?: string | null
           proof?: string | null
-          skill_name: string
-          source?: string | null
-          strength?: number | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
           trend?: string | null
-          user_id?: string | null
         }
         Update: {
-          group_name?: string | null
-          id?: string
-          last_updated?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          impact_metric?: string | null
           proof?: string | null
-          skill_name?: string
-          source?: string | null
-          strength?: number | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
           trend?: string | null
-          user_id?: string | null
+        }
+        Relationships: []
+      }
+      skills_master_final: {
+        Row: {
+          created_at: string | null
+          domain: string | null
+          evidence_level: string | null
+          frequency_score: number | null
+          id: number
+          impact_metric: string | null
+          market_gap_score: number | null
+          market_mentions: number | null
+          proof: string | null
+          rating: number | null
+          recency_year: number | null
+          role_alignment: string | null
+          seniority_band: string | null
+          skill: string
+          source_cv: string | null
+          status: string | null
+          trend: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          frequency_score?: number | null
+          id?: number
+          impact_metric?: string | null
+          market_gap_score?: number | null
+          market_mentions?: number | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill: string
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          frequency_score?: number | null
+          id?: number
+          impact_metric?: string | null
+          market_gap_score?: number | null
+          market_mentions?: number | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Relationships: []
+      }
+      skills_master_full: {
+        Row: {
+          created_at: string | null
+          domain: string | null
+          evidence_level: string | null
+          frequency_score: number | null
+          id: number
+          impact_metric: string | null
+          market_gap_score: number | null
+          market_mentions: number | null
+          proof: string | null
+          rating: number | null
+          recency_year: number | null
+          role_alignment: string | null
+          seniority_band: string | null
+          skill: string
+          source_cv: string | null
+          status: string | null
+          trend: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          frequency_score?: number | null
+          id?: number
+          impact_metric?: string | null
+          market_gap_score?: number | null
+          market_mentions?: number | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill: string
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          domain?: string | null
+          evidence_level?: string | null
+          frequency_score?: number | null
+          id?: number
+          impact_metric?: string | null
+          market_gap_score?: number | null
+          market_mentions?: number | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          seniority_band?: string | null
+          skill?: string
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Relationships: []
+      }
+      skills_stage: {
+        Row: {
+          domain: string
+          id: number
+          proof: string | null
+          rating: number | null
+          recency_year: number | null
+          role_alignment: string | null
+          skill: string
+          skill_norm: string | null
+          source_cv: string | null
+          status: string | null
+          trend: string | null
+        }
+        Insert: {
+          domain: string
+          id: number
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          skill: string
+          skill_norm?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Update: {
+          domain?: string
+          id?: number
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          skill?: string
+          skill_norm?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Relationships: []
+      }
+      skills_stage_full: {
+        Row: {
+          domain: string | null
+          proof: string | null
+          rating: number | null
+          recency_year: number | null
+          role_alignment: string | null
+          skill: string | null
+          source_cv: string | null
+          status: string | null
+          trend: string | null
+        }
+        Insert: {
+          domain?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Update: {
+          domain?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: number | null
+          role_alignment?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
         }
         Relationships: []
       }
@@ -29483,6 +29690,38 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "survey_autonomy_response_id_fkey"
+            columns: ["response_id"]
+            isOneToOne: false
+            referencedRelation: "survey_responses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_business_market: {
+        Row: {
+          created_at: string | null
+          data: Json | null
+          id: string
+          response_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          response_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          response_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_business_market_response_id_fkey"
             columns: ["response_id"]
             isOneToOne: false
             referencedRelation: "survey_responses"
@@ -35459,6 +35698,42 @@ export type Database = {
         }
         Relationships: []
       }
+      yes: {
+        Row: {
+          domain: string | null
+          proof: string | null
+          rating: number | null
+          recency_year: string | null
+          role_alignment: string | null
+          skill: string | null
+          source_cv: string | null
+          status: string | null
+          trend: string | null
+        }
+        Insert: {
+          domain?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: string | null
+          role_alignment?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Update: {
+          domain?: string | null
+          proof?: string | null
+          rating?: number | null
+          recency_year?: string | null
+          role_alignment?: string | null
+          skill?: string | null
+          source_cv?: string | null
+          status?: string | null
+          trend?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       "4500 Master": {
@@ -36024,16 +36299,16 @@ export type Database = {
         }
         Relationships: []
       }
-      skills_ranked: {
+      skills_rank_market_view: {
         Row: {
+          domain: string | null
           frequency_score: number | null
-          group_name: string | null
-          jd_hits: number | null
-          skill_name: string | null
-          strength: number | null
+          market_gap_score: number | null
+          market_mentions: number | null
+          rank_position: number | null
+          rating: number | null
+          skill: string | null
           trend: string | null
-          user_hits: number | null
-          user_id: string | null
         }
         Relationships: []
       }
