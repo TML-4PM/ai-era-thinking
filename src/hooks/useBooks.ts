@@ -124,20 +124,36 @@ const DEFAULT_BOOKS: Book[] = [
     ]
   },
 
-  // C: The Thinking Engine - Suite Hub 
+  // C: The Thinking Engine - Single book with 15 chapters
   {
     id: "C",
     title: "The Thinking Engine",
-    subtitle: "Complete Collection",
+    subtitle: "Cognitive Systems, Decision-Making, and Intelligent Design",
     slug: "thinking-engine",
-    lead: "A 15-part exploration of cognitive systems, decision-making, and intelligent design.",
+    lead: "A 15-chapter exploration of how humans and machines think, decide, and evolve together.",
     cover: "/assets/covers/thinking-engine-hub.jpg",
     series_name: "The Thinking Engine", 
-    collection: "Suite Hub",
-    status: "suite_hub",
+    collection: "Single Book",
+    status: "in_progress",
     owner: "Editorial Team",
     ready_flag: true,
-    chapters: []
+    chapters: [
+      { title: "Principles", sections: ["Guiding principles for AI development"], progress: 10, chapter_order: 1 },
+      { title: "Institutions", sections: ["Organizations driving AI development"], progress: 5, chapter_order: 2 },
+      { title: "Doctrines", sections: ["Philosophical doctrines shaping AI"], progress: 5, chapter_order: 3 },
+      { title: "Frameworks", sections: ["100 frameworks for understanding AI"], progress: 20, chapter_order: 4 },
+      { title: "Thinkers", sections: ["70 brains that shaped brains"], progress: 85, chapter_order: 5 },
+      { title: "Disciplines", sections: ["Academic disciplines in AI research"], progress: 15, chapter_order: 6 },
+      { title: "Technologies", sections: ["Core technologies enabling AI"], progress: 25, chapter_order: 7 },
+      { title: "Organizations", sections: ["Key organizations in AI ecosystem"], progress: 0, chapter_order: 8 },
+      { title: "Cultures", sections: ["Cultural perspectives on AI"], progress: 0, chapter_order: 9 },
+      { title: "Roles", sections: ["Human roles in AI-augmented systems"], progress: 30, chapter_order: 10 },
+      { title: "Products", sections: ["AI products transforming society"], progress: 0, chapter_order: 11 },
+      { title: "Eras", sections: ["Historical eras in AI development"], progress: 40, chapter_order: 12 },
+      { title: "Environment", sections: ["Non-human stakeholder perspectives"], progress: 0, chapter_order: 13 },
+      { title: "Energy and Forces", sections: ["Underlying drivers in AI"], progress: 0, chapter_order: 14 },
+      { title: "Unstructured", sections: ["Wildcards and user-defined items"], progress: 0, chapter_order: 15 }
+    ]
   },
 
   // D: Quantum Logic Systems - Single book with chapters

@@ -1,10 +1,10 @@
 {
-  "title": "The Thinking Engine Hub",
-  "subtitle": "Comprehensive Framework Analysis",
-  "description": "15-chapter exploration of cognitive systems, decision-making, and intelligent design.",
-  "totalSections": 15,
-  "seededSections": 6,
-  "volumes": [
+  "title": "The Thinking Engine",
+  "subtitle": "Cognitive Systems, Decision-Making, and Intelligent Design",
+  "description": "A 15-chapter exploration of how humans and machines think, decide, and evolve together.",
+  "totalChapters": 15,
+  "seededChapters": 6,
+  "chapters": [
     {
       "id": "principles",
       "title": "Principles",
