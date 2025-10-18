@@ -15996,6 +15996,7 @@ export type Database = {
           source_type: string
           star_examples_added: number | null
           status: string | null
+          updated_at: string | null
         }
         Insert: {
           error_message?: string | null
@@ -16009,6 +16010,7 @@ export type Database = {
           source_type: string
           star_examples_added?: number | null
           status?: string | null
+          updated_at?: string | null
         }
         Update: {
           error_message?: string | null
@@ -16022,6 +16024,7 @@ export type Database = {
           source_type?: string
           star_examples_added?: number | null
           status?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -22434,6 +22437,7 @@ export type Database = {
           started_at: string | null
           status: string | null
           total_files: number
+          updated_at: string | null
         }
         Insert: {
           completed_at?: string | null
@@ -22444,6 +22448,7 @@ export type Database = {
           started_at?: string | null
           status?: string | null
           total_files: number
+          updated_at?: string | null
         }
         Update: {
           completed_at?: string | null
@@ -22454,6 +22459,7 @@ export type Database = {
           started_at?: string | null
           status?: string | null
           total_files?: number
+          updated_at?: string | null
         }
         Relationships: []
       }
