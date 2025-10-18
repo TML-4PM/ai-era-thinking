@@ -18,9 +18,9 @@ export default function ThinkingEngineExplorer() {
         <meta name="description" content="Explore 15 chapters and 4500+ exemplars showing how humans and machines think, decide, and evolve together across five technological eras." />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-indigo-900/20">
+      <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+        <div className="relative overflow-hidden bg-gradient-to-r from-purple-700 to-indigo-700 dark:from-purple-800 dark:to-indigo-900 text-white">
           <div className="absolute inset-0 bg-grid-white/10 bg-[size:20px_20px]" />
           <div className="relative max-w-7xl mx-auto px-4 py-16 md:py-24">
             <div className="text-center space-y-6">

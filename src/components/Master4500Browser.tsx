@@ -21,7 +21,7 @@ const CHAPTERS = [
 export function Master4500Browser() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSection, setSelectedSection] = useState<string>('all');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<string>('all'); // Show ALL by default
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   
   const debouncedSearch = useDebounce(searchQuery, 300);
@@ -59,18 +59,29 @@ export function Master4500Browser() {
       {/* Header & Stats */}
       <Card>
         <CardHeader>
-          <CardTitle>Master 4500 Browser</CardTitle>
+          <CardTitle>Browse All Exemplars</CardTitle>
           <p className="text-sm text-muted-foreground">
-            Explore all {stats.total} exemplars across The Thinking Engine
+            Explore all {stats.total} exemplars across The Thinking Engine - complete, in progress, and ready for contribution
           </p>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-4 mb-6">
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">{stats.complete} Complete</Badge>
-              <Badge variant="outline">{stats.seeded} Seeded</Badge>
-              <Badge variant="outline">{stats.scaffold} Scaffold</Badge>
+              <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400">
+                {stats.complete} Complete
+              </Badge>
+              <Badge variant="outline" className="border-yellow-500/30 text-yellow-700 dark:text-yellow-400">
+                {stats.seeded} In Progress
+              </Badge>
+              <Badge variant="outline" className="border-orange-500/30 text-orange-700 dark:text-orange-400">
+                {stats.scaffold} Need Content
+              </Badge>
             </div>
+            {stats.scaffold > 0 && (
+              <p className="text-xs text-muted-foreground w-full">
+                💡 <strong>{stats.scaffold} exemplars</strong> need your contributions - click any scaffold card to help complete it!
+              </p>
+            )}
           </div>
 
           {/* Search and Filters */}

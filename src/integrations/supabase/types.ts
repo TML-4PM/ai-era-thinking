@@ -3485,6 +3485,33 @@ export type Database = {
         }
         Relationships: []
       }
+      api_access_log: {
+        Row: {
+          endpoint: string | null
+          headers: Json | null
+          id: number
+          ip: string | null
+          method: string | null
+          timestamp: string | null
+        }
+        Insert: {
+          endpoint?: string | null
+          headers?: Json | null
+          id?: number
+          ip?: string | null
+          method?: string | null
+          timestamp?: string | null
+        }
+        Update: {
+          endpoint?: string | null
+          headers?: Json | null
+          id?: number
+          ip?: string | null
+          method?: string | null
+          timestamp?: string | null
+        }
+        Relationships: []
+      }
       api_data_cache: {
         Row: {
           api_source: string
@@ -11350,18 +11377,24 @@ export type Database = {
           cv_text: string
           id: string
           last_updated: string | null
+          parsed_data: Json | null
+          source_files: string[] | null
           user_id: string | null
         }
         Insert: {
           cv_text: string
           id?: string
           last_updated?: string | null
+          parsed_data?: Json | null
+          source_files?: string[] | null
           user_id?: string | null
         }
         Update: {
           cv_text?: string
           id?: string
           last_updated?: string | null
+          parsed_data?: Json | null
+          source_files?: string[] | null
           user_id?: string | null
         }
         Relationships: []
@@ -11530,44 +11563,65 @@ export type Database = {
       }
       cv_profiles: {
         Row: {
+          achievements: Json | null
           candidate_name: string
           certification_scores: Json | null
           clearance_level: string | null
           created_at: string | null
           cv_id: string
+          education: Json | null
+          experience: Json | null
+          full_name: string | null
           labor_model: string | null
           methodology_expertise: string[] | null
+          professional_title: string | null
           project_size_scores: Json | null
           sectors_experience: Json | null
+          skills: Json | null
           soft_skill_tags: string[] | null
+          summary: string | null
           team_size_led: number | null
           updated_at: string | null
         }
         Insert: {
+          achievements?: Json | null
           candidate_name: string
           certification_scores?: Json | null
           clearance_level?: string | null
           created_at?: string | null
           cv_id?: string
+          education?: Json | null
+          experience?: Json | null
+          full_name?: string | null
           labor_model?: string | null
           methodology_expertise?: string[] | null
+          professional_title?: string | null
           project_size_scores?: Json | null
           sectors_experience?: Json | null
+          skills?: Json | null
           soft_skill_tags?: string[] | null
+          summary?: string | null
           team_size_led?: number | null
           updated_at?: string | null
         }
         Update: {
+          achievements?: Json | null
           candidate_name?: string
           certification_scores?: Json | null
           clearance_level?: string | null
           created_at?: string | null
           cv_id?: string
+          education?: Json | null
+          experience?: Json | null
+          full_name?: string | null
           labor_model?: string | null
           methodology_expertise?: string[] | null
+          professional_title?: string | null
           project_size_scores?: Json | null
           sectors_experience?: Json | null
+          skills?: Json | null
           soft_skill_tags?: string[] | null
+          summary?: string | null
           team_size_led?: number | null
           updated_at?: string | null
         }
@@ -15929,6 +15983,48 @@ export type Database = {
         }
         Relationships: []
       }
+      ingestion_log: {
+        Row: {
+          error_message: string | null
+          existing_skills_updated: number | null
+          file_hash: string | null
+          id: string
+          new_skills_discovered: number | null
+          processed_at: string | null
+          skills_extracted: number | null
+          source_file: string
+          source_type: string
+          star_examples_added: number | null
+          status: string | null
+        }
+        Insert: {
+          error_message?: string | null
+          existing_skills_updated?: number | null
+          file_hash?: string | null
+          id?: string
+          new_skills_discovered?: number | null
+          processed_at?: string | null
+          skills_extracted?: number | null
+          source_file: string
+          source_type: string
+          star_examples_added?: number | null
+          status?: string | null
+        }
+        Update: {
+          error_message?: string | null
+          existing_skills_updated?: number | null
+          file_hash?: string | null
+          id?: string
+          new_skills_discovered?: number | null
+          processed_at?: string | null
+          skills_extracted?: number | null
+          source_file?: string
+          source_type?: string
+          star_examples_added?: number | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       ingestion_runs: {
         Row: {
           finished_at: string | null
@@ -19808,6 +19904,33 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          source: string | null
+          status: string | null
+          subscribed_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          source?: string | null
+          status?: string | null
+          subscribed_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          source?: string | null
+          status?: string | null
+          subscribed_at?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscriptions: {
         Row: {
           email: string
@@ -21590,6 +21713,45 @@ export type Database = {
           },
         ]
       }
+      pending_skills_review: {
+        Row: {
+          approved: boolean | null
+          context: string | null
+          created_at: string | null
+          id: string
+          reviewed_at: string | null
+          skill_name: string
+          source_document: string | null
+          suggested_domain: string | null
+          suggested_rating: number | null
+          suggested_trend: string | null
+        }
+        Insert: {
+          approved?: boolean | null
+          context?: string | null
+          created_at?: string | null
+          id?: string
+          reviewed_at?: string | null
+          skill_name: string
+          source_document?: string | null
+          suggested_domain?: string | null
+          suggested_rating?: number | null
+          suggested_trend?: string | null
+        }
+        Update: {
+          approved?: boolean | null
+          context?: string | null
+          created_at?: string | null
+          id?: string
+          reviewed_at?: string | null
+          skill_name?: string
+          source_document?: string | null
+          suggested_domain?: string | null
+          suggested_rating?: number | null
+          suggested_trend?: string | null
+        }
+        Relationships: []
+      }
       performance_metrics: {
         Row: {
           id: string
@@ -22261,6 +22423,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      processing_sessions: {
+        Row: {
+          completed_at: string | null
+          failed_count: number | null
+          processed_count: number | null
+          session_id: string
+          skipped_count: number | null
+          started_at: string | null
+          status: string | null
+          total_files: number
+        }
+        Insert: {
+          completed_at?: string | null
+          failed_count?: number | null
+          processed_count?: number | null
+          session_id?: string
+          skipped_count?: number | null
+          started_at?: string | null
+          status?: string | null
+          total_files: number
+        }
+        Update: {
+          completed_at?: string | null
+          failed_count?: number | null
+          processed_count?: number | null
+          session_id?: string
+          skipped_count?: number | null
+          started_at?: string | null
+          status?: string | null
+          total_files?: number
+        }
+        Relationships: []
       }
       procurement_evaluation_metrics: {
         Row: {
@@ -23959,6 +24154,33 @@ export type Database = {
           resource_type?: string
           updated_at?: string
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      resource_waitlist: {
+        Row: {
+          created_at: string | null
+          email: string
+          expected_date: string | null
+          id: string
+          notified: boolean | null
+          resource_title: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          expected_date?: string | null
+          id?: string
+          notified?: boolean | null
+          resource_title: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          expected_date?: string | null
+          id?: string
+          notified?: boolean | null
+          resource_title?: string
         }
         Relationships: []
       }
@@ -30249,6 +30471,42 @@ export type Database = {
         }
         Relationships: []
       }
+      survey_responses_new: {
+        Row: {
+          completed_at: string | null
+          consent_given: boolean | null
+          created_at: string | null
+          demographics: Json | null
+          id: string
+          session_id: string
+          survey_data: Json
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          consent_given?: boolean | null
+          created_at?: string | null
+          demographics?: Json | null
+          id?: string
+          session_id?: string
+          survey_data?: Json
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          consent_given?: boolean | null
+          created_at?: string | null
+          demographics?: Json | null
+          id?: string
+          session_id?: string
+          survey_data?: Json
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       survey_societal_impact: {
         Row: {
           additional_comments: string | null
@@ -36134,43 +36392,412 @@ export type Database = {
       }
       consent_analytics: {
         Row: {
-          note: string | null
-          status: string | null
+          active_consents: number | null
+          avg_privacy_impact: number | null
+          total_consents: number | null
+          unique_templates: number | null
+          unique_users: number | null
         }
         Relationships: []
       }
       consent_category_analytics: {
         Row: {
-          note: string | null
-          status: string | null
+          active_consents: number | null
+          avg_privacy_impact: number | null
+          category_id: string | null
+          category_name: string | null
+          total_consents: number | null
+          unique_users: number | null
         }
         Relationships: []
       }
       consent_registry_category_summary: {
         Row: {
-          note: string | null
-          status: string | null
+          avg_complexity: number | null
+          category: string | null
+          high_complexity_count: number | null
+          total: number | null
         }
         Relationships: []
       }
       consent_registry_combined: {
         Row: {
-          note: string | null
+          access_request_process: string | null
+          accountability_principle: string | null
+          accuracy_requirements: boolean | null
+          age_of_subject: string | null
+          age_requirement: number | null
+          agent_required: string | null
+          applicable_age_range: string | null
+          automated_decision_making: boolean | null
+          automated_processing: string | null
+          awareness_level: string | null
+          breach_notification_timeline: string | null
+          can_revoke_text: string | null
+          category: string | null
+          certification_schemes: string | null
+          children_data: boolean | null
+          codes_of_conduct: string | null
+          collected_by: string | null
+          complaint_mechanism: string | null
+          complexity_band: string | null
+          complexity_score: number | null
+          consent_expiry: string | null
+          consent_giver: string | null
+          consent_id: string | null
+          consent_language_complexity: string | null
+          consent_log_id: string | null
+          consent_mechanism: string | null
+          consent_method_traceable: string | null
+          consent_name: string | null
+          consent_scope: string | null
+          consent_trigger: string | null
+          consent_type: string | null
+          consent_update_required: string | null
+          controller_obligations: string | null
+          criminal_data: boolean | null
+          cross_border_transfer: boolean | null
+          data_captured: string | null
+          data_controller: string | null
+          data_minimization: boolean | null
+          data_retention_estimate: string | null
+          data_retention_policy: string | null
+          data_sensitivity: string | null
+          data_type: string | null
+          data_usage: string | null
+          deletion_rights: boolean | null
+          derogations: string | null
+          disputed_rights: string | null
+          documentation_requirements: string | null
+          dpia_required: boolean | null
+          dpo_required: boolean | null
+          duration_days: number | null
+          enforcement_mechanism: string | null
+          example_data_collectors: string | null
+          flags_count: string | null
+          frequency: string | null
+          guardian_involvement: string | null
+          impact_on_opportunities: string | null
+          inference_based: string | null
+          information_obligations: string | null
+          insights_derived: string | null
+          integrity_confidentiality: string | null
+          international_transfers: string | null
+          judicial_remedy: string | null
+          jurisdiction: string | null
+          jurisdictional_threshold: string | null
+          legal_basis: string | null
+          legal_owner: string | null
+          legitimate_interest_test: string | null
+          life_domain: string | null
+          life_stage: string | null
+          linked_services: string | null
+          linked_systems: string | null
+          linked_systems_count: string | null
+          minor_involvement: string | null
+          notification_requirements: string | null
+          objection_rights: boolean | null
+          ownership_notes: string | null
+          parental_consent_required: boolean | null
+          penalties: string | null
+          policy_sources: string | null
+          portability_rights: boolean | null
+          privacy_by_default: boolean | null
+          privacy_by_design: boolean | null
+          privacy_impact: number | null
+          processor_obligations: string | null
+          profiling: boolean | null
+          profiling_applied: string | null
+          profiling_risk: string | null
+          purpose: string | null
+          purpose_limitation: boolean | null
+          records_of_processing: string | null
+          rectification_rights: boolean | null
+          registry_code: string | null
+          related_consents: string | null
+          restriction_of_processing: string | null
+          retention_period: string | null
+          revocable: boolean | null
+          revocation_available: string | null
+          revocation_method: string | null
+          risk_level: string | null
+          risk_of_misuse: string | null
+          risk_rating: string | null
+          safeguards: string | null
+          sensitivity: string | null
+          shared_with: string | null
+          shared_with_third_parties: string | null
+          source: string | null
+          special_category_data: boolean | null
           status: string | null
+          storage_limitation: boolean | null
+          subject_age: string | null
+          supervisory_authority: string | null
+          third_party_sharing: boolean | null
+          transparency_requirements: string | null
+          used_for_decision_making: string | null
+          visibility_to_subject: string | null
+          vulnerability_flag: string | null
+          vulnerable_groups: boolean | null
+          withdrawal_process: string | null
+        }
+        Insert: {
+          access_request_process?: never
+          accountability_principle?: never
+          accuracy_requirements?: never
+          age_of_subject?: string | null
+          age_requirement?: never
+          agent_required?: string | null
+          applicable_age_range?: string | null
+          automated_decision_making?: never
+          automated_processing?: string | null
+          awareness_level?: string | null
+          breach_notification_timeline?: never
+          can_revoke_text?: string | null
+          category?: string | null
+          certification_schemes?: never
+          children_data?: never
+          codes_of_conduct?: never
+          collected_by?: string | null
+          complaint_mechanism?: never
+          complexity_band?: never
+          complexity_score?: never
+          consent_expiry?: string | null
+          consent_giver?: string | null
+          consent_id?: string | null
+          consent_language_complexity?: string | null
+          consent_log_id?: string | null
+          consent_mechanism?: string | null
+          consent_method_traceable?: string | null
+          consent_name?: string | null
+          consent_scope?: string | null
+          consent_trigger?: string | null
+          consent_type?: string | null
+          consent_update_required?: string | null
+          controller_obligations?: never
+          criminal_data?: never
+          cross_border_transfer?: never
+          data_captured?: string | null
+          data_controller?: string | null
+          data_minimization?: never
+          data_retention_estimate?: string | null
+          data_retention_policy?: string | null
+          data_sensitivity?: string | null
+          data_type?: string | null
+          data_usage?: string | null
+          deletion_rights?: never
+          derogations?: never
+          disputed_rights?: string | null
+          documentation_requirements?: never
+          dpia_required?: never
+          dpo_required?: never
+          duration_days?: never
+          enforcement_mechanism?: never
+          example_data_collectors?: string | null
+          flags_count?: never
+          frequency?: string | null
+          guardian_involvement?: string | null
+          impact_on_opportunities?: string | null
+          inference_based?: string | null
+          information_obligations?: never
+          insights_derived?: string | null
+          integrity_confidentiality?: never
+          international_transfers?: never
+          judicial_remedy?: never
+          jurisdiction?: never
+          jurisdictional_threshold?: string | null
+          legal_basis?: never
+          legal_owner?: string | null
+          legitimate_interest_test?: never
+          life_domain?: string | null
+          life_stage?: string | null
+          linked_services?: string | null
+          linked_systems?: string | null
+          linked_systems_count?: never
+          minor_involvement?: string | null
+          notification_requirements?: never
+          objection_rights?: never
+          ownership_notes?: string | null
+          parental_consent_required?: never
+          penalties?: never
+          policy_sources?: string | null
+          portability_rights?: never
+          privacy_by_default?: never
+          privacy_by_design?: never
+          privacy_impact?: never
+          processor_obligations?: never
+          profiling?: never
+          profiling_applied?: string | null
+          profiling_risk?: string | null
+          purpose?: never
+          purpose_limitation?: never
+          records_of_processing?: never
+          rectification_rights?: never
+          registry_code?: string | null
+          related_consents?: never
+          restriction_of_processing?: never
+          retention_period?: string | null
+          revocable?: never
+          revocation_available?: string | null
+          revocation_method?: string | null
+          risk_level?: string | null
+          risk_of_misuse?: string | null
+          risk_rating?: string | null
+          safeguards?: never
+          sensitivity?: string | null
+          shared_with?: string | null
+          shared_with_third_parties?: string | null
+          source?: never
+          special_category_data?: never
+          status?: string | null
+          storage_limitation?: never
+          subject_age?: string | null
+          supervisory_authority?: never
+          third_party_sharing?: never
+          transparency_requirements?: never
+          used_for_decision_making?: string | null
+          visibility_to_subject?: string | null
+          vulnerability_flag?: string | null
+          vulnerable_groups?: never
+          withdrawal_process?: string | null
+        }
+        Update: {
+          access_request_process?: never
+          accountability_principle?: never
+          accuracy_requirements?: never
+          age_of_subject?: string | null
+          age_requirement?: never
+          agent_required?: string | null
+          applicable_age_range?: string | null
+          automated_decision_making?: never
+          automated_processing?: string | null
+          awareness_level?: string | null
+          breach_notification_timeline?: never
+          can_revoke_text?: string | null
+          category?: string | null
+          certification_schemes?: never
+          children_data?: never
+          codes_of_conduct?: never
+          collected_by?: string | null
+          complaint_mechanism?: never
+          complexity_band?: never
+          complexity_score?: never
+          consent_expiry?: string | null
+          consent_giver?: string | null
+          consent_id?: string | null
+          consent_language_complexity?: string | null
+          consent_log_id?: string | null
+          consent_mechanism?: string | null
+          consent_method_traceable?: string | null
+          consent_name?: string | null
+          consent_scope?: string | null
+          consent_trigger?: string | null
+          consent_type?: string | null
+          consent_update_required?: string | null
+          controller_obligations?: never
+          criminal_data?: never
+          cross_border_transfer?: never
+          data_captured?: string | null
+          data_controller?: string | null
+          data_minimization?: never
+          data_retention_estimate?: string | null
+          data_retention_policy?: string | null
+          data_sensitivity?: string | null
+          data_type?: string | null
+          data_usage?: string | null
+          deletion_rights?: never
+          derogations?: never
+          disputed_rights?: string | null
+          documentation_requirements?: never
+          dpia_required?: never
+          dpo_required?: never
+          duration_days?: never
+          enforcement_mechanism?: never
+          example_data_collectors?: string | null
+          flags_count?: never
+          frequency?: string | null
+          guardian_involvement?: string | null
+          impact_on_opportunities?: string | null
+          inference_based?: string | null
+          information_obligations?: never
+          insights_derived?: string | null
+          integrity_confidentiality?: never
+          international_transfers?: never
+          judicial_remedy?: never
+          jurisdiction?: never
+          jurisdictional_threshold?: string | null
+          legal_basis?: never
+          legal_owner?: string | null
+          legitimate_interest_test?: never
+          life_domain?: string | null
+          life_stage?: string | null
+          linked_services?: string | null
+          linked_systems?: string | null
+          linked_systems_count?: never
+          minor_involvement?: string | null
+          notification_requirements?: never
+          objection_rights?: never
+          ownership_notes?: string | null
+          parental_consent_required?: never
+          penalties?: never
+          policy_sources?: string | null
+          portability_rights?: never
+          privacy_by_default?: never
+          privacy_by_design?: never
+          privacy_impact?: never
+          processor_obligations?: never
+          profiling?: never
+          profiling_applied?: string | null
+          profiling_risk?: string | null
+          purpose?: never
+          purpose_limitation?: never
+          records_of_processing?: never
+          rectification_rights?: never
+          registry_code?: string | null
+          related_consents?: never
+          restriction_of_processing?: never
+          retention_period?: string | null
+          revocable?: never
+          revocation_available?: string | null
+          revocation_method?: string | null
+          risk_level?: string | null
+          risk_of_misuse?: string | null
+          risk_rating?: string | null
+          safeguards?: never
+          sensitivity?: string | null
+          shared_with?: string | null
+          shared_with_third_parties?: string | null
+          source?: never
+          special_category_data?: never
+          status?: string | null
+          storage_limitation?: never
+          subject_age?: string | null
+          supervisory_authority?: never
+          third_party_sharing?: never
+          transparency_requirements?: never
+          used_for_decision_making?: string | null
+          visibility_to_subject?: string | null
+          vulnerability_flag?: string | null
+          vulnerable_groups?: never
+          withdrawal_process?: string | null
         }
         Relationships: []
       }
       consent_registry_life_stage_summary: {
         Row: {
-          note: string | null
-          status: string | null
+          avg_complexity: number | null
+          high_complexity_count: number | null
+          life_stage: string | null
+          total: number | null
         }
         Relationships: []
       }
       consent_registry_type_summary: {
         Row: {
-          note: string | null
-          status: string | null
+          avg_complexity: number | null
+          consent_type: string | null
+          high_complexity_count: number | null
+          total: number | null
         }
         Relationships: []
       }
@@ -36470,8 +37097,14 @@ export type Database = {
       }
       user_consent_analytics: {
         Row: {
-          note: string | null
-          status: string | null
+          active_consents: number | null
+          avg_privacy_impact: number | null
+          first_consent_date: string | null
+          last_activity_date: string | null
+          pending_consents: number | null
+          total_consents: number | null
+          user_id: string | null
+          withdrawn_consents: number | null
         }
         Relationships: []
       }

@@ -23,7 +23,8 @@ const BookChapters = () => {
 
   if (!book) return null;
 
-  const isSuiteHub = book.collection === "Suite Hub";
+  // The Thinking Engine is NOT a Suite Hub book - it has chapters from master_4500
+  const isSuiteHub = book.collection === "Suite Hub" && slug !== 'thinking-engine';
   const sortedChapters = book.chapters?.sort((a, b) => (a.chapter_order || 0) - (b.chapter_order || 0)) || [];
 
   const getStatusColor = (status: string) => {
