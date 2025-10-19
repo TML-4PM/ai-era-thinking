@@ -1,0 +1,21 @@
+Relationship Type,Source Type,Source Example,Target Type,Target Example,Relationship Description,Bidirectional,Strength,Usage Context
+Influenced By,Thinker,Daniel Kahneman,Thinker,Herbert Simon,Intellectual influence and citation,"Yes (influences)",Strong,Historical tracing
+Related Framework,Thinker,Daniel Kahneman,Framework,Prospect Theory,Thinker developed or uses framework,No (framework-of),Strong,Framework attribution
+Applied In,Framework,Nudge Theory,Technology,Choice Architecture Platform,Framework implemented in technology,No (implementation-of),Medium,Practical application
+Evolved Into,Technology,On-Prem CRM,Technology,Cloud CRM,Technology evolution across eras,"Yes (evolved-from)",Strong,Era transition tracking
+Appears In,Thinker,Peter Senge,Book Section,thinking-engine/thinkers,Content location reference,No (contains),Weak,Content navigation
+Tagged With,Exemplar,Any exemplar,Tag,systems-thinking,Content categorization,No (tagged-as),Variable,Search and filtering
+Same Lobe,Thinker,Kahneman,Thinker,Simon,Share cognitive domain classification,"Yes (lobe-peer)",Medium,Similar thinkers discovery
+Same Era Focus,Exemplar,Any technology,Exemplar,Another technology,Both prominent in same era,"Yes (era-peer)",Medium,Era-based recommendations
+Co-Referenced,Thinker,Kahneman,Framework,Bounded Rationality,Thinker frequently references framework,No (references),Medium,Conceptual connections
+Case Study Of,Organization,Google,Framework,OKR Framework,Real-world implementation example,No (example-of),Strong,Practical examples
+Character Uses,Character,Elena Vasquez,Agent,Strategy Agent,GCBAT character associated with agent,No (operates),Strong,Narrative connections
+Part Of,Section,arc-1,Book,gcbat-vignettes,Hierarchical containment,"Yes (contains)",Strong,Navigation structure
+Exemplifies,Vignette,Leadership scenario,Theme,Ethical governance,Story illustrates theme,No (example-of),Medium,Thematic connections
+Contrasts With,Framework,Centralized governance,Framework,Holacracy,Opposing approaches,"Yes (opposite-of)",Medium,Comparative analysis
+Prerequisite For,Concept,Bounded Rationality,Concept,Satisficing,Foundational concept dependency,No (builds-on),Strong,Learning paths
+Complements,Technology,LLM,Technology,Vector Database,Technologies work together,"Yes (compatible-with)",Medium,Technology stacks
+Succeeded By,Framework,Waterfall,Framework,Agile,Historical succession in practice,No (predecessor-of),Strong,Historical evolution
+Critiqued By,Framework,Rational Choice Theory,Thinker,Kahneman,Critical analysis relationship,No (critic-of),Medium,Intellectual debate
+Synthesizes,Framework,Third Way,Framework,Capitalism + Socialism,Combination of multiple frameworks,No (synthesized-from),Strong,Synthesis relationships
+Applied By,Framework,Systems Thinking,Organization,Toyota,Organization known for using framework,No (practitioner-of),Medium,Real-world adoption

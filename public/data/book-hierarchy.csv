@@ -1,0 +1,11 @@
+Collection,Book Title,Book Slug,Status,Volumes/Chapters,Seeded Count,Primary Focus,Related Eras,Key Themes
+Premier Collection,The Thinkers,the-thinkers,seeded,4500+ exemplars,4500+,Comprehensive thinker catalog,All eras,"thinkers, frameworks, cognitive-domains"
+Premier Collection,Tech for Humanity,tech-for-humanity,partial,15 volumes,5,"Technology for human benefit across domains",Cloud Native through BCI,"ethics, healthcare, education, climate, governance"
+Premier Collection,The Thinking Engine,thinking-engine,partial,15 chapters,6,Cognitive systems and decision-making,All eras,"disciplines, frameworks, technologies, roles"
+Premier Collection,GCBAT Vignettes,gcbat-vignettes,seeded,3 arcs + characters,Complete,Narrative exploration of AI governance,Agentic AI through BCI,"governance, leadership, ethics, narratives"
+In Development,WorkFamilyAI,workfamilyai,partial,Multiple chapters,3,Work-family alignment systems,Agentic AI,"alignment, neural-ennead, executive-teams"
+In Development,Quantum Logic Systems,quantum-logic-systems,scaffold,3 clusters,Minimal,Quantum computation and biology,BCI Era,"quantum-computation, quantum-biology, quantum-medicine"
+In Development,The Regenerative Organization,regenerative-organization,scaffold,3 clusters,Minimal,Sustainable organizational transformation,Cloud Native through Agentic,"transformation, sustainability, strip-map-update"
+In Development,Sovereign Systems,sovereign-systems,scaffold,TBD,None,Individual and collective autonomy,Agentic AI through BCI,"sovereignty, autonomy, governance"
+On the Drawing Board,The Far Cage,the-far-cage,scaffold,TBD,None,Societal constraints and freedom,All eras,"constraints, freedom, governance"
+On the Drawing Board,Living Stack,living-stack,scaffold,TBD,None,Technology ecosystem integration,Cloud Native through BCI,"ecosystem, integration, tech-stack"

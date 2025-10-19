@@ -1,0 +1,18 @@
+Phase,Priority,Item Type,Item Name,Data Source,Import Format,Purpose,Dependencies,Estimated Tokens
+Phase 1: Core Taxonomy,Critical,Tag System,TAG_MAPPING (38 categories),src/lib/tag-mapping-utils.ts,JSON object with nested tags,Enable semantic search and tag-based filtering,None,~5000
+Phase 1: Core Taxonomy,Critical,Cognitive Domains,Brain Lobes (5 lobes),src/data/eras.ts,JSON array with descriptions,Classify content by cognitive domain,None,~2000
+Phase 1: Core Taxonomy,Critical,Historical Periods,Technological Eras (5 eras),src/data/eras.ts,JSON array with characteristics,Enable era-based filtering and evolution tracking,None,~3000
+Phase 1: Core Taxonomy,Critical,Book Structure,Book Hierarchy (10 books),src/hooks/useBooks.ts + public/books/content/,JSON with nested structure,Navigate book collection and sections,None,~8000
+Phase 2: Content Indexing,High,Thinker Profiles,4500 Master Records,Supabase: master_4500 table,CSV/JSON with full metadata,Primary content corpus for thinker queries,Phase 1 taxonomy,~200000
+Phase 2: Content Indexing,High,Extended Profiles,75+ Expanded Thinkers,src/data/expanded-thinkers.ts,JSON array with deep profiles,Detailed thinker information and relationships,Phase 1 taxonomy + Master records,~50000
+Phase 2: Content Indexing,High,Narrative Content,GCBAT Characters & Vignettes,Supabase: vignettes + enhanced_vignettes,JSON with character profiles and stories,Story-based content and narrative queries,Phase 1 taxonomy,~30000
+Phase 2: Content Indexing,High,Book Content,All Book JSON Files,public/books/content/*.json,JSON files with clusters/exemplars,Detailed book content and examples,Phase 1 taxonomy + Book hierarchy,~100000
+Phase 3: Relationship Mapping,Medium,Thinker Network,Thinker-to-Thinker Connections,related_thinkers arrays in data,Graph structure (nodes + edges),Enable "who influenced whom" queries,Phase 2 thinker data,~20000
+Phase 3: Relationship Mapping,Medium,Framework Links,Thinker-to-Framework Connections,related_frameworks arrays,Graph structure,Connect thinkers to their key frameworks,Phase 2 data,~15000
+Phase 3: Relationship Mapping,Medium,Tech Evolution,Framework-to-Technology Paths,era_mapping fields in exemplars,Time-series graph,Track evolution of ideas across eras,Phase 1 eras + Phase 2 data,~25000
+Phase 3: Relationship Mapping,Low,Era Transitions,Era-to-Era Evolution,era_mapping cross-references,Transition graph,Show how concepts evolved across eras,Phase 1 eras + Phase 2 data,~10000
+Phase 4: Query Optimization,High,Semantic Search,Tag Expansion Rules,TAG_MAPPING relationships,Search index configuration,Improve search recall through tag relationships,Phase 1 taxonomy,~5000
+Phase 4: Query Optimization,High,Era Comparison,Cross-Era Query Templates,Era characteristics + exemplar mappings,Query templates,Enable "how did X change from Y to Z era",Phase 1 eras + Phase 2 data,~8000
+Phase 4: Query Optimization,Medium,Lobe Filtering,Brain-Lobe Query Patterns,Lobe classifications + thinker assignments,Filter configuration,Find thinkers by cognitive domain,Phase 1 lobes + Phase 2 data,~5000
+Phase 4: Query Optimization,Medium,Book Scoping,Book/Section Context Queries,Book hierarchy + section slugs,Scoped search configuration,Limit queries to specific books or sections,Phase 1 book structure,~5000
+TOTAL,,,,,,,,"~486000 tokens"
