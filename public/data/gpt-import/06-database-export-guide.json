@@ -1,0 +1,177 @@
+{
+  "name": "Database Export Guide - Phase 2",
+  "version": "1.0",
+  "description": "Instructions for exporting database content to complete Phase 2 (Content Indexing)",
+  "estimated_tokens": 380000,
+  "exports_required": [
+    {
+      "export_id": "master_4500",
+      "source": "Supabase table: master_4500",
+      "description": "4500+ thinker records with full metadata",
+      "sql_query": "SELECT id, name, birth_year, death_year, nationality, summary, lobe, tags, related_thinkers, book_slug, section_slug, exemplar_type, era_mapping FROM master_4500 ORDER BY name",
+      "output_file": "07-master-4500-records.json",
+      "estimated_tokens": 200000,
+      "required_fields": [
+        "id",
+        "name",
+        "exemplar_type"
+      ],
+      "important_fields": [
+        "lobe (cognitive domain classification)",
+        "tags (array of tag strings)",
+        "era_mapping (array of era slugs)",
+        "related_thinkers (array of IDs for relationship mapping)",
+        "summary (brief description)",
+        "book_slug (which book this belongs to)",
+        "section_slug (which section within book)"
+      ],
+      "format_example": {
+        "id": "kahneman-daniel",
+        "name": "Daniel Kahneman",
+        "birth_year": 1934,
+        "death_year": 2024,
+        "nationality": "Israeli-American",
+        "summary": "Psychologist and economist, Nobel laureate, pioneer of behavioral economics and cognitive biases",
+        "lobe": "decision",
+        "tags": ["behavioral-economics", "decision-science", "cognitive-biases", "heuristics"],
+        "related_thinkers": ["tversky-amos", "thaler-richard", "simon-herbert"],
+        "book_slug": "the-thinkers",
+        "section_slug": "brains-that-shaped-brains",
+        "exemplar_type": "thinker",
+        "era_mapping": ["on-prem", "cloud-native"]
+      }
+    },
+    {
+      "export_id": "expanded_thinkers",
+      "source": "src/data/expanded-thinkers.ts",
+      "description": "75+ deeply profiled thinkers with extended biographies and insights",
+      "output_file": "08-expanded-thinkers.json",
+      "estimated_tokens": 50000,
+      "export_method": "Extract from TypeScript file and convert to JSON array",
+      "required_fields": [
+        "id",
+        "name",
+        "summary",
+        "biography",
+        "key_ideas",
+        "deep_insight"
+      ],
+      "format_example": {
+        "id": "kahneman-daniel",
+        "name": "Daniel Kahneman",
+        "birth_year": 1934,
+        "death_year": 2024,
+        "summary": "Pioneer of behavioral economics and cognitive biases",
+        "biography": "Full multi-paragraph biography...",
+        "key_ideas": [
+          "Prospect Theory",
+          "System 1 and System 2 thinking",
+          "Cognitive biases and heuristics"
+        ],
+        "deep_insight": "Detailed analysis of contributions...",
+        "lobe": "decision",
+        "related_thinkers": ["tversky-amos", "thaler-richard"],
+        "related_frameworks": ["Prospect Theory", "Thinking Fast and Slow"]
+      }
+    },
+    {
+      "export_id": "vignettes_gcbat",
+      "source": "Supabase tables: vignettes, enhanced_vignettes",
+      "description": "GCBAT narrative content - characters and story vignettes",
+      "sql_query": "SELECT v.id, v.arc, v.title, v.content, v.characters, v.themes, v.era, ev.enhanced_content, ev.metadata FROM vignettes v LEFT JOIN enhanced_vignettes ev ON v.id = ev.vignette_id ORDER BY v.arc, v.sequence",
+      "output_file": "09-gcbat-vignettes.json",
+      "estimated_tokens": 30000,
+      "related_export": {
+        "file": "10-gcbat-characters.json",
+        "sql_query": "SELECT id, name, role, arc, bio, agent_name, personality_traits FROM gcbat_characters ORDER BY name"
+      },
+      "format_example": {
+        "id": "vignette-arc1-001",
+        "arc": "arc-1",
+        "title": "The First Awakening",
+        "content": "Full vignette text...",
+        "characters": ["maya-rodriguez", "james-anderson"],
+        "themes": ["human-ai-collaboration", "emergence"],
+        "era": "agentic-ai",
+        "book_slug": "gcbat-vignettes",
+        "section_slug": "arc-1",
+        "exemplar_type": "narrative-vignette"
+      }
+    },
+    {
+      "export_id": "book_content",
+      "source": "File system: public/books/content/*.json",
+      "description": "All book content files with clusters and exemplars",
+      "output_file": "11-consolidated-book-content.json",
+      "estimated_tokens": 100000,
+      "files_to_consolidate": [
+        "quantum-logic-systems.json",
+        "regenerative-organization.json",
+        "tech-for-humanity-ethics-consent.json",
+        "tech-for-humanity-education-knowledge.json",
+        "tech-for-humanity-healthcare-wellbeing.json",
+        "tech-for-humanity-governance-policy.json",
+        "tech-for-humanity-climate-environment.json",
+        "thinking-engine.json",
+        "workfamilyai-ch1.json",
+        "workfamilyai-ch2.json",
+        "workfamilyai-ch3.json",
+        "disciplines.json",
+        "frameworks.json",
+        "technologies.json",
+        "eras.json",
+        "eras-time-canvas.json",
+        "roles-humans-in-machine.json",
+        "living-stack.json",
+        "thinkers-brains-that-shaped-brains.json"
+      ],
+      "consolidation_format": {
+        "book_slug": "string",
+        "section_slug": "string",
+        "clusters": [
+          {
+            "id": "string",
+            "name": "string",
+            "description": "string",
+            "exemplars": [
+              {
+                "id": "string",
+                "name": "string",
+                "exemplar_type": "thinker|framework|technology",
+                "summary": "string",
+                "tags": ["array"],
+                "lobe": "string",
+                "era_mapping": ["array"],
+                "related_thinkers": ["array"],
+                "related_frameworks": ["array"]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "export_workflow": {
+    "step_1": "Export master_4500 table from Supabase to JSON",
+    "step_2": "Convert expanded-thinkers.ts to JSON format",
+    "step_3": "Export vignettes and characters from Supabase",
+    "step_4": "Consolidate all book content JSON files",
+    "step_5": "Validate all exports have required fields",
+    "step_6": "Combine exports into single Phase 2 package"
+  },
+  "validation_checklist": [
+    "All IDs are unique and consistent across exports",
+    "All related_thinkers arrays reference valid IDs",
+    "All tags match TAG_MAPPING categories",
+    "All lobes match brain lobe IDs",
+    "All era_mapping values match technological era slugs",
+    "All book_slug values match book hierarchy",
+    "All exemplar_type values are valid (thinker|framework|technology|narrative-vignette)"
+  ],
+  "next_steps_after_export": [
+    "Proceed to Phase 3: Relationship Mapping",
+    "Build graph structure from related_* arrays",
+    "Create bidirectional relationship index",
+    "Identify relationship clusters and communities"
+  ]
+}
