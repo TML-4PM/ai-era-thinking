@@ -1,0 +1,282 @@
+{
+  "name": "Relationship Extraction Guide - Phase 3",
+  "version": "1.0",
+  "description": "Instructions for extracting and structuring relationship data after Phase 2 content is loaded",
+  "estimated_tokens": 70000,
+  "overview": "Phase 3 builds a relationship graph from the content loaded in Phase 2. This enables traversal queries like 'who influenced whom' and 'what frameworks did X create'.",
+  "extraction_methods": [
+    {
+      "relationship_type": "thinker_to_thinker",
+      "source_field": "related_thinkers",
+      "description": "Extract who influenced whom from related_thinkers arrays",
+      "extraction_sql": "SELECT DISTINCT id as source_id, name as source_name, unnest(related_thinkers) as target_id, 'influenced_by' as relationship_type FROM master_4500 WHERE related_thinkers IS NOT NULL AND array_length(related_thinkers, 1) > 0",
+      "output_format": {
+        "source_id": "kahneman-daniel",
+        "source_name": "Daniel Kahneman",
+        "target_id": "tversky-amos",
+        "target_name": "Amos Tversky",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "bidirectional": false
+      },
+      "notes": "These relationships are directional: if Kahneman lists Tversky in related_thinkers, it means Tversky influenced Kahneman"
+    },
+    {
+      "relationship_type": "thinker_to_framework",
+      "source_field": "related_frameworks",
+      "description": "Connect thinkers to their key frameworks and mental models",
+      "extraction_sql": "SELECT id as thinker_id, name as thinker_name, unnest(related_frameworks) as framework_name, 'created' as relationship_type FROM master_4500 WHERE related_frameworks IS NOT NULL AND array_length(related_frameworks, 1) > 0",
+      "output_format": {
+        "thinker_id": "kahneman-daniel",
+        "thinker_name": "Daniel Kahneman",
+        "framework_name": "Prospect Theory",
+        "relationship_type": "created",
+        "primary_framework": true
+      },
+      "notes": "Use core_framework field to identify primary framework"
+    },
+    {
+      "relationship_type": "framework_to_technology",
+      "source_field": "era_mapping",
+      "description": "Track how frameworks evolved into technologies across eras",
+      "extraction_method": "Match frameworks with technologies that share the same era_mapping values",
+      "output_format": {
+        "framework_name": "Decision Trees",
+        "technology_name": "AI Decision Systems",
+        "shared_eras": ["cloud-native", "gen-ai", "agentic-ai"],
+        "relationship_type": "evolved_into",
+        "evolution_notes": "Decision tree frameworks became foundation for modern AI decision systems"
+      }
+    },
+    {
+      "relationship_type": "era_to_era_evolution",
+      "source_field": "cross_era_evolution",
+      "description": "Map how concepts transitioned between technological eras",
+      "extraction_sql": "SELECT id, name, era_mapping, cross_era_evolution FROM master_4500 WHERE array_length(era_mapping, 1) > 1",
+      "output_format": {
+        "exemplar_id": "crm-concept",
+        "exemplar_name": "Customer Relationship Management",
+        "eras": ["on-prem", "cloud-native", "agentic-ai"],
+        "transitions": [
+          {
+            "from_era": "on-prem",
+            "to_era": "cloud-native",
+            "key_changes": "Moved from on-premise servers to cloud platforms"
+          },
+          {
+            "from_era": "cloud-native",
+            "to_era": "agentic-ai",
+            "key_changes": "AI agents now autonomously manage customer relationships"
+          }
+        ]
+      }
+    },
+    {
+      "relationship_type": "gcbat_character_to_agent",
+      "source": "GCBAT vignettes and characters",
+      "description": "Connect narrative characters to their AI agent counterparts",
+      "extraction_sql": "SELECT c.id as character_id, c.name as character_name, c.agent_name, c.role, v.arc FROM gcbat_characters c LEFT JOIN vignettes v ON v.characters @> ARRAY[c.id]",
+      "output_format": {
+        "character_id": "maya-rodriguez",
+        "character_name": "Maya Rodriguez",
+        "agent_name": "Strategic Advisor Agent",
+        "relationship_type": "represented_by",
+        "arc": "arc-1",
+        "role": "Strategic Innovation Leader"
+      }
+    },
+    {
+      "relationship_type": "book_to_section",
+      "source": "Book hierarchy",
+      "description": "Map books to their sections/volumes/chapters",
+      "extraction_method": "Use book_slug and section_slug from all content",
+      "output_format": {
+        "book_slug": "tech-for-humanity",
+        "book_name": "Tech for Humanity",
+        "section_slug": "ethics-consent",
+        "section_name": "Ethics & Consent",
+        "exemplar_count": 150,
+        "relationship_type": "contains"
+      }
+    },
+    {
+      "relationship_type": "tag_to_tag",
+      "source": "TAG_MAPPING relationships",
+      "description": "Semantic relationships between tags for search expansion",
+      "output_format": {
+        "tag": "behavioral-economics",
+        "related_tags": ["decision-science", "cognitive-biases", "heuristics"],
+        "relationship_type": "related_to",
+        "expansion_weight": 0.8
+      }
+    }
+  ],
+  "graph_structure": {
+    "nodes": {
+      "types": [
+        "thinker",
+        "framework",
+        "technology",
+        "vignette",
+        "character",
+        "book",
+        "section",
+        "era",
+        "tag"
+      ],
+      "node_format": {
+        "id": "unique_identifier",
+        "type": "node_type",
+        "name": "display_name",
+        "properties": {
+          "lobe": "cognitive_domain",
+          "eras": ["array_of_eras"],
+          "tags": ["array_of_tags"]
+        }
+      }
+    },
+    "edges": {
+      "types": [
+        "influenced_by",
+        "created",
+        "evolved_into",
+        "related_to",
+        "contains",
+        "represented_by",
+        "transitioned_to"
+      ],
+      "edge_format": {
+        "source_id": "source_node_id",
+        "target_id": "target_node_id",
+        "relationship_type": "edge_type",
+        "strength": "strong|medium|weak",
+        "bidirectional": true,
+        "properties": {
+          "era": "when_relationship_formed",
+          "notes": "additional_context"
+        }
+      }
+    }
+  },
+  "relationship_strength_rules": {
+    "strong": {
+      "definition": "Direct, primary relationship",
+      "examples": [
+        "Primary mentor/mentee relationship",
+        "Creator of primary framework",
+        "Core dependency"
+      ]
+    },
+    "medium": {
+      "definition": "Significant but not primary relationship",
+      "examples": [
+        "Colleague influence",
+        "Framework adaptation",
+        "Secondary inspiration"
+      ]
+    },
+    "weak": {
+      "definition": "Tangential or indirect relationship",
+      "examples": [
+        "Similar field of study",
+        "Loosely related concepts",
+        "Same era but different domains"
+      ]
+    }
+  },
+  "bidirectional_rules": {
+    "always_bidirectional": [
+      "colleague",
+      "collaborated_with",
+      "related_to"
+    ],
+    "never_bidirectional": [
+      "influenced_by",
+      "created",
+      "evolved_into"
+    ],
+    "context_dependent": [
+      "worked_with",
+      "studied_under"
+    ]
+  },
+  "relationship_inference_rules": [
+    {
+      "rule": "transitive_influence",
+      "logic": "If A influenced B and B influenced C, infer weak relationship A->C",
+      "example": "If Turing influenced Minsky, and Minsky influenced LeCun, infer Turing weakly influenced LeCun"
+    },
+    {
+      "rule": "shared_framework",
+      "logic": "If A created framework F and B extensively uses F, infer A influenced B",
+      "example": "Kahneman created Prospect Theory, Thaler uses it extensively -> Kahneman influenced Thaler"
+    },
+    {
+      "rule": "era_cohabitation",
+      "logic": "If concepts X and Y share multiple eras, they likely evolved together",
+      "example": "CRM and ERP both span on-prem->cloud-native->agentic, they co-evolved"
+    }
+  ],
+  "output_files": [
+    {
+      "filename": "13-thinker-network.json",
+      "description": "Complete thinker-to-thinker relationship graph",
+      "estimated_tokens": 30000
+    },
+    {
+      "filename": "14-framework-connections.json",
+      "description": "Thinker-to-framework and framework-to-technology mappings",
+      "estimated_tokens": 20000
+    },
+    {
+      "filename": "15-era-evolution-paths.json",
+      "description": "How concepts evolved across technological eras",
+      "estimated_tokens": 15000
+    },
+    {
+      "filename": "16-complete-graph.json",
+      "description": "Full graph structure with all nodes and edges",
+      "estimated_tokens": 5000,
+      "note": "Summary file - detailed relationships in separate files"
+    }
+  ],
+  "validation_checklist": [
+    "All relationship source_ids reference valid nodes",
+    "All relationship target_ids reference valid nodes",
+    "Bidirectional relationships are marked correctly",
+    "Relationship strengths are assigned consistently",
+    "No self-referential relationships (A->A)",
+    "Transitive relationships are marked as inferred",
+    "All relationship types match defined types"
+  ],
+  "query_examples_enabled": [
+    {
+      "query": "Who influenced Kahneman?",
+      "traversal": "Find all edges where target_id='kahneman-daniel' and type='influenced_by'"
+    },
+    {
+      "query": "What frameworks did Kahneman create?",
+      "traversal": "Find all edges where source_id='kahneman-daniel' and type='created'"
+    },
+    {
+      "query": "How did CRM evolve across eras?",
+      "traversal": "Find node with id='crm-concept', examine era_mapping array and evolution edges"
+    },
+    {
+      "query": "Who are Kahneman's intellectual descendants?",
+      "traversal": "Find all paths starting from kahneman-daniel following 'influenced' edges, depth 2-3"
+    },
+    {
+      "query": "What thinkers worked on behavioral economics?",
+      "traversal": "Find all nodes with tag='behavioral-economics' and type='thinker'"
+    }
+  ],
+  "implementation_notes": [
+    "Build graph incrementally - start with thinker-to-thinker, then add frameworks, then technologies",
+    "Use relationship strength to prioritize search results and recommendations",
+    "Cache frequently traversed paths for performance",
+    "Consider bidirectional indexes for fast reverse lookups",
+    "Tag-based relationships can be inferred from shared tags",
+    "Era-based relationships show technological evolution"
+  ]
+}
