@@ -227,58 +227,20 @@ const DEFAULT_BOOKS: Book[] = [
     ]
   },
 
-  // Living Stack - Cognitive Reef Architecture
+  // F2: The Far Cage
   {
-    id: "living-stack",
-    title: "Living Stack",
-    subtitle: "A Cognitive Reef Architecture for Signal-Driven Systems",
-    slug: "living-stack",
-    lead: "Treating tasks as signals, roles that mutate in real-time, and recovery mechanisms that ensure continuity across human-machine collaboration.",
-    cover: "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg",
-    series_name: "Tech for Humanity",
-    collection: "Tech for Humanity Suite",
-    status: "in_progress",
-    progress: 35,
-    owner: "Tech for Humanity Team",
-    ready_flag: true,
-    chapters: [
-      { title: "Foundation Concepts", sections: ["The Coordination Problem", "Tasks as Signals"], progress: 17, chapter_order: 1 },
-      { title: "Cognitive Reef Architecture", sections: ["Agent Roster Design", "Mutation Protocols", "Recovery Mechanisms"], progress: 16, chapter_order: 2 },
-      { title: "Implementation Patterns", sections: ["Time Tree Integration", "Cognitive Load Management", "Multi-Agent Orchestration"], progress: 11, chapter_order: 3 }
-    ]
-  },
-
-  // The Thinking Engine - 15-Chapter AI Evolution
-  {
-    id: "thinking-engine",
-    title: "The Thinking Engine",
-    subtitle: "Cognitive Systems, Decision-Making, and Intelligent Design",
-    slug: "thinking-engine",
-    lead: "A 15-chapter exploration of how humans and machines think, decide, and evolve together across five technological eras.",
-    cover: "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg",
-    series_name: "Tech for Humanity",
-    collection: "Tech for Humanity Suite",
-    status: "writing",
-    progress: 28,
-    owner: "Tech for Humanity Team",
-    ready_flag: true,
-    chapters: [
-      { title: "Principles", chapter_order: 1, progress: 0, sections: ["Guiding principles for AI development and deployment"] },
-      { title: "Institutions", chapter_order: 2, progress: 0, sections: ["Organizations and institutions driving AI development"] },
-      { title: "Doctrines", chapter_order: 3, progress: 0, sections: ["Philosophical doctrines shaping AI development"] },
-      { title: "Frameworks", chapter_order: 4, progress: 0, sections: ["Fundamental frameworks for understanding AI transformation"] },
-      { title: "Thinkers", chapter_order: 5, progress: 84, sections: ["The minds that shaped our understanding of AI and cognition"] },
-      { title: "Disciplines", chapter_order: 6, progress: 60, sections: ["Academic disciplines contributing to AI research"] },
-      { title: "Technologies", chapter_order: 7, progress: 60, sections: ["Core technologies enabling artificial intelligence"] },
-      { title: "Organizations", chapter_order: 8, progress: 0, sections: ["Key organizations in the AI ecosystem"] },
-      { title: "Cultures", chapter_order: 9, progress: 0, sections: ["Cultural perspectives on AI and human-machine interaction"] },
-      { title: "Roles", chapter_order: 10, progress: 65, sections: ["How human roles evolve in AI-augmented systems"] },
-      { title: "Products", chapter_order: 11, progress: 0, sections: ["AI products and applications transforming society"] },
-      { title: "Eras", chapter_order: 12, progress: 66, sections: ["Historical eras in AI development and adoption"] },
-      { title: "Environment", chapter_order: 13, progress: 0, sections: ["The non-human stakeholder perspective in AI systems"] },
-      { title: "Energy and Forces", chapter_order: 14, progress: 0, sections: ["The underlying drivers and invisible forces"] },
-      { title: "Unstructured", chapter_order: 15, progress: 0, sections: ["Wildcards and user-defined items"] }
-    ]
+    id: "F2",
+    title: "The Far Cage",
+    subtitle: "Digital Sovereignty and the Architecture of Control",
+    slug: "the-far-cage",
+    lead: "Exploring digital sovereignty, identity, autonomy, and control in the age of pervasive computation",
+    cover: "https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/Colour%20Mobile%20far%20cage.png",
+    series_name: "The Far Cage",
+    collection: "On the Drawing Board",
+    status: "draft",
+    owner: "TBA",
+    ready_flag: false,
+    chapters: []
   }
 ];
 
