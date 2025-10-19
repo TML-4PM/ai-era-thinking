@@ -1,0 +1,324 @@
+{
+  "name": "Technological Eras",
+  "version": "1.0",
+  "description": "Five historical periods defining the evolution of technology, architecture, and human-AI interaction",
+  "eras": [
+    {
+      "id": "on-prem",
+      "name": "On-Prem Era",
+      "slug": "on-prem",
+      "time_period": "Pre-2010",
+      "color": "#94a3b8",
+      "description": "Era of local infrastructure, mainframes, and desktop computing",
+      "characteristics": {
+        "key_technologies": [
+          "Mainframes",
+          "Client-server architecture",
+          "Desktop software",
+          "Local databases",
+          "Enterprise data centers"
+        ],
+        "architectural_patterns": [
+          "Monolithic architecture",
+          "Three-tier applications",
+          "Local file storage",
+          "On-premise databases",
+          "Dedicated hardware"
+        ],
+        "business_models": [
+          "License-based software",
+          "Perpetual licenses",
+          "On-site deployment",
+          "Hardware sales",
+          "Professional services"
+        ],
+        "human_role": [
+          "Primary operator",
+          "Manual processes",
+          "Local expertise required",
+          "IT department control",
+          "Hardware maintenance"
+        ],
+        "ai_capability": [
+          "Rule-based systems",
+          "Expert systems",
+          "Basic automation",
+          "Limited machine learning",
+          "Symbolic AI"
+        ],
+        "governance_approach": [
+          "IT governance frameworks",
+          "Compliance checklists",
+          "Internal policies",
+          "Audit controls",
+          "Physical security"
+        ]
+      },
+      "example_exemplars": [
+        "Legacy ERP systems",
+        "Mainframe applications",
+        "Desktop productivity software",
+        "Oracle databases",
+        "SAP R/3"
+      ],
+      "transition_to_next": "Cloud migration, SaaS adoption, DevOps practices"
+    },
+    {
+      "id": "cloud-native",
+      "name": "Cloud Native Era",
+      "slug": "cloud-native",
+      "time_period": "2010-2020",
+      "color": "#3b82f6",
+      "description": "Era of cloud computing, microservices, and API-first architecture",
+      "characteristics": {
+        "key_technologies": [
+          "SaaS platforms",
+          "IaaS (AWS, Azure, GCP)",
+          "PaaS solutions",
+          "Mobile applications",
+          "RESTful APIs",
+          "Container orchestration"
+        ],
+        "architectural_patterns": [
+          "Microservices",
+          "Containers (Docker)",
+          "Kubernetes orchestration",
+          "Service mesh",
+          "API gateways",
+          "Serverless functions"
+        ],
+        "business_models": [
+          "Subscription-based",
+          "Usage-based pricing",
+          "Freemium models",
+          "Pay-as-you-grow",
+          "Platform ecosystems"
+        ],
+        "human_role": [
+          "Cloud administrator",
+          "API integrator",
+          "DevOps engineer",
+          "Platform operator",
+          "Service orchestrator"
+        ],
+        "ai_capability": [
+          "Supervised machine learning",
+          "Predictive analytics",
+          "Recommendation systems",
+          "Image recognition",
+          "Natural language processing"
+        ],
+        "governance_approach": [
+          "Cloud security frameworks",
+          "API governance",
+          "Data privacy regulations (GDPR)",
+          "SaaS compliance",
+          "Identity management"
+        ]
+      },
+      "example_exemplars": [
+        "Salesforce",
+        "AWS Lambda",
+        "Kubernetes",
+        "React/Vue frameworks",
+        "Stripe API",
+        "Slack"
+      ],
+      "transition_to_next": "Large language models, generative AI, foundation models"
+    },
+    {
+      "id": "generative-ai",
+      "name": "Generative AI Era",
+      "slug": "generative-ai",
+      "time_period": "2020-2024",
+      "color": "#8b5cf6",
+      "description": "Era of large language models, text/image generation, and prompt engineering",
+      "characteristics": {
+        "key_technologies": [
+          "Large Language Models (LLMs)",
+          "GPT models",
+          "Diffusion models (image generation)",
+          "Vector databases",
+          "Transformer architectures",
+          "Embedding models"
+        ],
+        "architectural_patterns": [
+          "Prompt engineering",
+          "Retrieval-Augmented Generation (RAG)",
+          "Fine-tuning pipelines",
+          "Model API integration",
+          "Vector search",
+          "Context windows"
+        ],
+        "business_models": [
+          "AI-as-a-Service",
+          "Token-based pricing",
+          "API usage tiers",
+          "Compute credits",
+          "Model subscriptions"
+        ],
+        "human_role": [
+          "Prompt engineer",
+          "AI curator",
+          "Human-in-the-loop validator",
+          "Content reviewer",
+          "Fine-tuning specialist"
+        ],
+        "ai_capability": [
+          "Text generation",
+          "Image generation",
+          "Code generation",
+          "Summarization",
+          "Translation",
+          "Question-answering"
+        ],
+        "governance_approach": [
+          "AI ethics boards",
+          "Content moderation policies",
+          "Model governance",
+          "Bias detection",
+          "Output validation",
+          "Copyright considerations"
+        ]
+      },
+      "example_exemplars": [
+        "ChatGPT",
+        "Midjourney",
+        "GitHub Copilot",
+        "LangChain",
+        "Pinecone",
+        "Anthropic Claude"
+      ],
+      "transition_to_next": "Multi-agent systems, autonomous workflows, tool-using AI"
+    },
+    {
+      "id": "agentic-ai",
+      "name": "Agentic AI Era",
+      "slug": "agentic-ai",
+      "time_period": "2024-2028",
+      "color": "#f59e0b",
+      "description": "Era of autonomous AI agents, multi-agent systems, and goal-oriented AI",
+      "characteristics": {
+        "key_technologies": [
+          "Multi-agent systems",
+          "Tool-using AI",
+          "Autonomous workflows",
+          "Agent orchestration platforms",
+          "Memory systems",
+          "Planning algorithms"
+        ],
+        "architectural_patterns": [
+          "Agent orchestration",
+          "Multi-agent coordination",
+          "Tool chains",
+          "Agent memory systems",
+          "Goal decomposition",
+          "Feedback loops"
+        ],
+        "business_models": [
+          "Outcome-based pricing",
+          "Agent subscriptions",
+          "Task completion fees",
+          "Autonomous service tiers",
+          "Agent marketplace"
+        ],
+        "human_role": [
+          "Agent supervisor",
+          "Outcome validator",
+          "Strategic director",
+          "Goal setter",
+          "Quality assurance"
+        ],
+        "ai_capability": [
+          "Goal-oriented reasoning",
+          "Tool use and API calls",
+          "Multi-step planning",
+          "Autonomous execution",
+          "Self-correction",
+          "Agent collaboration"
+        ],
+        "governance_approach": [
+          "Agent alignment frameworks",
+          "Outcome verification",
+          "Multi-agent coordination rules",
+          "Autonomous system audits",
+          "Agent behavior policies"
+        ]
+      },
+      "example_exemplars": [
+        "AutoGPT",
+        "LangGraph",
+        "CrewAI",
+        "Multi-agent frameworks",
+        "Agent orchestration systems",
+        "Autonomous coding agents"
+      ],
+      "transition_to_next": "Neural interfaces, brain-computer interfaces, thought-to-action systems"
+    },
+    {
+      "id": "bci",
+      "name": "BCI Era",
+      "slug": "bci",
+      "time_period": "2028+",
+      "color": "#ec4899",
+      "description": "Era of brain-computer interfaces, neural integration, and thought-based interaction",
+      "characteristics": {
+        "key_technologies": [
+          "Neural interfaces",
+          "Brain-computer interface (BCI)",
+          "Neural implants",
+          "Thought-to-action systems",
+          "Neural recording devices",
+          "Brain signal processing"
+        ],
+        "architectural_patterns": [
+          "Neural-digital integration",
+          "Thought-to-action pathways",
+          "Direct neural feedback",
+          "Brain-state monitoring",
+          "Cognitive load balancing",
+          "Neural data streaming"
+        ],
+        "business_models": [
+          "Neural subscription services",
+          "Thought-based interactions",
+          "Intention-driven pricing",
+          "Cognitive enhancement tiers",
+          "Neural marketplace"
+        ],
+        "human_role": [
+          "Neural operator",
+          "Thought integrator",
+          "Cognitive augmenter",
+          "Neural interface designer",
+          "Brain-computer liaison"
+        ],
+        "ai_capability": [
+          "Direct neural feedback",
+          "Thought-to-action translation",
+          "Cognitive enhancement",
+          "Seamless AI integration",
+          "Brain-state adaptation",
+          "Neural prediction"
+        ],
+        "governance_approach": [
+          "Neural ethics frameworks",
+          "Cognitive rights protection",
+          "Neural privacy laws",
+          "Brain data governance",
+          "Consent mechanisms",
+          "Neural security protocols"
+        ]
+      },
+      "example_exemplars": [
+        "Neuralink concepts",
+        "Neural prosthetics",
+        "Brain-to-computer translation systems",
+        "Thought-controlled interfaces",
+        "Cognitive enhancement devices"
+      ],
+      "transition_to_next": "Unknown - frontier of human-AI integration"
+    }
+  ],
+  "usage_instructions": "Use eras to track technology evolution, compare implementations across time periods, and understand context for thinkers and frameworks. Many exemplars span multiple eras."
+}

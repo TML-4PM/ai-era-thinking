@@ -1,0 +1,228 @@
+{
+  "name": "Content Relationship Types",
+  "version": "1.0",
+  "description": "Defines all relationship types that connect thinkers, frameworks, technologies, and other content",
+  "relationships": [
+    {
+      "type": "influenced-by",
+      "source_type": "thinker",
+      "target_type": "thinker",
+      "bidirectional": true,
+      "reverse_type": "influences",
+      "strength": "strong",
+      "description": "Intellectual influence and citation",
+      "usage": "Historical tracing of ideas",
+      "example": "Daniel Kahneman influenced-by Herbert Simon"
+    },
+    {
+      "type": "related-framework",
+      "source_type": "thinker",
+      "target_type": "framework",
+      "bidirectional": false,
+      "reverse_type": "framework-of",
+      "strength": "strong",
+      "description": "Thinker developed or uses framework",
+      "usage": "Framework attribution",
+      "example": "Daniel Kahneman related-framework Prospect Theory"
+    },
+    {
+      "type": "applied-in",
+      "source_type": "framework",
+      "target_type": "technology",
+      "bidirectional": false,
+      "reverse_type": "implementation-of",
+      "strength": "medium",
+      "description": "Framework implemented in technology",
+      "usage": "Practical application",
+      "example": "Nudge Theory applied-in Choice Architecture Platform"
+    },
+    {
+      "type": "evolved-into",
+      "source_type": "technology",
+      "target_type": "technology",
+      "bidirectional": true,
+      "reverse_type": "evolved-from",
+      "strength": "strong",
+      "description": "Technology evolution across eras",
+      "usage": "Era transition tracking",
+      "example": "On-Prem CRM evolved-into Cloud CRM"
+    },
+    {
+      "type": "appears-in",
+      "source_type": "thinker",
+      "target_type": "book-section",
+      "bidirectional": false,
+      "reverse_type": "contains",
+      "strength": "weak",
+      "description": "Content location reference",
+      "usage": "Content navigation",
+      "example": "Peter Senge appears-in thinking-engine/thinkers"
+    },
+    {
+      "type": "tagged-with",
+      "source_type": "exemplar",
+      "target_type": "tag",
+      "bidirectional": false,
+      "reverse_type": "tagged-as",
+      "strength": "variable",
+      "description": "Content categorization",
+      "usage": "Search and filtering",
+      "example": "Any exemplar tagged-with systems-thinking"
+    },
+    {
+      "type": "same-lobe",
+      "source_type": "thinker",
+      "target_type": "thinker",
+      "bidirectional": true,
+      "reverse_type": "lobe-peer",
+      "strength": "medium",
+      "description": "Share cognitive domain classification",
+      "usage": "Similar thinkers discovery",
+      "example": "Kahneman same-lobe Simon (both Decision/Action)"
+    },
+    {
+      "type": "same-era-focus",
+      "source_type": "exemplar",
+      "target_type": "exemplar",
+      "bidirectional": true,
+      "reverse_type": "era-peer",
+      "strength": "medium",
+      "description": "Both prominent in same era",
+      "usage": "Era-based recommendations",
+      "example": "Kubernetes same-era-focus Docker"
+    },
+    {
+      "type": "co-referenced",
+      "source_type": "thinker",
+      "target_type": "framework",
+      "bidirectional": false,
+      "reverse_type": "references",
+      "strength": "medium",
+      "description": "Thinker frequently references framework",
+      "usage": "Conceptual connections",
+      "example": "Kahneman co-referenced Bounded Rationality"
+    },
+    {
+      "type": "case-study-of",
+      "source_type": "organization",
+      "target_type": "framework",
+      "bidirectional": false,
+      "reverse_type": "example-of",
+      "strength": "strong",
+      "description": "Real-world implementation example",
+      "usage": "Practical examples",
+      "example": "Google case-study-of OKR Framework"
+    },
+    {
+      "type": "character-uses",
+      "source_type": "character",
+      "target_type": "agent",
+      "bidirectional": false,
+      "reverse_type": "operates",
+      "strength": "strong",
+      "description": "GCBAT character associated with agent",
+      "usage": "Narrative connections",
+      "example": "Elena Vasquez character-uses Strategy Agent"
+    },
+    {
+      "type": "part-of",
+      "source_type": "section",
+      "target_type": "book",
+      "bidirectional": true,
+      "reverse_type": "contains",
+      "strength": "strong",
+      "description": "Hierarchical containment",
+      "usage": "Navigation structure",
+      "example": "arc-1 part-of gcbat-vignettes"
+    },
+    {
+      "type": "exemplifies",
+      "source_type": "vignette",
+      "target_type": "theme",
+      "bidirectional": false,
+      "reverse_type": "example-of",
+      "strength": "medium",
+      "description": "Story illustrates theme",
+      "usage": "Thematic connections",
+      "example": "Leadership scenario exemplifies Ethical governance"
+    },
+    {
+      "type": "contrasts-with",
+      "source_type": "framework",
+      "target_type": "framework",
+      "bidirectional": true,
+      "reverse_type": "opposite-of",
+      "strength": "medium",
+      "description": "Opposing approaches",
+      "usage": "Comparative analysis",
+      "example": "Centralized governance contrasts-with Holacracy"
+    },
+    {
+      "type": "prerequisite-for",
+      "source_type": "concept",
+      "target_type": "concept",
+      "bidirectional": false,
+      "reverse_type": "builds-on",
+      "strength": "strong",
+      "description": "Foundational concept dependency",
+      "usage": "Learning paths",
+      "example": "Bounded Rationality prerequisite-for Satisficing"
+    },
+    {
+      "type": "complements",
+      "source_type": "technology",
+      "target_type": "technology",
+      "bidirectional": true,
+      "reverse_type": "compatible-with",
+      "strength": "medium",
+      "description": "Technologies work together",
+      "usage": "Technology stacks",
+      "example": "LLM complements Vector Database"
+    },
+    {
+      "type": "succeeded-by",
+      "source_type": "framework",
+      "target_type": "framework",
+      "bidirectional": false,
+      "reverse_type": "predecessor-of",
+      "strength": "strong",
+      "description": "Historical succession in practice",
+      "usage": "Historical evolution",
+      "example": "Waterfall succeeded-by Agile"
+    },
+    {
+      "type": "critiqued-by",
+      "source_type": "framework",
+      "target_type": "thinker",
+      "bidirectional": false,
+      "reverse_type": "critic-of",
+      "strength": "medium",
+      "description": "Critical analysis relationship",
+      "usage": "Intellectual debate",
+      "example": "Rational Choice Theory critiqued-by Kahneman"
+    },
+    {
+      "type": "synthesizes",
+      "source_type": "framework",
+      "target_type": "framework",
+      "bidirectional": false,
+      "reverse_type": "synthesized-from",
+      "strength": "strong",
+      "description": "Combination of multiple frameworks",
+      "usage": "Synthesis relationships",
+      "example": "Third Way synthesizes Capitalism + Socialism"
+    },
+    {
+      "type": "applied-by",
+      "source_type": "framework",
+      "target_type": "organization",
+      "bidirectional": false,
+      "reverse_type": "practitioner-of",
+      "strength": "medium",
+      "description": "Organization known for using framework",
+      "usage": "Real-world adoption",
+      "example": "Systems Thinking applied-by Toyota"
+    }
+  ],
+  "usage_instructions": "Use these relationship types to traverse the knowledge graph, discover connections, and answer queries about how concepts relate to each other."
+}

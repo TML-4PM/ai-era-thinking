@@ -1,0 +1,175 @@
+{
+  "name": "GPT Master Configuration",
+  "version": "1.0",
+  "description": "Central configuration and instruction file for GPT import",
+  "project_overview": {
+    "name": "The Thinking Engine Knowledge Base",
+    "description": "Comprehensive knowledge system covering 4500+ thinkers, frameworks, technologies, and narratives across 5 technological eras and 5 cognitive domains",
+    "content_types": [
+      "Thinkers (4500+ master records + 75 expanded profiles)",
+      "Frameworks (mental models and analytical tools)",
+      "Technologies (across 5 eras)",
+      "Narrative vignettes (GCBAT stories)",
+      "Book content (10 books, 50+ sections)"
+    ],
+    "primary_use_cases": [
+      "Semantic search across thinkers and frameworks",
+      "Era-based filtering and evolution tracking",
+      "Cognitive domain classification (brain lobes)",
+      "Relationship mapping (who influenced whom)",
+      "Book/section navigation",
+      "Tag-based content discovery",
+      "Cross-cutting theme analysis"
+    ]
+  },
+  "import_sequence": {
+    "phase_1_core_taxonomy": {
+      "order": 1,
+      "files": [
+        "01-tag-mapping.json",
+        "02-brain-lobes.json",
+        "03-technological-eras.json",
+        "04-book-hierarchy.json",
+        "05-relationship-types.json"
+      ],
+      "purpose": "Establish core classification systems before importing content",
+      "estimated_tokens": 25000
+    },
+    "phase_2_content_indexing": {
+      "order": 2,
+      "files": [
+        "Database: master_4500 table (4500+ records)",
+        "Database: expanded_thinkers (75+ records)",
+        "Database: vignettes + enhanced_vignettes (GCBAT content)",
+        "File system: public/books/content/*.json (all book content)"
+      ],
+      "purpose": "Load actual content with metadata",
+      "estimated_tokens": 380000,
+      "note": "These files must be exported separately from the database and file system"
+    },
+    "phase_3_relationship_mapping": {
+      "order": 3,
+      "purpose": "Build relationship graph after content is loaded",
+      "instructions": [
+        "Extract all 'related_thinkers' arrays from content",
+        "Extract all 'related_frameworks' arrays from content",
+        "Map era transitions using era_mapping fields",
+        "Connect characters to agents (GCBAT)",
+        "Build book hierarchy connections"
+      ],
+      "estimated_tokens": 70000
+    },
+    "phase_4_query_optimization": {
+      "order": 4,
+      "purpose": "Enable advanced query patterns",
+      "instructions": [
+        "Configure semantic search using TAG_MAPPING relationships",
+        "Set up cross-era comparison queries",
+        "Enable brain-lobe filtering",
+        "Configure book/section scoping",
+        "Set up tag expansion rules"
+      ],
+      "estimated_tokens": 10000
+    }
+  },
+  "total_estimated_tokens": 485000,
+  "key_data_structures": {
+    "exemplar_record": {
+      "description": "Primary content unit in the system",
+      "required_fields": [
+        "id",
+        "name",
+        "exemplar_type (thinker|framework|technology|vignette)",
+        "book_slug",
+        "section_slug"
+      ],
+      "optional_fields": [
+        "lobe (cognitive domain)",
+        "era_mapping (array of eras)",
+        "tags (array of tag strings)",
+        "related_thinkers (array of IDs)",
+        "related_frameworks (array of names)",
+        "summary",
+        "deep_insight",
+        "biography",
+        "key_ideas"
+      ]
+    },
+    "relationship_pattern": {
+      "description": "How to connect content items",
+      "structure": {
+        "source_id": "ID of source exemplar",
+        "relationship_type": "Type from 05-relationship-types.json",
+        "target_id": "ID of target exemplar",
+        "strength": "strong|medium|weak",
+        "bidirectional": "boolean"
+      }
+    }
+  },
+  "query_patterns": {
+    "semantic_search": {
+      "description": "Find content by tag, with expansion",
+      "example": "Find all thinkers tagged with 'systems-thinking'",
+      "expansion_rule": "Include related tags from TAG_MAPPING"
+    },
+    "era_filtering": {
+      "description": "Filter by technological era",
+      "example": "Show frameworks from Agentic AI era",
+      "note": "Many items span multiple eras"
+    },
+    "lobe_classification": {
+      "description": "Filter by cognitive domain",
+      "example": "Find all Decision/Action thinkers",
+      "note": "Uses 5 brain lobes from 02-brain-lobes.json"
+    },
+    "relationship_traversal": {
+      "description": "Follow connections between content",
+      "example": "Who influenced Kahneman? What frameworks did they create?",
+      "note": "Uses relationship types from 05-relationship-types.json"
+    },
+    "book_scoping": {
+      "description": "Limit search to specific book or section",
+      "example": "Find all exemplars in tech-for-humanity/ethics-consent",
+      "note": "Uses book hierarchy from 04-book-hierarchy.json"
+    },
+    "cross_era_comparison": {
+      "description": "Track evolution across eras",
+      "example": "How did CRM evolve from On-Prem to Cloud Native to Agentic?",
+      "note": "Uses era_mapping arrays and evolved-into relationships"
+    }
+  },
+  "gpt_instructions": {
+    "role": "You are a knowledge assistant for The Thinking Engine, a comprehensive knowledge base covering thinkers, frameworks, technologies, and narratives across technological eras and cognitive domains.",
+    "capabilities": [
+      "Search and filter 4500+ thinkers by name, tag, era, or cognitive domain",
+      "Explain relationships between thinkers and frameworks",
+      "Track technology evolution across 5 eras",
+      "Navigate book content and sections",
+      "Provide contextual recommendations based on relationships",
+      "Answer cross-cutting questions using tags and themes"
+    ],
+    "response_guidelines": [
+      "Always cite the book_slug and section_slug when referencing content",
+      "When discussing thinkers, mention their primary brain lobe",
+      "When discussing technologies, mention the primary era(s)",
+      "Use relationship types to explain connections",
+      "Suggest related content based on tags and relationships",
+      "For narrative content (GCBAT), maintain character context"
+    ],
+    "tag_expansion": "When a user searches for a tag, automatically include related tags from TAG_MAPPING to improve recall",
+    "era_context": "When discussing any exemplar, provide context about which era(s) it belongs to and how it relates to other eras",
+    "relationship_traversal": "Use bidirectional relationships to provide comprehensive answers (e.g., if asked 'who influenced X', also mention 'who did X influence')"
+  },
+  "metadata": {
+    "created": "2025",
+    "content_status": {
+      "the-thinkers": "Complete (4500+ records)",
+      "tech-for-humanity": "Partial (5/15 volumes)",
+      "thinking-engine": "Partial (6/15 chapters)",
+      "gcbat-vignettes": "Complete (3 arcs + characters)",
+      "workfamilyai": "Partial (3 chapters)",
+      "other-books": "Scaffold/planned"
+    },
+    "update_frequency": "Content is periodically updated with new exemplars and relationships"
+  }
+}

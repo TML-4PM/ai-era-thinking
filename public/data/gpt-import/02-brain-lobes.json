@@ -1,0 +1,168 @@
+{
+  "name": "Brain Lobes / Cognitive Domains",
+  "version": "1.0",
+  "description": "Five cognitive domains used to classify thinkers and frameworks by mental function",
+  "lobes": [
+    {
+      "id": "perception-patterning",
+      "name": "Perception/Patterning",
+      "slug": "perception",
+      "color": "#9b87f5",
+      "description": "Recognition of patterns, processing of sensory information, and identification of structures in data and systems",
+      "cognitive_functions": [
+        "Pattern recognition",
+        "Visual processing",
+        "Spatial reasoning",
+        "Data interpretation",
+        "Sensory analysis"
+      ],
+      "example_thinkers": [
+        "Herbert Simon (pattern recognition in decision-making)",
+        "Marvin Minsky (frames and pattern structures)",
+        "Benoit Mandelbrot (fractal patterns)"
+      ],
+      "example_frameworks": [
+        "Pattern recognition systems",
+        "Computer vision",
+        "Neural networks for perception",
+        "Gestalt principles"
+      ],
+      "related_tags": [
+        "pattern-recognition",
+        "neural-networks",
+        "computer-vision",
+        "systems-thinking"
+      ]
+    },
+    {
+      "id": "decision-action",
+      "name": "Decision/Action",
+      "slug": "decision",
+      "color": "#0EA5E9",
+      "description": "Processes of making choices, taking action, planning, and executing strategies",
+      "cognitive_functions": [
+        "Decision-making",
+        "Action planning",
+        "Strategy execution",
+        "Problem-solving",
+        "Risk assessment"
+      ],
+      "example_thinkers": [
+        "Daniel Kahneman (decision-making under uncertainty)",
+        "Herbert Simon (bounded rationality and satisficing)",
+        "Richard Thaler (nudge theory and choice architecture)"
+      ],
+      "example_frameworks": [
+        "Prospect Theory",
+        "Bounded Rationality",
+        "Decision trees",
+        "Game theory",
+        "Nudge theory"
+      ],
+      "related_tags": [
+        "decision-science",
+        "behavioral-economics",
+        "bounded-rationality",
+        "heuristics"
+      ]
+    },
+    {
+      "id": "innovation-strategy",
+      "name": "Innovation/Strategy",
+      "slug": "innovation",
+      "color": "#F97316",
+      "description": "Creative thinking, strategic planning, innovation processes, and long-term vision",
+      "cognitive_functions": [
+        "Strategic thinking",
+        "Creative problem-solving",
+        "Innovation design",
+        "Future planning",
+        "Opportunity identification"
+      ],
+      "example_thinkers": [
+        "Clayton Christensen (disruptive innovation)",
+        "Peter Drucker (management innovation)",
+        "W. Edwards Deming (quality systems)"
+      ],
+      "example_frameworks": [
+        "Disruptive Innovation",
+        "Blue Ocean Strategy",
+        "Design Thinking",
+        "Jobs to Be Done",
+        "Lean Startup"
+      ],
+      "related_tags": [
+        "innovation",
+        "strategy",
+        "design-thinking",
+        "entrepreneurship"
+      ]
+    },
+    {
+      "id": "ethics-governance",
+      "name": "Ethics/Governance",
+      "slug": "ethics",
+      "color": "#D946EF",
+      "description": "Moral reasoning, ethical frameworks, governance structures, and value systems",
+      "cognitive_functions": [
+        "Ethical reasoning",
+        "Value judgment",
+        "Policy formation",
+        "Governance design",
+        "Rights protection"
+      ],
+      "example_thinkers": [
+        "John Rawls (justice as fairness)",
+        "Elinor Ostrom (commons governance)",
+        "Amartya Sen (capability approach)"
+      ],
+      "example_frameworks": [
+        "AI Ethics frameworks",
+        "Stakeholder theory",
+        "Corporate governance models",
+        "Rights-based approaches",
+        "Justice frameworks"
+      ],
+      "related_tags": [
+        "ethics",
+        "ai-ethics",
+        "governance",
+        "justice",
+        "policy"
+      ]
+    },
+    {
+      "id": "culture-behaviour",
+      "name": "Culture/Behaviour",
+      "slug": "culture",
+      "color": "#10B981",
+      "description": "Social dynamics, cultural systems, behavioral patterns, and collective psychology",
+      "cognitive_functions": [
+        "Social cognition",
+        "Cultural analysis",
+        "Behavioral observation",
+        "Group dynamics",
+        "Norm formation"
+      ],
+      "example_thinkers": [
+        "Edgar Schein (organizational culture)",
+        "Peter Senge (learning organizations)",
+        "Robert Cialdini (influence and persuasion)"
+      ],
+      "example_frameworks": [
+        "Cultural dimensions theory",
+        "Social identity theory",
+        "Organizational culture models",
+        "Behavioral change models",
+        "Social learning theory"
+      ],
+      "related_tags": [
+        "organizational-culture",
+        "behavioral-economics",
+        "social-psychology",
+        "organizational-behavior"
+      ]
+    }
+  ],
+  "usage_instructions": "Use brain lobes to classify content by cognitive domain. Each thinker, framework, or technology should be mapped to one primary lobe, though cross-lobe connections are common."
+}

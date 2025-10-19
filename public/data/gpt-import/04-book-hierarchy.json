@@ -1,0 +1,254 @@
+{
+  "name": "Book Collection Hierarchy",
+  "version": "1.0",
+  "description": "Complete structure of the book collection organized by development status and content type",
+  "collections": [
+    {
+      "name": "Premier Collection",
+      "status": "published",
+      "description": "Fully seeded books with comprehensive content",
+      "books": [
+        {
+          "slug": "the-thinkers",
+          "title": "The Thinkers",
+          "status": "seeded",
+          "primary_focus": "Comprehensive thinker catalog",
+          "volumes_chapters": "4500+ exemplars",
+          "seeded_count": "4500+",
+          "related_eras": ["all"],
+          "key_themes": ["thinkers", "frameworks", "cognitive-domains"],
+          "sections": [
+            {
+              "slug": "all-thinkers",
+              "name": "All Thinkers",
+              "description": "Complete catalog of 4500+ thinkers across all domains and eras"
+            },
+            {
+              "slug": "expanded-profiles",
+              "name": "Expanded Profiles",
+              "description": "Detailed profiles of 75+ key thinkers with deep analysis"
+            }
+          ]
+        },
+        {
+          "slug": "tech-for-humanity",
+          "title": "Tech for Humanity",
+          "status": "partial",
+          "primary_focus": "Technology for human benefit across domains",
+          "volumes_chapters": "15 volumes",
+          "seeded_count": "5",
+          "related_eras": ["cloud-native", "generative-ai", "agentic-ai", "bci"],
+          "key_themes": ["ethics", "healthcare", "education", "climate", "governance"],
+          "sections": [
+            {
+              "slug": "ethics-consent",
+              "name": "Ethics & Consent",
+              "status": "seeded",
+              "description": "Frameworks for ethical AI development and user consent"
+            },
+            {
+              "slug": "healthcare-wellbeing",
+              "name": "Healthcare & Wellbeing",
+              "status": "seeded",
+              "description": "AI applications in healthcare and mental health"
+            },
+            {
+              "slug": "education-knowledge",
+              "name": "Education & Knowledge",
+              "status": "seeded",
+              "description": "Educational technology and knowledge systems"
+            },
+            {
+              "slug": "climate-environment",
+              "name": "Climate & Environment",
+              "status": "seeded",
+              "description": "Technology for climate action and environmental protection"
+            },
+            {
+              "slug": "governance-policy",
+              "name": "Governance & Policy",
+              "status": "seeded",
+              "description": "AI governance frameworks and policy recommendations"
+            }
+          ]
+        },
+        {
+          "slug": "thinking-engine",
+          "title": "The Thinking Engine",
+          "status": "partial",
+          "primary_focus": "Cognitive systems and decision-making",
+          "volumes_chapters": "15 chapters",
+          "seeded_count": "6",
+          "related_eras": ["all"],
+          "key_themes": ["disciplines", "frameworks", "technologies", "roles"],
+          "sections": [
+            {
+              "slug": "disciplines",
+              "name": "Disciplines",
+              "status": "seeded",
+              "description": "Core academic and professional disciplines"
+            },
+            {
+              "slug": "frameworks",
+              "name": "Frameworks",
+              "status": "seeded",
+              "description": "Mental models and analytical frameworks"
+            },
+            {
+              "slug": "technologies",
+              "name": "Technologies",
+              "status": "seeded",
+              "description": "Key technologies across eras"
+            },
+            {
+              "slug": "roles",
+              "name": "Roles",
+              "status": "seeded",
+              "description": "Human roles in technology ecosystems"
+            },
+            {
+              "slug": "thinkers",
+              "name": "Thinkers",
+              "status": "seeded",
+              "description": "Key thinkers by cognitive domain"
+            },
+            {
+              "slug": "eras",
+              "name": "Eras",
+              "status": "seeded",
+              "description": "Historical evolution of technology eras"
+            }
+          ]
+        },
+        {
+          "slug": "gcbat-vignettes",
+          "title": "GCBAT Vignettes",
+          "status": "seeded",
+          "primary_focus": "Narrative exploration of AI governance",
+          "volumes_chapters": "3 arcs + characters",
+          "seeded_count": "Complete",
+          "related_eras": ["agentic-ai", "bci"],
+          "key_themes": ["governance", "leadership", "ethics", "narratives"],
+          "sections": [
+            {
+              "slug": "arc-1",
+              "name": "Arc 1: The Alliance Forms",
+              "status": "seeded",
+              "description": "9 characters unite to govern AI systems"
+            },
+            {
+              "slug": "arc-2",
+              "name": "Arc 2: Chaos & Coordination",
+              "status": "seeded",
+              "description": "Testing governance under pressure"
+            },
+            {
+              "slug": "arc-3",
+              "name": "Arc 3: The Emergent Order",
+              "status": "seeded",
+              "description": "New governance paradigms emerge"
+            },
+            {
+              "slug": "characters",
+              "name": "Characters",
+              "status": "seeded",
+              "description": "9 diverse leaders with unique perspectives"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "In Development",
+      "status": "active",
+      "description": "Books currently being developed with partial content",
+      "books": [
+        {
+          "slug": "workfamilyai",
+          "title": "WorkFamilyAI",
+          "status": "partial",
+          "primary_focus": "Work-family alignment systems",
+          "volumes_chapters": "Multiple chapters",
+          "seeded_count": "3",
+          "related_eras": ["agentic-ai"],
+          "key_themes": ["alignment", "neural-ennead", "executive-teams"],
+          "sections": [
+            {
+              "slug": "chapter-1",
+              "name": "Chapter 1: The Neural Ennead",
+              "status": "seeded"
+            },
+            {
+              "slug": "chapter-2",
+              "name": "Chapter 2: Alignment Mechanisms",
+              "status": "seeded"
+            },
+            {
+              "slug": "chapter-3",
+              "name": "Chapter 3: Executive Integration",
+              "status": "seeded"
+            }
+          ]
+        },
+        {
+          "slug": "quantum-logic-systems",
+          "title": "Quantum Logic Systems",
+          "status": "scaffold",
+          "primary_focus": "Quantum computation and biology",
+          "volumes_chapters": "3 clusters",
+          "seeded_count": "Minimal",
+          "related_eras": ["bci"],
+          "key_themes": ["quantum-computation", "quantum-biology", "quantum-medicine"]
+        },
+        {
+          "slug": "regenerative-organization",
+          "title": "The Regenerative Organization",
+          "status": "scaffold",
+          "primary_focus": "Sustainable organizational transformation",
+          "volumes_chapters": "3 clusters",
+          "seeded_count": "Minimal",
+          "related_eras": ["cloud-native", "generative-ai", "agentic-ai"],
+          "key_themes": ["transformation", "sustainability", "strip-map-update"]
+        },
+        {
+          "slug": "sovereign-systems",
+          "title": "Sovereign Systems",
+          "status": "scaffold",
+          "primary_focus": "Individual and collective autonomy",
+          "volumes_chapters": "TBD",
+          "seeded_count": "None",
+          "related_eras": ["agentic-ai", "bci"],
+          "key_themes": ["sovereignty", "autonomy", "governance"]
+        }
+      ]
+    },
+    {
+      "name": "On the Drawing Board",
+      "status": "planned",
+      "description": "Books in early conceptual stages",
+      "books": [
+        {
+          "slug": "the-far-cage",
+          "title": "The Far Cage",
+          "status": "scaffold",
+          "primary_focus": "Societal constraints and freedom",
+          "volumes_chapters": "TBD",
+          "seeded_count": "None",
+          "related_eras": ["all"],
+          "key_themes": ["constraints", "freedom", "governance"]
+        },
+        {
+          "slug": "living-stack",
+          "title": "Living Stack",
+          "status": "scaffold",
+          "primary_focus": "Technology ecosystem integration",
+          "volumes_chapters": "TBD",
+          "seeded_count": "None",
+          "related_eras": ["cloud-native", "generative-ai", "agentic-ai", "bci"],
+          "key_themes": ["ecosystem", "integration", "tech-stack"]
+        }
+      ]
+    }
+  ],
+  "usage_instructions": "Use book slugs and section slugs to scope queries and navigate content. Status indicates completeness. Each book has related eras and key themes for cross-referencing."
+}

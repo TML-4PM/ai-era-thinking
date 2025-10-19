@@ -1,0 +1,262 @@
+{
+  "name": "Tag Mapping System",
+  "version": "1.0",
+  "description": "Complete taxonomy of tags organized by category with semantic relationships",
+  "categories": {
+    "behavioral-cognitive": {
+      "name": "Behavioral & Cognitive",
+      "description": "Psychology, decision-making, and cognitive processes",
+      "tags": {
+        "behavioral-economics": {
+          "display": "Behavioral Economics",
+          "description": "Study of psychological factors in economic decisions",
+          "keywords": ["behavior", "economics", "psychology", "decision"],
+          "related": ["cognitive-bias", "decision-science", "heuristics"],
+          "common_contexts": ["Kahneman", "Thaler", "Nudge Theory"]
+        },
+        "cognitive-bias": {
+          "display": "Cognitive Bias",
+          "description": "Systematic patterns of deviation from rationality",
+          "keywords": ["bias", "cognitive", "thinking", "error"],
+          "related": ["behavioral-economics", "decision-science"],
+          "common_contexts": ["Kahneman", "Heuristics"]
+        },
+        "decision-science": {
+          "display": "Decision Science",
+          "description": "Scientific study of decision-making processes",
+          "keywords": ["decision", "choice", "rationality"],
+          "related": ["behavioral-economics", "bounded-rationality"],
+          "common_contexts": ["Simon", "Kahneman", "Decision Theory"]
+        },
+        "bounded-rationality": {
+          "display": "Bounded Rationality",
+          "description": "Concept that rationality is limited by cognitive constraints",
+          "keywords": ["rationality", "limits", "satisficing"],
+          "related": ["decision-science", "cognitive-bias"],
+          "common_contexts": ["Simon", "Satisficing"]
+        },
+        "heuristics": {
+          "display": "Heuristics",
+          "description": "Mental shortcuts used in problem-solving",
+          "keywords": ["shortcuts", "rules-of-thumb", "intuition"],
+          "related": ["cognitive-bias", "decision-science"],
+          "common_contexts": ["Kahneman", "Fast and Slow Thinking"]
+        },
+        "nudge-theory": {
+          "display": "Nudge Theory",
+          "description": "Framework for influencing behavior through choice architecture",
+          "keywords": ["nudge", "influence", "behavior-change"],
+          "related": ["behavioral-economics", "choice-architecture"],
+          "common_contexts": ["Thaler", "Behavioral Economics"]
+        }
+      }
+    },
+    "ai-technology": {
+      "name": "AI & Technology",
+      "description": "Artificial intelligence, machine learning, and emerging technologies",
+      "tags": {
+        "ai-ethics": {
+          "display": "AI Ethics",
+          "description": "Ethical considerations in AI development and deployment",
+          "keywords": ["ethics", "ai", "morals", "values"],
+          "related": ["ethics", "governance", "ai-alignment"],
+          "common_contexts": ["Tech for Humanity", "AI Safety"]
+        },
+        "machine-learning": {
+          "display": "Machine Learning",
+          "description": "Algorithms that improve through experience",
+          "keywords": ["ml", "algorithms", "training", "models"],
+          "related": ["deep-learning", "neural-networks"],
+          "common_contexts": ["All tech content"]
+        },
+        "neural-networks": {
+          "display": "Neural Networks",
+          "description": "Computing systems inspired by biological neural networks",
+          "keywords": ["neural", "networks", "layers", "neurons"],
+          "related": ["machine-learning", "deep-learning"],
+          "common_contexts": ["Deep Learning", "Quantum Logic"]
+        },
+        "ai-alignment": {
+          "display": "AI Alignment",
+          "description": "Ensuring AI systems align with human values",
+          "keywords": ["alignment", "values", "human-ai"],
+          "related": ["ai-ethics", "ai-safety"],
+          "common_contexts": ["AI Safety", "Tech for Humanity"]
+        },
+        "ai-safety": {
+          "display": "AI Safety",
+          "description": "Preventing unintended harm from AI systems",
+          "keywords": ["safety", "risks", "harm-prevention"],
+          "related": ["ai-ethics", "ai-alignment"],
+          "common_contexts": ["AI Ethics", "Governance"]
+        },
+        "explainable-ai": {
+          "display": "Explainable AI",
+          "description": "Making AI decision-making transparent and interpretable",
+          "keywords": ["xai", "interpretability", "transparency"],
+          "related": ["ai-ethics", "transparency"],
+          "common_contexts": ["Thinking Engine", "Frameworks"]
+        },
+        "generative-ai": {
+          "display": "Generative AI",
+          "description": "AI systems that create new content",
+          "keywords": ["generation", "content-creation", "llm"],
+          "related": ["llm", "gpt", "diffusion-models"],
+          "common_contexts": ["Generative AI Era"]
+        },
+        "agentic-ai": {
+          "display": "Agentic AI",
+          "description": "Autonomous AI systems that take independent action",
+          "keywords": ["agents", "autonomous", "agentic"],
+          "related": ["autonomous-systems", "multi-agent"],
+          "common_contexts": ["Agentic AI Era"]
+        }
+      }
+    },
+    "systems-complexity": {
+      "name": "Systems & Complexity",
+      "description": "Systems thinking, complexity theory, and interconnected dynamics",
+      "tags": {
+        "systems-thinking": {
+          "display": "Systems Thinking",
+          "description": "Holistic approach to analyzing interconnected systems",
+          "keywords": ["systems", "holistic", "interconnected"],
+          "related": ["complexity-theory", "holistic-analysis"],
+          "common_contexts": ["Senge", "Regenerative Organization"]
+        },
+        "complexity-theory": {
+          "display": "Complexity Theory",
+          "description": "Study of complex adaptive systems",
+          "keywords": ["complexity", "adaptive", "emergence"],
+          "related": ["systems-thinking", "emergence"],
+          "common_contexts": ["Regenerative Organization"]
+        },
+        "network-theory": {
+          "display": "Network Theory",
+          "description": "Mathematical study of networks and relationships",
+          "keywords": ["networks", "graphs", "connections"],
+          "related": ["graph-theory", "social-networks"],
+          "common_contexts": ["Network Analysis"]
+        },
+        "emergence": {
+          "display": "Emergence",
+          "description": "Properties arising from interactions of simpler components",
+          "keywords": ["emergence", "self-organization"],
+          "related": ["complexity-theory", "systems-thinking"],
+          "common_contexts": ["Complexity", "Quantum Logic"]
+        },
+        "cybernetics": {
+          "display": "Cybernetics",
+          "description": "Study of control and communication in systems",
+          "keywords": ["control", "communication", "feedback"],
+          "related": ["feedback-loops", "systems-thinking"],
+          "common_contexts": ["Wiener", "Thinking Engine"]
+        },
+        "feedback-loops": {
+          "display": "Feedback Loops",
+          "description": "Circular processes where outputs influence inputs",
+          "keywords": ["feedback", "loops", "cycles"],
+          "related": ["cybernetics", "systems-thinking"],
+          "common_contexts": ["Systems Dynamics"]
+        }
+      }
+    },
+    "organization-leadership": {
+      "name": "Organization & Leadership",
+      "description": "Organizational behavior, leadership, and management practices",
+      "tags": {
+        "organizational-behavior": {
+          "display": "Organizational Behavior",
+          "description": "Study of human behavior in organizational settings",
+          "keywords": ["organization", "behavior", "workplace"],
+          "related": ["leadership", "culture"],
+          "common_contexts": ["Regenerative Organization", "WorkFamilyAI"]
+        },
+        "leadership": {
+          "display": "Leadership",
+          "description": "Process of influencing and guiding groups",
+          "keywords": ["leadership", "influence", "guidance"],
+          "related": ["organizational-behavior", "management"],
+          "common_contexts": ["WorkFamilyAI", "GCBAT"]
+        },
+        "change-management": {
+          "display": "Change Management",
+          "description": "Structured approach to transitioning organizations",
+          "keywords": ["change", "transformation", "transition"],
+          "related": ["organizational-behavior", "transformation"],
+          "common_contexts": ["Regenerative Organization"]
+        },
+        "organizational-culture": {
+          "display": "Organizational Culture",
+          "description": "Shared values and practices within organizations",
+          "keywords": ["culture", "values", "norms"],
+          "related": ["organizational-behavior", "leadership"],
+          "common_contexts": ["Regenerative Organization", "WorkFamilyAI"]
+        },
+        "team-dynamics": {
+          "display": "Team Dynamics",
+          "description": "Behavioral relationships between team members",
+          "keywords": ["teams", "dynamics", "collaboration"],
+          "related": ["leadership", "collaboration"],
+          "common_contexts": ["WorkFamilyAI"]
+        },
+        "holacracy": {
+          "display": "Holacracy",
+          "description": "Self-organizing governance structure",
+          "keywords": ["holacracy", "self-organization", "governance"],
+          "related": ["organizational-structure", "self-organization"],
+          "common_contexts": ["Regenerative Organization", "WorkFamilyAI"]
+        }
+      }
+    },
+    "philosophy-logic": {
+      "name": "Philosophy & Logic",
+      "description": "Philosophical inquiry, logic, and epistemology",
+      "tags": {
+        "philosophy-of-mind": {
+          "display": "Philosophy of Mind",
+          "description": "Study of consciousness and mental phenomena",
+          "keywords": ["mind", "consciousness", "philosophy"],
+          "related": ["consciousness", "cognitive-science"],
+          "common_contexts": ["Dennett", "Thinking Engine"]
+        },
+        "epistemology": {
+          "display": "Epistemology",
+          "description": "Theory of knowledge and justified belief",
+          "keywords": ["knowledge", "epistemology", "belief"],
+          "related": ["knowledge", "logic"],
+          "common_contexts": ["Popper", "Thinking Engine"]
+        },
+        "logic": {
+          "display": "Logic",
+          "description": "Study of valid reasoning and inference",
+          "keywords": ["logic", "reasoning", "inference"],
+          "related": ["reasoning", "formal-systems"],
+          "common_contexts": ["Thinking Engine", "Quantum Logic"]
+        },
+        "ethics": {
+          "display": "Ethics",
+          "description": "Moral principles governing behavior",
+          "keywords": ["ethics", "morals", "principles"],
+          "related": ["ai-ethics", "governance", "values"],
+          "common_contexts": ["Tech for Humanity"]
+        },
+        "metaphysics": {
+          "display": "Metaphysics",
+          "description": "Study of fundamental nature of reality",
+          "keywords": ["metaphysics", "reality", "ontology"],
+          "related": ["ontology", "philosophy-of-mind"],
+          "common_contexts": ["Quantum Logic", "Thinking Engine"]
+        },
+        "phenomenology": {
+          "display": "Phenomenology",
+          "description": "Study of structures of consciousness and experience",
+          "keywords": ["phenomenology", "experience", "consciousness"],
+          "related": ["consciousness", "philosophy-of-mind"],
+          "common_contexts": ["Husserl"]
+        }
+      }
+    }
+  },
+  "usage_instructions": "Use these tags for semantic search, content classification, and relationship mapping. Related tags should be considered when searching for content. Keywords enable natural language queries."
+}
