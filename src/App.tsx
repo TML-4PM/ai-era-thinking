@@ -12,6 +12,7 @@ import EraDetail from "./pages/EraDetail";
 import Governance from "./pages/Governance";
 import Tools from "./pages/Tools";
 import AdminExpand from "./pages/AdminExpand";
+import GPTExport from "./pages/GPTExport";
 import AddThinker from "./pages/AddThinker";
 import Favorites from "./pages/Favorites";
 import Auth from "./pages/Auth";
@@ -114,6 +115,7 @@ const App = () => (
               <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
               <Route path="/books/:slug/chapter/:chapterNumber" element={<StaticChapterPage />} />
               <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/admin/gpt-export" element={<GPTExport />} />
               <Route path="/thinkers" element={<Thinkers />} />
               <Route path="/frameworks" element={<Frameworks />} />
               <Route path="/chat" element={<Chat />} />
