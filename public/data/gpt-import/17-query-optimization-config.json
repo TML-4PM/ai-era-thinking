@@ -1,0 +1,214 @@
+{
+  "name": "Query Optimization Configuration - Phase 4",
+  "version": "1.0",
+  "description": "Advanced query patterns and search optimization rules for The Thinking Engine GPT",
+  "semantic_search_rules": {
+    "description": "Rules for expanding search queries using tag relationships",
+    "tag_expansion": {
+      "enabled": true,
+      "max_depth": 2,
+      "include_parent_tags": true,
+      "include_related_tags": true,
+      "example": "Query 'systems thinking' expands to include: complexity, emergence, feedback-loops, holistic-view"
+    },
+    "fuzzy_matching": {
+      "enabled": true,
+      "threshold": 0.8,
+      "applies_to": ["thinker names", "framework titles", "tag names"]
+    },
+    "synonym_mapping": {
+      "AI": ["artificial intelligence", "machine learning", "neural networks"],
+      "governance": ["policy", "regulation", "compliance"],
+      "innovation": ["creativity", "disruption", "transformation"],
+      "ethics": ["values", "morality", "principles"]
+    }
+  },
+  "era_filtering": {
+    "description": "Rules for era-based queries and comparisons",
+    "single_era_query": {
+      "pattern": "Find all [exemplar_type] from [era_name]",
+      "filter_logic": "Match era_mapping array contains era_slug",
+      "example": "Find all frameworks from Agentic AI era"
+    },
+    "multi_era_query": {
+      "pattern": "Find [exemplar_type] spanning [era1] and [era2]",
+      "filter_logic": "Match era_mapping contains both era slugs",
+      "example": "Find thinkers spanning On-Prem and Cloud Native eras"
+    },
+    "era_evolution": {
+      "pattern": "How did [concept] evolve from [era1] to [era2]",
+      "search_logic": "Find exemplars with cross_era_evolution field populated, filter by era range",
+      "example": "How did CRM evolve from On-Prem to Agentic AI"
+    },
+    "era_transition": {
+      "pattern": "What changed between [era1] and [era2]",
+      "search_logic": "Compare exemplars tagged in era1 vs era2, analyze ai_era_shift fields",
+      "example": "What changed between Cloud Native and Gen AI eras"
+    }
+  },
+  "brain_lobe_filtering": {
+    "description": "Cognitive domain classification queries",
+    "lobe_query": {
+      "pattern": "Find all [exemplar_type] in [lobe_name] domain",
+      "filter_logic": "Use tag relationships to map exemplars to brain lobes",
+      "lobes": [
+        "perception-patterning",
+        "decision-action",
+        "innovation-strategy",
+        "ethics-governance",
+        "culture-behaviour"
+      ],
+      "example": "Find all thinkers in Decision/Action domain"
+    },
+    "cross_lobe_query": {
+      "pattern": "Find [exemplar_type] bridging [lobe1] and [lobe2]",
+      "filter_logic": "Find exemplars whose tags map to multiple lobes",
+      "example": "Find frameworks bridging Ethics/Governance and Innovation/Strategy"
+    }
+  },
+  "book_section_scoping": {
+    "description": "Queries scoped to specific books or sections",
+    "book_query": {
+      "pattern": "Find all exemplars in [book_slug]",
+      "filter_logic": "Match book_slug field",
+      "example": "Find all exemplars in tech-for-humanity"
+    },
+    "section_query": {
+      "pattern": "Find all exemplars in [book_slug]/[section_slug]",
+      "filter_logic": "Match both book_slug and section_slug",
+      "example": "Find all exemplars in tech-for-humanity/ethics-consent"
+    },
+    "multi_book_query": {
+      "pattern": "Find exemplars appearing in multiple books",
+      "filter_logic": "Group by exemplar ID, count distinct book_slugs",
+      "example": "Find thinkers referenced in both thinking-engine and tech-for-humanity"
+    }
+  },
+  "relationship_traversal": {
+    "description": "Queries following relationship links",
+    "influence_query": {
+      "pattern": "Who influenced [thinker_name]?",
+      "traversal": "Follow related_thinkers backward links (influenced-by relationship)",
+      "example": "Who influenced Daniel Kahneman? → Amos Tversky, Herbert Simon"
+    },
+    "influenced_query": {
+      "pattern": "Who did [thinker_name] influence?",
+      "traversal": "Follow related_thinkers forward links (influenced relationship)",
+      "example": "Who did Herbert Simon influence? → Kahneman, Thaler, many others"
+    },
+    "framework_creator_query": {
+      "pattern": "What frameworks did [thinker_name] create?",
+      "traversal": "Follow related_frameworks links with 'created' relationship",
+      "example": "What frameworks did Kahneman create? → Prospect Theory, System 1/System 2"
+    },
+    "framework_users_query": {
+      "pattern": "Who uses [framework_name]?",
+      "traversal": "Reverse lookup: find thinkers with this framework in related_frameworks",
+      "example": "Who uses Design Thinking? → Tim Brown, Roger Martin, others"
+    },
+    "multi_hop_query": {
+      "pattern": "Find connection path between [thinker1] and [thinker2]",
+      "traversal": "Breadth-first search through related_thinkers graph, max 3 hops",
+      "example": "Connect Peter Drucker to Geoffrey Hinton → Drucker influenced Porter, Porter influenced Christensen, Christensen influenced AI strategy thinkers"
+    }
+  },
+  "tag_based_discovery": {
+    "description": "Content discovery using tag relationships",
+    "tag_search": {
+      "pattern": "Find all [exemplar_type] tagged with [tag_name]",
+      "expansion": "Automatically include child tags and related tags",
+      "example": "Find all thinkers tagged with 'decision-making' → includes behavioral-economics, cognitive-bias, heuristics"
+    },
+    "multi_tag_search": {
+      "pattern": "Find [exemplar_type] tagged with both [tag1] and [tag2]",
+      "logic": "AND operation across tags, expand each tag first",
+      "example": "Find frameworks tagged with both 'systems-thinking' and 'organizational-change'"
+    },
+    "tag_clustering": {
+      "pattern": "Show me content clusters around [theme]",
+      "method": "Group exemplars by overlapping tag sets, surface common patterns",
+      "example": "Show clusters around 'AI governance' → ethics group, policy group, technical group"
+    }
+  },
+  "comparison_queries": {
+    "description": "Side-by-side comparisons and analysis",
+    "thinker_comparison": {
+      "pattern": "Compare [thinker1] and [thinker2]",
+      "dimensions": ["related_frameworks", "era_mapping", "tags", "related_thinkers"],
+      "output": "Venn diagram of overlaps, unique contributions",
+      "example": "Compare Kahneman and Simon → Both in decision-making, different eras, shared focus on bounded rationality"
+    },
+    "framework_comparison": {
+      "pattern": "Compare [framework1] and [framework2]",
+      "dimensions": ["creator", "era", "tags", "related_thinkers"],
+      "output": "Feature matrix, use case differences",
+      "example": "Compare Lean Startup vs Design Thinking"
+    },
+    "era_comparison": {
+      "pattern": "Compare [era1] vs [era2]",
+      "dimensions": ["key_technologies", "business_models", "human_role", "ai_capability"],
+      "output": "Before/after matrix, transition drivers",
+      "example": "Compare Gen AI vs Agentic AI era"
+    }
+  },
+  "advanced_patterns": {
+    "description": "Complex multi-dimensional queries",
+    "trend_analysis": {
+      "pattern": "How has [concept] evolved over time?",
+      "method": "Group exemplars by era, analyze cross_era_evolution fields, track tag frequency changes",
+      "example": "How has 'automation' evolved from On-Prem to Agentic AI?"
+    },
+    "gap_analysis": {
+      "pattern": "What's missing in [book/section/era]?",
+      "method": "Compare tag distribution vs expected coverage, identify underrepresented areas",
+      "example": "What governance topics are missing from Agentic AI era?"
+    },
+    "recommendation": {
+      "pattern": "If I like [exemplar], what else should I explore?",
+      "method": "Find exemplars with overlapping tags, shared relationships, similar era_mapping",
+      "example": "If I like Kahneman's work, explore: Thaler, Ariely, Gigerenzer"
+    },
+    "citation_network": {
+      "pattern": "Build citation/influence network for [topic]",
+      "method": "Extract all related_thinkers links for exemplars tagged with topic, visualize graph",
+      "example": "Build influence network for 'behavioral economics'"
+    }
+  },
+  "query_optimization_tips": {
+    "performance": [
+      "Cache frequently accessed exemplar records",
+      "Index on book_slug, section_slug, exemplar_type, tags",
+      "Precompute tag expansion mappings",
+      "Limit relationship traversal to 3 hops max"
+    ],
+    "accuracy": [
+      "Always expand tags using TAG_MAPPING before searching",
+      "Consider era context when interpreting frameworks (same name, different eras)",
+      "Weight related_thinkers by strength (co-author > influenced-by > contemporary)",
+      "Normalize thinker names (handle variations: 'Kahneman' vs 'Daniel Kahneman')"
+    ],
+    "user_experience": [
+      "Surface related queries ('People also searched for...')",
+      "Provide era context for all results",
+      "Show relationship paths visually when traversing",
+      "Offer refinement options based on tag hierarchy"
+    ]
+  },
+  "example_conversation_flow": {
+    "user_query": "Tell me about decision-making frameworks",
+    "gpt_process": [
+      "Step 1: Expand 'decision-making' tag → includes behavioral-economics, cognitive-bias, heuristics, judgment",
+      "Step 2: Search master_4500 for exemplar_type='framework' with expanded tags",
+      "Step 3: Group results by era, show evolution",
+      "Step 4: Surface key thinkers (Kahneman, Simon, Thaler)",
+      "Step 5: Offer follow-up: 'Would you like to compare Prospect Theory vs Expected Utility?'"
+    ],
+    "response_format": "Structured with: summary, key frameworks list, thinker profiles, era context, related topics, suggested deep-dives"
+  },
+  "integration_notes": {
+    "phase_1_usage": "Load 01-tag-mapping.json for tag expansion rules",
+    "phase_2_usage": "Query master_4500 records and expanded thinkers as primary data source",
+    "phase_3_usage": "Use relationship files (13-16) for traversal and network analysis",
+    "combined_power": "Phase 1 taxonomy + Phase 2 content + Phase 3 relationships + Phase 4 query patterns = comprehensive knowledge retrieval"
+  }
+}
