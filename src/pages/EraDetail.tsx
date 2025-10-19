@@ -1,7 +1,7 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { getEraById } from "@/data/eras";
+import { getEraById, ERAS } from "@/data/eras";
 import { THINKERS } from "@/data/thinkers";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,11 +10,18 @@ import { Separator } from "@/components/ui/separator";
 import { EraNavigation } from "@/components/EraNavigation";
 import { ArrowLeft, Calendar, Users, Zap, AlertTriangle, CheckCircle, Target } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { isPlaceholderParam } from "@/lib/route-guards";
 
 
 export const EraDetail: React.FC = () => {
   const { eraId } = useParams();
-  const era = eraId ? getEraById(eraId) : null;
+  
+  // Guard against placeholder params or invalid IDs
+  if (!eraId || isPlaceholderParam(eraId) || !ERAS.find(e => e.id === eraId)) {
+    return <Navigate to="/explore" replace />;
+  }
+  
+  const era = getEraById(eraId);
 
   if (!era) {
     return (

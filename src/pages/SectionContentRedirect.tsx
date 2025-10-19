@@ -35,8 +35,8 @@ export default function SectionContentRedirect() {
       bookSlug = "regenerative-organization";
     } else if (sectionId.includes("gcbat") || sectionId.includes("vignettes")) {
       bookSlug = "gcbat-vignettes";
-  } else if (sectionId.includes("sovereign") || sectionId.includes("cage")) {
-      bookSlug = "the-cage";
+  } else if (sectionId.includes("sovereign") || sectionId.includes("cage") || sectionId.includes("far-cage")) {
+      bookSlug = "the-far-cage";
     } else {
       // Default: assume first 2-3 words are the book slug
       bookSlug = parts.slice(0, Math.min(3, parts.length - 1)).join("-");

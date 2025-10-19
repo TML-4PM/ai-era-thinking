@@ -85,6 +85,20 @@ export const BOOK_TAB_CONFIGS: Record<string, BookTabConfig[]> = {
     { path: 'resources', label: 'Resources', icon: 'FolderOpen' }
   ],
 
+  // The Far Cage - Digital Sovereignty
+  'the-far-cage': [
+    { path: '', label: 'Overview', icon: 'Home' },
+    { path: 'chapters', label: 'Chapters', icon: 'BookOpen' },
+    { path: 'leaders-live', label: 'Leaders Live', icon: 'Users' },
+    { path: 'resources', label: 'Resources', icon: 'FolderOpen' }
+  ],
+
+  // The Thinkers - Leaders Live Forever (redirects to /explore)
+  'the-thinkers': [
+    { path: '', label: 'Explore Thinkers', icon: 'Users' },
+    { path: 'add-guru', label: 'Add Your Theory or Belief', icon: 'UserPlus' }
+  ],
+
   // Default configuration for any book not explicitly configured
   'default': [
     { path: '', label: 'Overview', icon: 'Home' },

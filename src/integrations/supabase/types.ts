@@ -92,12 +92,16 @@ export type Database = {
       "175+ Skills Matrix": {
         Row: {
           alignment_score: string | null
+          auto_weight: number | null
           Certification: string | null
           domain: string | null
           "Endorsements Count": string | null
           evidence_level: string | null
           impact_metric: string | null
           "Job Keywords Matched": string | null
+          last_jd_match: string | null
+          last_updated: string | null
+          market_demand_score: number | null
           market_trend: string | null
           "Proficiency Level": string | null
           "Project Examples": string | null
@@ -117,12 +121,16 @@ export type Database = {
         }
         Insert: {
           alignment_score?: string | null
+          auto_weight?: number | null
           Certification?: string | null
           domain?: string | null
           "Endorsements Count"?: string | null
           evidence_level?: string | null
           impact_metric?: string | null
           "Job Keywords Matched"?: string | null
+          last_jd_match?: string | null
+          last_updated?: string | null
+          market_demand_score?: number | null
           market_trend?: string | null
           "Proficiency Level"?: string | null
           "Project Examples"?: string | null
@@ -142,12 +150,16 @@ export type Database = {
         }
         Update: {
           alignment_score?: string | null
+          auto_weight?: number | null
           Certification?: string | null
           domain?: string | null
           "Endorsements Count"?: string | null
           evidence_level?: string | null
           impact_metric?: string | null
           "Job Keywords Matched"?: string | null
+          last_jd_match?: string | null
+          last_updated?: string | null
+          market_demand_score?: number | null
           market_trend?: string | null
           "Proficiency Level"?: string | null
           "Project Examples"?: string | null
@@ -11382,6 +11394,8 @@ export type Database = {
           job_description: string
           match_score: number | null
           profile_id: string | null
+          skill_alignment_score: number | null
+          skills_used: Json | null
           style_version: string | null
           tokens_used: number | null
           updated_at: string | null
@@ -11396,6 +11410,8 @@ export type Database = {
           job_description: string
           match_score?: number | null
           profile_id?: string | null
+          skill_alignment_score?: number | null
+          skills_used?: Json | null
           style_version?: string | null
           tokens_used?: number | null
           updated_at?: string | null
@@ -11410,6 +11426,8 @@ export type Database = {
           job_description?: string
           match_score?: number | null
           profile_id?: string | null
+          skill_alignment_score?: number | null
+          skills_used?: Json | null
           style_version?: string | null
           tokens_used?: number | null
           updated_at?: string | null
@@ -11720,6 +11738,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      cv_templates: {
+        Row: {
+          best_for: string[] | null
+          created_at: string | null
+          description: string | null
+          display_name: string
+          full_html: string
+          id: string
+          page_target: number | null
+          print_css: string | null
+          template_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          best_for?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          display_name: string
+          full_html: string
+          id?: string
+          page_target?: number | null
+          print_css?: string | null
+          template_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          best_for?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          display_name?: string
+          full_html?: string
+          id?: string
+          page_target?: number | null
+          print_css?: string | null
+          template_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       cvs: {
         Row: {
@@ -16592,6 +16649,7 @@ export type Database = {
         Row: {
           company: string | null
           cover_note: string | null
+          extracted_skills: Json | null
           generated_cv: string | null
           id: string
           jd_text: string | null
@@ -16599,12 +16657,14 @@ export type Database = {
           parsed_keywords: string[] | null
           region: string | null
           role_title: string | null
+          skill_extraction_status: string | null
           status: string | null
           user_id: string | null
         }
         Insert: {
           company?: string | null
           cover_note?: string | null
+          extracted_skills?: Json | null
           generated_cv?: string | null
           id?: string
           jd_text?: string | null
@@ -16612,12 +16672,14 @@ export type Database = {
           parsed_keywords?: string[] | null
           region?: string | null
           role_title?: string | null
+          skill_extraction_status?: string | null
           status?: string | null
           user_id?: string | null
         }
         Update: {
           company?: string | null
           cover_note?: string | null
+          extracted_skills?: Json | null
           generated_cv?: string | null
           id?: string
           jd_text?: string | null
@@ -16625,6 +16687,7 @@ export type Database = {
           parsed_keywords?: string[] | null
           region?: string | null
           role_title?: string | null
+          skill_extraction_status?: string | null
           status?: string | null
           user_id?: string | null
         }
@@ -28579,6 +28642,51 @@ export type Database = {
           source_cv?: string | null
           status?: string | null
           trend?: string | null
+        }
+        Relationships: []
+      }
+      skills_metrics: {
+        Row: {
+          action: string | null
+          alignment_delta: number | null
+          appeared_in_jd: boolean | null
+          confidence_score: number | null
+          id: string
+          job_id: string
+          new_score: number | null
+          old_score: number | null
+          present_in_cv: boolean | null
+          skill_name: string
+          timestamp: string | null
+          trend_delta: string | null
+        }
+        Insert: {
+          action?: string | null
+          alignment_delta?: number | null
+          appeared_in_jd?: boolean | null
+          confidence_score?: number | null
+          id?: string
+          job_id: string
+          new_score?: number | null
+          old_score?: number | null
+          present_in_cv?: boolean | null
+          skill_name: string
+          timestamp?: string | null
+          trend_delta?: string | null
+        }
+        Update: {
+          action?: string | null
+          alignment_delta?: number | null
+          appeared_in_jd?: boolean | null
+          confidence_score?: number | null
+          id?: string
+          job_id?: string
+          new_score?: number | null
+          old_score?: number | null
+          present_in_cv?: boolean | null
+          skill_name?: string
+          timestamp?: string | null
+          trend_delta?: string | null
         }
         Relationships: []
       }

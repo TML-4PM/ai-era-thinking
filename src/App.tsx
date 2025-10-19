@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
@@ -73,6 +73,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Books />} />
               <Route path="/explore" element={<Explore />} />
+              <Route path="/books/the-thinkers" element={<Navigate to="/explore" replace />} />
               <Route path="/era/:eraId" element={<EraDetail />} />
               <Route path="/governance" element={<Governance />} />
               <Route path="/tools" element={<Tools />} />

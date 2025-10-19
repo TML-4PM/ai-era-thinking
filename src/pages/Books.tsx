@@ -48,7 +48,7 @@ const Books: React.FC = () => {
   // Three-tier organization - UPDATED
   const premierSlugs = ['tech-for-humanity', 'thinking-engine', 'gcbat-vignettes'];
   const developmentSlugs = ['living-stack', 'quantum-logic-systems']; // MOVED UP
-  const drawingBoardSlugs = ['workfamilyai', 'the-cage', 'entangled-time', 'regenerative-organization']; // RENAMED from coreSlugs
+  const drawingBoardSlugs = ['workfamilyai', 'the-far-cage', 'entangled-time', 'regenerative-organization']; // RENAMED from coreSlugs
   
   // Sort books by predefined order
   const sortByOrder = (bookList: any[], order: string[]) => {
@@ -101,7 +101,7 @@ const Books: React.FC = () => {
         return 'Character-driven exploration • 9 characters across 5 story arcs';
       case 'workfamilyai':
         return '3 chapters in progress • Impact, Family Systems, Practical Frameworks';
-      case 'the-cage':
+      case 'the-far-cage':
         return 'Digital sovereignty exploration • Identity, autonomy, and control in the digital age';
       case 'entangled-time':
         return 'Temporal intelligence exploration • Foresight, narrative, and speculative futures';

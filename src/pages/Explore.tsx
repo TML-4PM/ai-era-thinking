@@ -57,17 +57,17 @@ const Explore = () => {
   return (
     <>
       <Helmet>
-        <title>Tech4Humanity - Leaders Live Forever</title>
-        <meta name="description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <title>The Thinkers — Leaders Live Forever</title>
+        <meta name="description" content="Explore the thinkers, frameworks, and ideas that shaped our understanding of technology, society, and humanity" />
         <link rel="canonical" href="https://ai-thinker-flux.lovable.app/explore" />
-        <meta property="og:title" content="Tech4Humanity - Leaders Live Forever" />
-        <meta property="og:description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <meta property="og:title" content="The Thinkers — Leaders Live Forever" />
+        <meta property="og:description" content="Explore the thinkers, frameworks, and ideas that shaped our understanding of technology, society, and humanity" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ai-thinker-flux.lovable.app/explore" />
         <meta property="og:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tech4Humanity - Leaders Live Forever" />
-        <meta name="twitter:description" content="Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts" />
+        <meta name="twitter:title" content="The Thinkers — Leaders Live Forever" />
+        <meta name="twitter:description" content="Explore the thinkers, frameworks, and ideas that shaped our understanding of technology, society, and humanity" />
         <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
         <script type="module" src="/assets/thinker-card.js"></script>
       </Helmet>
@@ -79,13 +79,11 @@ const Explore = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-3">
-                  <img 
-                    src="https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/T4H%20Logo%201.jpg" 
-                    alt="Tech4Humanity logo" 
-                    className="h-12 w-12 rounded-lg object-contain" 
-                  />
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center">
+                    <span className="text-primary-foreground font-bold text-lg">T</span>
+                  </div>
                   <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                    Tech4Humanity
+                    The Thinkers
                   </span>
                 </div>
                 
@@ -97,7 +95,7 @@ const Explore = () => {
                     className="flex items-center gap-2"
                   >
                     <Home className="w-4 h-4" />
-                    Books
+                    Back to Books
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -106,7 +104,7 @@ const Explore = () => {
                     className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700"
                   >
                     <Plus className="w-4 h-4" />
-                    Add your own guru
+                    Add Your Theory or Belief
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -116,15 +114,6 @@ const Explore = () => {
                   >
                     <Heart className="w-4 h-4" />
                     Crowdsourced Thinkers
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate("/governance")}
-                    className="flex items-center gap-2"
-                  >
-                    <Settings className="w-4 h-4" />
-                    Governance
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -152,9 +141,17 @@ const Explore = () => {
                 Leaders Live Forever
               </span>
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-              Explore how our favourite thinkers' frameworks evolve and apply across different domains and contexts
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
+              Explore the thinkers, frameworks, and theories that have shaped our understanding of technology, society, and human systems
             </p>
+            <div className="p-6 bg-primary/10 rounded-lg border border-primary/20 mb-8 max-w-3xl mx-auto">
+              <h2 className="text-xl font-semibold text-primary mb-2">About The Thinkers</h2>
+              <p className="text-muted-foreground">
+                This living collection explores the thinkers, frameworks, and theories that have shaped our understanding 
+                of technology, society, and human systems. From cognitive science to organizational design, from ethics 
+                to economics — see how ideas evolve and adapt across eras and contexts.
+              </p>
+            </div>
             <div className="flex justify-center">
               <Button 
                 asChild 
@@ -163,7 +160,7 @@ const Explore = () => {
               >
                 <Link to="/add-thinker">
                   <Plus className="w-4 h-4" />
-                  Add your own — discuss in real time the effects of new frameworks across teams, workfamilies, and governance.
+                  Add Your Theory or Belief — discuss in real time the effects of new frameworks across teams, workfamilies, and governance.
                 </Link>
               </Button>
             </div>
