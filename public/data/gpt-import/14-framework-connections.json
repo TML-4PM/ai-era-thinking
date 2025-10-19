@@ -1,0 +1,245 @@
+{
+  "name": "Framework Connection Network - Phase 3",
+  "version": "1.0",
+  "description": "Mapping connections between thinkers, frameworks, and technologies across eras",
+  "created_date": "2025-01-19",
+  "estimated_tokens": 20000,
+  "connection_types": [
+    {
+      "type": "thinker_to_framework",
+      "description": "Which thinkers created or developed which frameworks",
+      "relationship": "created",
+      "directionality": "thinker -> framework",
+      "source_field": "related_frameworks array in master_4500",
+      "example": {
+        "thinker_id": "kahneman-daniel",
+        "thinker_name": "Daniel Kahneman",
+        "framework_name": "Prospect Theory",
+        "relationship_type": "created",
+        "primary_framework": true,
+        "era_introduced": "on-prem",
+        "current_relevance": "all-eras"
+      }
+    },
+    {
+      "type": "framework_to_technology",
+      "description": "How frameworks evolved into or influenced technologies",
+      "relationship": "evolved_into",
+      "directionality": "framework -> technology",
+      "inference_method": "Match frameworks and technologies with overlapping era_mappings",
+      "example": {
+        "framework_name": "Decision Trees",
+        "technology_name": "Random Forests",
+        "relationship_type": "evolved_into",
+        "shared_eras": ["on-prem", "cloud-native", "gen-ai"],
+        "evolution_description": "Classical decision tree algorithms scaled to ensemble methods"
+      }
+    },
+    {
+      "type": "framework_to_framework",
+      "description": "How frameworks build on or relate to each other",
+      "relationship": "builds_on",
+      "inference_method": "Shared thinkers, shared tags, cited together",
+      "example": {
+        "source_framework": "Bounded Rationality",
+        "target_framework": "Dual-Process Theory",
+        "relationship_type": "builds_on",
+        "connection": "Kahneman built System 1/2 on Simon's bounded rationality concept"
+      }
+    }
+  ],
+  "sample_connections": {
+    "behavioral_economics_frameworks": [
+      {
+        "thinker": "Daniel Kahneman",
+        "primary_framework": "Prospect Theory",
+        "related_frameworks": [
+          "Dual-Process Theory",
+          "Cognitive Biases Framework",
+          "Loss Aversion Principle"
+        ],
+        "technologies_influenced": [
+          "Recommendation Systems",
+          "User Experience Design",
+          "AI Decision Support Systems",
+          "Nudge Architectures"
+        ],
+        "era_evolution": {
+          "on-prem": "Academic theory and experimental research",
+          "cloud-native": "Applied to UX design and choice architecture",
+          "gen-ai": "Embedded in AI recommendation algorithms",
+          "agentic-ai": "Agents that understand and leverage human biases",
+          "bci": "Direct neural bias detection and compensation"
+        }
+      },
+      {
+        "thinker": "Richard Thaler",
+        "primary_framework": "Nudge Theory",
+        "related_frameworks": [
+          "Choice Architecture",
+          "Mental Accounting",
+          "Behavioral Finance"
+        ],
+        "technologies_influenced": [
+          "Default Settings in Software",
+          "Personalized Nudging Systems",
+          "Behavioral Change Platforms"
+        ],
+        "builds_on": ["Prospect Theory (Kahneman)", "Bounded Rationality (Simon)"]
+      }
+    ],
+    "systems_thinking_frameworks": [
+      {
+        "thinker": "Donella Meadows",
+        "primary_framework": "Twelve Leverage Points",
+        "related_frameworks": [
+          "System Archetypes",
+          "Feedback Loops",
+          "System Boundaries"
+        ],
+        "technologies_influenced": [
+          "System Dynamics Modeling Software",
+          "Agent-Based Modeling",
+          "Complex Adaptive Systems Platforms"
+        ],
+        "era_evolution": {
+          "on-prem": "Manual system modeling and simulation",
+          "cloud-native": "Cloud-based modeling platforms with real-time data",
+          "gen-ai": "AI-assisted leverage point identification",
+          "agentic-ai": "Agents that dynamically adjust system leverage points",
+          "bci": "Direct human-system feedback loops"
+        }
+      },
+      {
+        "thinker": "Peter Senge",
+        "primary_framework": "Fifth Discipline / Learning Organizations",
+        "related_frameworks": [
+          "Personal Mastery",
+          "Mental Models",
+          "Team Learning",
+          "Shared Vision",
+          "Systems Thinking"
+        ],
+        "technologies_influenced": [
+          "Organizational Learning Platforms",
+          "Knowledge Management Systems",
+          "Collaborative Intelligence Tools"
+        ],
+        "builds_on": ["System Dynamics (Forrester)", "Leverage Points (Meadows)"]
+      }
+    ],
+    "ai_foundations": [
+      {
+        "thinker": "Alan Turing",
+        "primary_framework": "Turing Machine / Turing Test",
+        "related_frameworks": [
+          "Computability Theory",
+          "Universal Computation"
+        ],
+        "technologies_influenced": [
+          "All Modern Computing",
+          "AI Evaluation Metrics",
+          "Language Models",
+          "Conversational AI"
+        ],
+        "era_evolution": {
+          "on-prem": "Foundational computing theory implemented in hardware",
+          "cloud-native": "Distributed computing at scale",
+          "gen-ai": "Large language models approach Turing test threshold",
+          "agentic-ai": "Agents that pass domain-specific Turing tests",
+          "bci": "Human-machine computational hybrids"
+        }
+      },
+      {
+        "thinker": "Geoffrey Hinton",
+        "primary_framework": "Backpropagation / Deep Learning",
+        "related_frameworks": [
+          "Neural Networks",
+          "Representation Learning",
+          "Capsule Networks"
+        ],
+        "technologies_influenced": [
+          "TensorFlow",
+          "PyTorch",
+          "Computer Vision Systems",
+          "Large Language Models",
+          "Generative AI"
+        ],
+        "evolution_path": "Neural Networks (1980s) -> Deep Learning (2012) -> Foundation Models (2020s)"
+      }
+    ]
+  },
+  "framework_technology_evolution_patterns": [
+    {
+      "pattern": "direct_implementation",
+      "description": "Framework directly coded into software",
+      "examples": [
+        "Decision Trees -> Scikit-learn",
+        "Reinforcement Learning -> OpenAI Gym",
+        "Transformer Architecture -> GPT Models"
+      ]
+    },
+    {
+      "pattern": "scaling_evolution",
+      "description": "Framework scaled from individual to system level",
+      "examples": [
+        "Behavioral Nudges (individual) -> Personalization Engines (scale)",
+        "System Dynamics Models (organization) -> Digital Twin Platforms (global)"
+      ]
+    },
+    {
+      "pattern": "cross_domain_adaptation",
+      "description": "Framework from one domain applied to another",
+      "examples": [
+        "Evolutionary Algorithms (biology) -> Genetic Programming (AI)",
+        "Neural Networks (neuroscience) -> Deep Learning (AI)",
+        "Swarm Intelligence (biology) -> Distributed Systems (computing)"
+      ]
+    },
+    {
+      "pattern": "hybridization",
+      "description": "Multiple frameworks combined into new technology",
+      "examples": [
+        "Neuro-Symbolic AI (Neural Networks + Logic Systems)",
+        "Human-in-the-Loop ML (AI + Decision Theory)",
+        "Explainable AI (ML + Causal Reasoning)"
+      ]
+    }
+  ],
+  "extraction_methodology": {
+    "step_1": "Extract related_frameworks from each thinker in Master 4500",
+    "step_2": "Identify which frameworks are marked as 'core_framework' (primary)",
+    "step_3": "Match framework names with technology exemplars",
+    "step_4": "Use era_mapping overlap to infer evolution paths",
+    "step_5": "Group by tags to identify framework families",
+    "step_6": "Build graph with thinkers, frameworks, and technologies as nodes"
+  },
+  "query_patterns": [
+    {
+      "query": "What frameworks did Kahneman create?",
+      "method": "Filter thinker_to_framework where thinker_id='kahneman-daniel'"
+    },
+    {
+      "query": "Which technologies were influenced by Prospect Theory?",
+      "method": "Find framework_to_technology where framework='Prospect Theory'"
+    },
+    {
+      "query": "How did neural networks evolve from on-prem to agentic AI?",
+      "method": "Trace framework_to_technology path filtered by era_mapping progression"
+    },
+    {
+      "query": "What frameworks build on Bounded Rationality?",
+      "method": "Find framework_to_framework where target='Bounded Rationality'"
+    },
+    {
+      "query": "Show the intellectual lineage of GPT models",
+      "method": "Traverse backwards: GPT -> Transformers -> Attention -> Neural Networks -> Connectionism"
+    }
+  ],
+  "integration_notes": {
+    "with_thinker_network": "Combine to show: Thinker A influenced Thinker B, B created Framework X, X evolved into Technology Y",
+    "with_era_evolution": "Show how frameworks changed meaning/application across technological eras",
+    "with_tag_mapping": "Use tags to group related frameworks (e.g., all 'systems-thinking' frameworks)"
+  },
+  "usage_note": "This file defines the connection patterns. Actual data extracted from Master 4500 related_frameworks arrays and exemplar type='framework' records."
+}

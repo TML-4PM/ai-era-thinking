@@ -1,0 +1,230 @@
+{
+  "name": "Thinker Relationship Network - Phase 3",
+  "version": "1.0",
+  "description": "Complete thinker-to-thinker relationship graph showing who influenced whom",
+  "created_date": "2025-01-19",
+  "estimated_tokens": 30000,
+  "overview": "This file maps intellectual influences and relationships between thinkers, extracted from related_thinkers arrays in the Master 4500 dataset",
+  "graph_type": "directed_network",
+  "node_count_estimate": 4500,
+  "edge_count_estimate": 15000,
+  "relationship_types": [
+    {
+      "type": "influenced_by",
+      "description": "Direct intellectual influence - B influenced A's thinking",
+      "directionality": "source_to_target",
+      "strength_levels": ["strong", "medium", "weak"],
+      "example": {
+        "source_id": "kahneman-daniel",
+        "source_name": "Daniel Kahneman",
+        "target_id": "tversky-amos",
+        "target_name": "Amos Tversky",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Primary collaborator on prospect theory and decision-making research"
+      }
+    },
+    {
+      "type": "collaborated_with",
+      "description": "Direct collaboration or joint work",
+      "directionality": "bidirectional",
+      "strength_levels": ["strong", "medium"],
+      "example": {
+        "source_id": "kahneman-daniel",
+        "target_id": "tversky-amos",
+        "relationship_type": "collaborated_with",
+        "strength": "strong",
+        "bidirectional": true,
+        "context": "Co-authors of foundational behavioral economics research"
+      }
+    },
+    {
+      "type": "intellectual_descendant",
+      "description": "Indirect influence through ideas or frameworks (inferred)",
+      "directionality": "source_to_target",
+      "strength_levels": ["weak"],
+      "inferred": true
+    }
+  ],
+  "extraction_rules": {
+    "direct_relationships": "Extracted from related_thinkers arrays in master_4500 table",
+    "relationship_strength": {
+      "strong": "Explicitly listed as primary influence or frequent collaborator",
+      "medium": "Listed in related_thinkers but not primary influence",
+      "weak": "Indirect connection through shared frameworks or fields"
+    },
+    "bidirectional_inference": "If A lists B and B lists A, mark as bidirectional collaboration",
+    "transitive_inference": "If A influenced B (strong) and B influenced C (strong), infer weak A->C connection"
+  },
+  "sample_network_excerpt": {
+    "behavioral_economics_cluster": [
+      {
+        "source_id": "kahneman-daniel",
+        "source_name": "Daniel Kahneman",
+        "target_id": "tversky-amos",
+        "target_name": "Amos Tversky",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "bidirectional": true,
+        "context": "Primary research collaboration on heuristics and biases"
+      },
+      {
+        "source_id": "kahneman-daniel",
+        "target_id": "simon-herbert",
+        "target_name": "Herbert Simon",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Bounded rationality concept influenced dual-process theory"
+      },
+      {
+        "source_id": "thaler-richard",
+        "source_name": "Richard Thaler",
+        "target_id": "kahneman-daniel",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Prospect theory shaped nudge theory and behavioral economics applications"
+      },
+      {
+        "source_id": "ariely-dan",
+        "source_name": "Dan Ariely",
+        "target_id": "kahneman-daniel",
+        "relationship_type": "influenced_by",
+        "strength": "medium",
+        "context": "Built on behavioral economics frameworks for irrationality research"
+      },
+      {
+        "source_id": "gigerenzer-gerd",
+        "source_name": "Gerd Gigerenzer",
+        "target_id": "kahneman-daniel",
+        "relationship_type": "challenged_by",
+        "strength": "medium",
+        "context": "Alternative perspective on heuristics - fast and frugal rather than biased"
+      }
+    ],
+    "systems_thinking_cluster": [
+      {
+        "source_id": "meadows-donella",
+        "source_name": "Donella Meadows",
+        "target_id": "forrester-jay",
+        "target_name": "Jay Forrester",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Student of Forrester, expanded system dynamics to leverage points"
+      },
+      {
+        "source_id": "senge-peter",
+        "source_name": "Peter Senge",
+        "target_id": "meadows-donella",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Built learning organizations concept on systems thinking foundations"
+      },
+      {
+        "source_id": "sterman-john",
+        "source_name": "John Sterman",
+        "target_id": "forrester-jay",
+        "relationship_type": "influenced_by",
+        "strength": "strong",
+        "context": "Advanced system dynamics modeling methodologies"
+      }
+    ],
+    "ai_ethics_cluster": [
+      {
+        "source_id": "russell-stuart",
+        "source_name": "Stuart Russell",
+        "target_id": "norvig-peter",
+        "target_name": "Peter Norvig",
+        "relationship_type": "collaborated_with",
+        "strength": "strong",
+        "bidirectional": true,
+        "context": "Co-authors of AI: A Modern Approach textbook"
+      },
+      {
+        "source_id": "gebru-timnit",
+        "source_name": "Timnit Gebru",
+        "target_id": "russell-stuart",
+        "relationship_type": "influenced_by",
+        "strength": "medium",
+        "context": "AI ethics and fairness research informed by alignment concerns"
+      },
+      {
+        "source_id": "bengio-yoshua",
+        "source_name": "Yoshua Bengio",
+        "target_id": "lecun-yann",
+        "target_name": "Yann LeCun",
+        "relationship_type": "collaborated_with",
+        "strength": "strong",
+        "bidirectional": true,
+        "context": "Deep learning pioneers and co-recipients of Turing Award"
+      }
+    ]
+  },
+  "network_statistics": {
+    "most_influential_thinkers": {
+      "description": "Thinkers with highest in-degree (most others cite them as influences)",
+      "top_10_estimate": [
+        "Herbert Simon",
+        "Daniel Kahneman",
+        "John von Neumann",
+        "Alan Turing",
+        "Claude Shannon",
+        "Norbert Wiener",
+        "Peter Drucker",
+        "Jay Forrester",
+        "Marvin Minsky",
+        "Geoffrey Hinton"
+      ]
+    },
+    "most_collaborative_thinkers": {
+      "description": "Thinkers with most bidirectional relationships",
+      "characteristics": "High collaboration intensity, often team-based research"
+    },
+    "bridge_thinkers": {
+      "description": "Connect different intellectual domains",
+      "examples": ["Herbert Simon (economics & AI)", "Douglas Hofstadter (AI & philosophy)"]
+    },
+    "isolated_thinkers": {
+      "description": "Few or no listed relationships",
+      "note": "May be contemporary/emerging thinkers or data gaps"
+    }
+  },
+  "query_patterns_enabled": [
+    {
+      "query": "Who influenced Daniel Kahneman?",
+      "method": "Find all edges where source='kahneman-daniel' and type='influenced_by'"
+    },
+    {
+      "query": "Who did Herbert Simon influence?",
+      "method": "Find all edges where target='simon-herbert' and type='influenced_by'"
+    },
+    {
+      "query": "What is the intellectual path from Turing to LeCun?",
+      "method": "Find shortest path in directed graph from turing-alan to lecun-yann"
+    },
+    {
+      "query": "Who are Kahneman's intellectual descendants?",
+      "method": "Traverse influenced_by edges from kahneman-daniel to depth 2-3"
+    },
+    {
+      "query": "Find all behavioral economics collaborations",
+      "method": "Filter bidirectional edges where both nodes have tag='behavioral-economics'"
+    }
+  ],
+  "integration_with_other_files": {
+    "01-tag-mapping": "Use tags to identify intellectual clusters and communities",
+    "02-brain-lobes": "Group relationships by cognitive domain",
+    "03-technological-eras": "Show how influence patterns changed across eras",
+    "14-framework-connections": "Connect thinker relationships to framework development",
+    "master_4500_records": "Source data for all thinker relationships"
+  },
+  "next_steps_for_completion": [
+    "1. Extract all related_thinkers arrays from Master 4500 export",
+    "2. Create edges for each relationship with source and target IDs",
+    "3. Calculate relationship strength based on framework sharing and era overlap",
+    "4. Identify bidirectional relationships (A->B and B->A)",
+    "5. Calculate network statistics (degree centrality, betweenness, clustering)",
+    "6. Generate community detection for intellectual clusters",
+    "7. Export as graph JSON with nodes and edges arrays"
+  ],
+  "usage_note": "This file structure defines the relationship network format. Actual relationship data should be extracted from Master 4500 records once Phase 2 export is complete."
+}
