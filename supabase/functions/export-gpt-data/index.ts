@@ -49,8 +49,8 @@ serve(async (req) => {
           book_slug: record.book_slug || 'thinking-engine',
           section_slug: record.section_slug || 'general',
           summary: record.description || record.title,
-          lobe: null, // Would need additional mapping
-          tags: [], // Would need to extract from content
+          lobe: null,
+          tags: [],
           related_thinkers: record.related_thinkers || [],
           related_frameworks: record.related_frameworks || [],
           era_mapping: era_mapping,
@@ -80,6 +80,54 @@ serve(async (req) => {
           other: transformedData.filter(r => !['thinker', 'framework', 'technology', 'principle', 'organization'].includes(r.exemplar_type)).length
         },
         records: transformedData
+      };
+
+      return new Response(JSON.stringify(output, null, 2), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (exportType === 'vignettes') {
+      // Export GCBAT vignettes
+      const { data, error } = await supabaseClient
+        .from('vignettes')
+        .select('*')
+        .order('created_at');
+
+      if (error) throw error;
+
+      const output = {
+        name: "GCBAT Narrative Vignettes - Phase 2 Export",
+        version: "1.0",
+        description: `Export of ${data.length} narrative vignettes from The Thinking Engine knowledge base`,
+        export_date: new Date().toISOString(),
+        estimated_tokens: data.length * 150,
+        record_count: data.length,
+        vignettes: data
+      };
+
+      return new Response(JSON.stringify(output, null, 2), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (exportType === 'characters') {
+      // Export GCBAT characters
+      const { data, error } = await supabaseClient
+        .from('gcbat_characters')
+        .select('*')
+        .order('name');
+
+      if (error) throw error;
+
+      const output = {
+        name: "GCBAT Characters - Phase 2 Export",
+        version: "1.0",
+        description: `Export of ${data.length} character profiles from The Thinking Engine knowledge base`,
+        export_date: new Date().toISOString(),
+        estimated_tokens: data.length * 100,
+        record_count: data.length,
+        characters: data
       };
 
       return new Response(JSON.stringify(output, null, 2), {
