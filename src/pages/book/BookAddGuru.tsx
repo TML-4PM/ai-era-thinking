@@ -27,10 +27,10 @@ const BookAddGuru = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Add Your Guru</h1>
+        <h1 className="text-3xl font-bold mb-4">Add Your Theory or Belief</h1>
         <p className="text-lg text-muted-foreground max-w-3xl">
-          Contribute your own thought leaders and frameworks that connect to the themes in {book.title}. 
-          Help expand our understanding by sharing insights from thinkers who inspire your work.
+          Contribute your own thought leaders, theories, and frameworks that connect to the themes in {book.title}. 
+          Help expand our understanding by sharing insights from thinkers and ideas that inspire your work.
         </p>
       </div>
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useBooks } from "@/hooks/useBooks";
@@ -15,6 +16,7 @@ import { InsightInbox } from '@/components/author/InsightInbox';
 import { useAuthorMode } from '@/hooks/useAuthorMode';
 import { isPlaceholderParam } from '@/lib/route-guards';
 import GCBATLanding from '@/pages/gcbat/GCBATLanding';
+import { ChapterList } from '@/components/ChapterList';
 
 export default function BookOverview() {
   const { slug: bookSlug } = useParams<{ slug: string }>();
@@ -268,56 +270,11 @@ export default function BookOverview() {
                     </section>
                   )}
 
-                  {/* Chapter Preview */}
+                  {/* Chapter Preview with Collapse */}
                   <section>
                     <h2 className="text-2xl font-bold mb-4">Chapter Overview</h2>
                     {book.chapters && book.chapters.length > 0 ? (
-                      <div className="space-y-3">
-                        {book.chapters
-                          .sort((a, b) => (a.chapter_order || 0) - (b.chapter_order || 0))
-                          .slice(0, 5) // Show first 5 chapters
-                          .map((chapter, index) => (
-                            <Card key={chapter.id || index} className="hover:shadow-md transition-shadow">
-                              <CardContent className="p-4">
-                                <div className="flex items-center justify-between">
-                                  <div className="flex-1">
-                                    <h3 className="font-semibold">
-                                      {chapter.chapter_order || index + 1}. {chapter.title}
-                                    </h3>
-                                    {Array.isArray(chapter.sections) && chapter.sections.length > 0 && (
-                                      <div className="mt-2 flex flex-wrap gap-1">
-                                        {chapter.sections.slice(0, 3).map((section: string, idx: number) => (
-                                          <Badge key={idx} variant="outline" className="text-xs">
-                                            {section}
-                                          </Badge>
-                                        ))}
-                                        {chapter.sections.length > 3 && (
-                                          <Badge variant="outline" className="text-xs">
-                                            +{chapter.sections.length - 3} more
-                                          </Badge>
-                                        )}
-                                      </div>
-                                    )}
-                                  </div>
-                                  <div className="flex items-center gap-2 ml-4">
-                                    <Progress value={chapter.progress} className="w-16 h-2" />
-                                    <span className="text-xs text-muted-foreground min-w-[3rem]">
-                                      {chapter.progress}%
-                                    </span>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                        ))}
-                        {book.chapters.length > 5 && (
-                          <Card className="border-dashed">
-                            <CardContent className="p-4 text-center text-muted-foreground">
-                              <BookOpen className="w-6 h-6 mx-auto mb-2" />
-                              <p>+ {book.chapters.length - 5} more chapters</p>
-                            </CardContent>
-                          </Card>
-                        )}
-                      </div>
+                      <ChapterList chapters={book.chapters} bookSlug={bookSlug} />
                     ) : (
                       <Card className="border-dashed">
                         <CardContent className="p-8 text-center text-muted-foreground">

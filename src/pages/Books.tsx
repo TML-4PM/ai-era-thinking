@@ -45,10 +45,10 @@ const Books: React.FC = () => {
 
   const { isAuthorMode } = useAuthorMode();
 
-  // Three-tier organization
+  // Three-tier organization - UPDATED
   const premierSlugs = ['tech-for-humanity', 'thinking-engine', 'gcbat-vignettes'];
-  const coreSlugs = ['workfamilyai', 'sovereign-systems', 'entangled-time', 'living-stack'];
-  const developmentSlugs = ['regenerative-organization', 'quantum-logic-systems'];
+  const developmentSlugs = ['living-stack', 'quantum-logic-systems']; // MOVED UP
+  const drawingBoardSlugs = ['workfamilyai', 'the-cage', 'entangled-time', 'regenerative-organization']; // RENAMED from coreSlugs
   
   // Sort books by predefined order
   const sortByOrder = (bookList: any[], order: string[]) => {
@@ -68,22 +68,22 @@ const Books: React.FC = () => {
     premierSlugs
   );
   
-  // Core Books - Essential explorations
-  const coreBooks = sortByOrder(
-    books?.filter(book => 
-      coreSlugs.includes(book.slug) && 
-      !book.collection?.includes("Series")
-    ) || [],
-    coreSlugs
-  );
-  
-  // Development Books - Specific development slugs only
+  // Development Books - Actively being written (MOVED UP)
   const developmentBooks = sortByOrder(
     books?.filter(book => 
       developmentSlugs.includes(book.slug) && 
       !book.collection?.includes("Series")
     ) || [],
     developmentSlugs
+  );
+  
+  // Drawing Board Books - Early concepts (RENAMED from coreBooks)
+  const drawingBoardBooks = sortByOrder(
+    books?.filter(book => 
+      drawingBoardSlugs.includes(book.slug) && 
+      !book.collection?.includes("Series")
+    ) || [],
+    drawingBoardSlugs
   );
   
   // Check if a book slug is "coming soon" (in UPCOMING_BOOKS but not in DB)
@@ -101,7 +101,7 @@ const Books: React.FC = () => {
         return 'Character-driven exploration • 9 characters across 5 story arcs';
       case 'workfamilyai':
         return '3 chapters in progress • Impact, Family Systems, Practical Frameworks';
-      case 'sovereign-systems':
+      case 'the-cage':
         return 'Digital sovereignty exploration • Identity, autonomy, and control in the digital age';
       case 'entangled-time':
         return 'Temporal intelligence exploration • Foresight, narrative, and speculative futures';
@@ -335,18 +335,18 @@ const Books: React.FC = () => {
             )}
           </div>
 
-          {/* Core Volumes */}
-          {!isLoading && coreBooks.length > 0 && (
+          {/* In Development - MOVED UP */}
+          {!isLoading && developmentBooks.length > 0 && (
             <div className="mb-16">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">Core Books</h2>
+                <h2 className="text-3xl font-bold mb-2">In Development</h2>
                 <p className="text-muted-foreground">
-                  Essential explorations of emerging topics
+                  Actively being written and structured
                 </p>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {coreBooks.map((book) => (
+                {developmentBooks.map((book) => (
                   <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
                     <CardHeader className="p-0">
                   <div 
@@ -480,18 +480,18 @@ const Books: React.FC = () => {
             </div>
           )}
 
-          {/* Development Volumes */}
-          {!isLoading && developmentBooks.length > 0 && (
+          {/* On the Drawing Board - RENAMED from Core Books */}
+          {!isLoading && drawingBoardBooks.length > 0 && (
             <div className="mb-16">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">In Development</h2>
+                <h2 className="text-3xl font-bold mb-2">On the Drawing Board</h2>
                 <p className="text-muted-foreground">
-                  Works in active development and expansion
+                  Early concepts and foundational works in development
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {developmentBooks.map((book) => (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {drawingBoardBooks.map((book) => (
                   <Card key={book.slug} className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
                     <CardHeader className="p-0">
                   <div 
@@ -600,11 +600,11 @@ const Books: React.FC = () => {
             </div>
           )}
 
-          {/* Future Volumes */}
+          {/* On the Drawing Board - Future titles */}
           {!isLoading && (
             <div className="mb-16">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold mb-2">Future Volumes</h2>
+                <h2 className="text-3xl font-bold mb-2">On the Drawing Board</h2>
                 <p className="text-muted-foreground">
                   Planned additions to the collection
                 </p>

@@ -19,7 +19,15 @@ export const FutureVolumesCard: React.FC<FutureVolumesCardProps> = ({ className 
 
   return (
     <Card className={`group relative overflow-hidden border-2 border-dashed border-primary/30 hover:border-primary/60 transition-all duration-300 ${className}`}>
-      {/* Gradient background effect */}
+      {/* Background image effect */}
+      <div 
+        className="absolute inset-0 opacity-10 bg-cover bg-center"
+        style={{ 
+          backgroundImage: "url('https://lzfgigiyqpuuxslsygjt.supabase.co/storage/v1/object/public/images/main%20AHC%20image.jpg')"
+        }}
+      />
+      
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 opacity-50" />
       
       <CardHeader className="relative text-center pt-8">

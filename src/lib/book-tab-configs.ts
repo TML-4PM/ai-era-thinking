@@ -90,7 +90,7 @@ export const BOOK_TAB_CONFIGS: Record<string, BookTabConfig[]> = {
     { path: '', label: 'Overview', icon: 'Home' },
     { path: 'chapters', label: 'Chapters', icon: 'BookOpen' },
     { path: 'leaders-live', label: 'Leaders Live', icon: 'Users' },
-    { path: 'add-guru', label: 'Add Your Guru', icon: 'UserPlus' },
+    { path: 'add-guru', label: 'Add Your Theory or Belief', icon: 'UserPlus' },
     { path: 'resources', label: 'Resources', icon: 'Settings' }
   ]
 };
