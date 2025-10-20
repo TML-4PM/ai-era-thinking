@@ -56,13 +56,13 @@ const BookDetail = () => {
     <>
       <Helmet>
         <title>{book.title} — Tech for Humanity</title>
-        <meta name="description" content={book.lead || `Read ${book.title} from the Tech for Humanity book series.`} />
+        <meta name="description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
         <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta property="og:title" content={`${book.title} — Tech for Humanity`} />
-        <meta property="og:description" content={book.lead || `Read ${book.title} from the Tech for Humanity book series.`} />
+        <meta property="og:description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
         <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta name="twitter:title" content={`${book.title} — Tech for Humanity`} />
-        <meta name="twitter:description" content={book.lead || `Read ${book.title} from the Tech for Humanity book series.`} />
+        <meta name="twitter:description" content={book.lead_description || `Read ${book.title} from the Tech for Humanity book series.`} />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -126,7 +126,7 @@ const BookDetail = () => {
             <div className="md:col-span-2 space-y-8">
               {/* Description */}
               <section>
-                <p className="text-lg text-foreground leading-relaxed">{book.lead}</p>
+                <p className="text-lg text-foreground leading-relaxed">{book.lead_description}</p>
               </section>
 
               {/* Chapters */}

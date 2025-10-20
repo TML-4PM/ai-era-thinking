@@ -66,7 +66,7 @@ export default function BookOverview() {
     <>
       <Helmet>
         <title>{book.title} - Overview | Tech for Humanity</title>
-        <meta name="description" content={`${book.lead} Explore structured content, era evolution, and collaborative insights.`} />
+        <meta name="description" content={`${book.lead_description} Explore structured content, era evolution, and collaborative insights.`} />
         <meta name="keywords" content={`${book.title}, ${book.series_name}, book overview, structured content`} />
         <link rel="canonical" href={`/books/${bookSlug}`} />
         
@@ -74,7 +74,7 @@ export default function BookOverview() {
         {(bookSlug === 'tech-for-humanity' || book.series_name === 'Tech for Humanity') && (
           <>
             <meta property="og:title" content={`${book.title} - Tech for Humanity`} />
-            <meta property="og:description" content={book.lead} />
+            <meta property="og:description" content={book.lead_description} />
             <meta property="og:type" content="website" />
             <meta property="og:image" content="/assets/covers/tech-for-humanity-hub.jpg" />
             <meta property="og:image:width" content="1200" />
@@ -83,7 +83,7 @@ export default function BookOverview() {
             
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={`${book.title} - Tech for Humanity`} />
-            <meta name="twitter:description" content={book.lead} />
+            <meta name="twitter:description" content={book.lead_description} />
             <meta name="twitter:image" content="/assets/covers/tech-for-humanity-hub.jpg" />
           </>
         )}
@@ -150,7 +150,7 @@ export default function BookOverview() {
                   <section>
                     <h2 className="text-2xl font-bold mb-4">About This Book</h2>
                     <div className="prose dark:prose-invert max-w-none">
-                      <p className="text-lg leading-relaxed">{book.lead}</p>
+                      <p className="text-lg leading-relaxed">{book.lead_description}</p>
                     </div>
                   </section>
 
@@ -223,7 +223,7 @@ export default function BookOverview() {
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                   <p className="text-muted-foreground text-sm leading-relaxed">
-                                    {volume.lead}
+                                    {volume.lead_description}
                                   </p>
                                   {volume.exemplarCount && (
                                     <div className="flex items-center gap-2 text-sm text-muted-foreground">

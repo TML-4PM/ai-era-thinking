@@ -56,7 +56,7 @@ export interface Section {
   title: string;
   slug?: string;
   status: 'seeded' | 'scaffold';
-  lead: string;
+  lead_description: string;
   exemplarCount?: number;
   contentFile?: string;
 }
@@ -77,6 +77,6 @@ export interface Volume {
   title: string;
   slug?: string;
   status: 'seeded' | 'scaffold';
-  lead: string;
+  lead_description: string;
   exemplarCount?: number;
 }

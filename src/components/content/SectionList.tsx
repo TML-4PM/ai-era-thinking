@@ -74,7 +74,7 @@ export function SectionList({ sections, bookSlug }: SectionListProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground text-sm leading-relaxed">
-              {section.lead}
+              {section.lead_description}
             </p>
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground">

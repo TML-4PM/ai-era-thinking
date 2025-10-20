@@ -16,13 +16,13 @@ export const ComingSoonBookPage = ({ book }: ComingSoonBookPageProps) => {
     <>
       <Helmet>
         <title>{book.title} — Coming Soon — Tech4Humanity</title>
-        <meta name="description" content={book.lead} />
+        <meta name="description" content={book.lead_description} />
         <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta property="og:title" content={`${book.title} — Coming Soon — Tech4Humanity`} />
-        <meta property="og:description" content={book.lead} />
+        <meta property="og:description" content={book.lead_description} />
         <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta name="twitter:title" content={`${book.title} — Coming Soon`} />
-        <meta name="twitter:description" content={book.lead} />
+        <meta name="twitter:description" content={book.lead_description} />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
@@ -100,7 +100,7 @@ export const ComingSoonBookPage = ({ book }: ComingSoonBookPageProps) => {
                     <p className="text-xl text-muted-foreground mb-4">{book.subtitle}</p>
                   )}
                   
-                  <p className="text-foreground mb-6 leading-relaxed">{book.lead}</p>
+                  <p className="text-foreground mb-6 leading-relaxed">{book.lead_description}</p>
 
                   {book.teaserPoints && book.teaserPoints.length > 0 && (
                     <div className="mb-6">

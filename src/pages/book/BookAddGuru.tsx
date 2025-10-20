@@ -65,7 +65,7 @@ const BookAddGuru = () => {
                 <CardContent className="space-y-4">
                   <div>
                     <h3 className="font-semibold text-sm mb-2">{book.title}</h3>
-                    <p className="text-xs text-muted-foreground mb-3">{book.lead}</p>
+                    <p className="text-xs text-muted-foreground mb-3">{book.lead_description}</p>
                     <Badge variant="secondary" className="text-xs">{book.series_name}</Badge>
                   </div>
                   <div className="pt-3 border-t">

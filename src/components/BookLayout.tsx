@@ -99,13 +99,13 @@ const BookLayout = () => {
     <>
       <Helmet>
         <title>{book.title} — Tech4Humanity</title>
-        <meta name="description" content={book.lead || `Explore ${book.title} from the Tech4Humanity book series with interactive content and community features.`} />
+        <meta name="description" content={book.lead_description || `Explore ${book.title} from the Tech4Humanity book series with interactive content and community features.`} />
         <link rel="canonical" href={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta property="og:title" content={`${book.title} — Tech4Humanity`} />
-        <meta property="og:description" content={book.lead || `Explore ${book.title} from the Tech4Humanity book series.`} />
+        <meta property="og:description" content={book.lead_description || `Explore ${book.title} from the Tech4Humanity book series.`} />
         <meta property="og:url" content={`https://ai-thinker-flux.lovable.app/books/${book.slug}`} />
         <meta name="twitter:title" content={`${book.title} — Tech4Humanity`} />
-        <meta name="twitter:description" content={book.lead || `Explore ${book.title} from the Tech4Humanity book series.`} />
+        <meta name="twitter:description" content={book.lead_description || `Explore ${book.title} from the Tech4Humanity book series.`} />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
@@ -178,7 +178,7 @@ const BookLayout = () => {
               <div className="flex-1">
                 <h1 className="text-3xl font-bold text-foreground mb-2">{book.title}</h1>
                 <p className="text-lg text-muted-foreground mb-4">{book.subtitle}</p>
-                <p className="text-foreground mb-4">{book.lead}</p>
+                <p className="text-foreground mb-4">{book.lead_description}</p>
                 
                 <div className="flex flex-wrap gap-4 items-center">
                   <div className="flex items-center gap-2">

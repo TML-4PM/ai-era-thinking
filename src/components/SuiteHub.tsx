@@ -35,7 +35,7 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
             {suiteBook.title}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-            {suiteBook.lead}
+            {suiteBook.lead_description}
           </p>
           
           {/* Progress Stats */}
@@ -95,7 +95,7 @@ export function SuiteHub({ suiteBook, volumes }: SuiteHubProps) {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm mb-4 line-clamp-2">
-                  {volume.lead}
+                  {volume.lead_description}
                 </CardDescription>
                 
                 <div className="flex items-center justify-between">

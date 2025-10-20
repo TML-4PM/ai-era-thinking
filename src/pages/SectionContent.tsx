@@ -247,7 +247,7 @@ export default function SectionContent() {
                           <div className="text-center space-y-4">
                             <h1 className="text-4xl font-bold">{section.title}</h1>
                             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                              {section.lead}
+                              {section.lead_description}
                             </p>
                             <div className="flex items-center justify-center gap-4">
                               <Badge className="bg-green-500 text-white flex items-center gap-1">
@@ -284,7 +284,7 @@ export default function SectionContent() {
                   <div className="text-center space-y-4">
                     <h1 className="text-4xl font-bold">{section.title}</h1>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                      {section.lead}
+                      {section.lead_description}
                     </p>
                     <div className="flex items-center justify-center gap-4">
                       <Badge className="bg-yellow-500 text-white">
