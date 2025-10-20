@@ -52,6 +52,8 @@ import GCBATArcPage from "./pages/gcbat/GCBATArcPage";
 import ThinkingEngineExplorer from "./pages/ThinkingEngineExplorer";
 import Master4500BrowserPage from "./pages/Master4500BrowserPage";
 import EraEvolutionPage from "./pages/EraEvolutionPage";
+import CreateBook from "./pages/CreateBook";
+import AdminTemplates from "./pages/AdminTemplates";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -86,6 +88,7 @@ const App = () => (
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/books" element={<Books />} />
+              <Route path="/create-book" element={<CreateBook />} />
               <Route path="/books/:bookSlug/sections/:sectionId" element={<SectionContent />} />
               
               {/* Legacy redirect for old section-content routes */}
@@ -118,6 +121,7 @@ const App = () => (
               <Route path="/books/:slug/ch/:chapterOrder" element={<ChapterPage />} />
               <Route path="/books/:slug/chapter/:chapterNumber" element={<StaticChapterPage />} />
               <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/admin/templates" element={<AdminTemplates />} />
               <Route path="/admin/gpt-export" element={<GPTExport />} />
               <Route path="/thinkers" element={<Thinkers />} />
               <Route path="/frameworks" element={<Frameworks />} />

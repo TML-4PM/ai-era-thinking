@@ -7125,6 +7125,66 @@ export type Database = {
           },
         ]
       }
+      book_templates: {
+        Row: {
+          best_for: string[] | null
+          collection: string | null
+          created_at: string | null
+          default_chapters: Json | null
+          description: string | null
+          example_books: string[] | null
+          features: string[] | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          is_featured: boolean | null
+          name: string
+          suggested_series: string | null
+          tab_config: Json
+          template_config: Json
+          updated_at: string | null
+          usage_count: number | null
+        }
+        Insert: {
+          best_for?: string[] | null
+          collection?: string | null
+          created_at?: string | null
+          default_chapters?: Json | null
+          description?: string | null
+          example_books?: string[] | null
+          features?: string[] | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          name: string
+          suggested_series?: string | null
+          tab_config: Json
+          template_config: Json
+          updated_at?: string | null
+          usage_count?: number | null
+        }
+        Update: {
+          best_for?: string[] | null
+          collection?: string | null
+          created_at?: string | null
+          default_chapters?: Json | null
+          description?: string | null
+          example_books?: string[] | null
+          features?: string[] | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          name?: string
+          suggested_series?: string | null
+          tab_config?: Json
+          template_config?: Json
+          updated_at?: string | null
+          usage_count?: number | null
+        }
+        Relationships: []
+      }
       book_user_contributions: {
         Row: {
           author: string
@@ -7181,12 +7241,15 @@ export type Database = {
       }
       books: {
         Row: {
+          collaborators: string[] | null
           collection: string | null
           cover_url: string | null
           created_at: string
+          created_by: string | null
           draft_url: string | null
           due_date: string | null
           id: string
+          is_public: boolean | null
           lead_description: string | null
           owner: string | null
           progress_percentage: number | null
@@ -7195,16 +7258,20 @@ export type Database = {
           slug: string
           status: string | null
           subtitle: string | null
+          template_id: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          collaborators?: string[] | null
           collection?: string | null
           cover_url?: string | null
           created_at?: string
+          created_by?: string | null
           draft_url?: string | null
           due_date?: string | null
           id?: string
+          is_public?: boolean | null
           lead_description?: string | null
           owner?: string | null
           progress_percentage?: number | null
@@ -7213,16 +7280,20 @@ export type Database = {
           slug: string
           status?: string | null
           subtitle?: string | null
+          template_id?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          collaborators?: string[] | null
           collection?: string | null
           cover_url?: string | null
           created_at?: string
+          created_by?: string | null
           draft_url?: string | null
           due_date?: string | null
           id?: string
+          is_public?: boolean | null
           lead_description?: string | null
           owner?: string | null
           progress_percentage?: number | null
@@ -7231,6 +7302,7 @@ export type Database = {
           slug?: string
           status?: string | null
           subtitle?: string | null
+          template_id?: string | null
           title?: string
           updated_at?: string
         }
@@ -11386,9 +11458,11 @@ export type Database = {
       }
       cv_generations: {
         Row: {
+          ai_model: string | null
           created_at: string | null
           format: string | null
           generated_cv: string
+          generated_html: string | null
           generation_time_ms: number | null
           id: string
           job_description: string
@@ -11397,14 +11471,17 @@ export type Database = {
           skill_alignment_score: number | null
           skills_used: Json | null
           style_version: string | null
+          template_name: string | null
           tokens_used: number | null
           updated_at: string | null
           user_email: string | null
         }
         Insert: {
+          ai_model?: string | null
           created_at?: string | null
           format?: string | null
           generated_cv: string
+          generated_html?: string | null
           generation_time_ms?: number | null
           id?: string
           job_description: string
@@ -11413,14 +11490,17 @@ export type Database = {
           skill_alignment_score?: number | null
           skills_used?: Json | null
           style_version?: string | null
+          template_name?: string | null
           tokens_used?: number | null
           updated_at?: string | null
           user_email?: string | null
         }
         Update: {
+          ai_model?: string | null
           created_at?: string | null
           format?: string | null
           generated_cv?: string
+          generated_html?: string | null
           generation_time_ms?: number | null
           id?: string
           job_description?: string
@@ -11429,6 +11509,7 @@ export type Database = {
           skill_alignment_score?: number | null
           skills_used?: Json | null
           style_version?: string | null
+          template_name?: string | null
           tokens_used?: number | null
           updated_at?: string | null
           user_email?: string | null
