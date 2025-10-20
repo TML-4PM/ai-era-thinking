@@ -11,6 +11,7 @@ import { TopThinkersPanel } from "@/components/TopThinkersPanel";
 import { EnhancedOrganMap } from "@/components/EnhancedOrganMap";
 import { Footer } from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { KahnemanCard } from "@/components/KahnemanCard";
 import { THINKERS, type Lobe } from "@/data/thinkers";
 import { ERAS } from "@/data/eras";
 import { useFavorites } from "@/context/FavoritesContext";
@@ -69,7 +70,6 @@ const Explore = () => {
         <meta name="twitter:title" content="The Thinkers — Leaders Live Forever" />
         <meta name="twitter:description" content="Explore the thinkers, frameworks, and ideas that shaped our understanding of technology, society, and humanity" />
         <meta name="twitter:image" content="https://ai-thinker-flux.lovable.app/og-share.jpg" />
-        <script type="module" src="/assets/thinker-card.js"></script>
       </Helmet>
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20">
@@ -190,9 +190,7 @@ const Explore = () => {
               <div className="lg:col-span-3">
                 <AllThinkersGrid />
                 <div className="mt-6">
-                  <div dangerouslySetInnerHTML={{
-                    __html: '<thinker-card data-src="/data/kahneman.json"></thinker-card>'
-                  }} />
+                  <KahnemanCard />
                 </div>
               </div>
               <div className="lg:col-span-1">
