@@ -3,7 +3,7 @@ export interface Book {
   slug: string;
   title: string;
   subtitle?: string;
-  lead: string;
+  lead_description: string;
   cover?: string;
   chapters?: BookChapter[];
   series_name?: string;

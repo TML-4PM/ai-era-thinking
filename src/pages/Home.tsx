@@ -161,7 +161,7 @@ const Home = () => {
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold mb-2">{book.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{book.lead}</p>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{book.lead_description}</p>
                     <Badge variant="secondary">{book.series_name}</Badge>
                   </CardContent>
                 </Card>

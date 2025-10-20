@@ -114,7 +114,7 @@ const Books: React.FC = () => {
       case 'regenerative-organization':
         return '3 clusters seeded • Strip (Current State), Map (Ecosystem), Update (Transformation Paths)';
       default:
-        return book.lead || '';
+        return book.lead_description || '';
     }
   };
 
@@ -264,7 +264,7 @@ const Books: React.FC = () => {
                         {book.subtitle && (
                           <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
                         )}
-                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead}</p>
+                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead_description}</p>
                       </div>
 
                       {/* Content Snapshot */}
