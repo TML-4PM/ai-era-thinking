@@ -413,7 +413,7 @@ const Books: React.FC = () => {
                         {book.subtitle && (
                           <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
                         )}
-                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead}</p>
+                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead_description}</p>
                       </div>
 
                       <div className="bg-muted/50 rounded-lg p-3">
@@ -543,7 +543,7 @@ const Books: React.FC = () => {
                         {book.subtitle && (
                           <p className="text-sm text-muted-foreground mb-2">{book.subtitle}</p>
                         )}
-                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead}</p>
+                        <p className="text-sm text-muted-foreground line-clamp-2">{book.lead_description}</p>
                       </div>
 
                       <div className="bg-muted/50 rounded-lg p-3">
