@@ -54,6 +54,7 @@ import Master4500BrowserPage from "./pages/Master4500BrowserPage";
 import EraEvolutionPage from "./pages/EraEvolutionPage";
 import CreateBook from "./pages/CreateBook";
 import AdminTemplates from "./pages/AdminTemplates";
+import { ContentMetricsWidget } from "./components/ContentMetricsWidget";
 
 // Create a stable QueryClient instance with proper configuration
 const queryClient = new QueryClient({
@@ -72,6 +73,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <ContentMetricsWidget />
           <BrowserRouter future={{
             v7_startTransition: true,
             v7_relativeSplatPath: true
