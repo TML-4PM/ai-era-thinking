@@ -15318,6 +15318,30 @@ export type Database = {
         }
         Relationships: []
       }
+      dashboard_feeds: {
+        Row: {
+          created_at: string | null
+          data: Json
+          id: string
+          scan_type: string
+          source: string
+        }
+        Insert: {
+          created_at?: string | null
+          data: Json
+          id?: string
+          scan_type: string
+          source: string
+        }
+        Update: {
+          created_at?: string | null
+          data?: Json
+          id?: string
+          scan_type?: string
+          source?: string
+        }
+        Relationships: []
+      }
       data_custody: {
         Row: {
           confidence_score: number | null
