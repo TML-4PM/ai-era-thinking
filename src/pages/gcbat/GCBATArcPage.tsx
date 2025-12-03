@@ -63,7 +63,7 @@ export default function GCBATArcPage() {
   return (
     <>
       <Helmet>
-        <title>Arc {arc.number}: {arc.name} - {book.title}</title>
+        <title>{`Arc ${arc.number}: ${arc.name} - ${book.title}`}</title>
         <meta name="description" content={arc.description} />
       </Helmet>
 

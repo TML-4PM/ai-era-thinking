@@ -876,6 +876,191 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_clicks: {
+        Row: {
+          booking_id: string | null
+          click_url: string
+          clicked_at: string | null
+          converted: boolean | null
+          converted_at: string | null
+          created_at: string | null
+          id: string
+          ip_address: string | null
+          partner_code: string
+          referral_token: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          booking_id?: string | null
+          click_url: string
+          clicked_at?: string | null
+          converted?: boolean | null
+          converted_at?: string | null
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          partner_code: string
+          referral_token?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          booking_id?: string | null
+          click_url?: string
+          clicked_at?: string | null
+          converted?: boolean | null
+          converted_at?: string | null
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          partner_code?: string
+          referral_token?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_clicks_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliate_commissions: {
+        Row: {
+          approved_date: string | null
+          booking_amount: number | null
+          booking_id: string | null
+          click_id: string | null
+          commission_amount: number | null
+          commission_currency: string | null
+          created_at: string | null
+          external_reference: string | null
+          id: string
+          notes: string | null
+          paid_date: string | null
+          partner_code: string
+          pending_date: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          approved_date?: string | null
+          booking_amount?: number | null
+          booking_id?: string | null
+          click_id?: string | null
+          commission_amount?: number | null
+          commission_currency?: string | null
+          created_at?: string | null
+          external_reference?: string | null
+          id?: string
+          notes?: string | null
+          paid_date?: string | null
+          partner_code: string
+          pending_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          approved_date?: string | null
+          booking_amount?: number | null
+          booking_id?: string | null
+          click_id?: string | null
+          commission_amount?: number | null
+          commission_currency?: string | null
+          created_at?: string | null
+          external_reference?: string | null
+          id?: string
+          notes?: string | null
+          paid_date?: string | null
+          partner_code?: string
+          pending_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_commissions_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "affiliate_commissions_click_id_fkey"
+            columns: ["click_id"]
+            isOneToOne: false
+            referencedRelation: "affiliate_clicks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliate_partners: {
+        Row: {
+          api_access: boolean | null
+          api_endpoint: string | null
+          application_url: string | null
+          approval_time_days: number | null
+          category: string
+          commission_rate_max: number | null
+          commission_rate_min: number | null
+          cookie_length_days: number | null
+          created_at: string | null
+          deep_link_support: boolean | null
+          global_coverage: boolean | null
+          id: string
+          ideal_audience: string | null
+          partner_code: string
+          partner_name: string
+          payment_frequency: string | null
+          restrictions: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          api_access?: boolean | null
+          api_endpoint?: string | null
+          application_url?: string | null
+          approval_time_days?: number | null
+          category: string
+          commission_rate_max?: number | null
+          commission_rate_min?: number | null
+          cookie_length_days?: number | null
+          created_at?: string | null
+          deep_link_support?: boolean | null
+          global_coverage?: boolean | null
+          id?: string
+          ideal_audience?: string | null
+          partner_code: string
+          partner_name: string
+          payment_frequency?: string | null
+          restrictions?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          api_access?: boolean | null
+          api_endpoint?: string | null
+          application_url?: string | null
+          approval_time_days?: number | null
+          category?: string
+          commission_rate_max?: number | null
+          commission_rate_min?: number | null
+          cookie_length_days?: number | null
+          created_at?: string | null
+          deep_link_support?: boolean | null
+          global_coverage?: boolean | null
+          id?: string
+          ideal_audience?: string | null
+          partner_code?: string
+          partner_name?: string
+          payment_frequency?: string | null
+          restrictions?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       agency_partner_network: {
         Row: {
           agency_id: string
@@ -3482,6 +3667,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_modes: {
+        Row: {
+          autonomy_boost: number
+          created_at: string | null
+          dependency_rate: number
+          id: string
+          mode: string
+          resilience_boost: number
+          risk_level: string | null
+        }
+        Insert: {
+          autonomy_boost: number
+          created_at?: string | null
+          dependency_rate: number
+          id?: string
+          mode: string
+          resilience_boost: number
+          risk_level?: string | null
+        }
+        Update: {
+          autonomy_boost?: number
+          created_at?: string | null
+          dependency_rate?: number
+          id?: string
+          mode?: string
+          resilience_boost?: number
+          risk_level?: string | null
+        }
+        Relationships: []
+      }
       ai_recommendations: {
         Row: {
           accepted: boolean | null
@@ -4308,29 +4523,7 @@ export type Database = {
           signoff?: boolean | null
           target?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "alignment_updates_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "alignment_updates_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "v_alignment_latest"
-            referencedColumns: ["project_id"]
-          },
-          {
-            foreignKeyName: "alignment_updates_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "v_portfolio_score"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       allocations: {
         Row: {
@@ -4446,6 +4639,27 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_cache: {
+        Row: {
+          created_at: string | null
+          generated_at: string
+          id: number
+          insights: Json
+        }
+        Insert: {
+          created_at?: string | null
+          generated_at: string
+          id?: number
+          insights: Json
+        }
+        Update: {
+          created_at?: string | null
+          generated_at?: string
+          id?: number
+          insights?: Json
+        }
+        Relationships: []
+      }
       analytics_events: {
         Row: {
           created_at: string | null
@@ -4473,6 +4687,39 @@ export type Database = {
           page_url?: string | null
           session_id?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      anomaly_alerts: {
+        Row: {
+          acknowledged: boolean | null
+          alert_type: string
+          details: Json | null
+          id: number
+          industry: string | null
+          message: string
+          sent_at: string | null
+          severity: string
+        }
+        Insert: {
+          acknowledged?: boolean | null
+          alert_type: string
+          details?: Json | null
+          id?: number
+          industry?: string | null
+          message: string
+          sent_at?: string | null
+          severity: string
+        }
+        Update: {
+          acknowledged?: boolean | null
+          alert_type?: string
+          details?: Json | null
+          id?: number
+          industry?: string | null
+          message?: string
+          sent_at?: string | null
+          severity?: string
         }
         Relationships: []
       }
@@ -5066,6 +5313,69 @@ export type Database = {
         }
         Relationships: []
       }
+      archetypes: {
+        Row: {
+          adaptive: number
+          cognitive: number
+          created_at: string | null
+          creative: number
+          cultural: number
+          curiosity: number
+          elasticity: number
+          elasticity_category: string | null
+          embodied: number
+          emotional: number
+          existential: number
+          id: string
+          moral: number
+          narrative: number
+          practical: number
+          relational: number
+          temporal: number
+          type: string
+        }
+        Insert: {
+          adaptive: number
+          cognitive: number
+          created_at?: string | null
+          creative: number
+          cultural: number
+          curiosity: number
+          elasticity: number
+          elasticity_category?: string | null
+          embodied: number
+          emotional: number
+          existential: number
+          id?: string
+          moral: number
+          narrative: number
+          practical: number
+          relational: number
+          temporal: number
+          type: string
+        }
+        Update: {
+          adaptive?: number
+          cognitive?: number
+          created_at?: string | null
+          creative?: number
+          cultural?: number
+          curiosity?: number
+          elasticity?: number
+          elasticity_category?: string | null
+          embodied?: number
+          emotional?: number
+          existential?: number
+          id?: string
+          moral?: number
+          narrative?: number
+          practical?: number
+          relational?: number
+          temporal?: number
+          type?: string
+        }
+        Relationships: []
+      }
       article_events: {
         Row: {
           claude_tokens: number | null
@@ -5449,6 +5759,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      audience_guides: {
+        Row: {
+          audience_key: string | null
+          content_markdown: string | null
+          created_at: string | null
+          id: number
+          summary: string | null
+          title: string | null
+        }
+        Insert: {
+          audience_key?: string | null
+          content_markdown?: string | null
+          created_at?: string | null
+          id?: number
+          summary?: string | null
+          title?: string | null
+        }
+        Update: {
+          audience_key?: string | null
+          content_markdown?: string | null
+          created_at?: string | null
+          id?: number
+          summary?: string | null
+          title?: string | null
+        }
+        Relationships: []
       }
       audio_signals: {
         Row: {
@@ -9009,6 +9346,45 @@ export type Database = {
           },
         ]
       }
+      booking_outcomes: {
+        Row: {
+          created_at: string | null
+          destination_code: string | null
+          destination_name: string | null
+          feedback_notes: string | null
+          id: string
+          points_used: Json | null
+          satisfaction_rating: number | null
+          travel_dates: unknown
+          user_id: string | null
+          would_recommend: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          destination_code?: string | null
+          destination_name?: string | null
+          feedback_notes?: string | null
+          id?: string
+          points_used?: Json | null
+          satisfaction_rating?: number | null
+          travel_dates?: unknown
+          user_id?: string | null
+          would_recommend?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          destination_code?: string | null
+          destination_name?: string | null
+          feedback_notes?: string | null
+          id?: string
+          points_used?: Json | null
+          satisfaction_rating?: number | null
+          travel_dates?: unknown
+          user_id?: string | null
+          would_recommend?: boolean | null
+        }
+        Relationships: []
+      }
       booking_status_updates: {
         Row: {
           booking_id: string
@@ -9689,6 +10065,30 @@ export type Database = {
         }
         Relationships: []
       }
+      burnout_parameters: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          parameter: string
+          value: number
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          parameter: string
+          value: number
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          parameter?: string
+          value?: number
+        }
+        Relationships: []
+      }
       "Business Areas and Domains.csv": {
         Row: {
           "Analytics ID": string | null
@@ -9878,6 +10278,30 @@ export type Database = {
           id?: string
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      business_metrics: {
+        Row: {
+          business_line: string
+          id: string
+          metric_name: string
+          metric_value: string
+          updated_at: string | null
+        }
+        Insert: {
+          business_line: string
+          id?: string
+          metric_name: string
+          metric_value: string
+          updated_at?: string | null
+        }
+        Update: {
+          business_line?: string
+          id?: string
+          metric_name?: string
+          metric_value?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -11560,6 +11984,24 @@ export type Database = {
         }
         Relationships: []
       }
+      claude_state: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: Json | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value?: Json | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: Json | null
+        }
+        Relationships: []
+      }
       "cleaned catalogue 2": {
         Row: {
           bundle_name: string | null
@@ -12112,6 +12554,48 @@ export type Database = {
         }
         Relationships: []
       }
+      collector_health: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          execution_time_ms: number | null
+          function_name: string
+          id: number
+          industry: string
+          last_run: string | null
+          news_collected: number | null
+          papers_collected: number | null
+          status: string | null
+          subcategory: string
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          function_name: string
+          id?: number
+          industry: string
+          last_run?: string | null
+          news_collected?: number | null
+          papers_collected?: number | null
+          status?: string | null
+          subcategory: string
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          function_name?: string
+          id?: number
+          industry?: string
+          last_run?: string | null
+          news_collected?: number | null
+          papers_collected?: number | null
+          status?: string | null
+          subcategory?: string
+        }
+        Relationships: []
+      }
       community_reports: {
         Row: {
           business_id: string | null
@@ -12167,13 +12651,6 @@ export type Database = {
             columns: ["business_id"]
             isOneToOne: false
             referencedRelation: "lrs_businesses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "community_reports_reporter_id_fkey"
-            columns: ["reporter_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
@@ -12457,6 +12934,66 @@ export type Database = {
           maturity_levels?: Json
           role_category?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      competitions: {
+        Row: {
+          competition_ends: string | null
+          competition_starts: string | null
+          created_at: string | null
+          description: string | null
+          entry_fee_cents: number | null
+          format: Database["public"]["Enums"]["competition_format"]
+          id: string
+          judging_ends: string | null
+          max_participants: number | null
+          name: string
+          registration_closes: string | null
+          registration_opens: string | null
+          results_announced: string | null
+          settings: Json | null
+          slug: string | null
+          status: Database["public"]["Enums"]["competition_status"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          competition_ends?: string | null
+          competition_starts?: string | null
+          created_at?: string | null
+          description?: string | null
+          entry_fee_cents?: number | null
+          format?: Database["public"]["Enums"]["competition_format"]
+          id?: string
+          judging_ends?: string | null
+          max_participants?: number | null
+          name: string
+          registration_closes?: string | null
+          registration_opens?: string | null
+          results_announced?: string | null
+          settings?: Json | null
+          slug?: string | null
+          status?: Database["public"]["Enums"]["competition_status"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          competition_ends?: string | null
+          competition_starts?: string | null
+          created_at?: string | null
+          description?: string | null
+          entry_fee_cents?: number | null
+          format?: Database["public"]["Enums"]["competition_format"]
+          id?: string
+          judging_ends?: string | null
+          max_participants?: number | null
+          name?: string
+          registration_closes?: string | null
+          registration_opens?: string | null
+          results_announced?: string | null
+          settings?: Json | null
+          slug?: string | null
+          status?: Database["public"]["Enums"]["competition_status"] | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -14333,6 +14870,60 @@ export type Database = {
         }
         Relationships: []
       }
+      corpus_manifest: {
+        Row: {
+          content_preview: string | null
+          embedding_id: string | null
+          extracted_at: string | null
+          id: string
+          kind: string
+          name: string | null
+          path: string | null
+          processed: boolean | null
+          project: string
+          word_count: number | null
+        }
+        Insert: {
+          content_preview?: string | null
+          embedding_id?: string | null
+          extracted_at?: string | null
+          id: string
+          kind: string
+          name?: string | null
+          path?: string | null
+          processed?: boolean | null
+          project: string
+          word_count?: number | null
+        }
+        Update: {
+          content_preview?: string | null
+          embedding_id?: string | null
+          extracted_at?: string | null
+          id?: string
+          kind?: string
+          name?: string | null
+          path?: string | null
+          processed?: boolean | null
+          project?: string
+          word_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "corpus_manifest_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "extractable_text"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "corpus_manifest_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "file_index"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cost_comparison_cache: {
         Row: {
           agent_code: string
@@ -14437,6 +15028,79 @@ export type Database = {
           started_at?: string | null
         }
         Relationships: []
+      }
+      credentials: {
+        Row: {
+          badge_url: string | null
+          certificate_url: string | null
+          class: Database["public"]["Enums"]["class_type"] | null
+          competition_id: string | null
+          credential_code: string | null
+          division: Database["public"]["Enums"]["division_type"] | null
+          expires_at: string | null
+          id: string
+          issued_at: string | null
+          level: Database["public"]["Enums"]["credential_level"]
+          revoked: boolean | null
+          submission_id: string | null
+          user_id: string | null
+          verification_hash: string | null
+        }
+        Insert: {
+          badge_url?: string | null
+          certificate_url?: string | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          competition_id?: string | null
+          credential_code?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
+          expires_at?: string | null
+          id?: string
+          issued_at?: string | null
+          level: Database["public"]["Enums"]["credential_level"]
+          revoked?: boolean | null
+          submission_id?: string | null
+          user_id?: string | null
+          verification_hash?: string | null
+        }
+        Update: {
+          badge_url?: string | null
+          certificate_url?: string | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          competition_id?: string | null
+          credential_code?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
+          expires_at?: string | null
+          id?: string
+          issued_at?: string | null
+          level?: Database["public"]["Enums"]["credential_level"]
+          revoked?: boolean | null
+          submission_id?: string | null
+          user_id?: string | null
+          verification_hash?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credentials_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credentials_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credentials_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       credits_ledger: {
         Row: {
@@ -15288,6 +15952,39 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_intelligence_summary: {
+        Row: {
+          active_collectors: number | null
+          collection_date: string
+          created_at: string | null
+          id: number
+          industry: string
+          news_count: number | null
+          papers_count: number | null
+          total_signals: number | null
+        }
+        Insert: {
+          active_collectors?: number | null
+          collection_date: string
+          created_at?: string | null
+          id?: number
+          industry: string
+          news_count?: number | null
+          papers_count?: number | null
+          total_signals?: number | null
+        }
+        Update: {
+          active_collectors?: number | null
+          collection_date?: string
+          created_at?: string | null
+          id?: number
+          industry?: string
+          news_count?: number | null
+          papers_count?: number | null
+          total_signals?: number | null
+        }
+        Relationships: []
+      }
       daily_reports: {
         Row: {
           category: string | null
@@ -15697,29 +16394,7 @@ export type Database = {
           status?: string | null
           summary?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "deltas_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "deltas_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "v_alignment_latest"
-            referencedColumns: ["project_id"]
-          },
-          {
-            foreignKeyName: "deltas_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "v_portfolio_score"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       demand_forecast: {
         Row: {
@@ -15909,6 +16584,45 @@ export type Database = {
           title?: string
           updated_at?: string
           validation_status?: string | null
+        }
+        Relationships: []
+      }
+      deployment_files: {
+        Row: {
+          content: string
+          created_at: string | null
+          deployed: boolean | null
+          deployment_notes: string | null
+          file_type: string | null
+          filename: string
+          id: string
+          project: string
+          size_bytes: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          deployed?: boolean | null
+          deployment_notes?: string | null
+          file_type?: string | null
+          filename: string
+          id?: string
+          project: string
+          size_bytes?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          deployed?: boolean | null
+          deployment_notes?: string | null
+          file_type?: string | null
+          filename?: string
+          id?: string
+          project?: string
+          size_bytes?: number | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -16669,6 +17383,57 @@ export type Database = {
           stripe_session_id?: string | null
           updated_at?: string
           user_email?: string | null
+        }
+        Relationships: []
+      }
+      dynamic_sweet_spots: {
+        Row: {
+          active_promotions: Json | null
+          availability_score: number | null
+          cabin_class: string
+          created_at: string | null
+          crowd_level: string | null
+          destination_code: string
+          destination_name: string
+          id: string
+          image_url: string | null
+          last_updated: string | null
+          month: number | null
+          points_required: number | null
+          program_code: string
+          weather_score: number | null
+        }
+        Insert: {
+          active_promotions?: Json | null
+          availability_score?: number | null
+          cabin_class: string
+          created_at?: string | null
+          crowd_level?: string | null
+          destination_code: string
+          destination_name: string
+          id?: string
+          image_url?: string | null
+          last_updated?: string | null
+          month?: number | null
+          points_required?: number | null
+          program_code: string
+          weather_score?: number | null
+        }
+        Update: {
+          active_promotions?: Json | null
+          availability_score?: number | null
+          cabin_class?: string
+          created_at?: string | null
+          crowd_level?: string | null
+          destination_code?: string
+          destination_name?: string
+          id?: string
+          image_url?: string | null
+          last_updated?: string | null
+          month?: number | null
+          points_required?: number | null
+          program_code?: string
+          weather_score?: number | null
         }
         Relationships: []
       }
@@ -18809,6 +19574,57 @@ export type Database = {
           },
         ]
       }
+      file_index: {
+        Row: {
+          created: string | null
+          ext: string | null
+          full_path: string
+          hash: string
+          id: string
+          inserted_at: string | null
+          modified: string | null
+          name: string
+          origin_kind: string | null
+          project_key: string | null
+          root: string
+          size_bytes: number | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created?: string | null
+          ext?: string | null
+          full_path: string
+          hash: string
+          id?: string
+          inserted_at?: string | null
+          modified?: string | null
+          name: string
+          origin_kind?: string | null
+          project_key?: string | null
+          root: string
+          size_bytes?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created?: string | null
+          ext?: string | null
+          full_path?: string
+          hash?: string
+          id?: string
+          inserted_at?: string | null
+          modified?: string | null
+          name?: string
+          origin_kind?: string | null
+          project_key?: string | null
+          root?: string
+          size_bytes?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       FINAL: {
         Row: {
           Achieved_Outputs: string | null
@@ -19423,6 +20239,126 @@ export type Database = {
           slug?: string
           updated_at?: string | null
           voice_style?: string | null
+        }
+        Relationships: []
+      }
+      gcbat_market_signals: {
+        Row: {
+          confidence_score: number | null
+          detected_at: string | null
+          entity_name: string | null
+          headline: string | null
+          id: string
+          impact_assessment: string | null
+          signal_source: string | null
+          signal_type: string
+          url: string | null
+        }
+        Insert: {
+          confidence_score?: number | null
+          detected_at?: string | null
+          entity_name?: string | null
+          headline?: string | null
+          id?: string
+          impact_assessment?: string | null
+          signal_source?: string | null
+          signal_type: string
+          url?: string | null
+        }
+        Update: {
+          confidence_score?: number | null
+          detected_at?: string | null
+          entity_name?: string | null
+          headline?: string | null
+          id?: string
+          impact_assessment?: string | null
+          signal_source?: string | null
+          signal_type?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
+      gcbat_publications: {
+        Row: {
+          arxiv_id: string | null
+          authors: string[] | null
+          citation_count: number | null
+          created_at: string | null
+          doi: string | null
+          id: string
+          impact_score: number | null
+          journal: string | null
+          keywords: string[] | null
+          publication_date: string | null
+          research_category: string | null
+          title: string
+        }
+        Insert: {
+          arxiv_id?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          created_at?: string | null
+          doi?: string | null
+          id?: string
+          impact_score?: number | null
+          journal?: string | null
+          keywords?: string[] | null
+          publication_date?: string | null
+          research_category?: string | null
+          title: string
+        }
+        Update: {
+          arxiv_id?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          created_at?: string | null
+          doi?: string | null
+          id?: string
+          impact_score?: number | null
+          journal?: string | null
+          keywords?: string[] | null
+          publication_date?: string | null
+          research_category?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      gcbat_suppliers: {
+        Row: {
+          created_at: string | null
+          employee_count: number | null
+          funding_stage: string | null
+          id: string
+          last_funding_amount: number | null
+          location: string | null
+          name: string
+          products: string[] | null
+          regulatory_status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          employee_count?: number | null
+          funding_stage?: string | null
+          id?: string
+          last_funding_amount?: number | null
+          location?: string | null
+          name: string
+          products?: string[] | null
+          regulatory_status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          employee_count?: number | null
+          funding_stage?: string | null
+          id?: string
+          last_funding_amount?: number | null
+          location?: string | null
+          name?: string
+          products?: string[] | null
+          regulatory_status?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -20369,6 +21305,33 @@ export type Database = {
           response?: string
           thread_id?: string
           tokens_used?: number | null
+        }
+        Relationships: []
+      }
+      growth_curves: {
+        Row: {
+          autonomy_annual: number
+          created_at: string | null
+          description: string | null
+          id: string
+          resilience_annual: number
+          shape: string
+        }
+        Insert: {
+          autonomy_annual: number
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          resilience_annual: number
+          shape: string
+        }
+        Update: {
+          autonomy_annual?: number
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          resilience_annual?: number
+          shape?: string
         }
         Relationships: []
       }
@@ -21605,6 +22568,99 @@ export type Database = {
         }
         Relationships: []
       }
+      intervention_results: {
+        Row: {
+          applied_at_year: number
+          autonomy_after: number | null
+          autonomy_before: number | null
+          cost_estimate: number | null
+          created_at: string | null
+          id: string
+          intervention_id: string | null
+          recovery_rate: number | null
+          resilience_after: number | null
+          resilience_before: number | null
+          simulation_id: string | null
+        }
+        Insert: {
+          applied_at_year: number
+          autonomy_after?: number | null
+          autonomy_before?: number | null
+          cost_estimate?: number | null
+          created_at?: string | null
+          id?: string
+          intervention_id?: string | null
+          recovery_rate?: number | null
+          resilience_after?: number | null
+          resilience_before?: number | null
+          simulation_id?: string | null
+        }
+        Update: {
+          applied_at_year?: number
+          autonomy_after?: number | null
+          autonomy_before?: number | null
+          cost_estimate?: number | null
+          created_at?: string | null
+          id?: string
+          intervention_id?: string | null
+          recovery_rate?: number | null
+          resilience_after?: number | null
+          resilience_before?: number | null
+          simulation_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intervention_results_intervention_id_fkey"
+            columns: ["intervention_id"]
+            isOneToOne: false
+            referencedRelation: "interventions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "intervention_results_simulation_id_fkey"
+            columns: ["simulation_id"]
+            isOneToOne: false
+            referencedRelation: "simulation_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interventions: {
+        Row: {
+          autonomy_effect: number | null
+          cost_level: string | null
+          created_at: string | null
+          description: string | null
+          duration_years: number | null
+          id: string
+          name: string
+          resilience_effect: number | null
+          target: string | null
+        }
+        Insert: {
+          autonomy_effect?: number | null
+          cost_level?: string | null
+          created_at?: string | null
+          description?: string | null
+          duration_years?: number | null
+          id?: string
+          name: string
+          resilience_effect?: number | null
+          target?: string | null
+        }
+        Update: {
+          autonomy_effect?: number | null
+          cost_level?: string | null
+          created_at?: string | null
+          description?: string | null
+          duration_years?: number | null
+          id?: string
+          name?: string
+          resilience_effect?: number | null
+          target?: string | null
+        }
+        Relationships: []
+      }
       investment_scenarios: {
         Row: {
           created_at: string
@@ -21815,6 +22871,59 @@ export type Database = {
         }
         Relationships: []
       }
+      judges: {
+        Row: {
+          active: boolean | null
+          approved_at: string | null
+          average_review_time_minutes: number | null
+          created_at: string | null
+          expertise_areas:
+            | Database["public"]["Enums"]["output_category"][]
+            | null
+          id: string
+          judge_type: string
+          max_reviews_per_competition: number | null
+          total_reviews: number | null
+          user_id: string
+        }
+        Insert: {
+          active?: boolean | null
+          approved_at?: string | null
+          average_review_time_minutes?: number | null
+          created_at?: string | null
+          expertise_areas?:
+            | Database["public"]["Enums"]["output_category"][]
+            | null
+          id?: string
+          judge_type: string
+          max_reviews_per_competition?: number | null
+          total_reviews?: number | null
+          user_id: string
+        }
+        Update: {
+          active?: boolean | null
+          approved_at?: string | null
+          average_review_time_minutes?: number | null
+          created_at?: string | null
+          expertise_areas?:
+            | Database["public"]["Enums"]["output_category"][]
+            | null
+          id?: string
+          judge_type?: string
+          max_reviews_per_competition?: number | null
+          total_reviews?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judges_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       knowledge_applications: {
         Row: {
           applied_action: string
@@ -22023,6 +23132,114 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      lambda_future_registry: {
+        Row: {
+          function: string | null
+          name: string
+          output: string | null
+          why: string | null
+        }
+        Insert: {
+          function?: string | null
+          name: string
+          output?: string | null
+          why?: string | null
+        }
+        Update: {
+          function?: string | null
+          name?: string
+          output?: string | null
+          why?: string | null
+        }
+        Relationships: []
+      }
+      lambda_registry: {
+        Row: {
+          frequency: string | null
+          function: string | null
+          insights: string | null
+          last_run_time: string | null
+          name: string
+          output: string | null
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          frequency?: string | null
+          function?: string | null
+          insights?: string | null
+          last_run_time?: string | null
+          name: string
+          output?: string | null
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          frequency?: string | null
+          function?: string | null
+          insights?: string | null
+          last_run_time?: string | null
+          name?: string
+          output?: string | null
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      leaderboard_cache: {
+        Row: {
+          cached_at: string | null
+          chatter_index: number | null
+          class: Database["public"]["Enums"]["class_type"] | null
+          competition_id: string | null
+          display_name: string | null
+          division: Database["public"]["Enums"]["division_type"] | null
+          id: string
+          percentile_rank: number | null
+          rank: number | null
+          user_id: string | null
+        }
+        Insert: {
+          cached_at?: string | null
+          chatter_index?: number | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          competition_id?: string | null
+          display_name?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
+          id?: string
+          percentile_rank?: number | null
+          rank?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          cached_at?: string | null
+          chatter_index?: number | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          competition_id?: string | null
+          display_name?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
+          id?: string
+          percentile_rank?: number | null
+          rank?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leaderboard_cache_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leaderboard_cache_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       leadership_team: {
         Row: {
@@ -22418,39 +23635,122 @@ export type Database = {
         }
         Relationships: []
       }
-      linkedin_articles: {
+      linkedin_article_images: {
         Row: {
-          content: string | null
+          ai_description: string | null
+          ai_labels_google: string[] | null
+          ai_tags: string[] | null
+          alt_text: string | null
+          article_id: string | null
           created_at: string | null
-          created_by: string | null
-          engagement: Json | null
           id: string
-          published_at: string | null
-          title: string | null
-          topics: string[] | null
-          url: string | null
+          position: number | null
+          src_url: string | null
+          title_text: string | null
         }
         Insert: {
-          content?: string | null
+          ai_description?: string | null
+          ai_labels_google?: string[] | null
+          ai_tags?: string[] | null
+          alt_text?: string | null
+          article_id?: string | null
           created_at?: string | null
-          created_by?: string | null
-          engagement?: Json | null
           id?: string
-          published_at?: string | null
-          title?: string | null
-          topics?: string[] | null
-          url?: string | null
+          position?: number | null
+          src_url?: string | null
+          title_text?: string | null
         }
         Update: {
-          content?: string | null
+          ai_description?: string | null
+          ai_labels_google?: string[] | null
+          ai_tags?: string[] | null
+          alt_text?: string | null
+          article_id?: string | null
           created_at?: string | null
-          created_by?: string | null
-          engagement?: Json | null
           id?: string
-          published_at?: string | null
-          title?: string | null
-          topics?: string[] | null
-          url?: string | null
+          position?: number | null
+          src_url?: string | null
+          title_text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "linkedin_article_images_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "linkedin_articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      linkedin_articles: {
+        Row: {
+          ai_notes: Json | null
+          category: string | null
+          created_at: string | null
+          created_date: string | null
+          file_hash: string | null
+          file_path: string | null
+          id: string
+          original_url: string | null
+          plain_text: string | null
+          project_key: string | null
+          published_date: string | null
+          raw_html: string | null
+          series_key: string | null
+          series_order: number | null
+          slug: string | null
+          summary_long: string | null
+          summary_short: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          word_count: number | null
+        }
+        Insert: {
+          ai_notes?: Json | null
+          category?: string | null
+          created_at?: string | null
+          created_date?: string | null
+          file_hash?: string | null
+          file_path?: string | null
+          id?: string
+          original_url?: string | null
+          plain_text?: string | null
+          project_key?: string | null
+          published_date?: string | null
+          raw_html?: string | null
+          series_key?: string | null
+          series_order?: number | null
+          slug?: string | null
+          summary_long?: string | null
+          summary_short?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          word_count?: number | null
+        }
+        Update: {
+          ai_notes?: Json | null
+          category?: string | null
+          created_at?: string | null
+          created_date?: string | null
+          file_hash?: string | null
+          file_path?: string | null
+          id?: string
+          original_url?: string | null
+          plain_text?: string | null
+          project_key?: string | null
+          published_date?: string | null
+          raw_html?: string | null
+          series_key?: string | null
+          series_order?: number | null
+          slug?: string | null
+          summary_long?: string | null
+          summary_short?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          word_count?: number | null
         }
         Relationships: []
       }
@@ -26279,6 +27579,152 @@ export type Database = {
         }
         Relationships: []
       }
+      output_reviews: {
+        Row: {
+          accuracy: number | null
+          clarity: number | null
+          comments: string | null
+          completeness: number | null
+          handover_ready: number | null
+          id: string
+          output_id: string
+          review_id: string
+          usefulness: number | null
+          verification_validated: boolean | null
+        }
+        Insert: {
+          accuracy?: number | null
+          clarity?: number | null
+          comments?: string | null
+          completeness?: number | null
+          handover_ready?: number | null
+          id?: string
+          output_id: string
+          review_id: string
+          usefulness?: number | null
+          verification_validated?: boolean | null
+        }
+        Update: {
+          accuracy?: number | null
+          clarity?: number | null
+          comments?: string | null
+          completeness?: number | null
+          handover_ready?: number | null
+          id?: string
+          output_id?: string
+          review_id?: string
+          usefulness?: number | null
+          verification_validated?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "output_reviews_output_id_fkey"
+            columns: ["output_id"]
+            isOneToOne: false
+            referencedRelation: "outputs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "output_reviews_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      outputs: {
+        Row: {
+          ai_assisted: boolean | null
+          ai_tools_used: string[] | null
+          category: Database["public"]["Enums"]["output_category"]
+          created_at: string | null
+          description: string | null
+          evidence_type: string | null
+          evidence_url: string | null
+          id: string
+          produced_at: string
+          quality_accuracy: number | null
+          quality_average: number | null
+          quality_clarity: number | null
+          quality_completeness: number | null
+          quality_handover_ready: number | null
+          quality_usefulness: number | null
+          shipped: boolean | null
+          shipped_at: string | null
+          shipped_to: string | null
+          submission_id: string | null
+          time_spent_minutes: number | null
+          title: string
+          updated_at: string | null
+          verification_description: string | null
+          verification_performed: boolean | null
+          verification_types: string[] | null
+        }
+        Insert: {
+          ai_assisted?: boolean | null
+          ai_tools_used?: string[] | null
+          category: Database["public"]["Enums"]["output_category"]
+          created_at?: string | null
+          description?: string | null
+          evidence_type?: string | null
+          evidence_url?: string | null
+          id?: string
+          produced_at?: string
+          quality_accuracy?: number | null
+          quality_average?: number | null
+          quality_clarity?: number | null
+          quality_completeness?: number | null
+          quality_handover_ready?: number | null
+          quality_usefulness?: number | null
+          shipped?: boolean | null
+          shipped_at?: string | null
+          shipped_to?: string | null
+          submission_id?: string | null
+          time_spent_minutes?: number | null
+          title: string
+          updated_at?: string | null
+          verification_description?: string | null
+          verification_performed?: boolean | null
+          verification_types?: string[] | null
+        }
+        Update: {
+          ai_assisted?: boolean | null
+          ai_tools_used?: string[] | null
+          category?: Database["public"]["Enums"]["output_category"]
+          created_at?: string | null
+          description?: string | null
+          evidence_type?: string | null
+          evidence_url?: string | null
+          id?: string
+          produced_at?: string
+          quality_accuracy?: number | null
+          quality_average?: number | null
+          quality_clarity?: number | null
+          quality_completeness?: number | null
+          quality_handover_ready?: number | null
+          quality_usefulness?: number | null
+          shipped?: boolean | null
+          shipped_at?: string | null
+          shipped_to?: string | null
+          submission_id?: string | null
+          time_spent_minutes?: number | null
+          title?: string
+          updated_at?: string | null
+          verification_description?: string | null
+          verification_performed?: boolean | null
+          verification_types?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outputs_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       overagerules: {
         Row: {
           overage_rate: number | null
@@ -27860,6 +29306,225 @@ export type Database = {
         }
         Relationships: []
       }
+      platform_incidents: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: number
+          incident_date: string | null
+          incident_type: string | null
+          notes: string | null
+          platform_id: string | null
+          regulatory_response: string | null
+          title: string | null
+          youth_impact_level: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          incident_date?: string | null
+          incident_type?: string | null
+          notes?: string | null
+          platform_id?: string | null
+          regulatory_response?: string | null
+          title?: string | null
+          youth_impact_level?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          incident_date?: string | null
+          incident_type?: string | null
+          notes?: string | null
+          platform_id?: string | null
+          regulatory_response?: string | null
+          title?: string | null
+          youth_impact_level?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "platform_incidents_platform_id_fkey"
+            columns: ["platform_id"]
+            isOneToOne: false
+            referencedRelation: "platforms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      platform_metrics: {
+        Row: {
+          ad_intensity_score_0_10: number | null
+          age_assurance_method: string | null
+          au_users_estimate_thousands: number | null
+          created_at: string | null
+          data_confidence_level: string | null
+          data_hunger_score_0_10: number | null
+          data_source_notes: string | null
+          has_age_assurance: boolean | null
+          id: number
+          message_graph_linked_to_other_services: boolean | null
+          moderation_strength_score_0_10: number | null
+          monthly_active_users_millions: number | null
+          personalisation_intensity_score_0_10: number | null
+          platform_id: string | null
+          pressure_score_0_10: number | null
+          region: string | null
+          risk_score_0_10: number | null
+          snapshot_date: string | null
+          tracks_logged_out_users: boolean | null
+          youth_exposure_score_0_10: number | null
+          youth_user_share_percent: number | null
+        }
+        Insert: {
+          ad_intensity_score_0_10?: number | null
+          age_assurance_method?: string | null
+          au_users_estimate_thousands?: number | null
+          created_at?: string | null
+          data_confidence_level?: string | null
+          data_hunger_score_0_10?: number | null
+          data_source_notes?: string | null
+          has_age_assurance?: boolean | null
+          id?: number
+          message_graph_linked_to_other_services?: boolean | null
+          moderation_strength_score_0_10?: number | null
+          monthly_active_users_millions?: number | null
+          personalisation_intensity_score_0_10?: number | null
+          platform_id?: string | null
+          pressure_score_0_10?: number | null
+          region?: string | null
+          risk_score_0_10?: number | null
+          snapshot_date?: string | null
+          tracks_logged_out_users?: boolean | null
+          youth_exposure_score_0_10?: number | null
+          youth_user_share_percent?: number | null
+        }
+        Update: {
+          ad_intensity_score_0_10?: number | null
+          age_assurance_method?: string | null
+          au_users_estimate_thousands?: number | null
+          created_at?: string | null
+          data_confidence_level?: string | null
+          data_hunger_score_0_10?: number | null
+          data_source_notes?: string | null
+          has_age_assurance?: boolean | null
+          id?: number
+          message_graph_linked_to_other_services?: boolean | null
+          moderation_strength_score_0_10?: number | null
+          monthly_active_users_millions?: number | null
+          personalisation_intensity_score_0_10?: number | null
+          platform_id?: string | null
+          pressure_score_0_10?: number | null
+          region?: string | null
+          risk_score_0_10?: number | null
+          snapshot_date?: string | null
+          tracks_logged_out_users?: boolean | null
+          youth_exposure_score_0_10?: number | null
+          youth_user_share_percent?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "platform_metrics_platform_id_fkey"
+            columns: ["platform_id"]
+            isOneToOne: false
+            referencedRelation: "platforms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      platform_policies: {
+        Row: {
+          created_at: string | null
+          effective_date: string | null
+          id: number
+          is_under_16_relevant: boolean | null
+          notes: string | null
+          platform_id: string | null
+          policy_area: string | null
+          policy_summary: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          effective_date?: string | null
+          id?: number
+          is_under_16_relevant?: boolean | null
+          notes?: string | null
+          platform_id?: string | null
+          policy_area?: string | null
+          policy_summary?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          effective_date?: string | null
+          id?: number
+          is_under_16_relevant?: boolean | null
+          notes?: string | null
+          platform_id?: string | null
+          policy_area?: string | null
+          policy_summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "platform_policies_platform_id_fkey"
+            columns: ["platform_id"]
+            isOneToOne: false
+            referencedRelation: "platforms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      platforms: {
+        Row: {
+          allows_logged_out_use: boolean | null
+          created_at: string | null
+          id: string
+          is_gaming_or_holding_pen: boolean | null
+          is_messaging_exempt: boolean | null
+          name: string | null
+          official_age_minimum: number | null
+          owner_company: string | null
+          platform_type: string | null
+          primary_use_case: string | null
+          slug: string | null
+          status_under_16_au: string | null
+          summary_sentence: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          allows_logged_out_use?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_gaming_or_holding_pen?: boolean | null
+          is_messaging_exempt?: boolean | null
+          name?: string | null
+          official_age_minimum?: number | null
+          owner_company?: string | null
+          platform_type?: string | null
+          primary_use_case?: string | null
+          slug?: string | null
+          status_under_16_au?: string | null
+          summary_sentence?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          allows_logged_out_use?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_gaming_or_holding_pen?: boolean | null
+          is_messaging_exempt?: boolean | null
+          name?: string | null
+          official_age_minimum?: number | null
+          owner_company?: string | null
+          platform_type?: string | null
+          primary_use_case?: string | null
+          slug?: string | null
+          status_under_16_au?: string | null
+          summary_sentence?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       PM_Full_18x6_AI_Maturity_Work_Packages: {
         Row: {
           "Capability Area": string | null
@@ -27974,6 +29639,51 @@ export type Database = {
           seller_user_id?: string | null
           status?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      population_simulations: {
+        Row: {
+          avg_ai_dependency: number | null
+          avg_autonomy_end: number | null
+          avg_autonomy_start: number | null
+          avg_resilience_end: number | null
+          avg_resilience_start: number | null
+          burnout_rate: number | null
+          created_at: string | null
+          id: string
+          name: string | null
+          population_size: number
+          sector: string | null
+          years: number
+        }
+        Insert: {
+          avg_ai_dependency?: number | null
+          avg_autonomy_end?: number | null
+          avg_autonomy_start?: number | null
+          avg_resilience_end?: number | null
+          avg_resilience_start?: number | null
+          burnout_rate?: number | null
+          created_at?: string | null
+          id?: string
+          name?: string | null
+          population_size: number
+          sector?: string | null
+          years: number
+        }
+        Update: {
+          avg_ai_dependency?: number | null
+          avg_autonomy_end?: number | null
+          avg_autonomy_start?: number | null
+          avg_resilience_end?: number | null
+          avg_resilience_start?: number | null
+          burnout_rate?: number | null
+          created_at?: string | null
+          id?: string
+          name?: string | null
+          population_size?: number
+          sector?: string | null
+          years?: number
         }
         Relationships: []
       }
@@ -28575,54 +30285,63 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
-          company: string | null
-          created_at: string
+          city: string | null
+          class: Database["public"]["Enums"]["class_type"] | null
+          country_code: string | null
+          created_at: string | null
+          division: Database["public"]["Enums"]["division_type"] | null
           email: string | null
-          full_name: string | null
+          email_notifications: boolean | null
+          full_name: string
           id: string
-          job_title: string | null
-          onboarding_completed: boolean | null
-          preferences: Json | null
-          stripe_customer_id: string | null
-          stripe_subscription_id: string | null
-          subscription_status: string | null
-          subscription_tier: string | null
-          updated_at: string
-          user_id: string | null
+          linkedin_url: string | null
+          organisation: string | null
+          public_profile: boolean | null
+          role_title: string | null
+          timezone: string | null
+          tool_access_level: number | null
+          updated_at: string | null
+          years_experience: number | null
         }
         Insert: {
           avatar_url?: string | null
-          company?: string | null
-          created_at?: string
+          city?: string | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          country_code?: string | null
+          created_at?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
           email?: string | null
-          full_name?: string | null
-          id: string
-          job_title?: string | null
-          onboarding_completed?: boolean | null
-          preferences?: Json | null
-          stripe_customer_id?: string | null
-          stripe_subscription_id?: string | null
-          subscription_status?: string | null
-          subscription_tier?: string | null
-          updated_at?: string
-          user_id?: string | null
+          email_notifications?: boolean | null
+          full_name: string
+          id?: string
+          linkedin_url?: string | null
+          organisation?: string | null
+          public_profile?: boolean | null
+          role_title?: string | null
+          timezone?: string | null
+          tool_access_level?: number | null
+          updated_at?: string | null
+          years_experience?: number | null
         }
         Update: {
           avatar_url?: string | null
-          company?: string | null
-          created_at?: string
+          city?: string | null
+          class?: Database["public"]["Enums"]["class_type"] | null
+          country_code?: string | null
+          created_at?: string | null
+          division?: Database["public"]["Enums"]["division_type"] | null
           email?: string | null
-          full_name?: string | null
+          email_notifications?: boolean | null
+          full_name?: string
           id?: string
-          job_title?: string | null
-          onboarding_completed?: boolean | null
-          preferences?: Json | null
-          stripe_customer_id?: string | null
-          stripe_subscription_id?: string | null
-          subscription_status?: string | null
-          subscription_tier?: string | null
-          updated_at?: string
-          user_id?: string | null
+          linkedin_url?: string | null
+          organisation?: string | null
+          public_profile?: boolean | null
+          role_title?: string | null
+          timezone?: string | null
+          tool_access_level?: number | null
+          updated_at?: string | null
+          years_experience?: number | null
         }
         Relationships: []
       }
@@ -29206,38 +30925,29 @@ export type Database = {
       projects: {
         Row: {
           created_at: string | null
+          description: string | null
           id: string
-          lovable_fronts: string | null
-          maturity: number | null
           name: string
-          owner: string | null
-          repo_url: string | null
-          status: string | null
-          supabase_ref: string | null
+          project_key: string
+          tags: string[] | null
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
+          description?: string | null
           id?: string
-          lovable_fronts?: string | null
-          maturity?: number | null
           name: string
-          owner?: string | null
-          repo_url?: string | null
-          status?: string | null
-          supabase_ref?: string | null
+          project_key: string
+          tags?: string[] | null
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
+          description?: string | null
           id?: string
-          lovable_fronts?: string | null
-          maturity?: number | null
           name?: string
-          owner?: string | null
-          repo_url?: string | null
-          status?: string | null
-          supabase_ref?: string | null
+          project_key?: string
+          tags?: string[] | null
           updated_at?: string | null
         }
         Relationships: []
@@ -29338,6 +31048,45 @@ export type Database = {
           source?: string | null
           ssl_expires_on?: string | null
           url?: string | null
+        }
+        Relationships: []
+      }
+      publishing_queue: {
+        Row: {
+          created_at: string | null
+          id: string
+          payload: Json | null
+          project_key: string
+          result_location: string | null
+          source_id: string
+          source_table: string
+          status: string
+          target_kind: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          payload?: Json | null
+          project_key: string
+          result_location?: string | null
+          source_id: string
+          source_table: string
+          status?: string
+          target_kind: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          payload?: Json | null
+          project_key?: string
+          result_location?: string | null
+          source_id?: string
+          source_table?: string
+          status?: string
+          target_kind?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -29536,6 +31285,42 @@ export type Database = {
           file_name?: string
           id?: string
           loaded_at?: string
+        }
+        Relationships: []
+      }
+      recovery_phases: {
+        Row: {
+          autonomy_change: number
+          created_at: string | null
+          duration_years: number
+          fatigue_change: number
+          id: string
+          identity_strength_change: number
+          phase: string
+          resilience_change: number
+          sequence_order: number
+        }
+        Insert: {
+          autonomy_change: number
+          created_at?: string | null
+          duration_years: number
+          fatigue_change: number
+          id?: string
+          identity_strength_change: number
+          phase: string
+          resilience_change: number
+          sequence_order: number
+        }
+        Update: {
+          autonomy_change?: number
+          created_at?: string | null
+          duration_years?: number
+          fatigue_change?: number
+          id?: string
+          identity_strength_change?: number
+          phase?: string
+          resilience_change?: number
+          sequence_order?: number
         }
         Relationships: []
       }
@@ -29740,6 +31525,105 @@ export type Database = {
             referencedColumns: ["level_code"]
           },
         ]
+      }
+      registrations: {
+        Row: {
+          class: Database["public"]["Enums"]["class_type"]
+          competition_id: string | null
+          confirmed: boolean | null
+          confirmed_at: string | null
+          disqualified: boolean | null
+          division: Database["public"]["Enums"]["division_type"]
+          fee_cents: number | null
+          fee_waiver_approved: boolean | null
+          fee_waiver_requested: boolean | null
+          id: string
+          payment_id: string | null
+          payment_status: string | null
+          registered_at: string | null
+          user_id: string | null
+          withdrawn: boolean | null
+        }
+        Insert: {
+          class: Database["public"]["Enums"]["class_type"]
+          competition_id?: string | null
+          confirmed?: boolean | null
+          confirmed_at?: string | null
+          disqualified?: boolean | null
+          division: Database["public"]["Enums"]["division_type"]
+          fee_cents?: number | null
+          fee_waiver_approved?: boolean | null
+          fee_waiver_requested?: boolean | null
+          id?: string
+          payment_id?: string | null
+          payment_status?: string | null
+          registered_at?: string | null
+          user_id?: string | null
+          withdrawn?: boolean | null
+        }
+        Update: {
+          class?: Database["public"]["Enums"]["class_type"]
+          competition_id?: string | null
+          confirmed?: boolean | null
+          confirmed_at?: string | null
+          disqualified?: boolean | null
+          division?: Database["public"]["Enums"]["division_type"]
+          fee_cents?: number | null
+          fee_waiver_approved?: boolean | null
+          fee_waiver_requested?: boolean | null
+          id?: string
+          payment_id?: string | null
+          payment_status?: string | null
+          registered_at?: string | null
+          user_id?: string | null
+          withdrawn?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      regulatory_gaps: {
+        Row: {
+          gap_detail: string | null
+          gap_key: string | null
+          id: number
+          priority: string | null
+          short_summary: string | null
+          status: string | null
+          title: string | null
+        }
+        Insert: {
+          gap_detail?: string | null
+          gap_key?: string | null
+          id?: number
+          priority?: string | null
+          short_summary?: string | null
+          status?: string | null
+          title?: string | null
+        }
+        Update: {
+          gap_detail?: string | null
+          gap_key?: string | null
+          id?: number
+          priority?: string | null
+          short_summary?: string | null
+          status?: string | null
+          title?: string | null
+        }
+        Relationships: []
       }
       report_deliveries: {
         Row: {
@@ -30431,6 +32315,69 @@ export type Database = {
           projected_revenue?: number | null
         }
         Relationships: []
+      }
+      reviews: {
+        Row: {
+          assigned_at: string | null
+          comments: string | null
+          completed_at: string | null
+          due_at: string | null
+          flag_reason: string | null
+          flagged_for_interview: boolean | null
+          id: string
+          judge_id: string
+          overall_quality: number | null
+          overall_variety: number | null
+          overall_verification: number | null
+          review_time_minutes: number | null
+          submission_id: string
+        }
+        Insert: {
+          assigned_at?: string | null
+          comments?: string | null
+          completed_at?: string | null
+          due_at?: string | null
+          flag_reason?: string | null
+          flagged_for_interview?: boolean | null
+          id?: string
+          judge_id: string
+          overall_quality?: number | null
+          overall_variety?: number | null
+          overall_verification?: number | null
+          review_time_minutes?: number | null
+          submission_id: string
+        }
+        Update: {
+          assigned_at?: string | null
+          comments?: string | null
+          completed_at?: string | null
+          due_at?: string | null
+          flag_reason?: string | null
+          flagged_for_interview?: boolean | null
+          id?: string
+          judge_id?: string
+          overall_quality?: number | null
+          overall_variety?: number | null
+          overall_verification?: number | null
+          review_time_minutes?: number | null
+          submission_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rfid_tag_inventory: {
         Row: {
@@ -31508,6 +33455,33 @@ export type Database = {
           tender_title?: string
           updated_at?: string
           updated_by?: string | null
+        }
+        Relationships: []
+      }
+      risk_drift_log: {
+        Row: {
+          change: number | null
+          id: number
+          logged_at: string | null
+          new_score: number | null
+          old_score: number | null
+          slug: string | null
+        }
+        Insert: {
+          change?: number | null
+          id?: number
+          logged_at?: string | null
+          new_score?: number | null
+          old_score?: number | null
+          slug?: string | null
+        }
+        Update: {
+          change?: number | null
+          id?: number
+          logged_at?: string | null
+          new_score?: number | null
+          old_score?: number | null
+          slug?: string | null
         }
         Relationships: []
       }
@@ -32784,6 +34758,53 @@ export type Database = {
           },
         ]
       }
+      roles_index: {
+        Row: {
+          article_id: string | null
+          change_type: string | null
+          created_at: string | null
+          file_hash: string | null
+          id: string
+          impact_level: string | null
+          industry: string | null
+          notes: string | null
+          role_name: string | null
+          source_type: string | null
+        }
+        Insert: {
+          article_id?: string | null
+          change_type?: string | null
+          created_at?: string | null
+          file_hash?: string | null
+          id?: string
+          impact_level?: string | null
+          industry?: string | null
+          notes?: string | null
+          role_name?: string | null
+          source_type?: string | null
+        }
+        Update: {
+          article_id?: string | null
+          change_type?: string | null
+          created_at?: string | null
+          file_hash?: string | null
+          id?: string
+          impact_level?: string | null
+          industry?: string | null
+          notes?: string | null
+          role_name?: string | null
+          source_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "roles_index_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "linkedin_articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       roles_master: {
         Row: {
           ai_coverage_2000: number | null
@@ -33731,6 +35752,36 @@ export type Database = {
         }
         Relationships: []
       }
+      sectors: {
+        Row: {
+          automation_level: number | null
+          created_at: string | null
+          id: string
+          key_roles: string[] | null
+          name: string
+          typical_stress: string | null
+          typical_support: string | null
+        }
+        Insert: {
+          automation_level?: number | null
+          created_at?: string | null
+          id?: string
+          key_roles?: string[] | null
+          name: string
+          typical_stress?: string | null
+          typical_support?: string | null
+        }
+        Update: {
+          automation_level?: number | null
+          created_at?: string | null
+          id?: string
+          key_roles?: string[] | null
+          name?: string
+          typical_stress?: string | null
+          typical_support?: string | null
+        }
+        Relationships: []
+      }
       security_definer_view_audit: {
         Row: {
           created_at: string | null
@@ -34114,6 +36165,50 @@ export type Database = {
         }
         Relationships: []
       }
+      session_logs: {
+        Row: {
+          active_minutes: number | null
+          created_at: string | null
+          end_time: string | null
+          id: string
+          outputs_during_session: number | null
+          registration_id: string
+          session_date: string
+          start_time: string
+          tools_used: string[] | null
+        }
+        Insert: {
+          active_minutes?: number | null
+          created_at?: string | null
+          end_time?: string | null
+          id?: string
+          outputs_during_session?: number | null
+          registration_id: string
+          session_date: string
+          start_time: string
+          tools_used?: string[] | null
+        }
+        Update: {
+          active_minutes?: number | null
+          created_at?: string | null
+          end_time?: string | null
+          id?: string
+          outputs_during_session?: number | null
+          registration_id?: string
+          session_date?: string
+          start_time?: string
+          tools_used?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_logs_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sfia_roles: {
         Row: {
           description: string | null
@@ -34350,6 +36445,63 @@ export type Database = {
           state?: string
           thread_id?: string
           timestamp?: string | null
+        }
+        Relationships: []
+      }
+      simulation_runs: {
+        Row: {
+          ai_mode: string | null
+          archetype_type: string
+          baseline_autonomy: number | null
+          baseline_resilience: number | null
+          burnout_occurred: boolean | null
+          burnout_year: number | null
+          created_at: string | null
+          final_ai_dependency: number | null
+          final_autonomy: number | null
+          final_fatigue: number | null
+          final_resilience: number | null
+          id: string
+          neurotype: string | null
+          stress_level: string | null
+          support_level: string | null
+          years: number
+        }
+        Insert: {
+          ai_mode?: string | null
+          archetype_type: string
+          baseline_autonomy?: number | null
+          baseline_resilience?: number | null
+          burnout_occurred?: boolean | null
+          burnout_year?: number | null
+          created_at?: string | null
+          final_ai_dependency?: number | null
+          final_autonomy?: number | null
+          final_fatigue?: number | null
+          final_resilience?: number | null
+          id?: string
+          neurotype?: string | null
+          stress_level?: string | null
+          support_level?: string | null
+          years: number
+        }
+        Update: {
+          ai_mode?: string | null
+          archetype_type?: string
+          baseline_autonomy?: number | null
+          baseline_resilience?: number | null
+          burnout_occurred?: boolean | null
+          burnout_year?: number | null
+          created_at?: string | null
+          final_ai_dependency?: number | null
+          final_autonomy?: number | null
+          final_fatigue?: number | null
+          final_resilience?: number | null
+          id?: string
+          neurotype?: string | null
+          stress_level?: string | null
+          support_level?: string | null
+          years?: number
         }
         Relationships: []
       }
@@ -36254,6 +38406,71 @@ export type Database = {
           },
         ]
       }
+      submissions: {
+        Row: {
+          chatter_index_normalised: number | null
+          chatter_index_raw: number | null
+          created_at: string | null
+          efficiency_score: number | null
+          id: string
+          output_count: number | null
+          percentile_rank: number | null
+          quality_score: number | null
+          registration_id: string | null
+          scored_at: string | null
+          status: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at: string | null
+          sustainability_score: number | null
+          updated_at: string | null
+          variety_score: number | null
+          verification_rate: number | null
+        }
+        Insert: {
+          chatter_index_normalised?: number | null
+          chatter_index_raw?: number | null
+          created_at?: string | null
+          efficiency_score?: number | null
+          id?: string
+          output_count?: number | null
+          percentile_rank?: number | null
+          quality_score?: number | null
+          registration_id?: string | null
+          scored_at?: string | null
+          status?: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at?: string | null
+          sustainability_score?: number | null
+          updated_at?: string | null
+          variety_score?: number | null
+          verification_rate?: number | null
+        }
+        Update: {
+          chatter_index_normalised?: number | null
+          chatter_index_raw?: number | null
+          created_at?: string | null
+          efficiency_score?: number | null
+          id?: string
+          output_count?: number | null
+          percentile_rank?: number | null
+          quality_score?: number | null
+          registration_id?: string | null
+          scored_at?: string | null
+          status?: Database["public"]["Enums"]["submission_status"] | null
+          submitted_at?: string | null
+          sustainability_score?: number | null
+          updated_at?: string | null
+          variety_score?: number | null
+          verification_rate?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscribers: {
         Row: {
           created_at: string
@@ -37114,6 +39331,42 @@ export type Database = {
           },
         ]
       }
+      sweet_spot_analyses: {
+        Row: {
+          ai_level: number
+          archetype_type: string
+          autonomy_score: number
+          created_at: string | null
+          danger_zone: boolean | null
+          id: string
+          is_optimal: boolean | null
+          overall_score: number
+          resilience_score: number
+        }
+        Insert: {
+          ai_level: number
+          archetype_type: string
+          autonomy_score: number
+          created_at?: string | null
+          danger_zone?: boolean | null
+          id?: string
+          is_optimal?: boolean | null
+          overall_score: number
+          resilience_score: number
+        }
+        Update: {
+          ai_level?: number
+          archetype_type?: string
+          autonomy_score?: number
+          created_at?: string | null
+          danger_zone?: boolean | null
+          id?: string
+          is_optimal?: boolean | null
+          overall_score?: number
+          resilience_score?: number
+        }
+        Relationships: []
+      }
       system_heartbeat: {
         Row: {
           id: string
@@ -37720,6 +39973,27 @@ export type Database = {
           team_name?: string
           total_team_time_recovery?: number | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      team_compositions: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
         }
         Relationships: []
       }
@@ -38407,6 +40681,33 @@ export type Database = {
           original_outcome?: string
           re_recommended?: boolean | null
           tender_id?: string
+        }
+        Relationships: []
+      }
+      text_embeddings: {
+        Row: {
+          created_at: string | null
+          id: string
+          project_key: string | null
+          source_id: string
+          source_table: string
+          vector_embedding: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          project_key?: string | null
+          source_id: string
+          source_table: string
+          vector_embedding?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          project_key?: string | null
+          source_id?: string
+          source_table?: string
+          vector_embedding?: string | null
         }
         Relationships: []
       }
@@ -39357,6 +41658,56 @@ export type Database = {
         }
         Relationships: []
       }
+      trajectory_points: {
+        Row: {
+          ai_dependency: number | null
+          autonomy: number
+          burnout: boolean | null
+          created_at: string | null
+          fatigue: number
+          id: string
+          path_type: string | null
+          quadrant: string | null
+          resilience: number
+          simulation_id: string | null
+          year: number
+        }
+        Insert: {
+          ai_dependency?: number | null
+          autonomy: number
+          burnout?: boolean | null
+          created_at?: string | null
+          fatigue: number
+          id?: string
+          path_type?: string | null
+          quadrant?: string | null
+          resilience: number
+          simulation_id?: string | null
+          year: number
+        }
+        Update: {
+          ai_dependency?: number | null
+          autonomy?: number
+          burnout?: boolean | null
+          created_at?: string | null
+          fatigue?: number
+          id?: string
+          path_type?: string | null
+          quadrant?: string | null
+          resilience?: number
+          simulation_id?: string | null
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trajectory_points_simulation_id_fkey"
+            columns: ["simulation_id"]
+            isOneToOne: false
+            referencedRelation: "simulation_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       trang_selections: {
         Row: {
           bcc_email: string | null
@@ -40173,6 +42524,54 @@ export type Database = {
           platform_fees?: number | null
           total_earnings?: number | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      unified_intelligence_feed: {
+        Row: {
+          collected_at: string | null
+          collector_name: string
+          content: string | null
+          entity_name: string | null
+          id: number
+          industry: string
+          metadata: Json | null
+          published: string | null
+          signal_type: string
+          source: string | null
+          subcategory: string
+          title: string | null
+          url: string | null
+        }
+        Insert: {
+          collected_at?: string | null
+          collector_name: string
+          content?: string | null
+          entity_name?: string | null
+          id?: number
+          industry: string
+          metadata?: Json | null
+          published?: string | null
+          signal_type: string
+          source?: string | null
+          subcategory: string
+          title?: string | null
+          url?: string | null
+        }
+        Update: {
+          collected_at?: string | null
+          collector_name?: string
+          content?: string | null
+          entity_name?: string | null
+          id?: number
+          industry?: string
+          metadata?: Json | null
+          published?: string | null
+          signal_type?: string
+          source?: string | null
+          subcategory?: string
+          title?: string | null
+          url?: string | null
         }
         Relationships: []
       }
@@ -41205,13 +43604,18 @@ export type Database = {
           accessibility_settings: Json | null
           created_at: string
           dashboard_layout: Json | null
+          hates: string[] | null
+          home_airport: string | null
           id: string
+          kid_ages: number[] | null
           language: string | null
+          loves: string[] | null
           navigation_preferences: Json | null
           notification_settings: Json | null
           preferred_currency: string | null
           quick_actions: Json | null
           theme: string | null
+          travel_style: string | null
           updated_at: string
           user_id: string
         }
@@ -41219,13 +43623,18 @@ export type Database = {
           accessibility_settings?: Json | null
           created_at?: string
           dashboard_layout?: Json | null
+          hates?: string[] | null
+          home_airport?: string | null
           id?: string
+          kid_ages?: number[] | null
           language?: string | null
+          loves?: string[] | null
           navigation_preferences?: Json | null
           notification_settings?: Json | null
           preferred_currency?: string | null
           quick_actions?: Json | null
           theme?: string | null
+          travel_style?: string | null
           updated_at?: string
           user_id: string
         }
@@ -41233,13 +43642,18 @@ export type Database = {
           accessibility_settings?: Json | null
           created_at?: string
           dashboard_layout?: Json | null
+          hates?: string[] | null
+          home_airport?: string | null
           id?: string
+          kid_ages?: number[] | null
           language?: string | null
+          loves?: string[] | null
           navigation_preferences?: Json | null
           notification_settings?: Json | null
           preferred_currency?: string | null
           quick_actions?: Json | null
           theme?: string | null
+          travel_style?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -41640,6 +44054,63 @@ export type Database = {
           vercel_url?: string | null
         }
         Relationships: []
+      }
+      verification_interviews: {
+        Row: {
+          completed_at: string | null
+          consistency_score: number | null
+          duration_minutes: number | null
+          id: string
+          interviewer_id: string | null
+          notes: string | null
+          output_ids: string[] | null
+          recording_url: string | null
+          scheduled_at: string | null
+          submission_id: string
+          verification_confirmed: boolean | null
+        }
+        Insert: {
+          completed_at?: string | null
+          consistency_score?: number | null
+          duration_minutes?: number | null
+          id?: string
+          interviewer_id?: string | null
+          notes?: string | null
+          output_ids?: string[] | null
+          recording_url?: string | null
+          scheduled_at?: string | null
+          submission_id: string
+          verification_confirmed?: boolean | null
+        }
+        Update: {
+          completed_at?: string | null
+          consistency_score?: number | null
+          duration_minutes?: number | null
+          id?: string
+          interviewer_id?: string | null
+          notes?: string | null
+          output_ids?: string[] | null
+          recording_url?: string | null
+          scheduled_at?: string | null
+          submission_id?: string
+          verification_confirmed?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "verification_interviews_interviewer_id_fkey"
+            columns: ["interviewer_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verification_interviews_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       vignette_agentic_ai_progress: {
         Row: {
@@ -42875,6 +45346,74 @@ export type Database = {
         }
         Relationships: []
       }
+      weekly_briefs: {
+        Row: {
+          generated_at: string | null
+          id: number
+          summary: string | null
+        }
+        Insert: {
+          generated_at?: string | null
+          id?: number
+          summary?: string | null
+        }
+        Update: {
+          generated_at?: string | null
+          id?: number
+          summary?: string | null
+        }
+        Relationships: []
+      }
+      wellbeing_pulses: {
+        Row: {
+          energy_level: number | null
+          enjoyment: number | null
+          focus_quality: number | null
+          id: string
+          notes: string | null
+          pulse_type: string
+          recorded_at: string | null
+          recovery_adequacy: number | null
+          registration_id: string
+          stress_level: number | null
+          sustainability_indicator: number | null
+        }
+        Insert: {
+          energy_level?: number | null
+          enjoyment?: number | null
+          focus_quality?: number | null
+          id?: string
+          notes?: string | null
+          pulse_type: string
+          recorded_at?: string | null
+          recovery_adequacy?: number | null
+          registration_id: string
+          stress_level?: number | null
+          sustainability_indicator?: number | null
+        }
+        Update: {
+          energy_level?: number | null
+          enjoyment?: number | null
+          focus_quality?: number | null
+          id?: string
+          notes?: string | null
+          pulse_type?: string
+          recorded_at?: string | null
+          recovery_adequacy?: number | null
+          registration_id?: string
+          stress_level?: number | null
+          sustainability_indicator?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wellbeing_pulses_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       "work packages": {
         Row: {
           "Customer-Facing Benefit": string | null
@@ -43536,6 +46075,33 @@ export type Database = {
         }
         Relationships: []
       }
+      workforce_parameters: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          effect: string
+          id: string
+          parameter: string
+          threshold: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          effect: string
+          id?: string
+          parameter: string
+          threshold?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          effect?: string
+          id?: string
+          parameter?: string
+          threshold?: number | null
+        }
+        Relationships: []
+      }
       workforcemodels: {
         Row: {
           ai_coverage_pct: number | null
@@ -43975,6 +46541,33 @@ export type Database = {
         Row: {
           note: string | null
           status: string | null
+        }
+        Relationships: []
+      }
+      api_media_risk_bands: {
+        Row: {
+          danger_index: number | null
+          name: string | null
+          platform_type: string | null
+          pressure_score_0_10: number | null
+          risk_score_0_10: number | null
+          severity: string | null
+          slug: string | null
+          status_under_16_au: string | null
+          youth_exposure_score_0_10: number | null
+        }
+        Relationships: []
+      }
+      api_media_risk_feed: {
+        Row: {
+          danger_index: number | null
+          name: string | null
+          platform_type: string | null
+          pressure_score_0_10: number | null
+          risk_score_0_10: number | null
+          slug: string | null
+          status_under_16_au: string | null
+          youth_exposure_score_0_10: number | null
         }
         Relationships: []
       }
@@ -44602,6 +47195,16 @@ export type Database = {
         }
         Relationships: []
       }
+      dashboard_stats: {
+        Row: {
+          assigned_files: number | null
+          kind_counts: Json | null
+          project_counts: Json | null
+          snapshot_time: string | null
+          total_files: number | null
+        }
+        Relationships: []
+      }
       "Defebce Matches": {
         Row: {
           agent_code: string | null
@@ -44697,6 +47300,33 @@ export type Database = {
           status: string | null
           tagline: string | null
           websites: string[] | null
+        }
+        Relationships: []
+      }
+      extractable_text: {
+        Row: {
+          ext: string | null
+          full_path: string | null
+          id: string | null
+          name: string | null
+          origin_kind: string | null
+          project_key: string | null
+        }
+        Insert: {
+          ext?: string | null
+          full_path?: string | null
+          id?: string | null
+          name?: string | null
+          origin_kind?: string | null
+          project_key?: string | null
+        }
+        Update: {
+          ext?: string | null
+          full_path?: string | null
+          id?: string | null
+          name?: string | null
+          origin_kind?: string | null
+          project_key?: string | null
         }
         Relationships: []
       }
@@ -44811,6 +47441,14 @@ export type Database = {
         }
         Relationships: []
       }
+      origin_kind_summary: {
+        Row: {
+          count: number | null
+          origin_kind: string | null
+          percentage: number | null
+        }
+        Relationships: []
+      }
       partner_ecosystem_view: {
         Row: {
           note: string | null
@@ -44855,6 +47493,32 @@ export type Database = {
         Row: {
           note: string | null
           status: string | null
+        }
+        Relationships: []
+      }
+      project_kind_matrix: {
+        Row: {
+          count: number | null
+          origin_kind: string | null
+          project: string | null
+        }
+        Relationships: []
+      }
+      project_summary: {
+        Row: {
+          audio_files: number | null
+          claude_dumps: number | null
+          code_files: number | null
+          doc_files: number | null
+          gpt_dumps: number | null
+          html_files: number | null
+          image_files: number | null
+          pdf_files: number | null
+          project_key: string | null
+          slide_files: number | null
+          text_files: number | null
+          total_files: number | null
+          video_files: number | null
         }
         Relationships: []
       }
@@ -45023,59 +47687,6 @@ export type Database = {
         }
         Relationships: []
       }
-      v_alignment_health: {
-        Row: {
-          baseline_status: string | null
-          ci_ok: boolean | null
-          docs_ok: boolean | null
-          keys_ok: boolean | null
-          last_update: string | null
-          maturity: number | null
-          name: string | null
-          notion_ok: boolean | null
-          project_status: string | null
-          rls_ok: boolean | null
-          ses_ok: boolean | null
-          stripe_ok: boolean | null
-        }
-        Relationships: []
-      }
-      v_alignment_latest: {
-        Row: {
-          baseline: Json | null
-          blockers: string | null
-          created_at: string | null
-          date: string | null
-          delta_ids: string | null
-          eta: string | null
-          maturity: number | null
-          name: string | null
-          news: string | null
-          plan_30d: string | null
-          plan_7d: string | null
-          project_id: string | null
-          project_owner: string | null
-          project_status: string | null
-          risks: string[] | null
-          signoff: boolean | null
-          target: string | null
-          update_id: number | null
-        }
-        Relationships: []
-      }
-      v_portfolio_score: {
-        Row: {
-          baseline_score: number | null
-          deltas_30d: number | null
-          id: string | null
-          last_update_date: string | null
-          maturity: number | null
-          name: string | null
-          status: string | null
-          updates_30d: number | null
-        }
-        Relationships: []
-      }
       vw_monthly_stats: {
         Row: {
           active_review_count: number | null
@@ -45149,6 +47760,10 @@ export type Database = {
         Args: { p_batch_id: string }
         Returns: string
       }
+      calculate_chatter_index: {
+        Args: { p_submission_id: string }
+        Returns: number
+      }
       calculate_event_hash: {
         Args: {
           p_event_date: string
@@ -45189,6 +47804,7 @@ export type Database = {
       }
       delete_expired_wearable_data: { Args: never; Returns: undefined }
       detect_conflicts: { Args: never; Returns: number }
+      detect_risk_drift: { Args: never; Returns: undefined }
       discover_agents: {
         Args: {
           p_capability?: string
@@ -45221,9 +47837,15 @@ export type Database = {
       }
       gen_summary: { Args: { p_thread_id: string }; Returns: undefined }
       generate_application_number: { Args: never; Returns: string }
+      generate_credential_code: {
+        Args: { p_level: Database["public"]["Enums"]["credential_level"] }
+        Returns: string
+      }
       generate_partner_slug: { Args: { name: string }; Returns: string }
+      generate_weekly_brief: { Args: never; Returns: undefined }
       get_active_neural_spec: { Args: { p_schema_name: string }; Returns: Json }
       get_bci_contact_data: { Args: { contact_email: string }; Returns: Json }
+      get_corpus_stats: { Args: never; Returns: Json }
       get_daily_summary: {
         Args: { p_date?: string }
         Returns: {
@@ -45236,6 +47858,7 @@ export type Database = {
         }[]
       }
       get_expiring_certifications: { Args: { user_id: string }; Returns: Json }
+      get_file_stats: { Args: never; Returns: Json }
       get_final_table_data: {
         Args: never
         Returns: {
@@ -45277,6 +47900,16 @@ export type Database = {
       get_primary_tenant_for_user: {
         Args: { user_id: string }
         Returns: string
+      }
+      get_project_files: {
+        Args: { p_kind?: string; p_limit?: number; p_project: string }
+        Returns: {
+          ext: string
+          full_path: string
+          id: string
+          name: string
+          origin_kind: string
+        }[]
       }
       get_state: {
         Args: { p_thread_id?: string }
@@ -45668,6 +48301,19 @@ export type Database = {
         }
         Returns: string
       }
+      match_linkedin_articles: {
+        Args: {
+          filter_category?: string
+          match_count?: number
+          query_embedding: string
+        }
+        Returns: {
+          id: string
+          project_key: string
+          similarity: number
+          title: string
+        }[]
+      }
       migrate_partner_data: { Args: never; Returns: undefined }
       migrate_rich_vignettes_data: {
         Args: never
@@ -45683,6 +48329,7 @@ export type Database = {
       process_user_deletion: { Args: { p_user_id: string }; Returns: Json }
       refresh_book_appendices: { Args: never; Returns: undefined }
       refresh_daily_snapshot: { Args: never; Returns: undefined }
+      refresh_dashboard_stats: { Args: never; Returns: undefined }
       refresh_snapshot: { Args: { scope: string }; Returns: undefined }
       reorder_book_chapters: {
         Args: { p_book_id: string; p_chapter_ids: string[] }
@@ -45755,6 +48402,16 @@ export type Database = {
           title: string
           type: string
           url: string
+        }[]
+      }
+      search_files: {
+        Args: { p_limit?: number; p_pattern: string; p_project?: string }
+        Returns: {
+          full_path: string
+          id: string
+          name: string
+          origin_kind: string
+          project_key: string
         }[]
       }
       set_work_package_active: {
@@ -45931,9 +48588,54 @@ export type Database = {
         | "edited"
         | "approved"
         | "published"
+      class_type:
+        | "solo"
+        | "team"
+        | "connector"
+        | "enterprise"
+        | "public_sector"
+        | "startup"
+      competition_format:
+        | "sprint"
+        | "marathon"
+        | "head_to_head"
+        | "team_relay"
+        | "improvement"
+        | "constraint"
+      competition_status:
+        | "upcoming"
+        | "registration_open"
+        | "registration_closed"
+        | "in_progress"
+        | "judging"
+        | "completed"
+        | "archived"
       content_status: "scaffold" | "seeded" | "complete"
+      credential_level:
+        | "certified"
+        | "verified"
+        | "elite"
+        | "champion"
+        | "world_record_chatter"
+        | "hall_of_fame"
+      division_type:
+        | "student"
+        | "junior"
+        | "open"
+        | "executive"
+        | "rising"
+        | "masters"
       ladder_tier: "bronze" | "silver" | "gold" | "platinum" | "elite"
       metric_type: "numeric" | "text" | "boolean" | "date"
+      output_category:
+        | "strategy_analysis"
+        | "communication_content"
+        | "technical_code"
+        | "creative_design"
+        | "operations_coordination"
+        | "legal_compliance"
+        | "research_synthesis"
+        | "translation_connection"
       quote_request_status:
         | "new"
         | "in_review"
@@ -45949,6 +48651,13 @@ export type Database = {
         | "negotiation"
         | "closed_won"
         | "closed_lost"
+      submission_status:
+        | "draft"
+        | "submitted"
+        | "under_review"
+        | "scored"
+        | "appealed"
+        | "final"
       survey_status: "in_progress" | "completed" | "abandoned"
       task_state:
         | "Pending"
@@ -45960,6 +48669,13 @@ export type Database = {
         | "Archived"
         | "Error"
       value_tier: "high" | "medium" | "low"
+      verification_type:
+        | "source_checked"
+        | "logic_tested"
+        | "peer_reviewed"
+        | "fact_confirmed"
+        | "counterargument_considered"
+        | "error_check_performed"
     }
     CompositeTypes: {
       http_header: {
@@ -46124,9 +48840,60 @@ export const Constants = {
         "approved",
         "published",
       ],
+      class_type: [
+        "solo",
+        "team",
+        "connector",
+        "enterprise",
+        "public_sector",
+        "startup",
+      ],
+      competition_format: [
+        "sprint",
+        "marathon",
+        "head_to_head",
+        "team_relay",
+        "improvement",
+        "constraint",
+      ],
+      competition_status: [
+        "upcoming",
+        "registration_open",
+        "registration_closed",
+        "in_progress",
+        "judging",
+        "completed",
+        "archived",
+      ],
       content_status: ["scaffold", "seeded", "complete"],
+      credential_level: [
+        "certified",
+        "verified",
+        "elite",
+        "champion",
+        "world_record_chatter",
+        "hall_of_fame",
+      ],
+      division_type: [
+        "student",
+        "junior",
+        "open",
+        "executive",
+        "rising",
+        "masters",
+      ],
       ladder_tier: ["bronze", "silver", "gold", "platinum", "elite"],
       metric_type: ["numeric", "text", "boolean", "date"],
+      output_category: [
+        "strategy_analysis",
+        "communication_content",
+        "technical_code",
+        "creative_design",
+        "operations_coordination",
+        "legal_compliance",
+        "research_synthesis",
+        "translation_connection",
+      ],
       quote_request_status: [
         "new",
         "in_review",
@@ -46144,6 +48911,14 @@ export const Constants = {
         "closed_won",
         "closed_lost",
       ],
+      submission_status: [
+        "draft",
+        "submitted",
+        "under_review",
+        "scored",
+        "appealed",
+        "final",
+      ],
       survey_status: ["in_progress", "completed", "abandoned"],
       task_state: [
         "Pending",
@@ -46156,6 +48931,14 @@ export const Constants = {
         "Error",
       ],
       value_tier: ["high", "medium", "low"],
+      verification_type: [
+        "source_checked",
+        "logic_tested",
+        "peer_reviewed",
+        "fact_confirmed",
+        "counterargument_considered",
+        "error_check_performed",
+      ],
     },
   },
 } as const
