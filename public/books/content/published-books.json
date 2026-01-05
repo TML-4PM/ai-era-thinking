@@ -1,0 +1,46 @@
+{
+  "books": [
+    {
+      "id": "relief-with-rails",
+      "title": "Relief with Rails",
+      "subtitle": "A Practical Guide to Calmer Software",
+      "author": "Troy Latter",
+      "description": "A practical guide for experienced Ruby on Rails developers who want calmer, more resilient systems. Focuses on naming, structure, boundaries, and defaults that reduce stress over time.",
+      "chapters": 12,
+      "words": "12K",
+      "status": "published",
+      "epub_url": "/books/content/Relief_with_Rails.epub",
+      "cover_url": "/books/content/Relief-with-Rails-cover.jpg",
+      "keywords": ["ruby on rails", "rails architecture", "maintainable code", "software design"],
+      "published_date": "2025-12-19"
+    },
+    {
+      "id": "australian-family-guide",
+      "title": "The Australian Family Guide to Social Media",
+      "subtitle": "What Parents Need to Know Before the Age Restrictions Begin",
+      "author": "Troy Latter",
+      "description": "Australia is the first major nation to restrict social media for children under 16. This comprehensive guide gives families the patterns, evidence, and practical strategies.",
+      "chapters": 20,
+      "words": "95K",
+      "status": "published",
+      "epub_url": "https://tml-4pm.github.io/tech4humanity-books/Australian-Family-Guide-FINAL-READABLE.epub",
+      "cover_url": "https://tml-4pm.github.io/tech4humanity-books/Australian-Family-Guide-large.jpg",
+      "keywords": ["social media", "parenting", "digital safety", "australian law"],
+      "published_date": "2025-12-14"
+    },
+    {
+      "id": "7-dimensions-digital-child-protection",
+      "title": "7 Dimensions of Digital Child Protection",
+      "subtitle": "Beyond the Ban: Australia's Social Media Minimum Age",
+      "author": "Troy Latter",
+      "description": "A comprehensive analysis for policy makers, educators, and researchers. Examines account access, tracking, retention, migration, infrastructure, alternatives, and frameworks.",
+      "chapters": 9,
+      "words": "20K",
+      "status": "published",
+      "epub_url": "https://tml-4pm.github.io/tech4humanity-books/7-Dimensions-Digital-Child-Protection.epub",
+      "cover_url": "https://tml-4pm.github.io/tech4humanity-books/7-Dimensions-large.jpg",
+      "keywords": ["policy", "digital child protection", "social media regulation"],
+      "published_date": "2025-12-14"
+    }
+  ]
+}
