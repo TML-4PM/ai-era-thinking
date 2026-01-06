@@ -1,32 +1,20 @@
 {
   "books": [
     {
-      "id": "relief-with-rails",
-      "title": "Relief with Rails",
-      "subtitle": "A Practical Guide to Calmer Software",
-      "author": "Troy Latter",
-      "description": "A practical guide for experienced Ruby on Rails developers who want calmer, more resilient systems. Focuses on naming, structure, boundaries, and defaults that reduce stress over time.",
-      "chapters": 12,
-      "words": "12K",
-      "status": "published",
-      "epub_url": "/books/content/Relief_with_Rails.epub",
-      "cover_url": "/books/content/Relief-with-Rails-cover.jpg",
-      "keywords": ["ruby on rails", "rails architecture", "maintainable code", "software design"],
-      "published_date": "2025-12-19"
-    },
-    {
       "id": "australian-family-guide",
       "title": "The Australian Family Guide to Social Media",
       "subtitle": "What Parents Need to Know Before the Age Restrictions Begin",
       "author": "Troy Latter",
       "description": "Australia is the first major nation to restrict social media for children under 16. This comprehensive guide gives families the patterns, evidence, and practical strategies.",
-      "chapters": 20,
-      "words": "95K",
+      "chapters": 16,
+      "words": "110K",
       "status": "published",
-      "epub_url": "https://tml-4pm.github.io/tech4humanity-books/Australian-Family-Guide-FINAL-READABLE.epub",
-      "cover_url": "https://tml-4pm.github.io/tech4humanity-books/Australian-Family-Guide-large.jpg",
+      "epub_url": "/books/content/australian-family-guide-enhanced.epub",
+      "cover_url": "/books/content/afg-cover.png",
       "keywords": ["social media", "parenting", "digital safety", "australian law"],
-      "published_date": "2025-12-14"
+      "published_date": "2025-12-14",
+      "enhanced": true,
+      "version": "2.0"
     },
     {
       "id": "7-dimensions-digital-child-protection",
@@ -34,13 +22,35 @@
       "subtitle": "Beyond the Ban: Australia's Social Media Minimum Age",
       "author": "Troy Latter",
       "description": "A comprehensive analysis for policy makers, educators, and researchers. Examines account access, tracking, retention, migration, infrastructure, alternatives, and frameworks.",
-      "chapters": 9,
-      "words": "20K",
+      "chapters": 10,
+      "words": "47K",
       "status": "published",
-      "epub_url": "https://tml-4pm.github.io/tech4humanity-books/7-Dimensions-Digital-Child-Protection.epub",
-      "cover_url": "https://tml-4pm.github.io/tech4humanity-books/7-Dimensions-large.jpg",
+      "epub_url": "/books/content/7-dimensions-enhanced.epub",
+      "cover_url": "/books/content/7d-cover.png",
       "keywords": ["policy", "digital child protection", "social media regulation"],
-      "published_date": "2025-12-14"
+      "published_date": "2025-12-14",
+      "enhanced": true,
+      "version": "2.0"
+    },
+    {
+      "id": "relief-with-rails",
+      "title": "Relief with Rails",
+      "subtitle": "An Annual Dispatch on AI in the Wild",
+      "author": "Geoffrey C. Bateman",
+      "description": "A seasonal deep-dive into how real humans use AI assistants in 2025. Based on six years of controlled experiments with 400 participants.",
+      "chapters": 11,
+      "words": "1.2K (stub)",
+      "status": "draft",
+      "epub_url": "/books/content/relief-with-rails-enhanced.epub",
+      "cover_url": "/books/content/rwr-cover.png",
+      "keywords": ["AI", "user research", "human-computer interaction"],
+      "published_date": "2025-12-18",
+      "enhanced": true,
+      "version": "2.0",
+      "note": "Content stub - full 25K words pending"
     }
-  ]
+  ],
+  "last_updated": "2026-01-06",
+  "total_books": 3,
+  "enhancement_version": "2.0"
 }
