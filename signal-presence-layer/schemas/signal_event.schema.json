@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tech4humanity.com.au/schemas/signal_event.schema.json",
+  "title": "Signal Event",
+  "type": "object",
+  "required": ["event_id", "source", "surface", "mode", "signal", "received_at"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "source": { "type": "string" },
+    "surface": { "type": "string" },
+    "mode": { "type": "string" },
+    "actor": { "type": "object" },
+    "context": { "type": "object" },
+    "signal": {
+      "type": "object",
+      "required": ["type", "label", "confidence", "weight"],
+      "properties": {
+        "type": { "type": "string" },
+        "label": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "weight": { "type": "number", "minimum": 0 }
+      }
+    },
+    "received_at": { "type": "string", "format": "date-time" }
+  }
+}
