@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tech4humanity.com.au/schemas/execution_receipt.schema.json",
+  "title": "Execution Receipt",
+  "type": "object",
+  "required": ["receipt_id", "task_id", "intent", "execution", "output", "status", "evidence", "gaps", "next_action", "created_at"],
+  "properties": {
+    "receipt_id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "intent": { "type": "string" },
+    "execution": { "type": "object" },
+    "output": { "type": "object" },
+    "status": { "type": "string", "enum": ["REAL", "PARTIAL", "BLOCKED", "DRY_RUN"] },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "gaps": { "type": "array", "items": { "type": "string" } },
+    "next_action": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
