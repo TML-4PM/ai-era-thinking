@@ -1,0 +1,24 @@
+Signal Presence Runtime Receipt 001
+
+Status: PARTIAL
+
+The package path now exists as a committed scaffold.
+
+Evidence commits:
+12c9d12f95f037a041209faac58fee484d770888 README
+ce38088dfb2601d7e7efb0323aad4d1ff7182ccb package manifest
+4a2df6674a8c32e6386e3632c80bd7375a773152 execution bridge module
+70a98c08f9a20bf6c117c9346ecf690454d2980a receipt logger module
+6ace98fc3e5faf99953048e44e6cafee1c445b81 signal event schema
+1a34a6972280b80617e51a166aeff8bbf9f7723b execution receipt schema
+5b9a10c412443129d1509d2cce83625684bcb85a mock sport event test
+5c6fd46a0a0a5830536c4ef1509644c3a9e5dbc9 browser companion notes
+10f62473b75197359f2969ddacc5c9b299449e43 Signal Strip notes
+
+Test command: cd signal-presence-layer && npm test
+
+Expected output: signal_state active; receipt_generated true
+
+Open gaps: CI output, live endpoint call, ledger write, browser manifest, component source, registry source.
+
+Next action: attach this state to issue 2 and keep status PARTIAL until executable output is captured.
