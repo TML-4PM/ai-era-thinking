@@ -1,0 +1,19 @@
+{
+  "name": "signal-presence-layer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Signal Presence Layer runtime scaffold for signal events, presence state, execution receipts, and agent market radar.",
+  "scripts": {
+    "test": "node tests/mock-sport-event.test.mjs",
+    "smoke": "node tests/mock-sport-event.test.mjs"
+  },
+  "keywords": [
+    "signal-presence",
+    "reality-ledger",
+    "agent-radar",
+    "signal-strip",
+    "mate-mode"
+  ],
+  "license": "UNLICENSED"
+}
