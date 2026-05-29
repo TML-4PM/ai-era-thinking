@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       - name: Inspect Signal Presence files
         id: inspect
@@ -81,7 +81,7 @@ jobs:
           cat runtime-receipts/self_healing_monitor_receipt.json
 
       - name: Upload receipt artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: self-healing-monitor-receipt
           path: runtime-receipts/self_healing_monitor_receipt.json
