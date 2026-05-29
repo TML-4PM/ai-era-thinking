@@ -1,0 +1,84 @@
+name: Close SEC-WFA-001 Issues
+
+# One-shot closure workflow for issues #3 and #4 (SEC-WFA-001 outdated
+# action versions). Triggers on push to its own file; self-deletes the
+# trigger file would be cleaner but for auditability we leave the workflow
+# in place as a record. Re-running is a no-op for already-closed issues.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/close-sec-wfa-001.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Close #4 (latest SEC-WFA-001) as completed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eo pipefail
+          cat > /tmp/comment-4.md <<'EOF'
+          ## SEC-WFA-001 — Closed: REAL
+
+          **status:** REAL  
+          **closure commit:** `74bd640f81489ed4db29fb4dd596dd039b999625` (self-healing-monitor.yml) + `20ca79615bfef96676b92510cd3d9621f6d5f7e0` (signal-presence-runtime-proof.yml) + `25f208dd2f9bbffc9637976ee15869cef07ac0b8` (issue-snapshot.yml)
+
+          ### Findings remediated
+
+          | Workflow | Action | Was | Now |
+          |---|---|---|---|
+          | `.github/workflows/self-healing-monitor.yml` | `actions/checkout` | `v4` | `v6.0.2` |
+          | `.github/workflows/self-healing-monitor.yml` | `actions/upload-artifact` | `v4` | `v7.0.1` |
+          | `.github/workflows/signal-presence-runtime-proof.yml` | `actions/checkout` | `v4` | `v6.0.2` |
+          | `.github/workflows/signal-presence-runtime-proof.yml` | `actions/upload-artifact` | `v4` | `v7.0.1` |
+          | `.github/workflows/issue-snapshot.yml` | `actions/checkout` | `v4` | `v6.0.2` |
+
+          ### Verification
+
+          All three workflows re-ran on the bump commits with `conclusion=success`:
+          - Self Healing Monitor run [26615637599](https://github.com/TML-4PM/ai-era-thinking/actions/runs/26615637599) — 10s
+          - Signal Presence Runtime Proof run [26615637900](https://github.com/TML-4PM/ai-era-thinking/actions/runs/26615637900) — 15s
+          - Open Issues Snapshot run [26615637941](https://github.com/TML-4PM/ai-era-thinking/actions/runs/26615637941) — 9s
+
+          Versions verified current via GitHub Marketplace as of 2026-05-29:
+          - `actions/checkout@v6.0.2` (released 2026-01-09, signed)
+          - `actions/upload-artifact@v7.0.1` (released 2026-04-10, signed)
+
+          The next nightly SEC-WFA-001 audit run should show `current` for all rows.
+
+          _Closure operator: Claude session 2026-05-29, on directive from director Troy._
+          EOF
+          gh issue comment 4 --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment-4.md
+          gh issue close 4 --repo "$GITHUB_REPOSITORY" --reason completed
+          echo "::notice::Closed issue #4 (latest SEC-WFA-001 audit) as completed"
+
+      - name: Close #3 (superseded older SEC-WFA-001) as not_planned
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eo pipefail
+          cat > /tmp/comment-3.md <<'EOF'
+          ## SEC-WFA-001 — Closed: superseded
+
+          **status:** superseded by #4 (which has now also been remediated and closed)
+
+          Per the issue body's own statement: _"supersedes prior SEC-WFA issues on next run"_ — #4 was the 2026-05-28 audit superseding this 2026-05-27 audit. Both findings were identical; both have been resolved by the same commit set.
+
+          See #4 for the remediation receipt and verification evidence.
+
+          _Closure operator: Claude session 2026-05-29, on directive from director Troy._
+          EOF
+          gh issue comment 3 --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment-3.md
+          gh issue close 3 --repo "$GITHUB_REPOSITORY" --reason "not planned"
+          echo "::notice::Closed issue #3 (superseded SEC-WFA-001) as not_planned"
