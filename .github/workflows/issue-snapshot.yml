@@ -1,0 +1,57 @@
+name: Open Issues Snapshot
+
+# One-shot: list every open issue, commit the JSON snapshot back to
+# audit/open-issues.json so it's readable via github_file_read.
+# Runs only on push to its own file (idempotent) and on workflow_dispatch.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/issue-snapshot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: List open issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eo pipefail
+          mkdir -p audit
+          gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --limit 50 \
+            --json number,title,body,labels,createdAt,updatedAt,comments,author,assignees,milestone \
+            > audit/open-issues.json
+          echo "::notice::Found $(jq length audit/open-issues.json) open issues"
+          jq -r '.[] | "#\(.number) [\(.createdAt[:10])] \(.title)"' audit/open-issues.json
+
+      - name: Commit snapshot if changed
+        run: |
+          set -eo pipefail
+          git add audit/open-issues.json
+          if git diff --cached --quiet; then
+            echo "::notice::No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore(audit): refresh open-issues snapshot"
+          git push
+          echo "::notice::Snapshot committed"
