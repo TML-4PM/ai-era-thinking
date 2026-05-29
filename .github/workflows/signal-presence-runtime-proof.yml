@@ -5,18 +5,6 @@ name: Signal Presence Runtime Proof
 # ledger_receipt.json) as build artifacts, writes a ledger row to
 # symbio_audit_log when Supabase secrets are available, and posts an
 # issue-bound receipt comment on issue #2.
-#
-# Triggered by:
-#   - push to main affecting signal-presence-layer/**
-#   - workflow_dispatch (manual)
-#   - schedule every 6 hours (drift detection)
-#
-# Optional secrets (graceful skip if missing):
-#   SUPABASE_URL
-#   SUPABASE_SERVICE_ROLE
-#
-# Built-in:
-#   GITHUB_TOKEN (auto-provided; used for issue comment via gh CLI)
 
 on:
   push:
@@ -40,7 +28,7 @@ jobs:
         working-directory: signal-presence-layer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -74,7 +62,7 @@ jobs:
         run: cat test/runtime/ledger_receipt.json
 
       - name: Upload runtime receipt bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: signal-presence-runtime-receipt-${{ github.run_id }}
           path: signal-presence-layer/test/runtime/
